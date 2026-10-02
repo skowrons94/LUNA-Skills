@@ -70,3 +70,7 @@ Python 3 (tested with 3.12) with NumPy, SciPy, Matplotlib; `uproot` for ROOT inp
 
 - `research-slides` reproduces the author's presentation style (University of Padova and LUNA/INFN templates). The bundled logos and templates belong to the University of Padova, INFN, the LUNA and AGATA collaborations; use them only where you are entitled to.
 - Numerical examples in the skills are synthetic or published values; they are not results to cite.
+
+## License
+
+MIT (see [LICENSE](LICENSE)) for the code and documentation. The institutional logos and templates in `research-slides/assets/` are not covered by this license and remain the property of their owners.
