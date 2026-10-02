@@ -1,0 +1,43 @@
+# Matplotlib style for figures placed on the 13.33 x 7.5 in slides.
+#   plt.style.use("SKILL_DIR/assets/slides.mplstyle")
+# Size the figure at the size it will occupy on the slide (the main left figure is
+# about 6.9 x 4.3 in), so 16 pt here is 16 pt on the screen.
+figure.figsize       : 6.9, 4.3
+figure.dpi           : 100
+savefig.dpi          : 250
+savefig.bbox         : tight
+savefig.pad_inches   : 0.05
+savefig.transparent  : False
+figure.facecolor     : white
+
+font.family          : sans-serif
+font.sans-serif      : Arial, Helvetica Neue, Helvetica, DejaVu Sans
+mathtext.fontset     : dejavusans
+font.size            : 16
+axes.labelsize       : 17
+axes.titlesize       : 17
+xtick.labelsize      : 14
+ytick.labelsize      : 14
+legend.fontsize      : 13
+legend.frameon       : False
+
+axes.edgecolor       : 393D3F
+axes.labelcolor      : 393D3F
+xtick.color          : 393D3F
+ytick.color          : 393D3F
+text.color           : 393D3F
+axes.linewidth       : 1.2
+lines.linewidth      : 2.2
+lines.markersize     : 6
+errorbar.capsize     : 2
+xtick.direction      : in
+ytick.direction      : in
+xtick.top            : True
+ytick.right          : True
+xtick.minor.visible  : True
+ytick.minor.visible  : True
+axes.grid            : False
+
+# tab10 order kept: it matches the user's existing plots. Reserve AA0004 (slide red)
+# for "this work" / the fitted model so the figure and the callout agree.
+axes.prop_cycle      : cycler('color', ['1f77b4', 'ff7f0e', '2ca02c', 'd62728', '9467bd', '8c564b', 'e377c2', '7f7f7f', 'bcbd22', '17becf'])

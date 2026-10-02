@@ -1,0 +1,4 @@
+interface:
+  display_name: "AGATA simulations"
+  short_description: "Run, convert and analyse AGATA Geant4 simulations"
+  default_prompt: "Use $agata-simulation to set up and validate an AGATA Geant4 simulation for my gamma-ray feasibility study."

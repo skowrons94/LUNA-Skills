@@ -1,0 +1,99 @@
+--- a/include/AnalysisManager.hh
++++ b/include/AnalysisManager.hh
+@@ -65,8 +65,8 @@
+ 
+   TFile*   rootFile;
+   
+-  G4double totEGauss_BGO14Np[6];
+-  std::vector<G4double> totE_BGO14Np {0,0,0,0,0,0};
++  G4double totEGauss_BGO14Np[12];
++  std::vector<G4double> totE_BGO14Np = std::vector<G4double>(12, 0.0);
+   std::vector<G4double> Z_interaction;
+   std::vector<G4double> GammaKinEneRes;
+   std::vector<G4double> GammaKinEneDC;
+--- a/src/DetectorConstruction.cc
++++ b/src/DetectorConstruction.cc
+@@ -110,7 +110,7 @@
+     auto ATargetLog  = ATarget->Construct();
+   	G4RotationMatrix* rotTarget = new G4RotationMatrix();
+   	rotTarget->rotateX(0.*deg);
+-   	auto ATargetPhys  = new G4PVPlacement(rotTarget,G4ThreeVector(0,0,ATargetHolder->GetTargetPosition()+ATarget->GetTargetThickness()/2),ATargetLog,"ATargetPhys",ATargetHolderLog,false,0,checkOverlaps);
++   	if (Physics == "R") new G4PVPlacement(rotTarget,G4ThreeVector(0,0,SourceThickness-ATarget->GetTargetThickness()/2),ATargetLog,"ATargetPhys",WorldLog,false,0,checkOverlaps);
+   	
+   	
+ 	auto StepLimit = new G4UserLimits(MaxStep);
+@@ -128,7 +128,13 @@
+   G4String BGOSDname = "/BGO14NpSD";
+   BGO14NpSD* ABGOSD = new BGO14NpSD(BGOSDname);
+   SDman->AddNewDetector(ABGOSD);
+-  GetSensitiveDetector(ABGOPhys)->SetSensitiveDetector(ABGOSD);
++  auto sensitive = GetSensitiveDetector(ABGOPhys);
++  if (!sensitive) {
++    G4Exception("DetectorConstruction::Construct", "MissingBGO", FatalException,
++                "No BGO sensitive logical volume found");
++    return nullptr;
++  }
++  sensitive->SetSensitiveDetector(ABGOSD);
+ 
+   //------------------------------------------------------------------
+ 
+@@ -160,25 +166,12 @@
+ 
+ G4LogicalVolume* DetectorConstruction::GetSensitiveDetector(G4VPhysicalVolume* aVolume,G4int depth)
+ {
+-  for(int isp=0;isp<depth;isp++)
+-    /*
+-      { G4cout << "  "; }
+-      G4cout << aVolume->GetName() << "[" << aVolume->GetCopyNo() << "] "
+-      << aVolume->GetLogicalVolume()->GetName() << " "
+-      << aVolume->GetLogicalVolume()->GetNoDaughters() << " "
+-      << aVolume->GetLogicalVolume()->GetMaterial()->GetName();
+-      G4cout << G4endl;
+-    */
+-    if(aVolume->GetName()=="bgoCrPhys") {
+-      //G4cout << "Detector Construction, Sensitive volume found: " << aVolume->GetName() << "copy number: " <<  aVolume->GetCopyNo() << ", logical volume: " <<  aVolume->GetLogicalVolume() << G4endl;
+-      SensitiveLogicalVolume = aVolume->GetLogicalVolume();
+-      break;
+-    }
+-
+-  for(int i=0;i<aVolume->GetLogicalVolume()->GetNoDaughters();i++)
+-    { GetSensitiveDetector(aVolume->GetLogicalVolume()->GetDaughter(i),depth+1); }
+-
+-  return SensitiveLogicalVolume;
++  if(aVolume->GetName()=="bgoCrHalfPhys") return aVolume->GetLogicalVolume();
++  for(int i=0;i<aVolume->GetLogicalVolume()->GetNoDaughters();i++) {
++    auto found = GetSensitiveDetector(aVolume->GetLogicalVolume()->GetDaughter(i), depth+1);
++    if(found) return found;
++  }
++  return nullptr;
+ }
+ 
+ G4ThreeVector DetectorConstruction::GetSourcePos()
+--- a/src/AnalysisManager.cc
++++ b/src/AnalysisManager.cc
+@@ -1,4 +1,5 @@
+ #include "AnalysisManager.hh"
++#include <algorithm>
+ #include "AnalysisMessenger.hh"
+ 
+ #include "G4UnitsTable.hh"
+@@ -86,7 +87,7 @@
+ 
+  if(fAllEventFlag) tree1->Fill();
+  else if(!fAllEventFlag &&  fAllFusionEventFlag && fFusionEvent) tree1->Fill();
+- else if(!fAllEventFlag && !fAllFusionEventFlag && (totE_BGO14Np[0]!=0 || totE_BGO14Np[1]!=0 || totE_BGO14Np[2]!=0 || totE_BGO14Np[3]!=0 || totE_BGO14Np[4]!=0 || totE_BGO14Np[5]!=0)) tree1->Fill();
++ else if(!fAllEventFlag && !fAllFusionEventFlag && std::any_of(totE_BGO14Np.begin(), totE_BGO14Np.end(), [](G4double e){ return e != 0; })) tree1->Fill();
+ 
+ }
+ 
+--- a/src/EventAction.cc
++++ b/src/EventAction.cc
+@@ -75,7 +75,7 @@
+ 	
+ 	// noise level : N_BGO14Np
+ 	G4double sigmaE = 0;
+-	if((*BGO14NpHC)[i]->GetCopyNo() == 0 || (*BGO14NpHC)[i]->GetCopyNo() == 1 || (*BGO14NpHC)[i]->GetCopyNo() == 2 || (*BGO14NpHC)[i]->GetCopyNo() == 3 || (*BGO14NpHC)[i]->GetCopyNo() == 4 || (*BGO14NpHC)[i]->GetCopyNo() == 5 ) sigmaE = N_BGO14Np*sqrt((*BGO14NpHC)[i]->GetEdep()/keV); // keV
++	if((*BGO14NpHC)[i]->GetCopyNo() >= 0 && (*BGO14NpHC)[i]->GetCopyNo() < 12) sigmaE = N_BGO14Np*sqrt((*BGO14NpHC)[i]->GetEdep()/keV); // keV
+ 	eDepGauss_BGO14Np = eDep_BGO14Np + G4RandGauss::shoot(0.0,sigmaE);
+ 
+ 	//G4cout << "Event action Hit: " << i << "  copyNo: " << (*BGO14NpHC)[i]->GetCopyNo() << "  eDep: " << eDep_BGO14Np << G4endl; 

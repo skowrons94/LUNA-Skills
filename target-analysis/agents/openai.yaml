@@ -1,0 +1,3 @@
+interface:
+  display_name: "Target Analysis"
+  short_description: "Fit target profiles and excitation curves"

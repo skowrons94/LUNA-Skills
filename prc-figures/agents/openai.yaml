@@ -1,0 +1,4 @@
+interface:
+  display_name: "PRC figures"
+  short_description: "PRC / ROOT-like matplotlib figures for nuclear physics"
+  default_prompt: "Use $prc-figures to make clean, PRC-style figures for my analysis and check them for overlaps."

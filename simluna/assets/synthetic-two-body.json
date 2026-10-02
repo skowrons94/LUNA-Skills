@@ -1,0 +1,8 @@
+{
+  "projectile_mass_MeV": 1,
+  "target_mass_MeV": 1,
+  "beam_kinetic_MeV": 1,
+  "product_mass_MeV": 1,
+  "residual_mass_MeV": 1,
+  "theta_cm_deg": 90
+}

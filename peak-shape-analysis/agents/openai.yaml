@@ -1,0 +1,3 @@
+interface:
+  display_name: "Peak Shape Analysis"
+  short_description: "Fit asymmetric peaks with detector response"

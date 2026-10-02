@@ -1,0 +1,3 @@
+interface:
+  display_name: "Efficiency Analysis"
+  short_description: "Calibrate efficiencies and cascade summing"

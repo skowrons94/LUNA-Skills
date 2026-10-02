@@ -1,0 +1,4 @@
+interface:
+  display_name: "Nuclear Research Project"
+  short_description: "Structure reproducible nuclear-physics studies"
+  default_prompt: "Use $nuclear-research-project to create a reproducible feasibility-study project with R-matrix, simulation, data, LaTeX report, and presentation structure."

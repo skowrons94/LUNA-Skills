@@ -1,0 +1,4 @@
+interface:
+  display_name: "SimLUNA simulations"
+  short_description: "Build, run and validate SimLUNA simulations"
+  default_prompt: "Use $simluna to prepare and test a reproducible SimLUNA simulation for my setup."

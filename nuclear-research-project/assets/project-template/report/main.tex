@@ -1,0 +1,53 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage[margin=2.35cm]{geometry}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\usepackage{booktabs}
+\usepackage{caption}
+\usepackage[section]{placeins}
+\usepackage{microtype}
+\usepackage{siunitx}
+\usepackage{xcolor}
+\usepackage[colorlinks=true,linkcolor=black,citecolor=black,urlcolor=blue]{hyperref}
+\usepackage[backend=biber,style=numeric,sorting=none]{biblatex}
+
+\addbibresource{references.bib}
+\graphicspath{{../plots/report/}{../plots/}}
+\captionsetup{font=small,labelfont=bf}
+\sisetup{range-phrase={--},range-units=single}
+
+\title{@@PROJECT_TITLE_LATEX@@}
+\author{@@AUTHOR_LATEX@@}
+\date{@@DATE@@}
+
+\begin{document}
+\raggedbottom
+
+\hypersetup{pageanchor=false}
+\begin{titlepage}
+  \centering
+  \vspace*{2.2cm}
+  {\LARGE\bfseries @@PROJECT_TITLE_LATEX@@\par}
+  \vfill
+  {\Large @@AUTHOR_LATEX@@\par}
+  \vspace{0.4cm}
+  {\large @@DATE@@\par}
+\end{titlepage}
+\hypersetup{pageanchor=true}
+\pagenumbering{arabic}
+
+\input{sections/01_aim}
+\input{sections/02_inputs}
+\input{sections/03_method}
+\input{sections/04_validation}
+\input{sections/05_results}
+\input{sections/06_uncertainties}
+\input{sections/07_conclusion}
+
+\printbibliography
+
+\end{document}

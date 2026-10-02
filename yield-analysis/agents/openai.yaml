@@ -1,0 +1,3 @@
+interface:
+  display_name: "Yield Analysis"
+  short_description: "Extract spectral yields with uncertainty"

@@ -1,0 +1,55 @@
+# Local BGO variant only; see validation-record.md. Stationary Cs-137.
+/tracking/verbose 0
+/analysis/Gamma1 1.173
+/analysis/Gamma2 1.3325
+/analysis/CapFragIonA 20
+/analysis/CapFragIonZ 10
+/analysis/FragIonA1 19
+/analysis/FragIonZ1 9
+/analysis/FragIonA2 1
+/analysis/FragIonZ2 1
+/analysis/MultThr 50.
+/analysis/AllEventFlag true
+/analysis/AllFusionEventFlag false
+/analysis/ZintTreeFlag true
+/analysis/EpTreeFlag true
+/analysis/EgammaTreeFlag true
+/analysis/PgammaTreeFlag true
+/analysis/EdepTreeFlag true
+/analysis/BeamPosTreeFlag true
+/analysis/BeamKinETreeFlag true
+/analysis/BeamThetaTreeFlag true
+/BGO14Np/BGODisp 0. 0. 0. 0. 0. 0.
+/Materials/Layer0Type TaF5
+/BGO14NpTarget/BGOTargetSize 18. 0.0001
+/TargetChamber16op/TargetChamber16opType Al
+/Materials/TargetBacking Ta
+/BGO14NpTarget/TargetBackingThickness 0.25
+/DetectorConstruction/BGO14NpPos 0 0 0 cm
+/DetectorConstruction/Physics S
+/DetectorConstruction/SourceHolder A
+/DetectorConstruction/SourcePos 0 0 0 mm
+/DetectorConstruction/MaxStep 0.01 um
+/EventAction/NoiseBGO14Np 0.
+/PhysicsList/HadronPhysicsFlag true
+/HadronPhysicsList/InelFlagProt false
+/HadronPhysicsList/HPinelFlagProt false
+/HadronPhysicsList/InelFlagDeut false
+/HadronPhysicsList/InelFlagTrit false
+/HadronPhysicsList/InelFlagHe3 false
+/HadronPhysicsList/InelFlagAlph false
+/HadronPhysicsList/PartCapFlag true
+/HadronPhysicsList/PartCapType non-resonant
+/process/had/deex/correlatedGamma true
+/PhysicsList/EmPhysics standard
+/run/initialize
+/process/had/rdm/verbose 0
+/process/had/rdm/allVolumes
+/process/had/rdm/thresholdForVeryLongDecayTime 1.0e+60 year
+/gps/particle ion
+/gps/ion 55 137 0 0
+/gps/ene/mono 0 keV
+/analysis/filename result.root
+/random/setSeeds 12345 67890
+/run/printProgress 100
+/run/beamOn 1000

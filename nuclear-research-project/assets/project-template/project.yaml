@@ -1,0 +1,39 @@
+project:
+  title: "@@PROJECT_TITLE_YAML@@"
+  slug: "@@PROJECT_SLUG@@"
+  author: "@@AUTHOR_YAML@@"
+  created: "@@DATE@@"
+  status: "planning"
+
+physics:
+  reaction: ""
+  projectile: ""
+  target: ""
+  channels: []
+  energy_frame: ""
+  energy_unit: "MeV"
+
+beam:
+  particle_current: ""
+  charge_state: ""
+  normalization_convention: ""
+
+target:
+  material: ""
+  thickness: ""
+  composition: ""
+
+detectors:
+  configuration: ""
+  efficiency_definition: ""
+
+analysis:
+  decision_criterion: ""
+  uncertainty_method: ""
+  default_config: "configs/default.yaml"
+
+paths:
+  results: "results"
+  plots: "plots"
+  report: "report"
+  presentations: "presentations"

@@ -1,0 +1,35 @@
+# Python and notebooks
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.pytest_cache/
+
+# Local environments and editors
+.venv/
+.env
+.DS_Store
+.vscode/
+
+# Disposable research runs and scratch work
+work/
+r-matrix/runs/
+simulation/runs/
+
+# Compiled deliverables
+report/build/
+presentations/build/
+
+# LaTeX auxiliary files outside the build directory
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz
+
+# Manim render cache (regenerable); keep final MP4s next to the scene sources
+presentations/animations/media/

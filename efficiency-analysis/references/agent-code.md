@@ -1,0 +1,11 @@
+# Code map and extension contract
+
+Each skill is self-contained. In commands, `scripts/` means the scripts directory inside this skill, not inside the analysis project. Use an absolute script path when working elsewhere. Execute a script with `--help`, or run its offline `demo.py --out NEW_DIRECTORY` to generate working inputs/configuration and expected-result assertions. Paths in JSON are relative to that JSON, so a project can move as a unit. Results go to a new directory; preserve original inputs. Use the declared requirements with the project's Python environment.
+
+`analysis_utils.py` contains numeric-table validation, named bounded multistart least squares, local covariance/rank checks and HTML/JSON provenance reports. The covariance uses absolute measurement errors and is not scaled to force reduced chi-square to one. Read fit warnings: rank deficiency and boundary solutions can invalidate local errors. Priors are additional residuals, not extra observations to count blindly in a goodness-of-fit test.
+
+Main scientific functions are separated from command-line entrypoints so an agent can import them for numerical checks. Spectrum skills additionally use `spectrum_io.py` to preserve actual bin edges and variances; `prepare_spectrum.py` handles ROOT discovery/export and candidate windows. Avoid copying an old calibration or hard-coded reaction constant merely because a file loads.
+
+When adding a model, document each parameter's units, normalization, support and fixed/free status next to the function. Add a meaningful analytic limit or synthetic recovery example, then check numerical-grid convergence and data-coverage failures. Do not test only that an optimizer reports success. Preserve uncertainty, provenance, and no-overwrite behavior when extending outputs.
+
+For multi-run work, retain stable analysis IDs and acquisition metadata. Shared uncertainties need a common nuisance parameter or covariance sensitivity, not independent error inflation. A new physics component should have a direct forward-model check before being exposed as a fit parameter. Use profile likelihood or simulation when local covariance is inadequate; do not label a random sensitivity envelope as a confidence band.
