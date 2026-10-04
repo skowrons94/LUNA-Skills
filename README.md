@@ -1,21 +1,21 @@
-# LUNA Skills
+# Nuclear physics skills
 
-Agent skills (Claude Code / Agent Skills format) for experimental nuclear physics and nuclear astrophysics, developed around the LUNA and AGATA programmes: from raw spectra to a published paper and a talk. Each folder is one self-contained skill (`SKILL.md` plus optional `references/`, `scripts/`, `assets/`).
+Agent skills (Claude Code / Agent Skills format) for experimental nuclear physics and nuclear astrophysics, covering low-energy reaction measurements and gamma-ray spectroscopy: from raw spectra to a published paper and a talk. Each folder is one self-contained skill (`SKILL.md` plus optional `references/`, `scripts/`, `assets/`).
 
 ## The chain
 
 ```
 spectra ──► yield-analysis ──► peak-shape-analysis ──► target-analysis ──► azure2 (R-matrix, S-factor, rate)
                ▲                                                ▲
-      efficiency-analysis                                   simluna (Geant4 detector response, kinematics)
+      efficiency-analysis                                   underground-gamma-simulation (Geant4 detector response, kinematics)
                                                             agata-simulation (AGATA Geant4, PSA emulation, summing, tracking)
                                                             delta-beta-dsam (fs lifetimes from Δβ = β_reac − β_ems)
                                                                  │
 nuclear-research-project  (project layout, provenance, LaTeX report, handoff) ◄──────────┘
                                                                  │
-     writing: luna-clear-experimental-writing · brune-deboer-style · aliotta-style · unslop
+     writing: clear-experimental-writing · methods-paper-style · proposal-style · unslop
      figures: prc-figures (PRC / ROOT-like matplotlib style, stacked spectra, heatmaps, render check)
-     talks:   research-slides (UniPD / LUNA templates, Manim animations, render + audit)
+     talks:   research-slides (built-in house layout or your own template, Manim animations, render + audit)
 ```
 
 | Skill | Use it for |
@@ -24,17 +24,17 @@ nuclear-research-project  (project layout, provenance, LaTeX report, handoff) �
 | `peak-shape-analysis` | Bin-integrated fits of asymmetric γ peaks and target energy-loss shapes |
 | `efficiency-analysis` | Photopeak efficiency, IAEA NDS decay data, cascade summing corrections |
 | `target-analysis` | Target profiles, stoichiometry and degradation from excitation curves; SRIM tables |
-| `underground-gamma-simulation` | Building, extending and validating SimLUNA Geant4/ROOT simulations |
+| `underground-gamma-simulation` | Building, extending and validating Geant4/ROOT simulations of gamma-detection setups at underground accelerator laboratories |
 | `agata-simulation` | AGATA Geant4 code: custom geometries (e.g. one triplet in close geometry), external cascade events, list-mode conversion, PSA/resolution emulation, summing-in tags and OFT tracking |
 | `delta-beta-dsam` | Femtosecond lifetimes with the Doppler-velocity (Δβ) DSAM method: centroids, nuisance fit, Δβ–τ calibration, sensitivity |
 | `azure2` | AZURE2/pyazr R-matrix calculations, fits, decompositions, extrapolations, rates |
 | `nuclear-research-project` | Scaffolding and auditing reproducible feasibility-study projects and reports |
 | `clear-experimental-writing` | Experimental manuscripts, abstracts, captions, referee replies |
-| `methods-paper-style` | Formalism, methods and R-matrix sections in the Brune–deBoer register |
+| `methods-paper-style` | Formalism, methods and R-matrix sections in a plain, reusable technical register |
 | `proposal-style` | Proposals, grants, fellowships, beam-time requests |
 | `unslop` | De-formulaic editing of any prose (explicit invocation only) |
 | `prc-figures` | PRC / ROOT-like matplotlib figures: spectra, stacked components, S factors with data, heatmaps, method comparisons, annotated Geant4 renders, overlap checks |
-| `research-slides` | Talks in the user's PowerPoint style, Manim animations, rendering and deck audit |
+| `research-slides` | Talks in a consistent house style, Manim animations, rendering and deck audit |
 
 ## Install
 
@@ -68,9 +68,10 @@ Python 3 (tested with 3.12) with NumPy, SciPy, Matplotlib; `uproot` for ROOT inp
 
 ## Notes
 
-- `research-slides` reproduces the author's presentation style (University of Padova and LUNA/INFN templates). The bundled logos and templates belong to the University of Padova, INFN, the LUNA and AGATA collaborations; use them only where you are entitled to.
+- `research-slides` ships no logos or institutional templates. It draws its own house layout; pass your own template or logo files only where you are entitled to use them.
+- The writing skills contain original, general guidance; they do not reproduce text from books, papers or proposals.
 - Numerical examples in the skills are synthetic or published values; they are not results to cite.
 
 ## License
 
-MIT (see [LICENSE](LICENSE)) for the code and documentation. The institutional logos and templates in `research-slides/assets/` are not covered by this license and remain the property of their owners.
+MIT (see [LICENSE](LICENSE)) for the code and documentation.
