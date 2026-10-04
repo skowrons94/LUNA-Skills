@@ -24,14 +24,14 @@ nuclear-research-project  (project layout, provenance, LaTeX report, handoff) �
 | `peak-shape-analysis` | Bin-integrated fits of asymmetric γ peaks and target energy-loss shapes |
 | `efficiency-analysis` | Photopeak efficiency, IAEA NDS decay data, cascade summing corrections |
 | `target-analysis` | Target profiles, stoichiometry and degradation from excitation curves; SRIM tables |
-| `simluna` | Building, extending and validating SimLUNA Geant4/ROOT simulations |
+| `underground-gamma-simulation` | Building, extending and validating SimLUNA Geant4/ROOT simulations |
 | `agata-simulation` | AGATA Geant4 code: custom geometries (e.g. one triplet in close geometry), external cascade events, list-mode conversion, PSA/resolution emulation, summing-in tags and OFT tracking |
 | `delta-beta-dsam` | Femtosecond lifetimes with the Doppler-velocity (Δβ) DSAM method: centroids, nuisance fit, Δβ–τ calibration, sensitivity |
 | `azure2` | AZURE2/pyazr R-matrix calculations, fits, decompositions, extrapolations, rates |
 | `nuclear-research-project` | Scaffolding and auditing reproducible feasibility-study projects and reports |
-| `luna-clear-experimental-writing` | Experimental manuscripts, abstracts, captions, referee replies |
-| `brune-deboer-style` | Formalism, methods and R-matrix sections in the Brune–deBoer register |
-| `aliotta-style` | Proposals, grants, fellowships, beam-time requests |
+| `clear-experimental-writing` | Experimental manuscripts, abstracts, captions, referee replies |
+| `methods-paper-style` | Formalism, methods and R-matrix sections in the Brune–deBoer register |
+| `proposal-style` | Proposals, grants, fellowships, beam-time requests |
 | `unslop` | De-formulaic editing of any prose (explicit invocation only) |
 | `prc-figures` | PRC / ROOT-like matplotlib figures: spectra, stacked components, S factors with data, heatmaps, method comparisons, annotated Geant4 renders, overlap checks |
 | `research-slides` | Talks in the user's PowerPoint style, Manim animations, rendering and deck audit |
@@ -57,7 +57,7 @@ python3 peak-shape-analysis/scripts/demo.py --out /tmp/demo-peak
 python3 target-analysis/scripts/demo.py --out /tmp/demo-target
 python3 efficiency-analysis/scripts/demo.py --out /tmp/demo-eff
 python3 efficiency-analysis/scripts/demo_cascade.py --out /tmp/demo-cascade
-python3 simluna/scripts/test_physics_checks.py && python3 simluna/scripts/test_helpers.py
+python3 underground-gamma-simulation/scripts/test_physics_checks.py && python3 underground-gamma-simulation/scripts/test_helpers.py
 python3 agata-simulation/scripts/test_agata_lm.py
 python3 delta-beta-dsam/scripts/selftest.py
 python3 prc-figures/scripts/demo.py --out /tmp/demo-prc

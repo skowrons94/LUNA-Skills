@@ -1,5 +1,5 @@
 ---
-name: brune-deboer-style
+name: methods-paper-style
 description: Write or revise nuclear-physics methods and R-matrix papers in the style of C. R. Brune and R. J. deBoer (PRC, RMP, NIM A) — plain first-person-plural exposition, every symbol defined where it appears, assumptions and neglected effects stated with their size, conventions made explicit, balanced treatment of alternatives, and conclusions that say what was clarified and what remains open. Use when drafting or editing formalism sections, method descriptions, R-matrix analyses, validation sections, or conclusions of a technical nuclear-physics or nuclear-astrophysics paper, or when asked to make a manuscript "more scientific" in this register.
 ---
 

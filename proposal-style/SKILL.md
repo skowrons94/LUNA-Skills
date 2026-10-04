@@ -1,10 +1,10 @@
 ---
-name: aliotta-style
+name: proposal-style
 description: Draft or revise scientific proposals, grants and fellowships with question-first structure, explicit objectives, credible commitments and clear work packages for reviewers outside the immediate subfield. Use for ERC, MSCA, PRIN, INFN or beam-time proposals, science cases, objectives, work packages, risk sections and project summaries.
 ---
 # Aliotta style
 
-Use the user's proposal style to help a reviewer identify the question, evidence, planned work and assessable outcome. For experimental manuscripts, use `luna-clear-experimental-writing` instead of imposing a grant structure.
+Use the user's proposal style to help a reviewer identify the question, evidence, planned work and assessable outcome. For experimental manuscripts, use `clear-experimental-writing` instead of imposing a grant structure.
 
 Read [style-guide.md](references/style-guide.md) for the section patterns, work-package structure, risk treatment and worked revision example. Use only the parts relevant to the requested section; an abstract or short edit does not require the whole proposal template.
 

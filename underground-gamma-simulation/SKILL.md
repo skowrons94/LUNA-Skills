@@ -1,5 +1,5 @@
 ---
-name: simluna
+name: underground-gamma-simulation
 description: Build, extend and validate SimLUNA Geant4/ROOT simulations for LUNA. Use for geometry and detectors, reaction channels and kinematics, Doppler effects, cross-section bias and weights, nuclear-data edits, ROOT observables and reproducible runs.
 ---
 
