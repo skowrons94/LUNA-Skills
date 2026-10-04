@@ -20,10 +20,10 @@ $
 - `FORMAT emitterType emittedType`. Emitted format 0: lab energies and directions plus source position (cm); format 1: c.m. energies (boosted by the emitter velocity); 2/3 without position; 4 energy only.
 - `$` separates events; the first `$` ends the header. All γ of one cascade go in one event; AGATA writes them as one output event.
 - Doppler, recoil kicks, lifetimes: compute them in your generator and write lab energies (format 0). This is easier to validate than the internal emitter.
-- Example generator: `~/Desktop/LUAGATA/src/physics/o15.py` (`sample_cascade`: c.m. velocity, photon recoil kick, exponential decay times, slowing down in the target) and `scripts/run_agata.py` (writes files, runs, converts, manifest).
+- Example generator structure: a cascade sampler (c.m. velocity, photon recoil kick, exponential decay times, slowing down in the target) plus a driver script that writes the event files, runs AGATA, converts the output and records a manifest.
 
 ## Reaction generator (`-TargetEx`)
-Used in `~/Desktop/28Si/scripts/run_agata.py` for 3He(28Si,α)27Si* with `/Agata/generator/emitter/BeamIn/*`, `BeamOut/*`, `adistFile` (c.m. angular distribution), `ProjectileExcitation`, and private PhotonEvaporation data via `G4LEVELGAMMADATA`. Requires the D-006 patches; without them all products are created at rest.
+Used for 3He(28Si,α)27Si* with `/Agata/generator/emitter/BeamIn/*`, `BeamOut/*`, `adistFile` (c.m. angular distribution), `ProjectileExcitation`, and private PhotonEvaporation data via `G4LEVELGAMMADATA`. Requires the reaction-generator patches listed in the build notes; without them all products are created at rest.
 
 ### Pitfalls of `-TargetEx` (all found in 28Si; patches in `environment/agata_local_patches.diff`)
 - **Products at rest / segfault**: `Outgoing_Beam::ReactionProduct()` must be virtual, otherwise the TargetEx override is never called.

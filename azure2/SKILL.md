@@ -18,8 +18,8 @@ repo); pyazr resolves it via `$AZURE2_BINARY` → `<repo>/build/src/AZURE2` →
 `$PATH`, so `binary=` is usually unnecessary. **The two can drift**:
 `/usr/local/bin/AZURE2` is a copy, not a symlink, so a `make AZURE2` in the
 source repo does not reach it — `sudo cp build/src/AZURE2 /usr/local/bin/` after
-every rebuild, or export `$AZURE2_BINARY`. `pyazr/` lives at the repo root
-(`/Users/kuba/Desktop/R-Matrix/Codes/AZURE2/pyazr`, v2.3.0) and is mirrored into
+every rebuild, or export `$AZURE2_BINARY`. AZURE2 must be installed (with its `pyazr/`
+package, v2.3.0 or later, at the source repo root); pyazr is often mirrored into
 evaluation directories, so `from pyazr import ...` works when cwd is either.
 
 Full reference docs: `docs/_build/html/_sources/` — `reference/` covers

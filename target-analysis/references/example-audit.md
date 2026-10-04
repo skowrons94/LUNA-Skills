@@ -1,6 +1,6 @@
 # Example audit and validation
 
-The supplied example is preserved at `/Users/kuba/Desktop/Skills/temp/target-analysis/example`. It contains exploratory notebooks, SRIM tables, an AZURE wrapper, model outputs and yield tables. This skill extracts the workflow rather than treating every notebook as a working implementation.
+The audited example (not distributed with this skill) contained exploratory notebooks, SRIM tables, an AZURE wrapper, model outputs and yield tables. This skill extracts the workflow rather than treating every notebook as a working implementation.
 
 ## Findings that change decisions
 

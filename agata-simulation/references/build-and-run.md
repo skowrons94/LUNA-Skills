@@ -1,9 +1,9 @@
 # Build and run
 
 ## Known-good build (macOS arm64)
-- Source: https://gitlab.com/malabi-agata/agata, commit b1335fd (2026-07-31), in `~/Desktop/28Si/environment/agata`; executable `build/Agata`.
+- Source: https://gitlab.com/malabi-agata/agata, commit b1335fd (2026-07-31). The AGATA code must be installed and built; the executable is `build/Agata` in its source tree.
 - Geant4 11.2.2 (MT) and ROOT 6.34 from the conda env `main`; compile with Apple clang (`/usr/bin/clang++`); conda clang 18 fails on `<complex>` with the macOS 26 SDK.
-- Local patches (`~/Desktop/28Si/environment/agata_local_patches.diff`): custom target `AGATA` renamed `AGATA_all` (collides with `Agata` on case-insensitive FS); `-Wl,--no-as-needed` only if not Apple; configure with `-DCMAKE_POLICY_VERSION_MINIMUM=3.5` (CMake 4). Reaction generator fixes for `-TargetEx` (virtual `ReactionProduct()`, inverted theta window veto, uninitialised `PLEx/TLEx`) — see 28Si `docs/DECISIONS.md` D-006.
+- Local patches needed for this build: custom target `AGATA` renamed `AGATA_all` (collides with `Agata` on case-insensitive FS); `-Wl,--no-as-needed` only if not Apple; configure with `-DCMAKE_POLICY_VERSION_MINIMUM=3.5` (CMake 4). Reaction generator fixes for `-TargetEx` (virtual `ReactionProduct()`, inverted theta window veto, uninitialised `PLEx/TLEx`).
 ```bash
 cd environment/agata && mkdir -p build && cd build
 cmake .. -DCMAKE_POLICY_VERSION_MINIMUM=3.5 -DCMAKE_BUILD_TYPE=Release \
@@ -34,7 +34,7 @@ G4AGATAVACUUMINWORLD=1 Agata -TargetEx -a 1 41 -noQT -Path <geo>/ -b run.mac   #
 
 ## Rendering the geometry (validated in the 14N(p,γ) triplet study)
 - GDML export (`AGATAWRITEGDML=1`, written in `UpdateGeometry` after `/run/initialize` + `/Agata/detector/update`) FAILS for the array: crystals are `CConvexPolyhedron`, unknown to GDML.
-- The terminal-mode `AgataVisManager` does not provide a usable RayTracer viewer ("No valid current viewer", then segfault on trace). In `~/Desktop/LUAGATA/environment/agata_luagata`, `Agata.cc` uses `G4VisExecutive` when `AGATAG4VISEXECUTIVE=1`; then `TSG_OFFSCREEN` works (RayTracer still does not):
+- The terminal-mode `AgataVisManager` does not provide a usable RayTracer viewer ("No valid current viewer", then segfault on trace). With a patched `Agata.cc` that uses `G4VisExecutive` when `AGATAG4VISEXECUTIVE=1`, then `TSG_OFFSCREEN` works (RayTracer still does not):
 ```
 /vis/open TSG_OFFSCREEN 1800x1200-0+0
 /vis/viewer/set/autoRefresh false
@@ -48,4 +48,4 @@ G4AGATAVACUUMINWORLD=1 Agata -TargetEx -a 1 41 -noQT -Path <geo>/ -b run.mac   #
 /vis/viewer/rebuild
 ```
 - Logical volumes of one ATC: `geDetCapsL0k` (capsule), `cryPolyL0k` (crystal), `gePassC0k`/`gePassBL0k` (passivated core/back layers), `wlDetL00` (18 cryostat walls). Hiding a capsule hides its crystal; stacked transparent walls wash out colours.
-- Extra passive geometry (e.g. a target holder) can be added in `AgataDetectorConstruction` right after `theConstructed->Placement()` (both in `Construct` and `UpdateGeometry`) into `hallPhys`; see the `PlaceLunaHolder` patch (the 14N(p,γ) target holder ported from the underground-laboratory simulation), switched by `AGATALUNAHOLDER=1`. These two identifiers are the names used in the user's patched AGATA code; keep them unless that code is renamed too. When the holder carries the backing, do not also set `/Agata/detector/backingMaterial`.
+- Extra passive geometry (e.g. a target holder) can be added in `AgataDetectorConstruction` right after `theConstructed->Placement()` (both in `Construct` and `UpdateGeometry`) into `hallPhys`, for example a placement function switched on by an environment variable. When the holder carries the backing, do not also set `/Agata/detector/backingMaterial`.

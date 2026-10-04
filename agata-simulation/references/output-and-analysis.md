@@ -20,9 +20,9 @@ Header ends with a line `$`. Per event:
 - Doppler-correct sums with the direction of the most energetic point.
 
 ## Tracking
-- OFT and MGT source are in `environment/agata/analysis/oft/built-in/forward2018.c` and `analysis/mgt/` (with Ge cross-section tables `ge_{comp,phot,pair}.dat`: E keV, μ 1/cm). Copies and a formula write-up: `~/Desktop/LUAGATA/environment/tracking_reference/`, `~/Desktop/LUAGATA/work/tracking_algorithms.md`.
-- Python OFT figure of merit (Compton-angle term with position-error propagation, attenuation factors, (·)^(1/(2N−1)), single-hit isolation 4 cm + range test): `~/Desktop/LUAGATA/src/physics/response.py` (`oft_fom`, `oft_single_ok`). For a single cluster, compute the Ge path from the triplet front plane, not from a 4π shell.
-- For known cascades, an energy-partition test (a subset of ≤4 points whose energy equals a known primary) separates summing-in from single high-energy γ better than generic tracking: 94 % / 19 % (sum / true) vs OFT 77 % / 9 % at 7.4 MeV; see LUAGATA report Sect. 4.
+- OFT and MGT source are in `environment/agata/analysis/oft/built-in/forward2018.c` and `analysis/mgt/` (with Ge cross-section tables `ge_{comp,phot,pair}.dat`: E keV, μ 1/cm).
+- Python OFT figure of merit (Compton-angle term with position-error propagation, attenuation factors, (·)^(1/(2N−1)), single-hit isolation 4 cm + range test). For a single cluster, compute the Ge path from the triplet front plane, not from a 4π shell.
+- For known cascades, an energy-partition test (a subset of ≤4 points whose energy equals a known primary) separates summing-in from single high-energy γ better than generic tracking: 94 % / 19 % (sum / true) vs OFT 77 % / 9 % at 7.4 MeV.
 
 ## Statistics for low counts
-Split the ROI into categories (multiplicity × tag) and fit μ_c = s·G_c + θ·U_c + B_c with θ free (data-driven summing); evaluate systematics by fitting pseudo-data from varied templates. Implementation: `~/Desktop/LUAGATA/src/physics/stats.py`, `scripts/evaluate_methods.py`.
+Split the ROI into categories (multiplicity × tag) and fit μ_c = s·G_c + θ·U_c + B_c with θ free (data-driven summing); evaluate systematics by fitting pseudo-data from varied templates.

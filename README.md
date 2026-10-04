@@ -45,7 +45,7 @@ git clone https://github.com/skowrons94/LUNA-Skills.git && cd LUNA-Skills
 for s in */; do [ -f "$s/SKILL.md" ] && ln -sfn "$PWD/${s%/}" ~/.claude/skills/"${s%/}"; done
 ```
 
-If a folder of the same name already exists in `~/.claude/skills`, move it aside first. Some skills mention paths on the author's machine (`~/Desktop/...`); treat them as discovery hints and point the agent at your own installation.
+If a folder of the same name already exists in `~/.claude/skills`, move it aside first. Skills that drive external codes (AZURE2, Geant4, AGATA, ROOT) assume those codes are installed; point the agent at your own installation.
 
 ## Test
 

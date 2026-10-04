@@ -5,9 +5,9 @@ description: Run and analyse the official AGATA Geant4 simulation (gitlab.com/ma
 # AGATA simulation
 
 Simulate what AGATA would record, and keep every number traceable to a run, a geometry and a seed.
-Known-good build, worked examples and validated pitfalls come from two projects:
-`~/Desktop/28Si` (inverse kinematics with SAURON, `-TargetEx` generator) and `~/Desktop/LUAGATA`
-(14N(p,γ)15O cascades, one triplet at 20 mm, external events, summing-in tag, OFT).
+The AGATA simulation code (Geant4) must be installed. Known-good build, worked examples and validated
+pitfalls come from two studies: inverse kinematics with SAURON (`-TargetEx` generator), and
+14N(p,γ)15O cascades (one triplet at 20 mm, external events, summing-in tag, OFT).
 
 ## Route the task
 

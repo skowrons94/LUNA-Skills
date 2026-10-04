@@ -2,7 +2,7 @@
 
 Method of Fougeres et al., Nature Commun. 14, 4536 (2023), as extended in the 15O AGATA lifetime
 analysis (J. Skowronski et al., submitted 2026; code github.com/skowrons94/15O_Lifetime) and used in
-the 28Si(3He,alpha)27Si AGATA feasibility study (~/Desktop/28Si/scripts/analyse_agata.py).
+the 28Si(3He,alpha)27Si AGATA feasibility study.
 
 Conventions: energies in MeV for kinematics and keV for gamma rays, masses in MeV/c^2 (nuclear or
 atomic consistently), angles in degrees unless stated, c = 1. beta = v/c.

@@ -8,7 +8,7 @@ The excited recoil slows down in the backing; a longer lifetime means a smaller 
 Δβ = β_reac − β_ems is measured event by event and, for τ up to a few tens of fs, is linear in τ:
 Δβ ≈ (dβ/dt)·τ. References: Fougères et al., Nature Commun. 14, 4536 (2023); the 15O AGATA
 lifetime paper (J. Skowronski et al., submitted 2026; analysis code github.com/skowrons94/15O_Lifetime);
-worked simulation study: `~/Desktop/28Si` (scripts/analyse_agata.py, report Sect. 6).
+worked example: the 28Si(3He,α)27Si AGATA feasibility study.
 
 Library: `scripts/dbeta.py` (import it; numpy + scipy). Run `python3 scripts/selftest.py` first: it
 checks the inversion, unbiasedness without stopping, linearity in τ and recovery of an energy offset

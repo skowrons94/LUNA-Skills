@@ -11,7 +11,7 @@ histograms as steps, measured points in black with error bars, models as lines w
 ## Start
 
 ```python
-import sys; sys.path.insert(0, "~/Desktop/Skills/prc-figures/scripts")   # or copy prcstyle.py into the project (src/plotting/style.py)
+import sys; sys.path.insert(0, "<this skill>/scripts")   # or copy prcstyle.py into the project (src/plotting/style.py)
 import prcstyle as ps
 ps.apply()                                   # rcParams
 fig, ax = plt.subplots(figsize=(ps.COL_1, 2.7))   # PRC single column 3.4 in, double 7.0 in
