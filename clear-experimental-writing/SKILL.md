@@ -2,7 +2,7 @@
 name: clear-experimental-writing
 description: Write or revise experimental nuclear-astrophysics manuscripts with clear motivation, reproducible methods, transparent uncertainty and bounded physics interpretation. Use for abstracts, paper sections, captions, proceedings, thesis chapters, referee replies or full-paper restructuring; use `proposal-style` for proposals and `research-slides` for talks.
 ---
-# LUNA clear experimental writing
+# Clear experimental writing
 
 Make the measurement's logic easy to follow: astrophysical question → nuclear uncertainty → experimental gap → measurement strategy → observable extraction → uncertainty → comparison → consequence.
 

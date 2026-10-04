@@ -1,4 +1,4 @@
-# LUNA Clear Experimental Writing
+# Clear Experimental Writing
 
 ## Purpose
 
@@ -170,13 +170,13 @@ For each component, immediately state its purpose when that purpose is not obvio
 
 Prefer:
 
-> The copper tube was cooled with liquid nitrogen to suppress contaminant buildup and biased to ... for secondary-electron suppression.
+> A cold trap in front of the target limited the deposition of contaminants, and an electrode at negative potential returned secondary electrons so that the beam current was measured correctly.
 
-rather than describing the tube first and explaining its function several paragraphs later.
+rather than describing a component first and explaining its function several paragraphs later.
 
 Similarly:
 
-> A silicon detector at ... was used to monitor the competing reaction ...
+> A second detector monitored the competing channel, which provided an independent check of the target thickness.
 
 is preferable to giving detector specifications before telling the reader why the detector exists.
 
@@ -215,11 +215,11 @@ This often requires only one clause.
 
 Good:
 
-> The detector was mounted at \(125^\circ\) to separate the reaction products kinematically.
+> The detector was placed at a backward angle so that the two reaction products are separated in energy.
 
 Less useful:
 
-> The detector was mounted at \(125^\circ\).
+> The detector was placed at a backward angle.
 
 ---
 
@@ -280,7 +280,7 @@ Lead with the observation.
 
 Prefer:
 
-> All four targets give mutually consistent S factors.
+> The results from the individual targets agree within their uncertainties.
 
 then explain how the combined value is obtained.
 
@@ -340,7 +340,7 @@ Make comparisons quantitative whenever possible.
 
 Prefer:
 
-> The present value is 12% lower than X but compatible within the quoted uncertainties.
+> The present value is lower than X by an amount smaller than the combined uncertainty.
 
 instead of:
 
@@ -526,7 +526,7 @@ Usually the sentence can begin directly with the information that follows.
 
 ---
 
-# 18. Preferred manuscript flow for a LUNA experimental paper
+# 18. Preferred manuscript flow for an experimental paper
 
 For a full experimental article, default to:
 
@@ -588,7 +588,7 @@ Preserve technically precise wording supplied by domain experts.
 
 ---
 
-# 20. Special mode: editing Jakub's manuscripts
+# 20. Special mode: editing the user's manuscripts
 
 For technically mature drafts:
 

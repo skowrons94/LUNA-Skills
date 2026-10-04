@@ -1,242 +1,122 @@
-# Aliotta style
+# Proposal style guide
 
-A proposal is read by a tired non-specialist who must justify a score to a panel.
-Everything below serves one goal: give that referee sentences they can lift
-verbatim into their report, and never make them stop to decode.
+Reviewers usually read many proposals under time pressure, often outside their own speciality, and must defend a score to a panel. Write so that the reviewer can find each assessable element quickly and can summarise it in their own report without reconstructing your argument.
 
-## 1. The five-move section
+## 1. Building a problem section
 
-For a full problem section, use these five moves when the available evidence supports them. Adapt the order to the funder's format and omit unsupported claims about prior failures.
+A section that motivates one objective usually needs the following elements. Adapt the order and length to the call, and leave out any element the evidence does not support.
 
-1. **Consensus.** State the accepted picture, unhedged, no citation storm.
-   2–4 sentences. The referee must be able to nod along without expertise.
-2. **The anomaly, quantified where possible.** Use a meaningful quantitative comparison with its necessary qualification.
-   *"the observed plateau translates into an abundance a factor of 3 lower than
-   predicted."* Include uncertainty when it changes the interpretation.
-3. **The failed attempts.** One sentence listing what others tried, each with a
-   citation, ending in their failure. *"Despite four decades of effort, the
-   problem still eludes even the most imaginative solutions, such as X [9],
-   Y [10], Z [11], and others."* This move is what earns the proposal: it
-   establishes that the gap is real and not merely unattended.
-4. **The pivot.** One hedged hypothesis, opened with a connective that signals
-   novelty — *Intriguingly, Now, However, Again*. Exactly one sentence.
-   The hypothesis is always **may/could**, never *will*.
-5. **The commitment.** A bolded clause naming the project as agent, plus the
-   facility, the observable, and the limit. *"**PROJECT will exploit the
-   reduced-background conditions at FACILITY to push measurements of X to the
-   lowest accessible energies.**"*
+1. **Accepted background.** A few sentences a non-specialist can agree with. Keep citations to the essential ones.
+2. **The open problem, quantified.** Give the comparison that shows the gap (a discrepancy, a missing measurement, an uncertainty that limits a model) with the qualification needed to read it correctly.
+3. **Why it is still open.** If earlier approaches exist, summarise what they achieved and what limited them, with citations. Do not imply that others failed when they simply did not attempt the problem.
+4. **The idea.** One clearly marked hypothesis or approach that could resolve the problem. Present it as something to test, not a conclusion.
+5. **The commitment.** What the project will do, with which facility or method, which observable, and to what level of sensitivity.
 
-An optional objective-closing frame is:
+Close an objective section with a short summary that names the objective and lists the work packages that deliver it.
 
-> **In summary:** The Nth objective of PROJECT is to *<verb the question>*.
-> This effort will entail: i) …(WP1); ii) …(WP2); iii) …(WP3).
+## 2. Questions first
 
-The referee scores from moves 2, 3, and 5. Moves 1 and 4 exist to make 5 feel
-inevitable rather than announced.
+- State the open questions early, as numbered plain questions in everyday scientific language rather than as noun-phrase titles.
+- Reuse the same wording for the question wherever it reappears (summary, objectives, methodology headings) so the reviewer can recognise it without rereading.
+- Give questions, objectives, work packages, tasks and milestones short tags (Q1, O2, WP3, T3.2, M3.1) and use them in cross-references.
 
-## 2. Questions before answers
+## 3. Sentences and paragraphs
 
-State the open questions as plain interrogatives, numbered, early, in ordinary
-words a non-specialist would use: *"How did first-generation stars produce CNO
-elements?"* Not *"On the nucleosynthetic origin of CNO in Pop III."*
+- One idea per sentence and one theme per paragraph. Make the logical link to the next sentence explicit with a connective rather than leaving it to inference.
+- Let length follow function: background can chain accepted facts in longer sentences; feasibility, risk and commitment statements read best when short and direct.
+- If a paragraph needs many transition words, reorder it instead of adding more.
+- Prefer verbs to nominalisations and specific verbs to *is/has/makes*.
+- Avoid contractions, fragments, rhetorical questions other than the research questions, and closing aphorisms.
+- Follow one spelling convention throughout, or the one the funder requires.
 
-Then repeat each question **verbatim** as the heading of the section that
-answers it. Verbatim repetition is a memory device, not redundancy — the
-referee reads the question three times (summary, objectives, methodology) and
-can recall it without rereading.
+## 4. Certainty: hypotheses versus commitments
 
-Use tags (Q1, WP2b, M3.1) at relevant cross-references so the referee can
-navigate backwards from any sentence.
+Keep two kinds of statement grammatically distinct.
 
-## 3. Sentence mechanics
-
-- **Sentence lengths are illustrative, not targets.** The source pattern is roughly: 15% under 15 words, 35% at 15–24,
-  33% at 25–34, 17% above 35. Vary deliberately, not randomly.
-- **Length tracks function.** Background and state-of-the-art run long (35–55
-  words) because they chain accepted facts. Risk, feasibility, and commitment
-  run short (10–20). A 12-word sentence in a risk section reads as confidence;
-  the same sentence in the background reads as thin.
-- **One idea per sentence**, joined to the next by an explicit connective.
-  Chains of *because / while / whereas / instead / by contrast* do the reasoning;
-  the reader is never asked to infer a link.
-- **Transitions signal structure** (however, moreover, by contrast, finally) —
-  but if you need many, the structure is wrong; fix the order, not the glue.
-- Nominalizations become verbs. *is/has/makes* become strong verbs.
-- No contractions, no fragments, no rhetorical questions other than the
-  numbered research questions, no epigrams, no closing aphorism.
-- British or Oxford spelling, applied consistently throughout.
-
-## 4. Certainty grammar: the may/will split
-
-This is the single most load-bearing rule.
-
-| Subject | Modality |
+| Statement | Language |
 |---|---|
-| Untested hypotheses or uncertain interpretation | **may, could, might**, with calibrated confidence |
-| Work within the team's control | **will** for genuine commitments; state dependencies and conditions |
+| Untested hypothesis or uncertain interpretation | *may, could, might*, with confidence matched to the evidence |
+| Work within the team's control | *will*, with any conditions or external dependencies stated |
+| Established result | plain present tense, no hedge |
 
-*"Nuclear clustering **may** enhance cross sections by orders of magnitude"* —
-then — *"**we will** measure these cross sections down to the lowest accessible
-energies."* The hypothesis stays falsifiable; the work stays committed.
+Hedging your own planned work sounds like doubt about the team's ability; asserting an untested hypothesis sounds like bias. Remove defensive wording, but keep the uncertainties, feasibility arguments and limitations a reviewer needs.
 
-Inverting this is the commonest failure: hedging your own deliverables reads as
-doubt about your ability, and asserting the hypothesis reads as bias.
+## 5. Person
 
-State claims directly and provide the evidence needed to assess them. Remove defensive rhetoric, but retain uncertainty, feasibility arguments and limitations. Established results need not be hedged as hypotheses.
+Use the first person singular where the call asks about the applicant (vision, positioning, track record) and the first person plural for the work the team will carry out. Do not shift between them within one paragraph without reason. Some calls prescribe the person; follow them.
 
-## 5. Person: I for standing, we for work
+## 6. Technical terms
 
-Concentrate **I / my** in the vision, positioning, and track record — roughly a
-2:1 I-to-we ratio there. Flip to **we / our / my team and I** in methodology,
-where the ratio should be about 1:10 the other way.
+- Define a term the first time it is used, inside the sentence and briefly, by linking it to something the reader already knows.
+- Put longer definitions in a footnote or a box so that specialists are served without slowing other readers. Reserve this for the few terms the argument depends on.
+- Introduce an unfamiliar mechanism through a well-known example of the same mechanism before the new case.
+- Give orders of magnitude and ratios for the general reader, and keep precise values with uncertainties wherever the claim depends on them.
+- Introduce at most one new symbol or acronym at a time; expand each acronym once.
+- Figures can carry networks, the state of the art, and timelines, but the argument must stand without them.
 
-*"I am uniquely well placed to lead this programme"* is a judgement, so it takes
-*I*. *"We will perform direct measurements"* is labour, so it takes *we*. In the
-science sections, at most one positioning paragraph in the first person.
+## 7. Emphasis
 
-## 6. Keeping technicality to a clause
+- Use bold sparingly, on short clauses inside ordinary sentences: research questions, the central hypothesis (once), objective statements, commitments, and work-package or milestone tags.
+- Do not bold numbers, background, prior work or evaluative adjectives.
+- Test: reading only the emphasised text from top to bottom should reproduce the logic of the proposal. Remove emphasis that does not serve that purpose.
 
-- **Gloss at first use, inside the sentence, in one clause**, anchored to
-  something already familiar: *"the α particle (i.e. the nucleus of ⁴He), which
-  contains two protons and two neutrons."*
-- **If a definition needs more than a clause, it goes in a footnote.** Footnotes
-  are where the specialist reader is served without stalling the general one.
-  Two or three per document, for the terms the whole argument rests on.
-- **Precedent before novelty.** Introduce any unfamiliar mechanism through one
-  famous, accepted instance of the same mechanism. The reader accepts the new
-  claim because they already accept the old one. Never introduce a mechanism
-  cold.
-- **Magnitudes, not precision.** *a factor of 3, a million-fold reduction,
-  orders of magnitude, up to a thousand solar masses.* Comparative scale is
-  legible to a non-specialist. Retain precision and uncertainty wherever they affect the claim.
-- **One new symbol or piece of notation per sentence.** Expand each acronym once,
-  then use it.
-- Figures carry the network, the state of the art, and the timeline — never the
-  argument. The argument survives without them.
+## 8. Work packages and tables
 
-## 7. Bold is the referee's summary
-
-Bold **clauses inside ordinary sentences**, not whole sentences and not headings
-you are proud of.
-
-Bold these:
-- the research questions
-- the central hypothesis, once
-- every commitment clause (*we will measure… / PROJECT will exploit…*)
-- every objective statement (*The second objective of PROJECT is…*)
-- milestone and work-package tags
-- the names of collaborators who are actually committed to the project
-
-Never bold these: numbers, evidence, background, prior work, your own adjectives.
-
-Budget: **2–4 bold clauses per page.** The test: read only the bold, top to
-bottom, and the proposal must reconstruct itself. If a bold phrase does not
-score a point, unbold it.
-
-## 8. Structural parallelism
-
-Give every work package the identical heading skeleton, repeated verbatim:
+Give every work package the same internal headings, in the same order, for example:
 
 ```
-WPn: <Name>
-<one-line subtitle stating what it delivers>
-WPn: Tasks (T) and Milestones (M)
-WPn: Personnel and skills
-WPn: Risks and risk management
-WPn: Added value and long-term benefits
+WPn: <name>
+<one line stating what the package delivers>
+WPn: tasks and milestones
+WPn: personnel and expertise
+WPn: risks and mitigation
+WPn: expected impact beyond the project
 ```
 
-The referee looking for "what happens if WP2 fails" finds it at a fixed offset
-in every package. Parallel structure is worth more than elegant variation; vary
-the content, never the frame.
+A reviewer looking for the risks of one package should find them in the same place in every package. Vary the content, not the frame.
 
-Tables carry structure, not evidence. A good table: objective ↔ key outcome;
-task ↔ verifiable evidence. Use scenario-dependent rates and backgrounds when they support feasibility; state their main implication in the methodology and move excessive detail to supporting material.
+Use tables to show structure, for example objective versus outcome, or task versus verifiable evidence. Put the rates, backgrounds and sensitivity estimates that establish feasibility in the methodology, state their main implication there, and move further detail to annexes or supporting material. Each feasibility number should trace to one documented source (a simulation, a test measurement, a publication); convert private knowledge into something citable.
 
-Every claim traces to one authoritative source (one feasibility run, one
-reference). Private knowledge must be converted to a citable form.
+## 9. Risks
 
-## 9. Writing risk
-
-- **Grade every risk on a named scale**: low, low-medium, medium, medium-high,
-  high. Attach the grade to a *task*, never to the project.
-- **Say "no specific risks are associated with T3.1" where it is true.** Blunt,
-  short, unhedged. Credibility comes from the contrast with the items you do
-  grade as high.
-- **Every high-risk item gets a value-regardless clause**: *"Even if we do not
-  achieve a full breakthrough, the effort will be worthy of publication and
-  serve as a crucial stepping stone."* High risk is only fundable when failure
-  still produces an output.
-- **Every risk gets a named mitigation, and the mitigation's own risk is
-  admitted**: *"we will consider the alternative facility; this requires
-  committee approval, which may not be granted. State the evidence for any probability judgement; scientific importance alone does not make approval more likely."*
-- Say which tasks are independent of one another. Independence is itself a
-  mitigation and referees look for it.
+- Grade each risk on a stated scale (for example low / medium / high) and attach the grade to a task, not to the project as a whole.
+- Where a task carries no specific risk, say so briefly; this makes the graded risks more credible.
+- For each high-risk task, state what useful result remains if the main goal is not reached.
+- Give each risk a concrete mitigation and acknowledge the limits or dependencies of the mitigation itself (for example, an alternative facility that requires a separate approval). Do not claim that scientific importance makes approval more likely without evidence.
+- Point out tasks that do not depend on one another; independence is itself a mitigation.
 
 ## 10. Register
 
-- Emphasis words — *tantalising, intriguing, ground-breaking, unique, novel,
-  world-leading* — cost about one per page, no more. They attach to **evidence
-  and facilities**, never to yourself or your own idea.
-- One vivid colloquialism per section, at most: *"stands out like a sore thumb",
-  "has haunted the community for forty years"*. It buys goodwill precisely
-  because the surrounding prose is plain.
-- Name the collaborator, the institution, and the instrument. Concrete proper
-  nouns do the work that adjectives cannot.
-- Passive voice is acceptable for established physics, forbidden for your own
-  actions.
+- Use evaluative words (*novel, unique, first*) rarely, attach them to evidence, methods or facilities rather than to yourself, and verify priority claims.
+- Concrete names of instruments, institutions and committed partners do more than adjectives.
+- Passive voice is acceptable for established physics; use the active voice for what the team will do.
+- Keep informal phrases to a minimum; plain prose is easier to score.
 
-## 11. Worked example
+## 11. Revising a dense paragraph: what to look for
 
-Before (dense draft):
+When editing a paragraph from a draft, check in turn:
 
-> Inside the Gamow window at 2.0 MeV, the two predictions differ by a factor
-> of about 37, a separation an order of magnitude beyond any realistic
-> combined uncertainty (§1.2). **Whether carbon fusion is enhanced or hindered
-> is therefore no longer only a question of which extrapolation to believe,
-> but of a single measurement, and IGNIS will make it.**
+- Is the key comparison stated directly, with only the qualification needed to read it?
+- Does the paragraph end on a clever line or slogan? Replace it with the substantive statement.
+- Is emphasis on a number or on background? Move it to the commitment or the objective.
+- Does the paragraph state the gap before the commitment that answers it?
+- Are uncertainty arguments needed for feasibility still present somewhere in the proposal, even if moved out of this paragraph?
 
-After:
+## 12. Revision checklist
 
-> Moreover, existing extrapolations towards the stellar energy region are
-> mutually inconsistent, differing by up to a factor of 37 around 2 MeV.
-> More than four decades after the Becker measurement, the low-energy
-> ¹²C+¹²C cross section therefore remains inadequately constrained.
-> **IGNIS will measure this cross section directly at FACILITY, down to the
-> lowest accessible energies.**
-
-What changed:
-
-- The main comparison is more direct; retain the uncertainty argument elsewhere if it is needed to establish feasibility.
-- The epigram is gone. Epigrams read as advocacy.
-- The number is stated plainly and **not** bolded. Bold moved to the commitment,
-  which is what the referee copies into the report.
-- The paragraph now closes on the restated gap (move 3), so the commitment that
-  follows feels inevitable rather than announced.
-
-## 12. Revision checklist (run in order)
-
-1. Reverse outline: do the key-idea sentences alone tell the story, in order?
-2. Does each problem section establish the gap, evidence and proposed response without inventing prior failures?
-3. Are the research questions plain interrogatives, repeated verbatim as
-   headings?
-4. Modality audit: distinguish established results, hypotheses and genuine commitments. Retain conditions outside the team's control.
-5. Person audit: *I* concentrated in vision and track record, *we* in
-   methodology?
-6. One theme per paragraph? Orphan sentences removed or repurposed?
-7. Remove defensive rhetoric while retaining evidence and limitations needed to assess each claim.
-8. Technicality pass: every term glossed in a clause at first use; anything
-   longer moved to a footnote; one new symbol per sentence.
-9. Are all feasibility numbers in methodology, each appearing exactly once,
-   traceable to one authoritative source?
-10. Bold audit: reading only the bold, does the section score itself? Unbold
-    every number, every piece of evidence, and anything bolded out of pride.
-11. Parallelism audit: identical heading skeleton across all work packages?
-12. Risk audit: every task graded, every high risk carrying a value-regardless
-    clause, every mitigation carrying its own admitted risk?
-13. Sentence-length audit: long in background, short in risk and commitment;
-    median around 25 words.
-14. Verb audit: nominalizations → verbs; weak *is/has/makes* → strong verbs.
-15. Clutter pass: waste words, long-winded phrases, redundant transitions.
-16. Register pass: no contractions, no fragments, calibrated certainty,
-    emphasis words ≤ 1 per page and never attached to yourself.
+1. Reverse outline: do the first sentences of the paragraphs, read alone, tell the story in order?
+2. Does each problem section establish the gap, the evidence and the proposed response, without invented prior failures?
+3. Are the research questions plain questions, reused consistently as headings or tags?
+4. Modality: are established results, hypotheses and commitments distinguished, with external conditions stated?
+5. Person: singular for the applicant's standing, plural for the team's work (or as the call requires)?
+6. One theme per paragraph; isolated sentences merged or removed?
+7. Defensive wording removed, while evidence and limitations are kept?
+8. Every specialist term defined at first use; long definitions moved to a footnote or box?
+9. Feasibility numbers placed in the methodology, each traceable to one source and not repeated inconsistently?
+10. Emphasis: does the bold text alone reconstruct the logic?
+11. Work packages: identical heading structure across all packages?
+12. Risks: every task graded, high risks paired with a fallback outcome, mitigations with their own limits?
+13. Verbs: nominalisations and weak verbs replaced?
+14. Clutter: redundant transitions and long-winded phrases removed?
+15. Register: no contractions or fragments, calibrated certainty, evaluative words rare and never self-directed?
+16. Compliance: page limits, mandatory headings and evaluation criteria of the call met?
