@@ -11,7 +11,7 @@ Standard A180 set: `asolid -> A180solid.list`, `aclust -> A180clustS2p.list`, `a
 ```
 First column: cluster position index; second: cluster type in `aclust` (type 0 = ATC triplet in A180clustS2p). Rotation (0,0,0) puts the cluster axis along +z (beam direction), i.e. downstream of the target at 0°.
 
-## One triplet at distance d (validated in LUAGATA)
+## One triplet at distance d (validated in the 14N(p,γ) triplet study)
 In the cluster frame the Ge front faces are at z ≈ −49.7 mm and the cryostat front at z ≈ −55.5 mm (computed from A180solid/A180clustS2p/A180wallsS2p). For the endcap at distance d from the target: `dz = d + 55.5` mm; the Ge front is then at ≈ d + 5.8 mm. Nominal A180 placement radius is ~276.5 mm (Ge front ≈ 232 mm).
 - At d = 20 mm one ATC gives a 7.4 MeV full-energy efficiency of ~1.5 % (addback), 1.2 % at 30 mm, 0.8 % at 50 mm; ~15 % of 7.4 MeV γ interact.
 - A γ along exactly +z passes the junction of the three crystals (few or no hits): do not test with pencil beams on axis.

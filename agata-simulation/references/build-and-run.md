@@ -32,7 +32,7 @@ G4AGATAVACUUMINWORLD=1 Agata -TargetEx -a 1 41 -noQT -Path <geo>/ -b run.mac   #
 - One process per run with distinct `/random/setSeeds` (e.g. from a hash of the run name); record seeds and executable hash in a manifest.
 - Convert `GammaEvents.NNNN` to npz right after the run and delete the text file (GB per 10^6 events); gzip the log.
 
-## Rendering the geometry (validated in LUAGATA)
+## Rendering the geometry (validated in the 14N(p,γ) triplet study)
 - GDML export (`AGATAWRITEGDML=1`, written in `UpdateGeometry` after `/run/initialize` + `/Agata/detector/update`) FAILS for the array: crystals are `CConvexPolyhedron`, unknown to GDML.
 - The terminal-mode `AgataVisManager` does not provide a usable RayTracer viewer ("No valid current viewer", then segfault on trace). In `~/Desktop/LUAGATA/environment/agata_luagata`, `Agata.cc` uses `G4VisExecutive` when `AGATAG4VISEXECUTIVE=1`; then `TSG_OFFSCREEN` works (RayTracer still does not):
 ```
