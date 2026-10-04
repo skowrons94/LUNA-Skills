@@ -19,7 +19,7 @@ from pptx import Presentation
 from pptx.oxml.ns import qn
 from pptx.util import Emu
 
-# "1.5 min. ..." counts; "~8 min for the LUNA part" on a divider or "25 min talk: ..."
+# "1.5 min. ..." counts; "~8 min for part one" on a divider or "25 min talk: ..."
 # on the title slide is a summary and does not.
 TIME = re.compile(r"^\s*(\d+(?:\.\d+)?)\s*min\.", re.I)
 
@@ -60,7 +60,7 @@ def main():
         is_media = False
         for sh in s.shapes:
             x, y, w, h = inches(sh.left), inches(sh.top), inches(sh.width), inches(sh.height)
-            decorative = "alphaModFix" in sh._element.xml  # e.g. the faded UniPD seal
+            decorative = "alphaModFix" in sh._element.xml  # e.g. a faded watermark image
             if sh.left is not None and not decorative and (x < -0.05 or y < -0.05 or x + w > W + 0.05 or y + h > H + 0.05):
                 report("WARN", i, f"'{sh.name}' extends outside the canvas")
             if sh.has_text_frame:

@@ -11,10 +11,10 @@ from manim import (BLUE, DOWN, LEFT, RIGHT, UP, WHITE, Axes, Circle, Create, Dot
 # ---- palette (keep semantic meaning stable across clips) -------------------------
 BG = "#0B1220"        # background
 SOFT = "#C9D1DE"      # secondary text, axes, arrows
-RED_U = "#D0141A"     # the bottleneck / the quantity we measure (UniPD red on dark)
+RED_U = "#D0141A"     # the bottleneck / the quantity we measure (house red on dark)
 GOLD = "#E3B23C"      # stellar context, questions to the audience
 BLUE_N = "#5DA9FF"    # neutrinos, photons from the source, "data"
-GREEN_A = "#5CC46A"   # detectors (AGATA, HPGe, BGO)
+GREEN_A = "#5CC46A"   # detectors (HPGe, BGO, tracking arrays)
 ORANGE_S = "#FF7A45"  # case A (short lifetime, high energy, ...)
 BLUE_L = "#7FB3FF"    # case B (long lifetime, low energy, ...)
 

@@ -1,6 +1,6 @@
 ---
 name: research-slides
-description: Plan, build, animate and check scientific talks in the user's own PowerPoint style — conference talks, seminars, working-group updates and technical-meeting presentations in nuclear physics and nuclear astrophysics. Builds .pptx decks from the user's UniPD conference or LUNA/INFN seminar templates with python-pptx, adds Manim animations as click-to-play video slides, and renders and audits every slide. Use whenever the user asks for slides, a deck, a talk, a presentation, a seminar, speaker notes, or a Manim animation for a talk, or wants an existing deck restyled, shortened, timed or checked.
+description: Plan, build, animate and check scientific talks in the user's own PowerPoint style — conference talks, seminars, working-group updates and technical-meeting presentations in nuclear physics and nuclear astrophysics. Builds .pptx decks in the built-in house layout (or on a template the user supplies) with python-pptx, adds Manim animations as click-to-play video slides, and renders and audits every slide. Use whenever the user asks for slides, a deck, a talk, a presentation, a seminar, speaker notes, or a Manim animation for a talk, or wants an existing deck restyled, shortened, timed or checked.
 ---
 
 # Research slides
@@ -9,7 +9,7 @@ Make a talk that a room can follow at speaking pace: one claim per slide, figure
 
 ## Before building
 
-1. Establish the talk type and slot (conference 12–25 min, seminar 45–60 min, working-group meeting, technical meeting), audience, date, venue, and which template: `unipd` (default since 2026: Padova conference master) or `luna` (older LUNA/INFN seminar look). A user-supplied .pptx can also serve as the template (`Deck(template="path.pptx")` keeps its masters and drops its slides).
+1. Establish the talk type and slot (conference 12–25 min, seminar 45–60 min, working-group meeting, technical meeting), audience, date, venue, and which layout: the built-in `house` layout (default; drawn by `deck.py`, no template file) or a .pptx the user supplies (`Deck(template="path.pptx")` keeps its masters and drops its slides). The skill bundles no logos or institutional templates; use the user's own files only where they are entitled to them.
 2. Collect the evidence: result files and plots from the project (`results/`, `plots/` in a [nuclear-research-project](../nuclear-research-project/SKILL.md) layout), publications, and what is unpublished. Every number on a slide must trace to a source; never invent values, citations, lifetimes, uncertainties or collaborator credits. Mark unpublished results PRELIMINARY.
 3. Write the storyboard before any code: one line per slide with its claim title, the figure or animation, the build steps, and minutes. Read [narrative-and-notes.md](references/narrative-and-notes.md) for the arc, title style, build and timing rules. Show the storyboard to the user for a talk longer than a few slides.
 
@@ -20,13 +20,13 @@ Read [house-style.md](references/house-style.md) for the measured geometry, colo
 ```python
 import sys; sys.path.insert(0, "SKILL_DIR/scripts")
 from deck import Deck, Box, LEFT_FIG, RIGHT_TEXT, BLUE, GREEN, RED
-d = Deck(template="unipd", footer="J. Skowronski  |  Università di Padova & INFN Padova  |  NPA 2026")
+d = Deck(footer="A. Author  |  Institute  |  Conference 2026")
 d.title_slide(title, subtitle=..., author=..., affiliation=..., event=..., date=...)
 d.video("clip.mp4", poster="clip_poster.png", notes="1.5 min. ...")      # Manim clip, plays on click
-d.section("Direct Measurements: LUNA", logo="luna")
-d.build("One state controls the extrapolation", [step1, step2], badge="luna", notes="1.5 min. ...")
-s = d.content("Impact", badge="agata"); s.figure(...); s.bullets([...]); s.kpi_transition(...); s.notes(...)
-d.closing(line="LUNA Collaboration  •  AGATA Collaboration"); d.backup(); d.save("talk.pptx")
+d.section("Part 1: Direct measurement")                 # logo="my_logo.png" optional
+d.build("One state controls the extrapolation", [step1, step2], notes="1.5 min. ...")
+s = d.content("Impact"); s.figure(...); s.bullets([...]); s.kpi_transition(...); s.notes(...)
+d.closing(line="Collaboration A  •  Collaboration B"); d.backup(); d.save("talk.pptx")
 ```
 
 Text helpers accept `**bold**`, `==red accent==`, `^{sup}`, `_{sub}` and Unicode symbols. `s.equation(tex, x, y, size)` typesets LaTeX at its true point size. Make plots with `plt.style.use("SKILL_DIR/assets/slides.mplstyle")` at the size they occupy on the slide. Run `python3 SKILL_DIR/scripts/demo_deck.py --out NEW_DIR` to see every component working.

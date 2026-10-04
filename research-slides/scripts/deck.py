@@ -1,18 +1,21 @@
 """Build PowerPoint decks in the user's house style with python-pptx.
 
-The default template is the Università di Padova conference master used for the
-NPA 2026 talk (red header bar, right-aligned white title, grey footer rule).
+The default ("house") layout is drawn by this module on python-pptx's blank
+presentation: red header bar with a white bold title, grey footer rule, page
+number, and full-red title/divider/closing slides. No logos or third-party
+templates are bundled; pass your own .pptx as template=, and your own image
+files as logos or badges, only where you are entitled to use them.
 Every helper places shapes in inches on a 13.33 x 7.50 in canvas.
 
     import sys; sys.path.insert(0, "SKILL_DIR/scripts")
     from deck import Deck, LEFT_FIG, RIGHT_TEXT
 
-    d = Deck(footer="J. Skowronski  |  Università di Padova & INFN Padova  |  NPA 2026")
+    d = Deck(footer="A. Author  |  Institute  |  Conference 2026")
     d.title_slide("Direct and indirect approaches ...", subtitle="The ^{14}N(p,γ)^{15}O reaction ...",
-                  author="Jakub Skowronski", affiliation="Università degli Studi di Padova & INFN",
-                  event="Nuclear Physics in Astrophysics 2026", date="10/09/2026")
-    s = d.content("CNO neutrinos: a probe limited by nuclear physics", badge="luna")
-    s.figure("plots/borexino.png", LEFT_FIG, caption="Borexino, Nature 587 (2020)")
+                  author="A. Author", affiliation="Institute",
+                  event="Conference 2026", date="10/09/2026")
+    s = d.content("CNO neutrinos: a probe limited by nuclear physics")
+    s.figure("plots/cno_flux.png", LEFT_FIG, caption="Source: journal, volume (year)")
     s.bullets(["Flux ∝ **C+N abundance in the core**", "S_{114} is the **2nd largest term**"], RIGHT_TEXT)
     s.notes("1.5 min. ...")
     d.save("talk.pptx")
@@ -36,19 +39,9 @@ from pptx.oxml.ns import qn
 from pptx.util import Inches, Pt
 
 SKILL_DIR = Path(__file__).resolve().parents[1]
-TEMPLATES = {
-    "unipd": SKILL_DIR / "assets/templates/unipd-conference.pptx",
-    "luna": SKILL_DIR / "assets/templates/luna-seminar.pptx",
-}
-LOGOS = {
-    "luna": SKILL_DIR / "assets/logos/luna-logo.png",
-    "agata": SKILL_DIR / "assets/logos/agata-logo.jpg",
-    "infn": SKILL_DIR / "assets/logos/infn-logo.wmf",
-    "unipd": SKILL_DIR / "assets/logos/unipd-logo-white.png",
-    "seal": SKILL_DIR / "assets/logos/unipd-seal-watermark.png",
-}
+HOUSE = "house"  # built-in layout drawn by this module; no template file needed
 
-# Palette measured from the NPA 2026 and IAEA 2026 decks.
+# House palette.
 RED = RGBColor(0xAA, 0x00, 0x04)      # header bar, callouts, key numbers
 TEXT = RGBColor(0x39, 0x3D, 0x3F)     # body text
 GREY = RGBColor(0x6E, 0x73, 0x76)     # captions, page number, secondary KPI box
@@ -296,7 +289,7 @@ class Slide:
             self.bullets(items, Box(x + 0.1, box.y + 0.62, cw - 0.2, box.h - 0.7), size=size, gap_pt=6)
 
     def person(self, photo, caption, box: Box = Box(10.9, 4.9, 1.9, 1.9)):
-        """Photo plus credit line ('Elia Pilotto's PhD'), used when a student did the work."""
+        """Photo plus credit line (e.g. 'A. Student, PhD work'), used when a student did the work."""
         self.figure(photo, Box(box.x, box.y, box.w, box.h - 0.4))
         self.text(caption, Box(box.x - 0.4, box.y + box.h - 0.4, box.w + 0.8, 0.4), size=14, bold=True,
                   align="center")
@@ -357,8 +350,8 @@ class Slide:
             pw, ph = im.size
         return self.shapes.add_picture(str(out), Inches(x), Inches(y), Inches(pw / 400), Inches(ph / 400))
 
-    def logo(self, name_or_path, box: Box):
-        path = LOGOS.get(name_or_path, name_or_path)
+    def logo(self, path, box: Box):
+        """Place a user-supplied logo image (no logos are bundled with the skill)."""
         return self.figure(path, box)
 
     # -- notes ----------------------------------------------------------------
@@ -369,19 +362,21 @@ class Slide:
 
 
 class Deck:
-    """A deck built on one of the user's templates.
+    """A deck in the house layout or on a user-supplied template.
 
-    template="unipd" (default): Padova conference master, red title/divider slides.
-    template="luna": older LUNA/INFN seminar master (white, red rounded title box,
-    grey footer bar with date | footer | page). Any other value is a .pptx path whose
-    slides are ignored and whose layouts are reused.
+    template="house" (default): 16:9 canvas drawn by this module (red header bar,
+    white title, grey footer rule, full-red title/divider slides).
+    Any other value is a .pptx path whose slides are ignored and whose layouts
+    are reused.
     """
 
-    def __init__(self, template="unipd", footer="", date="", page_numbers=True):
-        self.kind = template if template in TEMPLATES else "custom"
-        path = TEMPLATES.get(template, template)
-        self.prs = Presentation(str(path))
-        if self.kind == "custom":
+    def __init__(self, template=HOUSE, footer="", date="", page_numbers=True):
+        self.kind = HOUSE if template in (None, HOUSE) else "custom"
+        if self.kind == HOUSE:
+            self.prs = Presentation()
+            self.prs.slide_width, self.prs.slide_height = Inches(W), Inches(H)
+        else:
+            self.prs = Presentation(str(template))
             _drop_all_slides(self.prs)
         self.footer = footer
         self.date = date
@@ -403,16 +398,22 @@ class Deck:
         return self.prs.slide_layouts[0]
 
     def _red_slide(self):
-        s = self.prs.slides.add_slide(self._layout("DEFAULT", "Tappo atertura e chiusura"))
+        s = self.prs.slides.add_slide(self._layout("Blank", "DEFAULT"))
+        for ph in list(s.placeholders):
+            ph._element.getparent().remove(ph._element)
         bg = s.background.fill
         bg.solid()
         bg.fore_color.rgb = RED
-        wm = s.shapes.add_picture(str(LOGOS["seal"]), Inches(8.6), Inches(3.0), Inches(4.6), Inches(4.6))
-        _set_picture_alpha(wm, 12)
         return Slide(self, s)
 
+    def watermark(self, slide: "Slide", path, box: Box = Box(8.6, 3.0, 4.6, 4.6), percent=12):
+        """Faded user-supplied image (e.g. your own emblem) on a red slide."""
+        wm = slide.shapes.add_picture(str(path), Inches(box.x), Inches(box.y), Inches(box.w), Inches(box.h))
+        _set_picture_alpha(wm, percent)
+        return wm
+
     def _title_layout_slide(self, title, lines=()):
-        """luna/custom: the template's own title layout (placeholders 0, 11, 12, 13)."""
+        """custom: the template's own title layout (placeholders 0, 11, 12, 13)."""
         sl = self.prs.slides.add_slide(self._layout("Titolo", "Title Slide", "Cover presentazione"))
         values = {0: title, 11: lines[0] if len(lines) > 0 else "", 12: lines[1] if len(lines) > 1 else "",
                   13: lines[2] if len(lines) > 2 else ""}
@@ -427,11 +428,11 @@ class Deck:
         return Slide(self, sl)
 
     def title_slide(self, title, subtitle="", author="", affiliation="", event="", date="",
-                    logos=("infn",)):
-        if self.kind != "unipd":
+                    logos=()):
+        """Full-red title slide. logos: paths to your own image files."""
+        if self.kind != HOUSE:
             return self._title_layout_slide(title, (f"**{author}**", affiliation, date or self.date))
         s = self._red_slide()
-        s.figure(LOGOS["unipd"], Box(0.62, 0.5, 3.96, 1.0), align="left")
         s.text(title, Box(0.62, 1.55, 11.8, 1.6), size=32, color=WHITE, bold=True, font="Cambria",
                anchor="bottom", line_spacing=1.0)
         if subtitle:
@@ -450,8 +451,8 @@ class Deck:
         return s
 
     def section(self, title, logo=None):
-        """Divider slide ('Direct Measurements: LUNA'): full red on unipd."""
-        if self.kind != "unipd":
+        """Divider slide ('Part 1: Direct measurement'); logo is an optional image path."""
+        if self.kind != HOUSE:
             return self._title_layout_slide(title)
         s = self._red_slide()
         s.text(title, Box(0.8, 2.8, 8.0, 0.8), size=40, color=WHITE, bold=True, anchor="middle")
@@ -459,8 +460,9 @@ class Deck:
             s.logo(logo, Box(8.8, 1.6, 3.7, 3.6))
         return s
 
-    def closing(self, title="Thank you", line="", logos=("luna", "agata", "infn")):
-        if self.kind != "unipd":
+    def closing(self, title="Thank you", line="", logos=()):
+        """Closing slide; line names the collaborations, logos are your own image paths."""
+        if self.kind != HOUSE:
             return self._title_layout_slide(title, (line,))
         s = self._red_slide()
         s.text(title, Box(0.8, 2.4, 11.5, 1.2), size=40, color=WHITE, bold=True, anchor="bottom")
@@ -471,22 +473,30 @@ class Deck:
         return s
 
     def content(self, title, badge=None):
-        """Standard slide with title, footer and page number from the template."""
-        unipd = self.kind == "unipd"
-        sl = self.prs.slides.add_slide(self._layout("Diapositiva neutra", "Titolo e contenuto", "Title Only"))
+        """Standard slide with title, footer and page number.
+
+        badge: optional path to a small image shown in the header bar.
+        """
+        house = self.kind == HOUSE
+        sl = self.prs.slides.add_slide(self._layout("Title Only", "Diapositiva neutra", "Titolo e contenuto"))
         self._page += 1
-        own_number = unipd
+        own_number = house
+        if house:
+            _house_frame(sl)
         for ph in list(sl.placeholders):
             idx, typ = ph.placeholder_format.idx, str(ph.placeholder_format.type)
             if idx == 0:
                 ph.text_frame.text = ""
                 p = ph.text_frame.paragraphs[0]
-                if unipd:  # white, bold, right-aligned in the red bar
+                if house:  # white, bold, in the red bar
+                    ph.left, ph.top, ph.width, ph.height = Inches(0.5), Inches(0.01), Inches(12.33), Inches(0.73)
+                    ph.text_frame.vertical_anchor = MSO_ANCHOR.MIDDLE
+                    ph.text_frame.word_wrap = True
                     add_rich_text(p, title, size=20, color=WHITE, bold=True, accent=WHITE)
-                    p.alignment = PP_ALIGN.RIGHT
+                    p.alignment = PP_ALIGN.LEFT
                 else:      # inherit the layout's title style
                     add_rich_text(p, title, size=28, color=WHITE, bold=True, accent=WHITE)
-            elif "FOOTER" in typ or (unipd and idx == 11):
+            elif "FOOTER" in typ:
                 if self.footer:
                     ph.text_frame.text = self.footer
                 else:
@@ -498,16 +508,12 @@ class Deck:
             else:
                 ph._element.getparent().remove(ph._element)
         s = Slide(self, sl)
+        if house and self.footer:
+            s.text(self.footer, Box(0.5, 7.09, 11.5, 0.35), size=10, color=GREY)
         if self.page_numbers and own_number:
             s.text(str(self._page), Box(12.4, 7.08, 0.8, 0.35), size=10, color=GREY, align="right")
-        if self.kind == "luna":  # python-pptx does not copy date/footer/number placeholders
-            for txt, box, al in ((self.date, Box(0.3, 7.08, 3.0, 0.35), "left"),
-                                 (self.footer, Box(3.33, 7.08, 6.68, 0.35), "center"),
-                                 (str(self._page) if self.page_numbers else "", Box(10.08, 7.08, 3.0, 0.35), "right")):
-                if txt:
-                    s.text(txt, box, size=12, color=WHITE, bold=True, align=al, anchor="middle")
-        if badge:  # small collaboration logo sitting in the header bar
-            s.logo(badge, Box(4.62, 0.04, 0.7, 0.66) if unipd else Box(11.3, 0.13, 0.9, 0.9))
+        if badge:  # small user-supplied image in the header bar, right end
+            s.logo(badge, Box(12.55, 0.04, 0.7, 0.66) if house else Box(11.3, 0.13, 0.9, 0.9))
         return s
 
     def build(self, title, steps, badge=None, notes=None):
@@ -538,7 +544,7 @@ class Deck:
         """
         poster = str(poster) if poster else None
         if full_bleed:
-            sl = self.prs.slides.add_slide(self._layout("Diapositiva vuota", "DEFAULT", "Blank"))
+            sl = self.prs.slides.add_slide(self._layout("Blank", "Diapositiva vuota", "DEFAULT"))
             for ph in list(sl.placeholders):
                 ph._element.getparent().remove(ph._element)
             bg = sl.background.fill
@@ -564,6 +570,24 @@ class Deck:
         Path(path).parent.mkdir(parents=True, exist_ok=True)
         self.prs.save(str(path))
         return path
+
+
+def _house_frame(slide):
+    """Red header bar and grey footer rule, sent behind the slide's placeholders."""
+    bar = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, 0, 0, Inches(W), Inches(0.75))
+    bar.fill.solid()
+    bar.fill.fore_color.rgb = RED
+    bar.line.fill.background()
+    bar.shadow.inherit = False
+    rule = slide.shapes.add_shape(MSO_SHAPE.RECTANGLE, Inches(0.5), Inches(7.06), Inches(12.33), Inches(0.01))
+    rule.fill.solid()
+    rule.fill.fore_color.rgb = GREY
+    rule.line.fill.background()
+    rule.shadow.inherit = False
+    tree = slide.shapes._spTree
+    for el in (rule._element, bar._element):
+        tree.remove(el)
+        tree.insert(2, el)
 
 
 def _drop_all_slides(prs):

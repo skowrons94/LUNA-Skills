@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Build a short example deck that exercises every component, then audit it.
 
-    python3 demo_deck.py --out NEW_DIR [--template unipd|luna] [--video clip.mp4]
+    python3 demo_deck.py --out NEW_DIR [--template house|path.pptx] [--video clip.mp4]
 
 Uses synthetic data only. With --video, the clip is embedded full-bleed with a
 poster taken from its last frame. Render afterwards with render_deck.py.
@@ -41,7 +41,7 @@ def make_figure(path):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", type=Path, required=True)
-    ap.add_argument("--template", default="unipd")
+    ap.add_argument("--template", default="house")
     ap.add_argument("--video", type=Path)
     a = ap.parse_args()
     if a.out.exists() and any(a.out.iterdir()):
@@ -50,32 +50,32 @@ def main():
     fig = a.out / "s_factor.png"
     make_figure(fig)
 
-    d = Deck(template=a.template, footer="J. Skowronski  |  Università di Padova & INFN Padova  |  Demo",
+    d = Deck(template=a.template, footer="A. Author  |  Institute  |  Demo",
              date="01/01/2027")
     d.title_slide("Example talk:\nthe ^{14}N(p,γ)^{15}O reaction", subtitle="Synthetic content for testing",
-                  author="Jakub Skowronski", affiliation="Università degli Studi di Padova & INFN Padova",
+                  author="A. Author", affiliation="Institute",
                   event="Demo Conference", date="01/01/2027").notes("12 min talk: 3 min motivation, 7 min results, 2 min summary.")
     if a.video:
         poster = a.out / (a.video.stem + "_poster.png")
         subprocess.run([sys.executable, str(HERE / "video_poster.py"), str(a.video), "--at", "last", "--out", str(poster)],
                        check=True)
         d.video(a.video, poster=poster, notes="1 min. Opening animation; click to play.")
-    d.section("Direct measurement", logo="luna").notes("~7 min for the results.")
+    d.section("Direct measurement").notes("~7 min for the results.")
 
     def step1(s):
         s.figure(fig, LEFT_FIG, caption="Synthetic data, demo only")
-        s.bullets(["S_{114}(0) from **seven data sets**", ("Priors", ["ANCs from transfer", "Γ_{6.79} from AGATA"])],
+        s.bullets(["S_{114}(0) from **seven data sets**", ("Priors", ["ANCs from transfer", "Γ_{6.79} from a lifetime"])],
                   RIGHT_TEXT)
 
     def step2(s):
         s.callout("One state controls the ==extrapolation==")
 
-    d.build("One state controls the extrapolation", [step1, step2], badge="luna",
+    d.build("One state controls the extrapolation", [step1, step2],
             notes="1.5 min. Point at the low-energy points, then reveal the take-away.")
 
-    s = d.content("The Doppler formula", badge="agata")
+    s = d.content("The Doppler formula")
     s.equation(r"E_\gamma = E_0\,\frac{\sqrt{1-\beta^2}}{1-\beta\cos\theta}", 0.8, 1.6, size=32)
-    s.bullets(["β from the **silicon detector** kinematics", "θ from AGATA **tracking**"], Box(7.3, 1.6, 5.5, 2.5))
+    s.bullets(["β from the **silicon detector** kinematics", "θ from γ-ray **tracking**"], Box(7.3, 1.6, 5.5, 2.5))
     s.kpi("1.0 ± 0.5 fs", "τ of a state (made up)", "demo value", Box(0.8, 4.4, 4.0, 1.4))
     s.notes("1.5 min. Formula, then the result box.")
 
@@ -91,7 +91,7 @@ def main():
              ("Impact", RED, ["**5 %** on S(0)"])])
     s.callout("Direct and indirect data are not alternatives", Box(0.5, 5.0, 12.33, 1.0))
     s.notes("1 min. Close the loop.")
-    d.closing(line="LUNA Collaboration  •  AGATA Collaboration")
+    d.closing(line="Collaboration A  •  Collaboration B")
     d.backup()
     out = d.save(a.out / "demo.pptx")
     print("Deck:", out)

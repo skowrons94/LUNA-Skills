@@ -1,4 +1,4 @@
 interface:
   display_name: "Research Slides"
   short_description: "Build, animate and check talks in the house style"
-  default_prompt: "Use $research-slides to plan and build a conference talk with a Manim opening animation in my UniPD template."
+  default_prompt: "Use $research-slides to plan and build a conference talk with a Manim opening animation in my house style."
