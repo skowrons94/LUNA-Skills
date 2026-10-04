@@ -10,13 +10,13 @@ Source and test outputs are preserved separately in the development workspace (`
 
 The build used the active `main` Conda environment: Geant4 11.2.2, ROOT 6.34.04, CMake 4.0 and the system Apple Clang compiler. See `configure-conda.log`, `build-conda.log`, subsequent rebuild logs and `environment.sh` in the validation directory. `environment.sh` only overrides project nuclear-data locations; the active Conda environment must already provide standard Geant4 datasets and libraries.
 
-The reusable [stationary Cs macro](../assets/cs137-smoke.mac) targets this variant. The [source patch](local-split-bgo.patch) records the fixes applied **only to the isolated test copy**:
+The reusable [stationary Cs macro](../assets/cs137-smoke.mac) targets this variant. The source fixes below were applied **only to the isolated test copy** (the patch itself is kept outside this repository, since its context lines come from the simulation source code):
 
 - Attach the sensitive detector to the actual split-crystal logical volume, with a checked lookup.
 - Allocate deposited/smeared energy storage for 12 channels; apply event filtering and noise logic consistently across all 12.
 - In reaction mode place the thin target in the world just upstream of the backing, with transformed coordinates; omit the reaction layer in source mode to avoid source-holder overlap.
 
-Do not apply this patch blindly to six-crystal BGO, HPGe or upstream versions. Inspect context and use `git apply --check /path/to/local-split-bgo.patch` (or a patch dry run) against a separate matching source copy before applying. It does not implement the missing reaction branches or validate cross sections.
+Do not apply these fixes blindly to six-crystal BGO, HPGe or upstream versions. If you have the patch, inspect its context and use `git apply --check` (or a patch dry run) against a separate matching source copy before applying. It does not implement the missing reaction branches or validate cross sections.
 
 ## Results
 
