@@ -1,19 +1,19 @@
 ---
 name: underground-gamma-simulation
-description: Build, extend and validate SimLUNA Geant4/ROOT simulations for LUNA. Use for geometry and detectors, reaction channels and kinematics, Doppler effects, cross-section bias and weights, nuclear-data edits, ROOT observables and reproducible runs.
+description: Build, extend and validate Geant4/ROOT simulations of gamma-ray detection setups at low-background (underground) accelerator laboratories. Use for geometry and detectors, reaction channels and kinematics, Doppler effects, cross-section bias and weights, nuclear-data edits, ROOT observables and reproducible runs.
 ---
 
-# SimLUNA
+# Underground gamma simulation
 
-Produce reproducible, checked simulations using the user's actual SimLUNA variant. Separate successful execution, detector-response checks, and experimentally validated physics; none implies the next.
+Produce reproducible, checked simulations using the user's actual variant of their Geant4/ROOT application. Throughout this skill, `APP` stands for the application's executable name and `APP.cc` for its main source file in the user's checkout. Separate successful execution, detector-response checks, and experimentally validated physics; none implies the next.
 
 ## Establish the variant
 
-Read the project's instructions, `SimLUNA.cc`, `CMakeLists.txt`, relevant messenger implementations, and a nearby working macro. The upstream repository is <https://baltig.infn.it/LUNA/simluna-open>. It required authentication during skill development; do not imply the local source was verified against current upstream.
+Read the project's instructions, `APP.cc`, `CMakeLists.txt`, relevant messenger implementations, and a nearby working macro. The upstream repository required authentication during skill development; do not imply the local source was verified against current upstream.
 
-On this user's machine, a tested starting point is `/Users/kuba/Desktop/LUNA/Simulations/SimLUNA`, with other variants under `SimLUNA_HPGe` and `19F + p`. These are discovery hints, not portable dependencies. Use the source and data specified by the user. Do not conflate BGO, HPGe or six/twelve-segment variants.
+On the user's machine there is a tested BGO checkout plus separate HPGe and 19F+p variants; ask for their paths. These are discovery hints, not portable dependencies. Use the source and data specified by the user. Do not conflate BGO, HPGe or six/twelve-segment variants.
 
-Read [setup-and-interface.md](references/setup-and-interface.md) when building or preparing macros, and [validation-record.md](references/validation-record.md) for actual test coverage and local defects. Preserve original research files; use a separate build and run directory. Record source identity, build settings, executable, macros, actual dataset paths and relevant data-file hashes. `scripts/preflight.py --source CODE_DIR --data-file FILE` emits a JSON inventory; its presence checks do not certify data completeness or compatibility.
+Read [setup-and-interface.md](references/setup-and-interface.md) when building or preparing macros, and [validation-record.md](references/validation-record.md) for actual test coverage and local defects. Preserve original research files; use a separate build and run directory. Record source identity, build settings, executable, macros, actual dataset paths and relevant data-file hashes. `scripts/preflight.py --source CODE_DIR --main APP.cc --data-file FILE` emits a JSON inventory; its presence checks do not certify data completeness or compatibility.
 
 ## Run a small, explicit baseline
 
@@ -23,7 +23,7 @@ Read [setup-and-interface.md](references/setup-and-interface.md) when building o
 4. Use the checked runner for one reviewed, flat macro:
 
    ```bash
-   python3 SKILL_DIR/scripts/run_checked.py --exe /absolute/build/SimLUNA \
+   python3 SKILL_DIR/scripts/run_checked.py --exe /absolute/build/APP \
      --macro /absolute/macros/example.mac --out /absolute/new-run \
      --events 1000 --seeds 12345 67890 --timeout 300
    ```
@@ -62,7 +62,7 @@ python3 SKILL_DIR/scripts/physics_checks.py two-body SKILL_DIR/assets/synthetic-
 python3 SKILL_DIR/scripts/test_physics_checks.py
 ```
 
-The example uses artificial masses and is not a nuclear reaction dataset. These checks complement transport tests; they neither modify SimLUNA nor supply missing nuclear data. Use emitted-particle truth for kinematics and deposited/reconstructed energy for detector comparisons.
+The example uses artificial masses and is not a nuclear reaction dataset. These checks complement transport tests; they neither modify the application nor supply missing nuclear data. Use emitted-particle truth for kinematics and deposited/reconstructed energy for detector comparisons.
 
 ## Nuclear-data files
 

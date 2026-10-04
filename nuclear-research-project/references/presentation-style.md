@@ -26,9 +26,9 @@ Put detailed derivations, alternative assumptions, and diagnostic plots in backu
 
 ## Visual system
 
-Use the `research-slides` skill for the visual system, components, Manim animations, rendering and the deck audit. Its house-style reference covers the UniPD conference and LUNA/INFN seminar templates and the working-group variant used for the IGNIS feasibility decks (10 × 5.62 in, white, Cambria titles in orange-red `#C25E2E`, Calibri body, flat tables, thin warm-grey footer rule).
+Use the `research-slides` skill for the visual system, components, Manim animations, rendering and the deck audit. Its house-style reference covers the default conference layout and a compact working-group variant for feasibility decks (10 × 5.62 in, white, Cambria titles in orange-red `#C25E2E`, Calibri body, flat tables, thin warm-grey footer rule).
 
-Keep colour semantic and stable across plots within a study. For the IGNIS particle study: blues for alpha channels, reds for proton channels, greens for direct deuterium background, and magenta/wine for the knock-on chain.
+Keep colour semantic and stable across plots within a study. For example, in a charged-particle feasibility study: blues for alpha channels, reds for proton channels, greens for direct deuterium background, and magenta/wine for the knock-on chain.
 
 ## Figures
 

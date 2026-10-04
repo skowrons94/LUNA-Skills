@@ -1,4 +1,4 @@
 interface:
-  display_name: "SimLUNA simulations"
-  short_description: "Build, run and validate SimLUNA simulations"
-  default_prompt: "Use $underground-gamma-simulation to prepare and test a reproducible SimLUNA simulation for my setup."
+  display_name: "Underground gamma simulations"
+  short_description: "Build, run and validate Geant4 gamma-detection simulations"
+  default_prompt: "Use $underground-gamma-simulation to prepare and test a reproducible Geant4 simulation for my setup."

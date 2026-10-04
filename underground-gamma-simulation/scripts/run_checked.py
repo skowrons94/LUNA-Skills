@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Run one flat, reviewed SimLUNA macro in a fresh directory; preserve provenance."""
+"""Run one flat, reviewed Geant4 application macro in a fresh directory; preserve provenance."""
 
 import argparse
 import hashlib

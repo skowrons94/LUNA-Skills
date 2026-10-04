@@ -14,7 +14,7 @@ For detector efficiency, prescribed products can be much simpler than enhancing 
 
 ## Where to change the local implementation
 
-The inspected `ParticleCaptureXS`/`ParticleResonantCaptureXS` read numerical vectors and return their values, including their documented isotope fallback. No explicit likelihood-weight correction was found in those inspected cross-section classes or the local output path. Increasing those values must therefore be treated as changing the physical interaction probability until a weight implementation is demonstrated. There is no verified universal SimLUNA “bias factor” macro.
+The inspected `ParticleCaptureXS`/`ParticleResonantCaptureXS` read numerical vectors and return their values, including their documented isotope fallback. No explicit likelihood-weight correction was found in those inspected cross-section classes or the local output path. Increasing those values must therefore be treated as changing the physical interaction probability until a weight implementation is demonstrated. There is no verified universal “bias factor” macro.
 
 If implementing a configurable factor, keep an immutable physical table and apply the named factor at a single audited point in the cross-section path; record both physical and biased values at representative energies. Trace applicability, isotope selection, process competition and mean-free-path use. Do not also multiply an already enhanced input file. Prefer recording bias configuration in ROOT/run metadata rather than encoding it only in a filename.
 

@@ -3,7 +3,7 @@
 - Audience:
 - Decision or discussion the deck must support:
 - Central takeaway:
-- Source deck or template (unipd, luna, or a supplied .pptx):
+- Source deck or template (built-in house layout or a supplied .pptx):
 - Slot length (minutes) and talk type:
 - Animations (scene, purpose, planned duration):
 - Required evidence:

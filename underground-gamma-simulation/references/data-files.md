@@ -1,6 +1,6 @@
 # Selecting and changing nuclear data
 
-Read this before changing reaction cross sections, gamma branching, level schemes, angular distributions or radioactive decay. Data edits are part of configuring SimLUNA: available library values may be absent, incomplete, deliberately biased or inappropriate for the specific measurement. Do not treat installed data as automatically correct, or alter them merely to make a spectrum look plausible.
+Read this before changing reaction cross sections, gamma branching, level schemes, angular distributions or radioactive decay. Data edits are part of configuring the application: available library values may be absent, incomplete, deliberately biased or inappropriate for the specific measurement. Do not treat installed data as automatically correct, or alter them merely to make a spectrum look plausible.
 
 ## Identify the input that controls the requested change
 
@@ -25,7 +25,7 @@ A cross-section edit controls interaction probability; it does not by itself def
 2. Trace the selected process to the precise path and file it loads. Record the original SHA-256 and inspect the existing format. Check element/isotope fallback and energy applicability; initialization may require files for other elements in the geometry too.
 3. Make a project-local, complete dataset override or a versioned copy of the required dataset family. Preserve the original. If using a symlink overlay for a large library, replace each edited symlink with a regular private copy **before writing**; otherwise edits will modify the shared original. Avoid hard links for editable files too. A directory containing only one replacement file usually cannot replace an entire dataset root.
 4. Edit the minimum set of coupled files, retain a diff, and record old/new hashes plus the scientific reason. Point only the relevant environment variables at the override in the run launcher. Record their resolved absolute paths in the manifest. Do not globally repoint another project's environment.
-5. Validate structure and physics as below, then launch a **new SimLUNA process**. These models cache data; changing a file while the application remains alive may not change the loaded tables. Data-only changes normally need a restart, not recompilation; changes to reader logic, supported isotopes or model registration need a rebuild.
+5. Validate structure and physics as below, then launch a **new application process**. These models cache data; changing a file while the application remains alive may not change the loaded tables. Data-only changes normally need a restart, not recompilation; changes to reader logic, supported isotopes or model registration need a rebuild.
 6. Demonstrate that the overridden data were read. Prefer reader diagnostics showing the resolved file and effective cross sections/populations, or temporary instrumentation in the isolated build. A nonempty output file alone does not prove the override was used.
 
 ## Cross-section format and unit checks

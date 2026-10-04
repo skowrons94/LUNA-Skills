@@ -1,4 +1,4 @@
-# Adapting SimLUNA to a different reaction
+# Adapting the simulation to a different reaction
 
 A new reaction is a coupled change to material, incident particles, reaction probability, final states and output interpretation. A changed macro title or GPS ion does not supply these components.
 

@@ -5,7 +5,7 @@ from pathlib import Path
 import unittest
 from run_checked import prepare, assess
 
-MACRO = '/run/initialize\n/analysis/filename /workdir/rootfiles/SimLUNA.root\n/run/beamOn 1000000\n'
+MACRO = '/run/initialize\n/analysis/filename /workdir/rootfiles/simulation.root\n/run/beamOn 1000000\n'
 
 
 class Checks(unittest.TestCase):

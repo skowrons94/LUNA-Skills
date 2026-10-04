@@ -4,7 +4,7 @@ First distinguish the **primary-event generator** from the **reaction final-stat
 
 ## Existing local generator
 
-`SimLUNA.cc` creates `PrimaryGeneratorAction` and registers it with the serial run manager. The implementation is `shared/src/actions/PrimaryGeneratorAction.cc`; it owns `G4GeneralParticleSource`.
+`APP.cc` creates `PrimaryGeneratorAction` and registers it with the serial run manager. The implementation is `shared/src/actions/PrimaryGeneratorAction.cc`; it owns `G4GeneralParticleSource`.
 
 - `GeneratePrimaries()` dispatches on `DetectorConstruction::GetPhysics()` values `S` and `R`.
 - Reaction mode calls GPS and records its primary position, energy and direction.
@@ -25,7 +25,7 @@ The current bookkeeping queries GPS values once after generation. Do not assume 
 Use this when GPS cannot express the needed correlations, external events, beam phase space or controlled reaction-product generation.
 
 1. Define the input contract: species, energy/momentum, position, time, multiplicity, correlations, coordinate frame, units and weights. For a phase-space/event file, define grouping, ordering, malformed-record handling and end-of-file behavior. Do not silently cycle a short file and call the repeated sample independent.
-2. Add an explicit mode/member and messenger interface, or a separate `G4VUserPrimaryGeneratorAction` selected in `SimLUNA.cc`. Preserve the baseline path. If keeping the existing class, dispatch to a new generation method and reject unknown modes. Decide how geometry source/reaction selection remains compatible.
+2. Add an explicit mode/member and messenger interface, or a separate `G4VUserPrimaryGeneratorAction` selected in `APP.cc`. Preserve the baseline path. If keeping the existing class, dispatch to a new generation method and reject unknown modes. Decide how geometry source/reaction selection remains compatible.
 3. Use an appropriate Geant4 primary interface, such as `G4ParticleGun` for simple single-particle generation or explicit primary vertices/particles for correlated multiparticle events. Set every required quantity, ownership and particle definition. Sample correlated quantities jointly and transform from CM to lab when needed; do not independently sample daughters that must conserve four-momentum.
 4. Use the application's Geant4/CLHEP random engine for reproducible sampling. If an external library has a separate generator, seed and record it explicitly. Keep source sampling, event weights and file provenance in metadata. Do not use wall-clock reseeding for each event.
 5. Save the actual generated primaries, event/source identity and relevant weights to analysis storage. Review the primary-buffer lifecycle described in [root-output.md](root-output.md). Ensure new tracks remain compatible with `TrackingAction`, `StackingAction` and any `TrackInformation` assumptions in sensitive detectors.

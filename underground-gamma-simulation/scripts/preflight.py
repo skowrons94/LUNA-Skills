@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Record local SimLUNA source identity, tools, dataset paths and file hashes."""
+"""Record local Geant4 application source identity, tools, dataset paths and file hashes."""
 import argparse
 import hashlib
 import json
@@ -11,16 +11,19 @@ import subprocess
 
 def main():
     p = argparse.ArgumentParser(description=__doc__)
-    p.add_argument('--source', required=True, type=Path, help='Directory containing SimLUNA.cc')
+    p.add_argument('--source', required=True, type=Path, help='Application source directory (contains CMakeLists.txt)')
+    p.add_argument('--main', help='Main source file expected in --source (e.g. APP.cc); checked when given')
     p.add_argument('--data-file', action='append', type=Path, default=[], help='Relevant XS/cascade file; repeatable')
     a = p.parse_args()
     source = a.source.resolve()
-    if not (source / 'SimLUNA.cc').is_file():
-        p.error('Source must contain SimLUNA.cc')
+    if a.main and not (source / a.main).is_file():
+        p.error(f'Source must contain {a.main}')
+    if not (source / 'CMakeLists.txt').is_file() or not any(source.glob('*.cc')):
+        p.error('Source must contain CMakeLists.txt and a top-level .cc main file')
     files = sorted(x for x in source.rglob('*') if x.is_file() and x.suffix in {'.cc', '.hh', '.txt'}
                    and not any(y.startswith('build') or y in {'.git', 'CMakeFiles'} for y in x.relative_to(source).parts))
     hashes = {str(x.relative_to(source)): hashlib.sha256(x.read_bytes()).hexdigest() for x in files}
-    report = {'source': str(source), 'source_files_sha256': hashes, 'tools': {}, 'datasets': {}, 'data_files': {}}
+    report = {'source': str(source), 'main': a.main, 'source_files_sha256': hashes, 'tools': {}, 'datasets': {}, 'data_files': {}}
     for tool in ['cmake', 'geant4-config', 'root-config']:
         exe = shutil.which(tool)
         report['tools'][tool] = {'path': exe}

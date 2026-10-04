@@ -1,4 +1,4 @@
-# Style rules and lessons (from the LUAGATA feasibility study, 2026)
+# Style rules and lessons (from a 2026 gamma-spectroscopy feasibility study)
 
 ## Figure types and recipes
 

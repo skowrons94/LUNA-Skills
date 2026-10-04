@@ -56,7 +56,7 @@ The project template uses `plots/report/` as the preferred figure source. Genera
 
 ## Patterns observed in the reference feasibility studies
 
-The reference papers and IGNIS note share a useful pattern:
+Good published feasibility studies and internal feasibility notes share a useful pattern:
 
 - They motivate the measurement with one specific limitation at the relevant energy.
 - They introduce the apparatus only to the level needed to understand acceptance, efficiency, resolution, or background.

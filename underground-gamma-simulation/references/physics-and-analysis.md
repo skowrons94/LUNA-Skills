@@ -38,6 +38,6 @@ A manually enhanced cross section can improve reaction statistics, but dividing 
 
 Require completed counts, readable expected outputs, sensible channel occupancy, reproducible same-seed observables, changed-seed independence, overlap review, statistical precision and relevant calibration/physics comparisons. Keep a convergence check for step/cut choices and enough input provenance to reproduce the result. Report outstanding geometry or data-model limitations even when execution passes.
 
-Background reading: [LUNA detector and shielding study, 2024](https://www.mdpi.com/2218-1997/10/5/228). It describes the modular Geant4/ROOT framework and validation against source/reaction measurements. It does not validate arbitrary local changes or grant a universal accuracy to a new simulation.
+Background reading: [published detector and shielding study, Universe 10, 228 (2024)](https://www.mdpi.com/2218-1997/10/5/228). It describes the modular Geant4/ROOT framework and validation against source/reaction measurements. It does not validate arbitrary local changes or grant a universal accuracy to a new simulation.
 
 For explicit bias estimators and bias scans, read [bias-and-weights.md](bias-and-weights.md). For a new channel, use [reaction-workflows.md](reaction-workflows.md); validate emitted kinematics and Doppler effects using [kinematics-and-doppler.md](kinematics-and-doppler.md).

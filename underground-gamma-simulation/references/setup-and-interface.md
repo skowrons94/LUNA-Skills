@@ -4,7 +4,7 @@ The observations below come from the local BGO code examined on 2026-09-25, not 
 
 ## Build
 
-Dependencies: shared Geant4 libraries, ROOT 6, CMake and a compatible C++ compiler. The local CMake exposes `WITH_GEANT4_UIVIS`, recursively collects `.cc`/`.hh` and produces `SimLUNA`. Prefer a build directory outside the source tree because of recursive file collection. The existing `build.sh` deletes its old build; use explicit CMake commands instead.
+Dependencies: shared Geant4 libraries, ROOT 6, CMake and a compatible C++ compiler. The local CMake exposes `WITH_GEANT4_UIVIS`, recursively collects `.cc`/`.hh` and produces the executable `APP`. Prefer a build directory outside the source tree because of recursive file collection. The existing `build.sh` deletes its old build; use explicit CMake commands instead.
 
 ```bash
 cmake -S /path/to/code -B /path/to/new-build \
@@ -21,7 +21,7 @@ Geant4's generated `geant4.sh` may require sourcing from its own directory under
 
 ## Data
 
-Read the project's launch script and physics source. Standard Geant4 datasets are necessary but may lack LUNA-specific additions. For this local setup the project overrides are:
+Read the project's launch script and physics source. Standard Geant4 datasets are necessary but may lack the project's own additions. For this local setup the project overrides are:
 
 | Variable | Directory relative to project `data/` | Role |
 |---|---|---|
@@ -36,11 +36,11 @@ These names are observed paths, not a universal version recipe. Preserve standar
 
 ## Interface pitfalls
 
-- Batch invocation: `SimLUNA -m input.mac -s 12345`. Omitting `-s` in this variant reaches `stoi("")`; arguments are consumed as pairs without robust validation. Do not probe it with an invented `--help` flag.
+- Batch invocation: `APP -m input.mac -s 12345`. Omitting `-s` in this variant reaches `stoi("")`; arguments are consumed as pairs without robust validation. Do not probe it with an invented `--help` flag.
 - `-s` expands `/control/alias seed VALUE`; it never calls the random engine directly. Use `/random/setSeeds 12345 67890` explicitly before `/run/beamOn`.
 - Output command is exactly `/analysis/filename` (lowercase `n`). Older presentations show different spelling; follow the installed messenger.
-- `AnalysisManager` opens outputs with `RECREATE`. Existing results can be overwritten. Many supplied macros use `/workdir/rootfiles/SimLUNA.root`, and the default is a historic cluster path. Create the parent directory or use a fresh run-local filename.
-- `SimLUNA.cc` ignores the return status of `ApplyCommand` and returns zero. Inspect logs for interrupted batches, unknown commands, invalid states and failed output creation.
+- `AnalysisManager` opens outputs with `RECREATE`. Existing results can be overwritten. Many supplied macros use a fixed `/workdir/rootfiles/` output path, and the default is a historic cluster path. Create the parent directory or use a fresh run-local filename.
+- `APP.cc` ignores the return status of `ApplyCommand` and returns zero. Inspect logs for interrupted batches, unknown commands, invalid states and failed output creation.
 - `/DetectorConstruction/Physics S` selects source geometry/generation; `R` selects reaction generation. These flags are not substitutes for physics-list configuration.
 - Source mode re-applies `/DetectorConstruction/SourcePos` to the GPS position for every event. Editing only `/gps/pos/centre` will not move the source in this variant.
 - The supplied Cs macro was observed to generate ions at 1000 keV by default. Explicitly configure radioactive ions at rest (`/gps/ene/mono 0 keV`), ion Z/A and angular/source distribution. For long-lived calibration sources, verify the supported radioactive-decay time threshold; supplied macros use `/process/had/rdm/thresholdForVeryLongDecayTime 1.0e+60 year` after initialization.

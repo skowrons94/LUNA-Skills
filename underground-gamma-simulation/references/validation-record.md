@@ -2,9 +2,9 @@
 
 ## Provenance and scope
 
-Upstream <https://baltig.infn.it/LUNA/simluna-open> redirected to sign-in and cloning returned authentication denied. No upstream commit was fetched. This skill was developed against the user's existing local split-BGO source at `/Users/kuba/Desktop/LUNA/Simulations/SimLUNA/code`. There was no `.git` identity in that code directory.
+The upstream repository redirected to sign-in and cloning returned authentication denied. No upstream commit was fetched. This skill was developed against the user's existing local split-BGO source checkout. There was no `.git` identity in that code directory.
 
-Source and test outputs are preserved separately at `/Users/kuba/Desktop/Skills/temp/simluna-validation`. The original LUNA project and data were not edited. Source-file hashes and selected nuclear-data hashes are in `preflight.json`; each run contains its executed macro, executable hash, dataset paths, log and manifest. The tested executable SHA-256 is `602e9fef90cab881ec957a396b52d3e17bc810f2640638a3e8d74995e3299010`.
+Source and test outputs are preserved separately in the development workspace (`temp/simulation-validation`). The original project and data were not edited. Source-file hashes and selected nuclear-data hashes are in `preflight.json`; each run contains its executed macro, executable hash, dataset paths, log and manifest. The tested executable SHA-256 is `602e9fef90cab881ec957a396b52d3e17bc810f2640638a3e8d74995e3299010`.
 
 ## Reproducing this local test
 
@@ -32,7 +32,7 @@ Do not apply this patch blindly to six-crystal BGO, HPGe or upstream versions. I
 | Reaction geometry, 1000 surface samples per volume | No overlap warnings after fixes |
 | Supplied 19F(p,gamma), 250 keV | 10000 completed events and Tree1 entries; 9980 events with deposits |
 | Reaction output sanity | Finite nonnegative deposits, maximum addback 13087.60 keV; Zint populated in 9991 events |
-| Real invalid-command test | SimLUNA returned zero; checked runner rejected the interrupted batch and missing output |
+| Real invalid-command test | The application returned zero; checked runner rejected the interrupted batch and missing output |
 | Helper regression tests | Three tests pass: explicit seeds/output, rejection of hidden/multiple runs, false-success detection |
 
 Final outputs are in `verified-cs137`, `verified-cs137-repeat`, `verified-cs137-independent`, `verified-source-geometry`, `verified-reaction-geometry`, and `verified-f19`. `root-inspection.json`, `reproducibility.json`, and `reaction-check.json` preserve checks. Earlier failed/intermediate runs remain labeled separately for diagnosis.
@@ -47,10 +47,10 @@ The local source declares but never fills `EgammaDC`/`EgammaRes`, and never sets
 
 No HPGe, inverse-kinematics, neutron, resonant-capture, high-statistics production or cluster execution was tested. Nuclear datasets were read, not changed. Obtain authenticated upstream access if current upstream compatibility is required.
 
-Workspace organization: validation artifacts were subsequently moved into `temp/simluna-validation`. Historical manifests/logs retain their original execution paths as provenance; CMake caches may need regeneration before rebuilding in the new location.
+Workspace organization: validation artifacts were subsequently moved into `temp/simulation-validation`. Historical manifests/logs retain their original execution paths as provenance; CMake caches may need regeneration before rebuilding in the new location.
 
 ## Expansion checks — 2026-09-26
 
-Re-inspected the preserved local capture/final-state source. The kinematics guide now records the excited-final-state primary-gamma approximation, the existing CM-to-lab boost, and the active resonant path's level matching/geantino fallback; these are code-audit findings, not new transport-validation results. Source hashes for this audit are preserved in `temp/simluna-expansion-2026-09-26/source-audit.json` in the development workspace.
+Re-inspected the preserved local capture/final-state source. The kinematics guide now records the excited-final-state primary-gamma approximation, the existing CM-to-lab boost, and the active resonant path's level matching/geantino fallback; these are code-audit findings, not new transport-validation results. Source hashes for this audit are preserved in `temp/simulation-expansion-2026-09-26/source-audit.json` in the development workspace.
 
-The standalone physics helper passes seven analytic regression tests: equal-mass elastic energy sharing, capture recoil/excitation, lab four-momentum and mass shells, thresholds/invalid inputs, Doppler limits and inverse boost, thin/unity bias limits, and weighted slab reaction-plus-survival normalization. The equal-mass JSON example uses synthetic masses. No new reaction, bias operator, lifetime transport or geometry scan was implemented in the user's SimLUNA checkout as part of this skill expansion. Validate any such implementation against the guide before production.
+The standalone physics helper passes seven analytic regression tests: equal-mass elastic energy sharing, capture recoil/excitation, lab four-momentum and mass shells, thresholds/invalid inputs, Doppler limits and inverse boost, thin/unity bias limits, and weighted slab reaction-plus-survival normalization. The equal-mass JSON example uses synthetic masses. No new reaction, bias operator, lifetime transport or geometry scan was implemented in the user's checkout as part of this skill expansion. Validate any such implementation against the guide before production.

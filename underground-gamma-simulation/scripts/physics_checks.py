@@ -127,7 +127,7 @@ def slab(optical_depth, bias_factor, interaction_depth_fraction=None):
         "naive_relative_error": (biased / b) / analog - 1,
         "conditional_reaction_probability_ratio": analog / biased,
         "log_survivor_weight": (b - 1) * tau,
-        "scope": "Constant-energy single-process absorbing slab only; not a SimLUNA event reweighter",
+        "scope": "Constant-energy single-process absorbing slab only; not a Geant4 event reweighter",
     }
     if interaction_depth_fraction is not None:
         finite(interaction_depth_fraction)
