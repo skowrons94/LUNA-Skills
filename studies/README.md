@@ -8,6 +8,7 @@ self-contained and reproducible from its scripts.
 |---|---|---|
 | `bbn-lithium/` | Can nuclear physics solve the cosmological ⁷Li problem? | done: no; see its README |
 | `azure2-to-pynucastro/` | Hand an AZURE2 rate to a pynucastro network | pipeline works; needs a fitted evaluation |
+| `dd-rmatrix/` | d(d,p)t and d(d,n)³He: R-matrix evaluation and a full systematic-uncertainty study, propagated to D/H | done: rates uncertain by 5–10 %, not 1 %; D/H −7/+8 %; driven by a KR87–BJ90–LE06 scale/shape tension |
 
 ## Where the field says the open points are
 

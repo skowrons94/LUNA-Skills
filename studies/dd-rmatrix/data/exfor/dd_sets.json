@@ -1,0 +1,8442 @@
+[
+{
+"entry": "A0409002",
+"reaction": "dp",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG,,SFC)",
+"author": "(A.Krauss, H.W.Becker, H.P.Trautvetter, C.Rolfs, K.Brand)",
+"reference": "(J,NP/A,465,150,1987)",
+"errors": "(ERR-S).Statistical error only (less than 1%, except where quoted). An overall error of 6.4% due to uncertainties in the absolute normalization has to be added to the data.",
+"method": "(SITA) (BCINT) (JET)",
+"sample": "D(2) gas at a pressure of 0.05 Torr was used",
+"comment": "*By authors*.E-cm is effective energy within the target",
+"status": "(TABLE).Table 2 of J,NP/A,465,150,1987",
+"common": {},
+"heads": [
+"EN-CM",
+"DATA",
+"ERR-S"
+],
+"units": [
+"KEV",
+"B*KEV",
+"B*KEV"
+],
+"rows": [
+[
+2.98,
+57.7,
+8.4
+],
+[
+3.98,
+59.3,
+3.6
+],
+[
+4.97,
+53.9,
+2.0
+],
+[
+6.63,
+54.9,
+0.8
+],
+[
+9.94,
+53.3,
+null
+],
+[
+11.92,
+51.3,
+null
+],
+[
+14.91,
+53.5,
+null
+],
+[
+19.88,
+52.9,
+null
+],
+[
+22.36,
+53.7,
+null
+],
+[
+29.82,
+55.1,
+null
+],
+[
+34.78,
+56.2,
+null
+],
+[
+39.79,
+56.2,
+null
+],
+[
+44.72,
+58.2,
+null
+],
+[
+49.67,
+56.4,
+null
+]
+]
+},
+{
+"entry": "A0409003",
+"reaction": "dn",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG,,SFC)",
+"author": "(A.Krauss, H.W.Becker, H.P.Trautvetter, C.Rolfs, K.Brand)",
+"reference": "(J,NP/A,465,150,1987)",
+"errors": "(DATA-ERR).Error includes the uncertainties in the normalization procedures.",
+"method": "(SITA) (BCINT) (JET)",
+"sample": "D(2) gas at a pressure of 0.05 Torr was used",
+"comment": "*By authors*.E-cm is effective energy within the target",
+"status": "(TABLE).Table 2 of J,NP/A,465,150,1987",
+"common": {},
+"heads": [
+"EN-CM",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"B*KEV",
+"B*KEV"
+],
+"rows": [
+[
+6.63,
+51.7,
+5.3
+],
+[
+9.94,
+51.4,
+2.0
+],
+[
+14.91,
+53.5,
+1.8
+],
+[
+19.88,
+54.6,
+1.4
+],
+[
+22.36,
+56.5,
+1.1
+],
+[
+29.82,
+58.2,
+1.0
+],
+[
+34.78,
+59.4,
+1.0
+],
+[
+39.79,
+58.9,
+0.8
+],
+[
+44.72,
+60.9,
+1.2
+],
+[
+49.67,
+59.3,
+0.8
+]
+]
+},
+{
+"entry": "A0409004",
+"reaction": "dp",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG,,SFC)",
+"author": "(A.Krauss, H.W.Becker, H.P.Trautvetter, C.Rolfs, K.Brand)",
+"reference": "(J,NP/A,465,150,1987)",
+"errors": "(ERR-S).An overall error of 5% due to variations in the alignment of beam and jet target profiles has to be added in quadrature to the above error of 6.4%",
+"method": "(SITA) (BCINT) (JET)",
+"sample": "D(2) gas at a pressure of 0.05 Torr was used",
+"comment": "*By authors*.E-cm is effective energy within the target",
+"status": "(TABLE).Table 2 of J,NP/A,465,150,1987",
+"common": {},
+"heads": [
+"EN-CM",
+"DATA",
+"ERR-S"
+],
+"units": [
+"KEV",
+"B*KEV",
+"B*KEV"
+],
+"rows": [
+[
+14.8,
+43.5,
+6.0
+],
+[
+19.6,
+56.8,
+6.6
+],
+[
+24.0,
+55.7,
+5.9
+],
+[
+29.0,
+55.3,
+3.6
+],
+[
+34.8,
+54.8,
+3.5
+],
+[
+39.7,
+56.2,
+1.0
+],
+[
+44.6,
+56.8,
+null
+],
+[
+49.5,
+56.4,
+null
+],
+[
+54.3,
+59.2,
+null
+],
+[
+59.3,
+63.0,
+null
+],
+[
+64.3,
+63.1,
+null
+],
+[
+74.0,
+66.8,
+null
+],
+[
+83.8,
+70.0,
+null
+],
+[
+93.6,
+72.6,
+null
+],
+[
+103.4,
+76.1,
+null
+],
+[
+113.2,
+77.8,
+null
+],
+[
+123.0,
+80.8,
+null
+],
+[
+133.0,
+84.4,
+null
+],
+[
+142.5,
+88.3,
+null
+],
+[
+152.5,
+85.1,
+null
+],
+[
+162.5,
+91.4,
+null
+]
+]
+},
+{
+"entry": "A0409005",
+"reaction": "dn",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG,,SFC)",
+"author": "(A.Krauss, H.W.Becker, H.P.Trautvetter, C.Rolfs, K.Brand)",
+"reference": "(J,NP/A,465,150,1987)",
+"errors": "(ERR-S).An overall error of 5% due to variations in the alignment of beam and jet target profiles has to be added in quadrature to the above error of 6.4%",
+"method": "(SITA) (BCINT) (JET)",
+"sample": "D(2) gas at a pressure of 0.05 Torr was used",
+"comment": "*By authors*.E-cm is effective energy within the target",
+"status": "(TABLE).Table 2 of J,NP/A,465,150,1987",
+"common": {},
+"heads": [
+"EN-CM",
+"DATA",
+"ERR-S"
+],
+"units": [
+"KEV",
+"B*KEV",
+"B*KEV"
+],
+"rows": [
+[
+14.8,
+42.8,
+5.0
+],
+[
+19.6,
+58.3,
+6.6
+],
+[
+24.0,
+56.4,
+5.9
+],
+[
+29.0,
+54.4,
+3.6
+],
+[
+34.8,
+54.2,
+3.4
+],
+[
+39.7,
+58.9,
+1.2
+],
+[
+44.6,
+59.6,
+null
+],
+[
+49.5,
+61.9,
+null
+],
+[
+54.3,
+64.6,
+null
+],
+[
+59.3,
+68.5,
+null
+],
+[
+64.3,
+70.9,
+null
+],
+[
+74.0,
+78.6,
+null
+],
+[
+83.8,
+83.0,
+null
+],
+[
+93.6,
+86.7,
+null
+],
+[
+103.4,
+89.6,
+null
+],
+[
+113.2,
+93.2,
+null
+],
+[
+123.0,
+98.2,
+null
+],
+[
+133.0,
+105.7,
+null
+],
+[
+142.5,
+109.3,
+null
+],
+[
+152.5,
+107.9,
+null
+],
+[
+162.5,
+114.2,
+null
+]
+]
+},
+{
+"entry": "A0409009",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG)",
+"author": "(A.Krauss, H.W.Becker, H.P.Trautvetter, C.Rolfs, K.Brand)",
+"reference": "(J,NP/A,465,150,1987)",
+"errors": "(DATA-ERR).The error is reported in text. (ERR-1).The error in the observed angle-integrated yield is 0.2%. (ERR-2).The error in the number of incident projectiles is 3%. (ERR-3).The error in the gas pressure in the target chamber is 4%.",
+"method": "(SITA) (BCINT) (JET)",
+"sample": "",
+"comment": "*By authors*.E-cm is effective energy within the target",
+"status": "(TABLE).Value in text of J,NP/A,465,150,1987 (DEP,A0409002)",
+"common": {
+"ERR-1": [
+"PER-CENT",
+0.2
+],
+"ERR-2": [
+"PER-CENT",
+3.0
+],
+"ERR-3": [
+"PER-CENT",
+4.0
+]
+},
+"heads": [
+"EN-CM",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"MB",
+"MB"
+],
+"rows": [
+[
+49.67,
+13.22,
+0.85
+]
+]
+},
+{
+"entry": "A0726002",
+"reaction": "dn",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG,,SFC) D(2)O target. (1-H-2(D,N)2-HE-3,,SIG,,SFC) CD(2) target.",
+"author": "(V.M.Bystritsky, V.V.Gerasimov, A.R.Krylov, S.S.Parzhitski, P.S.Anan'in, G.N.Dudkin, V.L.Kaminskii, B.A.Nechaev, V.M.Padalko, A.V.Petrov, G.A.Mesyats, M.Filipovicz, J.Wozniak, V.M.Bystritskii)",
+"reference": "(J,EPJ/A,36,151,2008)",
+"errors": "The resulting errors of the measured values of the astrophysical S-factor and the cross-section for the d-d reaction arise from the error in the number of events detected by neutron detectors and from inaccurate knowledge- of the neutron detection efficiency approx. 6%, number and energy distribution of deuterons incident on the target, stopping power of deuterons in deuterium containing target less or equal 6%, deuteron density in a target less or equal 4%. (ERR-S) The error is reported by authors on figure.",
+"method": "(BCINT) The deuteron current at the HA output was measured by the Rogovsky coil with a passive RC integrator.",
+"sample": "Two types of solid-state targets, which were a layer of frozen heavy water D(2)O, deposited on a copper disk, diameter 140 mm, thickness 1 mm, cooled by a liquid nitrogen and a plate of a deuterated polyethylene CD(2) 0.1 mm thick and 58 mm in diameter.",
+"comment": "*By authors*.Due to variations of the ion current on a shot-to-shot base, less than 20%, the charge of the collector for each deuteron pulse was normalized to the charge of the entrance grid S1 of the spectrometer. The variation of the normalized charges did not exceed 3%.",
+"status": "(TABLE,,V.M.Bystritsky+,J,EPJ/A,36,151,2008) Table 1 for the D2O target. (CURVE,,V.M.Bystritsky+,J,EPJ/A,36,151,2008)) Fig.5 for the CD2 target.",
+"common": {},
+"heads": [
+"EN-CM",
+"DATA      1",
+"ERR-S     1",
+"DATA      2",
+"ERR-S     2"
+],
+"units": [
+"KEV",
+"B*KEV",
+"B*KEV",
+"B*KEV",
+"B*KEV"
+],
+"rows": [
+[
+2.35,
+50.5,
+88.3,
+null,
+null
+],
+[
+3.29,
+67.3,
+14.0,
+null,
+null
+],
+[
+3.92,
+61.2,
+10.5,
+null,
+null
+],
+[
+4.68,
+null,
+null,
+50.0,
+9.0
+],
+[
+4.7,
+51.4,
+8.7,
+null,
+null
+],
+[
+5.09,
+null,
+null,
+55.0,
+16.0
+],
+[
+5.46,
+54.0,
+8.7,
+null,
+null
+],
+[
+6.12,
+58.2,
+9.3,
+null,
+null
+]
+]
+},
+{
+"entry": "A0726003",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG,,,DERIV) D(2)O target. (1-H-2(D,N)2-HE-3,,SIG,,,DERIV) CD(2) target.",
+"author": "(V.M.Bystritsky, V.V.Gerasimov, A.R.Krylov, S.S.Parzhitski, P.S.Anan'in, G.N.Dudkin, V.L.Kaminskii, B.A.Nechaev, V.M.Padalko, A.V.Petrov, G.A.Mesyats, M.Filipovicz, J.Wozniak, V.M.Bystritskii)",
+"reference": "(J,EPJ/A,36,151,2008)",
+"errors": "",
+"method": "(BCINT) The deuteron current at the HA output was measured by the Rogovsky coil with a passive RC integrator.",
+"sample": "Two types of solid-state targets, which were a layer of frozen heavy water D(2)O, deposited on a copper disk, diameter 140 mm, thickness 1 mm, cooled by a liquid nitrogen and a plate of a deuterated polyethylene CD(2) 0.1 mm thick and 58 mm in diameter.",
+"comment": "*By authors*.Due to variations of the ion current on a shot-to-shot base, less than 20%, the charge of the collector for each deuteron pulse was normalized to the charge of the entrance grid S1 of the spectrometer. The variation of the normalized charges did not exceed 3%.",
+"status": "(DEP,A0726002)",
+"common": {},
+"heads": [
+"EN-CM",
+"DATA      1",
+"DATA      2"
+],
+"units": [
+"KEV",
+"MICRO-B",
+"MICRO-B"
+],
+"rows": [
+[
+2.35,
+0.0277,
+null
+],
+[
+3.29,
+0.618,
+null
+],
+[
+3.92,
+2.03,
+null
+],
+[
+4.68,
+null,
+6.0
+],
+[
+4.7,
+5.62,
+null
+],
+[
+5.09,
+null,
+11.0
+],
+[
+5.46,
+14.5,
+null
+],
+[
+6.12,
+29.4,
+null
+]
+]
+},
+{
+"entry": "A0940004",
+"reaction": "dn",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG,,SFC)",
+"author": "(V.M.Bystritsky, V.M.Bystritsky, G.N.Dudkin, M.Filipowicz, S.Gazi, J.Huran, A.P.Kobzev, G.A.Mesyats, B.A.Nechaev, V.M.Padalko, S.S.Parzhitskii, F.M.Penkov, A.V.Philippov, V.L.Kaminskii, Yu.Zh.Tuleushev, J.Wozniak)",
+"reference": "(J,YF,75,971,2012) (J,PAN,75,913,2012) English translation",
+"errors": "(ERR-S).The uncertainty is reported by authors on figure (MISC-ERR).'MISC'uncertainty",
+"method": "(BCINT) (TOF)",
+"sample": "TiD(2) target.",
+"comment": "*By authors*.En is the average deuteron collision energy in the c.m.s. at the temperatures 20, 60, and 200 degree",
+"status": "(CURVE).Fig.5 of J,PAN,75,913,2012",
+"common": {},
+"heads": [
+"TEMP",
+"EN-CM",
+"DATA",
+"ERR-S",
+"MISC",
+"MISC-ERR"
+],
+"units": [
+"DEG-C",
+"KEV",
+"B*KEV",
+"B*KEV",
+"EV",
+"EV"
+],
+"rows": [
+[
+20.0,
+3.27,
+70.52,
+7.241,
+125.0,
+34.0
+],
+[
+20.0,
+3.7,
+73.44,
+4.654,
+125.0,
+34.0
+],
+[
+20.0,
+4.56,
+64.8,
+2.327,
+125.0,
+34.0
+],
+[
+20.0,
+4.98,
+59.44,
+3.103,
+125.0,
+34.0
+],
+[
+20.0,
+5.39,
+61.32,
+null,
+125.0,
+34.0
+],
+[
+60.0,
+3.26,
+70.64,
+5.107,
+133.0,
+47.0
+],
+[
+60.0,
+3.69,
+71.74,
+3.83,
+133.0,
+47.0
+],
+[
+60.0,
+5.38,
+61.81,
+null,
+133.0,
+47.0
+],
+[
+200.0,
+3.26,
+69.76,
+4.253,
+113.0,
+38.0
+],
+[
+200.0,
+3.69,
+72.08,
+4.999,
+113.0,
+38.0
+],
+[
+200.0,
+4.12,
+66.65,
+2.997,
+113.0,
+38.0
+],
+[
+200.0,
+4.54,
+61.72,
+2.247,
+113.0,
+38.0
+],
+[
+200.0,
+4.96,
+60.04,
+2.749,
+113.0,
+38.0
+],
+[
+200.0,
+5.37,
+61.61,
+null,
+null,
+null
+]
+]
+},
+{
+"entry": "A0940005",
+"reaction": "dn",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG,,SFC)",
+"author": "(V.M.Bystritsky, V.M.Bystritsky, G.N.Dudkin, M.Filipowicz, S.Gazi, J.Huran, A.P.Kobzev, G.A.Mesyats, B.A.Nechaev, V.M.Padalko, S.S.Parzhitskii, F.M.Penkov, A.V.Philippov, V.L.Kaminskii, Yu.Zh.Tuleushev, J.Wozniak)",
+"reference": "(J,YF,75,971,2012) (J,PAN,75,913,2012) English translation",
+"errors": "(ERR-S).The uncertainty is reported by authors on figure (MISC-ERR).'MISC'uncertainty",
+"method": "(BCINT) (TOF)",
+"sample": "ZrD(2) target.",
+"comment": "*By authors*.En is the average deuteron collision energy in the c.m.s. at the temperatures 20, 60, and 200 degree",
+"status": "(CURVE).Fig.5 of J,PAN,75,913,2012",
+"common": {},
+"heads": [
+"TEMP",
+"EN-CM",
+"DATA",
+"ERR-S",
+"MISC",
+"MISC-ERR"
+],
+"units": [
+"DEG-C",
+"KEV",
+"B*KEV",
+"B*KEV",
+"EV",
+"EV"
+],
+"rows": [
+[
+20.0,
+3.25,
+86.01,
+4.538,
+205.0,
+37.0
+],
+[
+20.0,
+3.68,
+85.06,
+3.713,
+205.0,
+37.0
+],
+[
+20.0,
+4.1,
+79.16,
+2.889,
+205.0,
+37.0
+],
+[
+20.0,
+4.53,
+72.64,
+2.27,
+205.0,
+37.0
+],
+[
+20.0,
+4.95,
+68.39,
+2.471,
+205.0,
+37.0
+],
+[
+20.0,
+5.38,
+69.91,
+null,
+205.0,
+37.0
+],
+[
+60.0,
+3.25,
+86.09,
+4.225,
+186.0,
+37.0
+],
+[
+60.0,
+3.67,
+83.63,
+4.484,
+186.0,
+37.0
+],
+[
+60.0,
+4.09,
+77.44,
+2.984,
+186.0,
+37.0
+],
+[
+60.0,
+4.54,
+74.25,
+1.497,
+186.0,
+37.0
+],
+[
+60.0,
+4.96,
+66.06,
+2.237,
+186.0,
+37.0
+],
+[
+60.0,
+5.37,
+69.82,
+null,
+186.0,
+37.0
+],
+[
+200.0,
+3.25,
+83.96,
+4.522,
+196.0,
+29.0
+],
+[
+200.0,
+3.68,
+88.27,
+4.271,
+196.0,
+29.0
+],
+[
+200.0,
+4.11,
+81.02,
+3.257,
+196.0,
+29.0
+],
+[
+200.0,
+4.53,
+70.51,
+2.005,
+196.0,
+29.0
+],
+[
+200.0,
+4.96,
+68.03,
+2.005,
+196.0,
+29.0
+],
+[
+200.0,
+5.37,
+69.31,
+null,
+196.0,
+29.0
+]
+]
+},
+{
+"entry": "A0941002",
+"reaction": "dn",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG,,SFC) The electron screening potentials 313 eV",
+"author": "(V.M.Bystritsky, Vit.M.Bystritsky, G.N.Dudkin, M.Filipowicz, S.Gazi, J.Huran, A.P.Kobzev, G.A.Mesyats, B.A.Nechaev, V.M.Padalko, S.S.Parzhitskii, F.M.Penkov, A.V.Philippov, V.L.Kaminskii, Yu.Zh.Tuleushev, J.Wozniak)",
+"reference": "(J,NP/A,889,93,2012)",
+"errors": "(ERR-S).The uncertainty is reported by authors on figure",
+"method": "(BCINT) (TOF)",
+"sample": "TaD(1/2) target.",
+"comment": "*By authors*.En is the average deuteron collision energy in the c.m.s. at the temperatures  60 degree",
+"status": "(CURVE).Fig.5 of J,NP/A,889,93,2012",
+"common": {
+"TEMP": [
+"DEG-C",
+60.0
+]
+},
+"heads": [
+"EN-CM",
+"DATA",
+"ERR-S"
+],
+"units": [
+"KEV",
+"B*KEV",
+"B*KEV"
+],
+"rows": [
+[
+3.26,
+116.8,
+19.26
+],
+[
+3.69,
+116.8,
+13.32
+],
+[
+4.12,
+82.83,
+7.172
+],
+[
+4.54,
+80.37,
+5.533
+],
+[
+5.38,
+80.57,
+2.254
+]
+]
+},
+{
+"entry": "A1007010",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG,,,EVAL)",
+"author": "(H.Liskien,A.Paulsen)",
+"reference": "(J,ND/A,11,569,1973)",
+"errors": "",
+"method": "",
+"sample": "",
+"comment": "Data from other authors are normalized for evaluation",
+"status": "(TABLE,,H.Liskien+,J,ND/A,11,569,1973) Table on p.587",
+"common": {},
+"heads": [
+"EN",
+"DATA"
+],
+"units": [
+"MEV",
+"MB"
+],
+"rows": [
+[
+0.02,
+0.26
+],
+[
+0.03,
+1.23
+],
+[
+0.04,
+2.95
+],
+[
+0.05,
+4.8
+],
+[
+0.06,
+7.0
+],
+[
+0.07,
+9.4
+],
+[
+0.08,
+11.7
+],
+[
+0.09,
+14.2
+],
+[
+0.1,
+16.9
+],
+[
+0.15,
+26.5
+],
+[
+0.2,
+35.0
+],
+[
+0.25,
+43.0
+],
+[
+0.3,
+50.0
+],
+[
+0.35,
+57.0
+],
+[
+0.4,
+63.0
+],
+[
+0.45,
+67.7
+],
+[
+0.5,
+72.5
+],
+[
+0.55,
+77.0
+],
+[
+0.6,
+81.3
+],
+[
+0.65,
+85.2
+],
+[
+0.7,
+88.2
+],
+[
+0.75,
+90.5
+],
+[
+0.8,
+92.7
+],
+[
+0.85,
+94.9
+],
+[
+0.9,
+96.9
+],
+[
+0.95,
+98.3
+],
+[
+1.0,
+99.8
+],
+[
+1.1,
+101.8
+],
+[
+1.2,
+103.7
+],
+[
+1.3,
+104.9
+],
+[
+1.4,
+105.5
+],
+[
+1.5,
+105.9
+],
+[
+1.6,
+105.9
+],
+[
+1.7,
+105.8
+],
+[
+1.8,
+105.7
+],
+[
+1.9,
+105.5
+],
+[
+2.0,
+105.3
+],
+[
+2.1,
+105.2
+],
+[
+2.2,
+105.0
+],
+[
+2.3,
+104.8
+],
+[
+2.4,
+104.5
+],
+[
+2.5,
+104.3
+],
+[
+2.6,
+104.0
+],
+[
+2.7,
+103.8
+],
+[
+2.8,
+103.5
+],
+[
+2.9,
+103.2
+],
+[
+3.0,
+102.9
+],
+[
+3.5,
+101.0
+],
+[
+4.0,
+99.2
+],
+[
+4.5,
+97.7
+],
+[
+5.0,
+96.4
+],
+[
+5.5,
+95.1
+],
+[
+6.0,
+93.9
+],
+[
+6.5,
+92.7
+],
+[
+7.0,
+91.5
+],
+[
+7.5,
+90.5
+],
+[
+8.0,
+89.5
+],
+[
+8.5,
+88.6
+],
+[
+9.0,
+87.7
+],
+[
+9.5,
+86.8
+],
+[
+10.0,
+86.0
+]
+]
+},
+{
+"entry": "A1007013",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG,,,EVAL)",
+"author": "(H.Liskien,A.Paulsen)",
+"reference": "(J,ND/A,11,569,1973)",
+"errors": "",
+"method": "",
+"sample": "",
+"comment": "Data from other authors are normalized for evaluation",
+"status": "(TABLE,,H.Liskien+,J,ND/A,11,569,1973) Table on p.591",
+"common": {},
+"heads": [
+"EN",
+"DATA",
+"FLAG"
+],
+"units": [
+"MEV",
+"MB",
+"NO-DIM"
+],
+"rows": [
+[
+0.013,
+0.033,
+1.0
+],
+[
+0.019,
+0.2,
+1.0
+],
+[
+0.022,
+0.367,
+1.0
+],
+[
+0.025,
+0.592,
+1.0
+],
+[
+0.03,
+1.08,
+1.0
+],
+[
+0.033,
+1.46,
+1.0
+],
+[
+0.036,
+1.88,
+1.0
+],
+[
+0.04,
+2.43,
+1.0
+],
+[
+0.046,
+3.42,
+1.0
+],
+[
+0.052,
+4.64,
+2.0
+],
+[
+0.053,
+4.78,
+1.0
+],
+[
+0.06,
+6.25,
+1.0
+],
+[
+0.067,
+7.86,
+1.0
+],
+[
+0.073,
+9.3,
+1.0
+],
+[
+0.08,
+10.9,
+1.0
+],
+[
+0.087,
+11.85,
+2.0
+],
+[
+0.093,
+13.6,
+1.0
+],
+[
+0.1,
+15.2,
+1.0
+],
+[
+0.107,
+16.6,
+1.0
+],
+[
+0.11,
+17.0,
+1.0
+],
+[
+0.113,
+17.4,
+1.0
+],
+[
+0.12,
+19.0,
+3.0
+],
+[
+0.13,
+23.0,
+4.0
+],
+[
+0.14,
+26.0,
+3.0
+],
+[
+0.156,
+29.0,
+5.0
+],
+[
+0.16,
+26.0,
+3.0
+],
+[
+0.162,
+28.0,
+4.0
+],
+[
+0.195,
+37.0,
+4.0
+],
+[
+0.205,
+36.0,
+4.0
+],
+[
+0.206,
+38.3,
+5.0
+],
+[
+0.21,
+38.0,
+4.0
+],
+[
+0.25,
+38.0,
+3.0
+],
+[
+0.25,
+25.0,
+6.0
+],
+[
+0.255,
+46.0,
+4.0
+],
+[
+0.26,
+44.0,
+4.0
+],
+[
+0.267,
+45.0,
+4.0
+],
+[
+0.27,
+51.0,
+5.0
+],
+[
+0.275,
+47.0,
+4.0
+],
+[
+0.325,
+57.0,
+4.0
+],
+[
+0.33,
+54.0,
+4.0
+],
+[
+0.362,
+60.0,
+5.0
+],
+[
+0.365,
+60.0,
+4.0
+],
+[
+0.38,
+63.0,
+4.0
+],
+[
+0.4,
+45.0,
+6.0
+],
+[
+0.405,
+70.0,
+4.0
+],
+[
+0.425,
+70.0,
+4.0
+],
+[
+0.447,
+67.0,
+4.0
+],
+[
+0.466,
+73.3,
+5.0
+],
+[
+0.47,
+74.0,
+4.0
+],
+[
+0.48,
+70.0,
+4.0
+],
+[
+0.49,
+51.0,
+7.0
+],
+[
+0.5,
+58.0,
+6.0
+],
+[
+0.51,
+72.0,
+4.0
+],
+[
+0.554,
+76.0,
+4.0
+],
+[
+0.595,
+74.0,
+4.0
+],
+[
+0.6,
+67.0,
+6.0
+],
+[
+0.66,
+88.0,
+4.0
+],
+[
+0.668,
+83.0,
+4.0
+],
+[
+0.675,
+72.0,
+6.0
+],
+[
+0.7,
+72.0,
+7.0
+],
+[
+0.75,
+82.0,
+6.0
+],
+[
+0.76,
+92.0,
+4.0
+],
+[
+0.77,
+91.0,
+4.0
+],
+[
+0.791,
+89.0,
+4.0
+],
+[
+0.825,
+74.0,
+6.0
+],
+[
+0.85,
+100.0,
+4.0
+],
+[
+0.884,
+94.0,
+4.0
+],
+[
+0.925,
+100.0,
+4.0
+],
+[
+0.96,
+41.0,
+8.0
+],
+[
+0.98,
+98.0,
+4.0
+],
+[
+0.99,
+97.0,
+7.0
+],
+[
+1.34,
+107.0,
+7.0
+],
+[
+1.43,
+104.0,
+9.0
+],
+[
+1.75,
+107.0,
+7.0
+],
+[
+1.96,
+105.0,
+9.0
+],
+[
+1.96,
+104.3,
+10.0
+],
+[
+2.15,
+106.0,
+7.0
+],
+[
+2.49,
+102.0,
+9.0
+],
+[
+2.51,
+104.6,
+10.0
+],
+[
+2.54,
+105.0,
+7.0
+],
+[
+2.83,
+102.0,
+7.0
+],
+[
+3.02,
+103.0,
+9.0
+],
+[
+3.02,
+103.8,
+10.0
+],
+[
+3.11,
+101.0,
+7.0
+],
+[
+3.4,
+96.0,
+7.0
+],
+[
+3.5,
+101.4,
+10.0
+],
+[
+3.52,
+102.0,
+9.0
+],
+[
+3.69,
+106.0,
+7.0
+],
+[
+4.0,
+99.8,
+10.0
+],
+[
+4.5,
+98.6,
+10.0
+],
+[
+5.0,
+94.6,
+11.0
+],
+[
+5.0,
+97.3,
+10.0
+],
+[
+5.0,
+96.1,
+12.0
+],
+[
+5.5,
+94.9,
+10.0
+],
+[
+5.55,
+71.0,
+8.0
+],
+[
+5.8,
+93.0,
+13.0
+],
+[
+5.8,
+93.7,
+10.0
+],
+[
+5.8,
+94.1,
+12.0
+],
+[
+6.2,
+93.4,
+10.0
+],
+[
+7.6,
+96.5,
+11.0
+],
+[
+8.15,
+88.0,
+13.0
+],
+[
+9.0,
+83.2,
+12.0
+],
+[
+9.6,
+93.7,
+11.0
+],
+[
+10.0,
+82.6,
+12.0
+]
+]
+},
+{
+"entry": "A1028002",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG)",
+"author": "(J.H.SANDERS, J.MOFFATT, D.ROAF)",
+"reference": "(J,PR,77,(5),754(N14),1950) Minutes of the APS meeting",
+"errors": "Nothing said about errors.",
+"method": "",
+"sample": "Thin deuterium target",
+"comment": "",
+"status": "(TABLE) See text",
+"common": {},
+"heads": [
+"EN",
+"DATA"
+],
+"units": [
+"MEV",
+"MB"
+],
+"rows": [
+[
+0.0145,
+0.0706
+],
+[
+0.0194,
+0.248
+],
+[
+0.0243,
+0.596
+],
+[
+0.0291,
+1.12
+],
+[
+0.0339,
+1.76
+],
+[
+0.0388,
+2.55
+]
+]
+},
+{
+"entry": "A1043003",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG)",
+"author": "(S.T.Thornton)",
+"reference": "(J,NP/A,136,25,1969)",
+"errors": "(ERR-T,1.,14.) The final uncertainties were determined by adding quadratically the individual uncertainties and ranged from 1% to 14% with a typical uncertainty of 2%.",
+"method": "(BCINT,TOF) The absolute differential cross section has been determined at E = 5.0, 5.8, 9.0 and 10.0 MeV by the detection of the 3He particles, and at E = 5.0 and 5.8 MeV by the neutron time-of-flight method. The scattering chamber is 35.6 cm in diameter and has detector slit positions at 5. degr. intervals from 10. to 170. degr. See REL-REF for details of TOF system.",
+"sample": "Purity deuterium gas and the only significant impurity 0.3% 2H",
+"comment": "",
+"status": "(TABLE,,S.T.Thornton,J,NP/A,136,25,1969) Table 2",
+"common": {
+"ERR-1": [
+"PER-CENT",
+0.1
+],
+"ERR-2": [
+"PER-CENT",
+0.1
+],
+"ERR-3": [
+"PER-CENT",
+0.3
+],
+"ERR-4": [
+"PER-CENT",
+0.5
+]
+},
+"heads": [
+"EN",
+"DATA"
+],
+"units": [
+"MEV",
+"MB"
+],
+"rows": [
+[
+5.0,
+96.1
+],
+[
+5.8,
+94.1
+],
+[
+9.0,
+83.2
+],
+[
+10.0,
+82.6
+]
+]
+},
+{
+"entry": "A1076006",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG)",
+"author": "(N.Ying,B.B.Cox,B.K.Barnes,A.W.Barrows)",
+"reference": "(J,NP/A,206,481,1973)",
+"errors": "",
+"method": "(PHD) The Cockcroft-Walton accelerator was calibrated by placing a thin LiF target at the reaction center in the scattering chamber. The gamma-rays from the 7Li(p,gamma)8Be resonance at 441 keV and the 19F(p,alpha+gamma)16O resonances at 340, 484, 597 and 672 keV were observed using a sodium iodide detector.",
+"sample": "A target gas was CP grade deuterium 99.5% pure",
+"comment": "",
+"status": "(TABLE,,N.Ying+,J,NP/A,206,481,1973) Table 3",
+"common": {
+"EN-ERR": [
+"MEV",
+0.0015
+]
+},
+"heads": [
+"EN",
+"DATA"
+],
+"units": [
+"MEV",
+"MB"
+],
+"rows": [
+[
+0.298,
+51.2
+],
+[
+0.349,
+56.8
+],
+[
+0.3995,
+62.8
+],
+[
+0.4485,
+66.0
+],
+[
+0.499,
+71.4
+],
+[
+0.5515,
+75.0
+],
+[
+0.6025,
+78.4
+],
+[
+0.654,
+82.3
+],
+[
+0.703,
+86.4
+]
+]
+},
+{
+"entry": "A1076008",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG)",
+"author": "(N.Ying,B.B.Cox,B.K.Barnes,A.W.Barrows)",
+"reference": "(J,NP/A,206,481,1973)",
+"errors": "",
+"method": "(PHD) The Cockcroft-Walton accelerator was calibrated by placing a thin LiF target at the reaction center in the scattering chamber. The gamma-rays from the 7Li(p,gamma)8Be resonance at 441 keV and the 19F(p,alpha+gamma)16O resonances at 340, 484, 597 and 672 keV were observed using a sodium iodide detector.",
+"sample": "A target gas was CP grade deuterium 99.5% pure",
+"comment": "",
+"status": "(TABLE,,N.Ying+,J,NP/A,206,481,1973) Table 3",
+"common": {
+"EN-ERR": [
+"MEV",
+0.0015
+]
+},
+"heads": [
+"EN",
+"DATA"
+],
+"units": [
+"MEV",
+"MB"
+],
+"rows": [
+[
+0.298,
+43.4
+],
+[
+0.349,
+48.1
+],
+[
+0.3995,
+52.3
+],
+[
+0.4485,
+55.9
+],
+[
+0.499,
+59.0
+],
+[
+0.5515,
+62.5
+],
+[
+0.6025,
+65.3
+],
+[
+0.654,
+68.0
+],
+[
+0.703,
+70.8
+]
+]
+},
+{
+"entry": "A1142002",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG)",
+"author": "(G.PRESTON,P.F.D.SHAW,J.A.YOUNG)",
+"reference": "(J,PRS/A,226,(1165),206,195411)",
+"errors": "(DATA-ERR) Relative error",
+"method": "",
+"sample": "",
+"comment": "",
+"status": "(TABLE) Table 1",
+"common": {},
+"heads": [
+"EN",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"MEV",
+"MB",
+"MB"
+],
+"rows": [
+[
+0.156,
+29.0,
+1.8
+],
+[
+0.206,
+38.3,
+2.1
+],
+[
+0.27,
+51.0,
+4.6
+],
+[
+0.362,
+60.0,
+3.7
+],
+[
+0.466,
+73.3,
+5.4
+]
+]
+},
+{
+"entry": "A1142003",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG)",
+"author": "(G.PRESTON,P.F.D.SHAW,J.A.YOUNG)",
+"reference": "(J,PRS/A,226,(1165),206,195411)",
+"errors": "(DATA-ERR) Relative error",
+"method": "",
+"sample": "",
+"comment": "",
+"status": "(TABLE) Table 1",
+"common": {},
+"heads": [
+"EN",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"MEV",
+"MB",
+"MB"
+],
+"rows": [
+[
+0.156,
+26.2,
+2.0
+],
+[
+0.206,
+34.7,
+2.2
+],
+[
+0.27,
+44.9,
+3.9
+],
+[
+0.362,
+50.8,
+4.1
+],
+[
+0.466,
+61.2,
+4.5
+]
+]
+},
+{
+"entry": "A1143002",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG)",
+"author": "(E.Bretscher,A.P.French,F.G.P.Seidl)",
+"reference": "(J,PR,73,815,1948)",
+"errors": "(ERR-1,,1.) The counting errors (ERR-2) Error in the beam current integrator (ERR-3) Geometrical errors (ERR-4,4.,8.) Aggregate error in the thick target yield N(E) amounting to 4% at most energies, but reaching 8% at 15 keV.",
+"method": "",
+"sample": "D2O ice target",
+"comment": "",
+"status": "(CURVE,,E.Bretscher+,J,PR,73,815,1948) fig.9",
+"common": {
+"ERR-2": [
+"PER-CENT",
+2.0
+],
+"ERR-3": [
+"PER-CENT",
+2.0
+],
+"EN-ERR-DIG": [
+"KEV",
+0.3
+],
+"ERR-DIG": [
+"PER-CENT",
+0.5
+]
+},
+"heads": [
+"EN",
+"DATA"
+],
+"units": [
+"KEV",
+"B"
+],
+"rows": [
+[
+16.9,
+0.0001311
+],
+[
+21.5,
+0.0005106
+],
+[
+25.3,
+0.0007667
+],
+[
+31.1,
+0.0021
+],
+[
+37.2,
+0.0024
+],
+[
+43.2,
+0.0049
+],
+[
+50.3,
+0.0052
+],
+[
+70.8,
+0.0151
+],
+[
+100.2,
+0.0215
+]
+]
+},
+{
+"entry": "A1150004",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG)",
+"author": "(G.T.Hunter,H.T.Richards)",
+"reference": "(J,PR,76,1445,1949)",
+"errors": "",
+"method": "",
+"sample": "A gas target",
+"comment": "At 0.7-MeV deuteron energy, background neutrons amounted to only 2% of the D-D yield and at 3.1-MeV background was 7% of total yield in the forward direction but 22% at 110 degr.",
+"status": "(CURVE,,G.T.Hunter+,J,PR,76,1445,1949) Fig 6",
+"common": {
+"EN-ERR-DIG": [
+"MEV",
+0.013
+],
+"ERR-DIG": [
+"MB",
+0.3
+]
+},
+"heads": [
+"EN",
+"DATA"
+],
+"units": [
+"MEV",
+"MB"
+],
+"rows": [
+[
+0.492,
+52.0
+],
+[
+0.707,
+72.8
+],
+[
+1.02,
+98.3
+],
+[
+1.357,
+109.3
+],
+[
+1.765,
+109.5
+],
+[
+2.163,
+109.2
+],
+[
+2.552,
+107.8
+],
+[
+2.841,
+104.3
+],
+[
+3.12,
+102.9
+],
+[
+3.409,
+98.4
+],
+[
+3.706,
+108.9
+]
+]
+},
+{
+"entry": "A1151003",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG)",
+"author": "(W.Gruebler,V.Konig,P.A.Schmelzbach,B.Jenny,J.Vybiral)",
+"reference": "(J,NP/A,369,381,1981)",
+"errors": "(DATA-ERR,,2.) The total uncertainty of the absolute cross section. Statistical error is smaller than dots on figs.",
+"method": "",
+"sample": "A gas target",
+"comment": "",
+"status": "(CURVE,,W.Gruebler+,J,NP/A,369,381,1981) Fig. 4",
+"common": {
+"EN-ERR-DIG": [
+"MEV",
+0.04
+],
+"ERR-DIG": [
+"MB",
+0.5
+]
+},
+"heads": [
+"EN",
+"DATA"
+],
+"units": [
+"MEV",
+"MB"
+],
+"rows": [
+[
+0.84,
+74.2
+],
+[
+1.42,
+84.2
+],
+[
+1.92,
+89.8
+],
+[
+2.35,
+86.7
+],
+[
+3.04,
+86.9
+]
+]
+},
+{
+"entry": "A1152002",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG)",
+"author": "(P.A.Davenport,T.O.Jeffries,M.E.Owen,F.V.Price,D.Roaf)",
+"reference": "(J,PRS/A,216,66,1953)",
+"errors": "(DATA-ERR) Relative error",
+"method": "",
+"sample": "A gas target",
+"comment": "",
+"status": "(TABLE,,P.A.Davenport+,J,PRS/A,216,66,1953) Table 1",
+"common": {},
+"heads": [
+"EN",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"MEV",
+"MB",
+"MB"
+],
+"rows": [
+[
+0.0145,
+0.0717,
+0.0068
+],
+[
+0.0169,
+0.147,
+0.013
+],
+[
+0.0194,
+0.252,
+0.022
+],
+[
+0.0242,
+0.606,
+0.048
+],
+[
+0.029,
+1.14,
+0.09
+],
+[
+0.0338,
+1.79,
+0.15
+],
+[
+0.0386,
+2.59,
+0.22
+],
+[
+0.0571,
+6.66,
+0.49
+],
+[
+0.0786,
+11.1,
+0.8
+],
+[
+0.1331,
+19.6,
+2.3
+],
+[
+0.1616,
+27.7,
+2.0
+],
+[
+0.1857,
+29.9,
+2.2
+],
+[
+0.309,
+40.9,
+5.3
+],
+[
+0.429,
+50.2,
+4.7
+]
+]
+},
+{
+"entry": "A1155002",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG)",
+"author": "(W.A.Wenzel,W.Whaling)",
+"reference": "(J,PR,88,1149,1952)",
+"errors": "(DATA-ERR) A probable error",
+"method": "(BCINT)",
+"sample": "The D20 ice target was deposited on a copper surface cooled with liquid nitrogen in a target chamber",
+"comment": "",
+"status": "(TABLE,,W.A.Wenzel+,J,PR,88,1149,1952) Table 1",
+"common": {
+"DATA-ERR": [
+"PER-CENT",
+5.0
+]
+},
+"heads": [
+"EN",
+"DATA"
+],
+"units": [
+"MEV",
+"MB"
+],
+"rows": [
+[
+0.035,
+1.94
+],
+[
+0.05,
+4.81
+],
+[
+0.07,
+9.49
+],
+[
+0.1,
+15.8
+],
+[
+0.15,
+23.8
+],
+[
+0.2,
+30.6
+],
+[
+0.25,
+37.0
+],
+[
+0.3,
+43.1
+],
+[
+0.35,
+48.1
+],
+[
+0.4,
+52.3
+],
+[
+0.45,
+55.8
+],
+[
+0.5,
+59.0
+],
+[
+0.55,
+62.0
+]
+]
+},
+{
+"entry": "A1157002",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG)",
+"author": "(A.Von-Engel,C.C.Goodyear)",
+"reference": "(J,PRS/A,264,445,1961)",
+"errors": "(DATA-ERR) No information about source of uncertainty",
+"method": "",
+"sample": "A gas target",
+"comment": "",
+"status": "(TABLE,,A.Von-Engel+,J,PRS/A,264,445,1961) From the title of the fig. 4",
+"common": {},
+"heads": [
+"EN",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"MEV",
+"MB",
+"MB"
+],
+"rows": [
+[
+0.004,
+9e-06,
+4.9e-06
+],
+[
+0.006,
+0.00025,
+7.5e-05
+],
+[
+0.008,
+0.0018,
+0.0004
+],
+[
+0.01,
+0.0077,
+0.0012
+],
+[
+0.012,
+0.023,
+0.0014
+]
+]
+},
+{
+"entry": "A1168002",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG)",
+"author": "(V.A.Davidenko,A.M.Kucher,I.S.Pogrebov,Ju.F.Tuturov)",
+"reference": "(J,AE/S,,(5),7,1957) (J,SJA/S,,(5),7,1957) English transl. of AE/S,1957,(5),7",
+"errors": "(ERR-T) Total error (ERR-1) Uncertainty in the deuteron current incident on the target (ERR-2) The uncertainty in determining the absolute activity in the chamber (ERR-3) The uncertainty in the determination of the neutron yield (EN-ERR) Error in energy range",
+"method": "(MANGB)",
+"sample": "Thick heavy ice target",
+"comment": "",
+"status": "(TABLE) table 1 from AE/S,,(5),7,1957",
+"common": {
+"ERR-1": [
+"PER-CENT",
+2.0
+],
+"ERR-2": [
+"PER-CENT",
+7.0
+],
+"ERR-3": [
+"PER-CENT",
+8.0
+],
+"EN-ERR": [
+"PER-CENT",
+1.0
+],
+"ERR-T": [
+"PER-CENT",
+20.0
+]
+},
+"heads": [
+"EN",
+"DATA"
+],
+"units": [
+"MEV",
+"MB"
+],
+"rows": [
+[
+0.01,
+0.008
+],
+[
+0.02,
+0.26
+],
+[
+0.03,
+1.23
+],
+[
+0.04,
+3.1
+],
+[
+0.05,
+5.3
+],
+[
+0.06,
+7.7
+],
+[
+0.07,
+10.0
+],
+[
+0.08,
+12.0
+],
+[
+0.09,
+14.0
+],
+[
+0.1,
+16.0
+],
+[
+0.11,
+18.0
+],
+[
+0.12,
+19.0
+],
+[
+0.13,
+21.5
+],
+[
+0.14,
+23.0
+],
+[
+0.15,
+25.0
+],
+[
+0.16,
+26.0
+],
+[
+0.17,
+28.0
+],
+[
+0.18,
+30.0
+],
+[
+0.19,
+31.0
+],
+[
+0.2,
+33.0
+],
+[
+0.22,
+35.0
+]
+]
+},
+{
+"entry": "A1170003",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG)",
+"author": "(V.V.Volkov,P.E.Vorotnikov,E.A.Koltypin,N.I.Sidorov, G.B.Iankov)",
+"reference": "(J,AE/S,,(5),15,1957) (J,SJA/S,,(5),13,1957) English transl. of AE/S,,(5),15,1957",
+"errors": "(EN-ERR-DIG) Digitizing error (ERR-DIG) Digitizing error (DATA-ERR) Absolute error",
+"method": "",
+"sample": "Deuterium-titanium target",
+"comment": "",
+"status": "(CURVE) Fig 6 from AE/S,1957,(5),15",
+"common": {
+"EN-ERR-DIG": [
+"MEV",
+0.004
+],
+"DATA-ERR": [
+"PER-CENT",
+5.0
+],
+"ERR-DIG": [
+"MB",
+0.3
+]
+},
+"heads": [
+"EN",
+"DATA"
+],
+"units": [
+"MEV",
+"MB"
+],
+"rows": [
+[
+0.1926,
+24.34
+],
+[
+0.3741,
+52.87
+],
+[
+0.5019,
+64.76
+],
+[
+0.5994,
+71.26
+],
+[
+0.7081,
+78.52
+],
+[
+0.7979,
+82.69
+],
+[
+0.91,
+86.84
+],
+[
+0.9772,
+89.1
+],
+[
+1.082,
+93.65
+],
+[
+1.175,
+94.32
+],
+[
+1.294,
+93.42
+],
+[
+1.406,
+95.24
+],
+[
+1.525,
+93.57
+],
+[
+1.76,
+100.7
+]
+]
+},
+{
+"entry": "A1171003",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG)",
+"author": "(A.S.Ganeev,A.M.Govorov,G.M.Osetinskii,A.N.Rakivnenko, I.V.Sizov,V.S.Siksin)",
+"reference": "(J,AE/S,,(5),26,1957) (J,SJA/S,,(5),21,1957) English transl. of AE/S,,(5),21,1957",
+"errors": "(ERR-T) The total uncertainties include: (ERR-S,0.5,2.3) the statistical error (0.5 - 2.3%), (ERR-1,1.3,1.6) the uncertainty in the experimental geometry (1.3-1.6%) (ERR-2,1.,1.5) the errors in the number of atoms in the target (1-1.5%) (ERR-3,1.2,1.5) the uncertainty in the beam current (1.2-1.5%) (ERR-4,2.,11.) the uncertainty in the determination of deuteron energy at the center of the target (approximately 2.% at Ed = 1070 keV, and approximately 11.% at Ed = 77 keV).",
+"method": "(BCINT) The deuteron current at the target was measured by means of a current integrator.",
+"sample": "A gas target and a point gas target",
+"comment": "",
+"status": "(CURVE) fig 7 from AE/S,1957,(5),26",
+"common": {
+"EN-ERR-DIG": [
+"MEV",
+0.005
+]
+},
+"heads": [
+"EN",
+"DATA",
+"ERR-T"
+],
+"units": [
+"MEV",
+"MB",
+"MB"
+],
+"rows": [
+[
+0.079,
+11.76,
+1.962
+],
+[
+0.137,
+21.2,
+1.635
+],
+[
+0.146,
+23.15,
+0.3381
+],
+[
+0.208,
+34.55,
+0.3381
+],
+[
+0.249,
+38.11,
+1.962
+],
+[
+0.281,
+41.36,
+2.289
+],
+[
+0.346,
+49.49,
+2.613
+],
+[
+0.439,
+57.92,
+2.938
+],
+[
+0.451,
+58.24,
+2.613
+],
+[
+0.547,
+64.71,
+2.285
+],
+[
+0.64,
+69.23,
+2.938
+],
+[
+0.653,
+68.89,
+2.94
+],
+[
+0.755,
+72.42,
+2.94
+],
+[
+0.854,
+74.97,
+2.613
+],
+[
+0.876,
+75.28,
+3.593
+],
+[
+0.953,
+77.85,
+2.94
+],
+[
+1.071,
+79.73,
+2.94
+],
+[
+1.084,
+80.38,
+3.269
+]
+]
+},
+{
+"entry": "A1171005",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG)",
+"author": "(A.S.Ganeev,A.M.Govorov,G.M.Osetinskii,A.N.Rakivnenko, I.V.Sizov,V.S.Siksin)",
+"reference": "(J,AE/S,,(5),26,1957) (J,SJA/S,,(5),21,1957) English transl. of AE/S,,(5),21,1957",
+"errors": "(ERR-T) The total uncertainties include: (ERR-S,0.5,2.3) the statistical error (0.5 - 2.3%), (ERR-1,1.3,1.6) the uncertainty in the experimental geometry (1.3-1.6%) (ERR-2,1.,1.5) the errors in the number of atoms in the target (1-1.5%) (ERR-3,1.2,1.5) the uncertainty in the beam current (1.2-1.5%) (ERR-4,2.,11.) the uncertainty in the determination of deuteron energy at the center of the target (approximately 2.% at Ed = 1070 keV, and approximately 11.% at Ed = 77 keV).",
+"method": "(BCINT) The deuteron current at the target was measured by means of a current integrator.",
+"sample": "A gas target and a point gas target",
+"comment": "",
+"status": "(CURVE) fig 12 from AE/S,1957,(5),26",
+"common": {
+"EN-ERR-DIG": [
+"MEV",
+0.002
+]
+},
+"heads": [
+"EN",
+"DATA",
+"ERR-T"
+],
+"units": [
+"MEV",
+"MB",
+"MB"
+],
+"rows": [
+[
+0.259,
+46.27,
+3.135
+],
+[
+0.33,
+55.0,
+3.827
+],
+[
+0.446,
+68.62,
+4.177
+],
+[
+0.551,
+77.37,
+5.222
+],
+[
+0.674,
+84.72,
+6.265
+],
+[
+0.804,
+92.08,
+5.568
+],
+[
+0.896,
+96.3,
+6.266
+],
+[
+0.998,
+100.5,
+7.309
+]
+]
+},
+{
+"entry": "A1171006",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG)",
+"author": "(A.S.Ganeev,A.M.Govorov,G.M.Osetinskii,A.N.Rakivnenko, I.V.Sizov,V.S.Siksin)",
+"reference": "(J,AE/S,,(5),26,1957) (J,SJA/S,,(5),21,1957) English transl. of AE/S,,(5),21,1957",
+"errors": "ERR-T from error bars given on fig. 14",
+"method": "(MANGB) Manganese bath",
+"sample": "A gas target and a point gas target",
+"comment": "",
+"status": "(CURVE) fig 14 from Rus.Atom.Energ.,S1957,(5),26,1956",
+"common": {
+"EN-ERR-DIG": [
+"MEV",
+0.003
+]
+},
+"heads": [
+"EN",
+"DATA",
+"ERR-T",
+"FLAG"
+],
+"units": [
+"MEV",
+"MB",
+"MB",
+"NO-DIM"
+],
+"rows": [
+[
+0.129,
+22.96,
+3.113,
+2.0
+],
+[
+0.152,
+27.48,
+2.764,
+2.0
+],
+[
+0.193,
+37.19,
+0.381,
+2.0
+],
+[
+0.207,
+36.17,
+0.381,
+2.0
+],
+[
+0.21,
+37.9,
+3.804,
+2.0
+],
+[
+0.251,
+46.92,
+3.807,
+2.0
+],
+[
+0.272,
+44.52,
+0.381,
+1.0
+],
+[
+0.275,
+46.94,
+0.381,
+2.0
+],
+[
+0.329,
+57.36,
+4.498,
+2.0
+],
+[
+0.34,
+53.92,
+0.381,
+1.0
+],
+[
+0.388,
+62.95,
+4.84,
+2.0
+],
+[
+0.414,
+70.57,
+0.381,
+2.0
+],
+[
+0.435,
+69.9,
+4.84,
+2.0
+],
+[
+0.453,
+67.5,
+0.381,
+1.0
+],
+[
+0.466,
+74.08,
+5.182,
+2.0
+],
+[
+0.487,
+69.95,
+0.381,
+2.0
+],
+[
+0.514,
+73.09,
+0.381,
+2.0
+],
+[
+0.573,
+75.56,
+0.381,
+1.0
+],
+[
+0.607,
+84.58,
+5.873,
+2.0
+],
+[
+0.672,
+88.44,
+6.219,
+2.0
+],
+[
+0.683,
+82.92,
+0.381,
+1.0
+],
+[
+0.772,
+92.68,
+0.381,
+2.0
+],
+[
+0.782,
+91.31,
+6.568,
+2.0
+],
+[
+0.814,
+88.92,
+0.381,
+1.0
+],
+[
+0.871,
+101.1,
+6.222,
+2.0
+],
+[
+0.907,
+94.19,
+0.381,
+1.0
+],
+[
+0.948,
+100.1,
+6.913,
+2.0
+],
+[
+1.007,
+98.44,
+0.381,
+1.0
+]
+]
+},
+{
+"entry": "A1175002",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG)",
+"author": "(C.F.Cook,J.R.Smith)",
+"reference": "(J,PR,89,785,1953)",
+"errors": "",
+"method": "",
+"sample": "Three calibrated targets were used to determine the D-D cross section at 100 keV. Two of these had Zr-D deposits of 50 ug/cm2, and the third had 25 ug/cm2.",
+"comment": "",
+"status": "(CURVE,,C.F.Cook+,J,PR,89,785,1953) Fig 2",
+"common": {
+"EN-ERR-DIG": [
+"MEV",
+0.0005
+],
+"ERR-DIG": [
+"MB",
+0.06
+]
+},
+"heads": [
+"EN",
+"DATA"
+],
+"units": [
+"MEV",
+"MB"
+],
+"rows": [
+[
+0.0488,
+3.51
+],
+[
+0.0521,
+4.34
+],
+[
+0.0543,
+4.6
+],
+[
+0.0596,
+5.31
+],
+[
+0.0648,
+6.98
+],
+[
+0.0666,
+7.15
+],
+[
+0.0704,
+8.07
+],
+[
+0.0737,
+8.91
+],
+[
+0.0755,
+8.74
+],
+[
+0.0813,
+10.83
+],
+[
+0.0882,
+11.59
+],
+[
+0.0896,
+12.59
+],
+[
+0.0948,
+13.39
+],
+[
+0.102,
+16.14
+]
+]
+},
+{
+"entry": "A1176002",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG,,,DERIV)",
+"author": "(J.H.Manley,J.H.Coon,E.R.Graves) All athours are from Los Alamos Laboratory",
+"reference": "(J,PR,70,101(A3),194607) abstracts",
+"errors": "",
+"method": "",
+"sample": "Thick heavy ice target",
+"comment": "",
+"status": "(TABLE) table 1 (DEP,A1176003)",
+"common": {},
+"heads": [
+"EN",
+"DATA"
+],
+"units": [
+"MEV",
+"MB"
+],
+"rows": [
+[
+0.119,
+25.0
+],
+[
+0.171,
+37.0
+],
+[
+0.22,
+51.0
+],
+[
+0.294,
+84.0
+]
+]
+},
+{
+"entry": "A1177002",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG,,,DERIV)",
+"author": "(A.C.Graves,E.R.Graves,J.H.Coon,J.H.Manley) All athours are from Los Alamos Laboratory",
+"reference": "(J,PR,70,101(A4),194607) abstracts",
+"errors": "",
+"method": "",
+"sample": "Thick heavy ice target",
+"comment": "",
+"status": "(TABLE) table 1 (DEP,A1177003)",
+"common": {},
+"heads": [
+"EN",
+"DATA"
+],
+"units": [
+"MEV",
+"MB"
+],
+"rows": [
+[
+0.122,
+26.0
+],
+[
+0.171,
+33.0
+],
+[
+0.219,
+39.0
+],
+[
+0.3,
+52.0
+]
+]
+},
+{
+"entry": "A1192002",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG)",
+"author": "(P.R.Chagnon,G.E.Owen)",
+"reference": "(J,PR,101,1798,1956)",
+"errors": "(ERR-1) Uncertainty due to current integrator",
+"method": "(BCINT)",
+"sample": "Deuterium gas target",
+"comment": "",
+"status": "(TABLE,,P.R.Chagnon+,J,PR,101,1798,1956) Table I",
+"common": {
+"ERR-1": [
+"PER-CENT",
+2.0
+]
+},
+"heads": [
+"EN",
+"DATA"
+],
+"units": [
+"MEV",
+"MB"
+],
+"rows": [
+[
+0.25,
+25.0
+],
+[
+0.4,
+45.0
+],
+[
+0.5,
+58.0
+],
+[
+0.6,
+67.0
+],
+[
+0.675,
+72.0
+],
+[
+0.75,
+82.0
+],
+[
+0.825,
+74.0
+]
+]
+},
+{
+"entry": "A1281002",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "((1-H-2(D,G)2-HE-4,,SIG)/ (1-H-2(D,P)1-H-3,,SIG))",
+"author": "(C.A.Barnes,K.H.Chang,T.R.Donoghue,C.Rolfs, J.Kammeraad)",
+"reference": "(J,PL/B,197,315,1987)",
+"errors": "(ERR-S) Statistical error (ERR-1) Systematic error",
+"method": "",
+"sample": "Target were made by deuterating Ti layers on Cu backings",
+"comment": "",
+"status": "(TABLE,,C.A.Barnes+,J,PL/B,197,315,1987) Table 1",
+"common": {
+"ERR-1": [
+"PER-CENT",
+10.0
+]
+},
+"heads": [
+"EN-CM",
+"DATA",
+"ERR-S"
+],
+"units": [
+"MEV",
+"NO-DIM",
+"NO-DIM"
+],
+"rows": [
+[
+0.036,
+8.2e-08,
+2.7e-08
+],
+[
+0.052,
+7.3e-08,
+9e-09
+],
+[
+0.123,
+6.4e-08,
+1.8e-08
+],
+[
+0.159,
+1e-07,
+2.7e-08
+],
+[
+0.189,
+5.5e-08,
+1.8e-08
+],
+[
+0.236,
+9.1e-08,
+1.8e-08
+],
+[
+0.248,
+1.37e-07,
+3.6e-08
+],
+[
+0.278,
+9.1e-08,
+3.6e-08
+],
+[
+0.305,
+5.5e-08,
+1.8e-08
+]
+]
+},
+{
+"entry": "A1299002",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG)",
+"author": "(A.S.Belov,V.E.Kusik,Yu.V.Ryabov)",
+"reference": "(J,NC/A,103,1647,1990)",
+"errors": "",
+"method": "",
+"sample": "The palladium thin-wall tubes target with an excess pressure of gaseous deuterium inside",
+"comment": "The total neutrons detection efficiency was determined with a standard Pu-Be-source and equalled 1.3*10**(2) Experimental accuracy (systematic+statistic errors) varies from 3% for Ed=18.3 keV to 13% for Ed=6.8 keV",
+"status": "(CURVE,,A.S.Belov+,J,NC/A,103,1647,1990) Fig.3",
+"common": {
+"EN-ERR-DIG": [
+"KEV",
+0.023
+],
+"ERR-DIG": [
+"PER-CENT",
+0.8
+]
+},
+"heads": [
+"EN",
+"DATA"
+],
+"units": [
+"KEV",
+"B"
+],
+"rows": [
+[
+6.897,
+1.768e-06
+],
+[
+9.296,
+1.094e-05
+],
+[
+11.019,
+2.398e-05
+],
+[
+13.833,
+7.2e-05
+],
+[
+16.148,
+0.0001489
+],
+[
+18.465,
+0.0002484
+]
+]
+},
+{
+"entry": "C0018005",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG)",
+"author": "(W.R.Arnold,J.A.Phillips,G.A.Sawyer,E.J.Stovall Jr, J.L.Tuck)",
+"reference": "(J,PR,93,483,1954) #doi:10.1103/PhysRev.93.483 (R,LA-1479,1952) detailed tables for T(d,n)He4 reaction",
+"errors": "(DATA-ERR1) Standard error (DATA-ERR2) Assigned error",
+"method": "(PHD,ASSOP)",
+"sample": "Thin D2 gas target with thin SiO window.",
+"comment": "",
+"status": "From smoothed curve through data. Data taken from primary reference",
+"common": {},
+"heads": [
+"EN",
+"DATA",
+"DATA-ERR1",
+"DATA-ERR2"
+],
+"units": [
+"KEV",
+"MB",
+"PER-CENT",
+"PER-CENT"
+],
+"rows": [
+[
+13.0,
+0.0352,
+2.5,
+5.0
+],
+[
+19.0,
+0.213,
+2.5,
+5.0
+],
+[
+22.0,
+0.391,
+2.5,
+5.0
+],
+[
+25.0,
+0.629,
+2.5,
+5.0
+],
+[
+30.0,
+1.14,
+1.6,
+3.2
+],
+[
+33.0,
+1.54,
+1.6,
+3.2
+],
+[
+36.0,
+1.98,
+1.6,
+3.2
+],
+[
+40.0,
+2.56,
+1.6,
+3.2
+],
+[
+46.0,
+3.58,
+1.6,
+3.2
+],
+[
+53.0,
+4.98,
+1.6,
+3.2
+],
+[
+60.0,
+6.5,
+1.6,
+3.2
+],
+[
+67.0,
+8.14,
+1.6,
+3.2
+],
+[
+73.0,
+9.59,
+1.6,
+3.2
+],
+[
+80.0,
+11.2,
+1.6,
+3.2
+],
+[
+93.0,
+13.9,
+1.6,
+3.2
+],
+[
+100.0,
+15.4,
+1.6,
+3.2
+],
+[
+107.0,
+16.5,
+1.6,
+3.2
+],
+[
+110.0,
+17.1,
+1.6,
+3.2
+],
+[
+113.0,
+17.5,
+1.6,
+3.2
+]
+]
+},
+{
+"entry": "C0018006",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG,,,DERIV)",
+"author": "(W.R.Arnold,J.A.Phillips,G.A.Sawyer,E.J.Stovall Jr, J.L.Tuck)",
+"reference": "(J,PR,93,483,1954) #doi:10.1103/PhysRev.93.483 (R,LA-1479,1952) detailed tables for T(d,n)He4 reaction",
+"errors": "(DATA-ERR1) Standard error (DATA-ERR2) Assigned error",
+"method": "(ASSOP,PHD)",
+"sample": "Thin D2 gas target with thin SiO window.",
+"comment": "",
+"status": "From smoothed curve through data. Data taken from primary reference",
+"common": {},
+"heads": [
+"EN",
+"DATA",
+"DATA-ERR1",
+"DATA-ERR2"
+],
+"units": [
+"KEV",
+"MB",
+"PER-CENT",
+"PER-CENT"
+],
+"rows": [
+[
+13.0,
+0.0329,
+2.5,
+5.0
+],
+[
+19.0,
+0.2,
+2.5,
+5.0
+],
+[
+22.0,
+0.367,
+2.5,
+5.0
+],
+[
+25.0,
+0.592,
+2.5,
+5.0
+],
+[
+30.0,
+1.08,
+1.6,
+3.2
+],
+[
+33.0,
+1.46,
+1.6,
+3.2
+],
+[
+36.0,
+1.88,
+1.6,
+3.2
+],
+[
+40.0,
+2.43,
+1.6,
+3.2
+],
+[
+46.0,
+3.42,
+1.6,
+3.2
+],
+[
+53.0,
+4.78,
+1.6,
+3.2
+],
+[
+60.0,
+6.25,
+1.6,
+3.2
+],
+[
+67.0,
+7.86,
+1.6,
+3.2
+],
+[
+73.0,
+9.3,
+1.6,
+3.2
+],
+[
+80.0,
+10.9,
+1.6,
+3.2
+],
+[
+93.0,
+13.6,
+1.6,
+3.2
+],
+[
+100.0,
+15.2,
+1.6,
+3.2
+],
+[
+107.0,
+16.6,
+1.6,
+3.2
+],
+[
+110.0,
+17.0,
+1.6,
+3.2
+],
+[
+113.0,
+17.4,
+1.6,
+3.2
+]
+]
+},
+{
+"entry": "C0025002",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG)",
+"author": "(J.Moffatt,D.Roaf,J.H.Sanders)",
+"reference": "(J,PRS/A,212,220,1952) (J,PR,77,754(N14),1950) Preliminary data.",
+"errors": "(DATA-ERR) Maximum limits obtained by adding the uncertainties on the individual measurements.",
+"method": "(TOF)",
+"sample": "D gas target.",
+"comment": "",
+"status": "Data taken from Table 5 in reference.",
+"common": {},
+"heads": [
+"EN",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"MB",
+"MB"
+],
+"rows": [
+[
+14.5,
+0.0717,
+0.0068
+],
+[
+16.94,
+0.147,
+0.013
+],
+[
+19.44,
+0.252,
+0.022
+],
+[
+24.24,
+0.606,
+0.048
+],
+[
+29.01,
+1.14,
+0.09
+],
+[
+33.75,
+1.79,
+0.15
+],
+[
+38.6,
+2.59,
+0.22
+]
+]
+},
+{
+"entry": "C0030005",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG)",
+"author": "(R.L.Schulte,M.Cosack,A.W.Obst,J.L.Weil)",
+"reference": "(J,NP/A,192,609,1972) #doi:10.1016/0375-9474(72)90093-0 (W,WEIL,19781122) preprint of article",
+"errors": "(DATA-ERR) No information on source of uncertainties",
+"method": "",
+"sample": "",
+"comment": "",
+"status": "(DEP,C0030004) (TABLE) Data taken from table 3 page 620 in article.",
+"common": {},
+"heads": [
+"EN",
+"EN-ERR",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"MEV",
+"KEV",
+"MB",
+"MB"
+],
+"rows": [
+[
+1.96,
+3.6,
+104.3,
+0.25
+],
+[
+2.51,
+4.0,
+104.6,
+0.25
+],
+[
+3.02,
+4.5,
+103.8,
+0.25
+],
+[
+3.5,
+5.0,
+101.4,
+0.63
+],
+[
+4.0,
+5.7,
+99.8,
+0.38
+],
+[
+4.5,
+6.4,
+98.6,
+0.63
+],
+[
+5.0,
+7.2,
+97.3,
+0.63
+],
+[
+5.5,
+8.1,
+94.9,
+0.63
+],
+[
+5.8,
+8.7,
+93.7,
+0.5
+],
+[
+6.2,
+9.5,
+93.4,
+0.75
+]
+]
+},
+{
+"entry": "C0033004",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG)",
+"author": "(D.L.Booth,G.Preston,P.F.D.Shaw)",
+"reference": "(J,PPS/A,69,265,1956)",
+"errors": "(DATA-ERR) Sum of uncertainties due to measurements of counter geometry, counting statistics, determination of discriminator bias, beam current, and the number of target nuclei.",
+"method": "(ASSOP)Thin foils were placed in front of the detector windows to stop the He3 particles when the D(d,p)H3 reaction was measured.",
+"sample": "Thin gas target.",
+"comment": "",
+"status": "",
+"common": {
+"EN-ERR": [
+"PER-CENT",
+0.6
+]
+},
+"heads": [
+"EN",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"MB",
+"MB"
+],
+"rows": [
+[
+52.2,
+4.64,
+0.27
+],
+[
+86.9,
+11.85,
+0.83
+]
+]
+},
+{
+"entry": "C0033005",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG)",
+"author": "(D.L.Booth,G.Preston,P.F.D.Shaw)",
+"reference": "(J,PPS/A,69,265,1956)",
+"errors": "(DATA-ERR) Sum of uncertainties due to measurements of counter geometry, counting statistics, determination of discriminator bias, beam current, and the number of target nuclei.",
+"method": "(ASSOP)Thin foils were placed in front of the detector windows to stop the He3 particles when the D(d,p)H3 reaction was measured.",
+"sample": "Thin gas target.",
+"comment": "",
+"status": "",
+"common": {
+"EN-ERR": [
+"PER-CENT",
+0.6
+]
+},
+"heads": [
+"EN",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"MB",
+"MB"
+],
+"rows": [
+[
+52.2,
+4.59,
+0.34
+],
+[
+86.9,
+11.41,
+0.65
+]
+]
+},
+{
+"entry": "C0043005",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG)",
+"author": "(M.D.GOLDBERG,J.M.LE BLANC)",
+"reference": "(J,PR,119,1992,1960)",
+"errors": "(EN-ERR) The uncertainty in the beam energy due to the differential range measurement, intrinsic energy spread and energy drift was about 2%.",
+"method": "",
+"sample": "Two atmospheres of D2 gas within stainless steel cylinder 4 inches in length by 1 inch in diameter. 10-mg/cm2 Ta entrance foil and 0.020-inch Ta beam stop.",
+"comment": "",
+"status": "(DEP,C0043004) Data taken from table in article.",
+"common": {
+"EN-ERR": [
+"PER-CENT",
+2.0
+]
+},
+"heads": [
+"EN",
+"DATA"
+],
+"units": [
+"MEV",
+"MB"
+],
+"rows": [
+[
+5.0,
+94.6
+],
+[
+7.6,
+96.5
+],
+[
+9.6,
+93.7
+],
+[
+12.2,
+81.3
+]
+]
+},
+{
+"entry": "C0046005",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG)",
+"author": "(J.E.Brolley Jr,T.M.Putnam,L.Rosen)",
+"reference": "(J,PR,107,820,1957) #doi:10.1103/PhysRev.107.820",
+"errors": "(EN-ERR) From mean energy of the range measurements and corrections for gas absorption.",
+"method": "",
+"sample": "Deuterium gas in a nuclear multiplate camera",
+"comment": "",
+"status": "(DEP,C0046002) (TABLE,,J.E.Brolley Jr+,J,PR,107,820,1957) Data taken from Table X of reference.",
+"common": {},
+"heads": [
+"EN",
+"EN-ERR",
+"DATA"
+],
+"units": [
+"MEV",
+"MEV",
+"MB"
+],
+"rows": [
+[
+6.1,
+0.1,
+87.0
+],
+[
+8.1,
+0.1,
+84.0
+],
+[
+12.15,
+0.1,
+74.0
+],
+[
+13.8,
+0.15,
+72.0
+]
+]
+},
+{
+"entry": "C0109004",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG) (1-H-2(D,P)1-H-3,,SIG,,SFC)",
+"author": "(R.E.Brown,N.Jarmie)",
+"reference": "(J,PR/C,41,1391,1990) #doi:10.1103/PhysRevC.41.1391 (J,NIM/B,10-11,405,1985) prelim.results #doi:10.1016/0168-583X(85)90279-4 ((J,RE,92,45,1986)=(C,85SANTA,1,45",
+"errors": "(DATA-ERR) Relative uncertainty. Full correlation among coefficients taken into account.",
+"method": "(PHD)",
+"sample": "A cryogenic windowless gas target was chosen to avoid energy-loss uncertainty in entrance and exit foils. A temperature of the target chamber (10.5 K for deuterium and 11.2 K for tritium gas) just above the freezing point of the target gas gives the maximum target density compatible with an appropriate energy loss in the target. The resulting gas density is low, approximately 10**4 nuclei/cm3.",
+"comment": "",
+"status": "(DEP,C0109006) with the coefficients a, b, and c (in Subent 007 marked as 0,2,4) determined from a least-squares fit to the data, angle-integrated cross section a from sig=4Pi(a + b/3 + c/5) was computed. (TABLE) Data taken from table II of PR/C,41,1391",
+"common": {
+"EN-ERR": [
+"EV",
+15.0
+],
+"EN-RSL-FW": [
+"EV",
+40.0
+],
+"ERR-1": [
+"PER-CENT",
+1.3
+]
+},
+"heads": [
+"EN",
+"DATA      1",
+"DATA      2",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"MB",
+"B*KEV",
+"PER-CENT"
+],
+"rows": [
+[
+19.94,
+0.2704,
+56.1,
+2.8
+],
+[
+29.94,
+1.19,
+59.61,
+1.3
+],
+[
+39.93,
+2.641,
+59.39,
+0.87
+],
+[
+49.92,
+4.481,
+59.96,
+0.78
+],
+[
+59.92,
+6.584,
+61.13,
+0.73
+],
+[
+69.91,
+8.759,
+61.98,
+0.67
+],
+[
+79.91,
+10.91,
+62.61,
+0.64
+],
+[
+89.91,
+13.22,
+64.21,
+0.42
+],
+[
+99.91,
+15.31,
+64.99,
+0.59
+],
+[
+109.9,
+17.35,
+65.85,
+0.56
+],
+[
+116.9,
+18.81,
+66.77,
+0.75
+]
+]
+},
+{
+"entry": "C0109005",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG) (1-H-2(D,N)2-HE-3,,SIG,,SFC)",
+"author": "(R.E.Brown,N.Jarmie)",
+"reference": "(J,PR/C,41,1391,1990) #doi:10.1103/PhysRevC.41.1391 (J,NIM/B,10-11,405,1985) prelim.results #doi:10.1016/0168-583X(85)90279-4 ((J,RE,92,45,1986)=(C,85SANTA,1,45",
+"errors": "(DATA-ERR) Relative uncertainty. Full correlation among coefficients taken into account.",
+"method": "(PHD)",
+"sample": "A cryogenic windowless gas target was chosen to avoid energy-loss uncertainty in entrance and exit foils. A temperature of the target chamber (10.5 K for deuterium and 11.2 K for tritium gas) just above the freezing point of the target gas gives the maximum target density compatible with an appropriate energy loss in the target. The resulting gas density is low, approximately 10**4 nuclei/cm3.",
+"comment": "",
+"status": "(DEP,C0109007) with the coefficients a, b, and c (in Subent 007 marked as 0,2,4) determined from a least-squares fit to the data, angle-integrated cross section a from sig=4Pi(a + b/3 + c/5) was computed. (TABLE) Data taken from table II of PR/C,41,1391",
+"common": {
+"EN-ERR": [
+"EV",
+15.0
+],
+"EN-RSL-FW": [
+"EV",
+40.0
+],
+"ERR-1": [
+"PER-CENT",
+1.3
+]
+},
+"heads": [
+"EN",
+"DATA      1",
+"DATA      2",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"MB",
+"B*KEV",
+"PER-CENT"
+],
+"rows": [
+[
+19.94,
+0.273,
+56.7,
+4.0
+],
+[
+29.94,
+1.161,
+58.1,
+1.8
+],
+[
+39.93,
+2.667,
+59.99,
+1.2
+],
+[
+49.92,
+4.651,
+62.24,
+1.0
+],
+[
+59.92,
+6.927,
+64.31,
+1.0
+],
+[
+69.91,
+9.237,
+65.36,
+0.86
+],
+[
+79.91,
+11.38,
+65.32,
+0.82
+],
+[
+89.91,
+14.08,
+68.41,
+0.46
+],
+[
+99.91,
+16.44,
+69.79,
+0.79
+],
+[
+109.9,
+19.1,
+72.5,
+0.75
+],
+[
+116.9,
+20.36,
+72.27,
+0.89
+]
+]
+},
+{
+"entry": "C1499002",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG)",
+"author": "(D.S.Leonard,H.J.Karwowski,C.R.Brune,B.M.Fisher, E.J.Ludwig)",
+"reference": "(J,PR/C,73,045801,2006)",
+"errors": "(DATA-ERR) The uncertainties for the normalized data input into the fits were calculated by first-order propagation of the uncertainties in the peak sums. Correlations arising from shared monitor normalization counts were not taken into account because the monitor yields generally contributed a relatively small amount to the overall statistical uncertainties. The final uncertainties and correlations in the cross-section results are determined directly from the error matrix.",
+"method": "",
+"sample": "The targets were produced by plasma deposition of fully deuterated methane gas and were typically about 30 microg/cm2 thick, with roughly equal numbers of carbon and deuterium atoms.",
+"comment": "",
+"status": "(TABLE) Data taken from table 3",
+"common": {},
+"heads": [
+"EN",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"MB",
+"MB"
+],
+"rows": [
+[
+646.1,
+74.55,
+1.07
+],
+[
+557.3,
+68.02,
+0.96
+],
+[
+470.2,
+58.47,
+0.8
+],
+[
+379.2,
+53.09,
+0.94
+],
+[
+314.6,
+45.77,
+1.06
+],
+[
+232.8,
+37.65,
+0.82
+],
+[
+172.8,
+29.55,
+0.88
+],
+[
+112.2,
+19.77,
+0.85
+]
+]
+},
+{
+"entry": "C1499003",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG)",
+"author": "(D.S.Leonard,H.J.Karwowski,C.R.Brune,B.M.Fisher, E.J.Ludwig)",
+"reference": "(J,PR/C,73,045801,2006)",
+"errors": "(DATA-ERR) The uncertainties for the normalized data input into the fits were calculated by first-order propagation of the uncertainties in the peak sums. Correlations arising from shared monitor normalization counts were not taken into account because the monitor yields generally contributed a relatively small amount to the overall statistical uncertainties. The final uncertainties and correlations in the cross-section results are determined directly from the error matrix.",
+"method": "",
+"sample": "The targets were produced by plasma deposition of fully deuterated methane gas and were typically about 30 microg/cm2 thick, with roughly equal numbers of carbon and deuterium atoms.",
+"comment": "",
+"status": "(TABLE) Data taken from table 3",
+"common": {},
+"heads": [
+"EN",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"MB",
+"MB"
+],
+"rows": [
+[
+646.1,
+84.34,
+1.59
+],
+[
+557.3,
+80.22,
+1.18
+],
+[
+470.2,
+69.55,
+1.04
+],
+[
+379.2,
+62.6,
+1.12
+],
+[
+314.6,
+56.01,
+1.33
+],
+[
+232.8,
+43.13,
+0.96
+],
+[
+172.8,
+33.03,
+1.01
+],
+[
+112.2,
+21.07,
+0.92
+]
+]
+},
+{
+"entry": "C1511002",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG)",
+"author": "(M.A.Hofstee,A.K.Pallone,F.E.Cecil,J.A.McNeil, C.S.Galovich)",
+"reference": "(J,NP/A,688,527,2001) Conference proceedings",
+"errors": "(ERR-S) Statistical uncertainty (ERR-SYS) Systematical uncertainty",
+"method": "Neutron counts were determined using the calculated efficiency from the Kent State code",
+"sample": "D, 6,7Li, 9Be, and 10,11B targets",
+"comment": "",
+"status": "(TABLE) Data taken from Table 1",
+"common": {},
+"heads": [
+"EN-CM",
+"DATA",
+"ERR-S",
+"ERR-SYS"
+],
+"units": [
+"KEV",
+"MB",
+"PER-CENT",
+"PER-CENT"
+],
+"rows": [
+[
+24.0,
+4.47,
+5.0,
+2.0
+],
+[
+40.0,
+10.8,
+5.0,
+2.0
+]
+]
+},
+{
+"entry": "C1511008",
+"reaction": "dn",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG,,SFC)",
+"author": "(M.A.Hofstee,A.K.Pallone,F.E.Cecil,J.A.McNeil, C.S.Galovich)",
+"reference": "(J,NP/A,688,527,2001) Conference proceedings",
+"errors": "(ERR-S) Statistical uncertainty (ERR-SYS) Systematical uncertainty",
+"method": "Neutron counts were determined using the calculated efficiency from the Kent State code",
+"sample": "D, 6,7Li, 9Be, and 10,11B targets",
+"comment": "",
+"status": "(TABLE) Data taken from Table 1",
+"common": {},
+"heads": [
+"EN-CM",
+"DATA",
+"ERR-S",
+"ERR-SYS"
+],
+"units": [
+"KEV",
+"B*MEV",
+"PER-CENT",
+"PER-CENT"
+],
+"rows": [
+[
+24.0,
+0.0651,
+5.0,
+2.0
+],
+[
+40.0,
+0.0619,
+5.0,
+2.0
+]
+]
+},
+{
+"entry": "C2236003",
+"reaction": "dn",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG,,SFC)",
+"author": "(D.Lattuada,M.Barbarino,A.Bonasera,W.Bang,H.J.Quevedo, M.Warren,F.Consoli,R.De Angelis,P.Andreoli,S.Kimura, G.Dyer,A.C.Bernstein,K.Hagel,M.Barbui,K.Schmidt, E.Gaul,M.E.Donovan,J.B.Natowitz,T.Ditmire)",
+"reference": "(J,PR/C,93,045808,2016)",
+"errors": "(DATA-ERR) No information of source of uncertainties",
+"method": "",
+"sample": "Cluster target generated by a cryo-cooled gas mixture of D2+3He at 86 K or gas mixture of CD4+3He at 200 - 260 K",
+"comment": "",
+"status": "(TABLE) Data presented in fig. 7 of the reference sent by author (D.L.)",
+"common": {},
+"heads": [
+"EN-CM",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"B*MEV",
+"B*MEV"
+],
+"rows": [
+[
+20.0575,
+61.3011347,
+19.94507935
+],
+[
+20.3545,
+54.0382235,
+14.34091317
+],
+[
+21.1465,
+40.4855638,
+13.91691258
+],
+[
+21.5425,
+36.8133793,
+21.29699629
+],
+[
+21.7405,
+41.0113781,
+7.63350469
+],
+[
+22.0375,
+66.6823546,
+8.13130822
+],
+[
+22.5325,
+57.5432734,
+19.69928999
+],
+[
+22.6315,
+47.6640292,
+10.78795862
+],
+[
+22.7305,
+42.8144492,
+11.9880458
+],
+[
+22.9285,
+61.0398794,
+7.79585417
+],
+[
+23.1265,
+49.3224872,
+11.37190844
+],
+[
+23.1265,
+74.5882109,
+25.22531855
+],
+[
+23.3245,
+44.0198947,
+14.94961359
+],
+[
+23.3245,
+49.2977818,
+14.21635593
+],
+[
+23.8195,
+39.9191938,
+8.40520804
+],
+[
+24.1165,
+81.3975664,
+16.8249609
+],
+[
+24.5125,
+50.406121,
+10.48944279
+],
+[
+24.5125,
+55.4311591,
+10.88557604
+],
+[
+27.5815,
+55.6918955,
+17.65449139
+],
+[
+27.7795,
+61.348622,
+11.75001233
+],
+[
+28.3735,
+44.2753197,
+7.22949666
+],
+[
+30.0565,
+60.1952373,
+6.8285995
+],
+[
+30.0565,
+41.6435783,
+8.3054511
+],
+[
+30.7495,
+41.449136,
+11.89409991
+],
+[
+32.3335,
+38.7920513,
+5.36978277
+],
+[
+32.9275,
+51.4800514,
+5.75438075
+],
+[
+34.5115,
+63.8743548,
+8.43880365
+],
+[
+35.8975,
+49.0132059,
+7.56324471
+],
+[
+37.2835,
+52.8905537,
+17.10233473
+],
+[
+38.8675,
+62.2891287,
+9.36504767
+],
+[
+39.4615,
+50.2061469,
+15.9291928
+],
+[
+48.6685,
+86.273183,
+14.66080235
+]
+]
+},
+{
+"entry": "D0003005",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG,,,EVAL) recommended value for total cross-section.",
+"author": "(M.Drosg,D.M.Drake) latter is co-author for La-5732-ms",
+"reference": "(J,NSE,67,190,197808) (J,NSE,65,553,1978) (R,LA-5732-MS,197412) d-d and p-t (preliminary results)",
+"errors": "uncertainty of less than 1 percent.",
+"method": "",
+"sample": "",
+"comment": "H-2(d,n)He-3 differential cross-section measurements considered for evaluation are the following and their references are summarized in 'rel-ref' . ----------------------------------------------------- author(s) * ref-  *   method    * ang-range* d-energy *erence *             * c-m deg. *  MeV,lab --- absolute data --- Brolley+   *   1   * he3,nucl.em.* 22 - 117 * 5.8-13.8 Smith+     *   2   * n,count.tel.*  0 -  92 * 5.8 *       * n,count.tel.*  0       * 4.1-8.5 Daehnick+  *   3   * n,plastic   *  0 -  84 * 8.4 Cochran+   *   4   * n,count.tel.*  0       * 6.3-13.8 Goldberg+  *   5   * n,count.tel.*  0       * 3.4-10.2 Wilson+    *   6   * n,count.tel.*  0       * 4.8-13.3 Antolkovic+*   7   * d,si        *  0       * 15.1 Antolkovic+*   8   * d,si        * 8.5-110.4* 15.1 Thornton   *   9   * he3,si      * 21 - 117 * 5  - 10 Schulte+   *  10   * he3,si      * 22 - 130 * 2  - 6.2 *       * n,tof       *  0 -  21 * 2  - 6.2 Hegland+   *  11   * he3,si      * 32 -  80 * 17.5 Jarmie+    *  12   * he3,si      * 24 -  96 * 12.305 this work  *       * n,tof       *  0 -  98 * 6  - 17 --- relative distribution --- Cranberg+  *  13   * n,tof       *  0 -  55 * 6.3 Goldberg+  *   5   * n,count.tel.*  0 - 100 * 5.0-12.2 Brill+     *  14   * n,tof       *  0       * 4.8-18.5 Kerr+      *  15   * n,tof       *  0 - 160 * 5  - 10 Dietrich+  *  16   * n,tof       *  0 - 160 * 12 - 18 Azimov+    *  17   * n,tof       *  0 -  86 * 13.9 --- zero-degree breakup data --- Cranberg+  *  13   *",
+"status": "data taken from table XVI of Nucl.Sci.Eng.,67(1978)190",
+"common": {
+"DATA-ERR": [
+"PER-CENT",
+1.0
+]
+},
+"heads": [
+"EN",
+"DATA",
+"FLAG"
+],
+"units": [
+"MEV",
+"MB",
+"NO-DIM"
+],
+"rows": [
+[
+3.0,
+102.8,
+1.0
+],
+[
+3.5,
+101.2,
+1.0
+],
+[
+4.0,
+99.6,
+2.0
+],
+[
+4.5,
+98.0,
+2.0
+],
+[
+5.0,
+96.5,
+2.0
+],
+[
+5.5,
+95.0,
+2.0
+],
+[
+5.8,
+94.1,
+2.0
+],
+[
+6.0,
+93.5,
+null
+],
+[
+6.2,
+92.9,
+2.0
+],
+[
+7.0,
+90.6,
+null
+],
+[
+8.0,
+87.8,
+null
+],
+[
+9.0,
+85.0,
+2.0
+],
+[
+10.0,
+82.4,
+null
+],
+[
+11.0,
+79.8,
+null
+],
+[
+12.0,
+77.4,
+1.0
+],
+[
+12.31,
+76.6,
+null
+],
+[
+13.0,
+75.0,
+1.0
+],
+[
+14.0,
+72.6,
+null
+],
+[
+15.0,
+70.3,
+1.0
+],
+[
+17.0,
+66.0,
+null
+],
+[
+20.0,
+60.1,
+1.0
+],
+[
+25.3,
+50.9,
+2.0
+]
+]
+},
+{
+"entry": "D0527004",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "((1-H-2(D,G)2-HE-4,,SIG)/(1-H-2(D,P)1-H-3,,SIG))",
+"author": "(Zhou Jing, Fu Yuanyong, Zhou Shuhua, Xia Haihong, Li Chengbo, Meng Qiuying)",
+"reference": "(J,CPH/C,33,350,2009) (J,CST,41,663,2007)  preliminary cs (29+/-12 pb) given (J,CPL,23,2703,2006) preliminary results given",
+"errors": "(DATA-ERR) Mainly due to uncertainty of the efficiency of the gamma-ray detector",
+"method": "",
+"sample": "A D-Ti target (0.5 mg/cm2 thick) on Mo backing The atomic ratio is D:Ti=1.7:1.",
+"comment": "",
+"status": "(TABLE) Text (p2705) of Chin.Phys.Lett.23(2006)2703 (SPSDD,D0527006)",
+"common": {},
+"heads": [
+"EN",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"NO-DIM",
+"NO-DIM"
+],
+"rows": [
+[
+20.0,
+1.06e-07,
+4.2e-08
+]
+]
+},
+{
+"entry": "D0527006",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "((1-H-2(D,G)2-HE-4,,SIG)/(1-H-2(D,P)1-H-3,,SIG))",
+"author": "(Zhou Jing, Fu Yuanyong, Zhou Shuhua, Xia Haihong, Li Chengbo, Meng Qiuying)",
+"reference": "(J,CPH/C,33,350,2009) (J,CST,41,663,2007)  preliminary cs (29+/-12 pb) given (J,CPL,23,2703,2006) preliminary results given",
+"errors": "(DATA-ERR) Mainly due to uncertainty of the efficiency of the gamma-ray and particle detectors",
+"method": "",
+"sample": "A D-Ti target (0.5 mg/cm2 thick) on Mo backing The atomic ratio is D:Ti=1.7:1.",
+"comment": "",
+"status": "(TABLE) Text (p352) of Chin.Phys.C33(2009)350",
+"common": {},
+"heads": [
+"EN-CM",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"NO-DIM",
+"NO-DIM"
+],
+"rows": [
+[
+7.0,
+1.06e-07,
+3.4e-08
+]
+]
+},
+{
+"entry": "D0651002",
+"reaction": "dp",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG,,SFC,DERIV) Experiment with 18 MeV 3He beam energy (1-H-2(D,P)1-H-3,,SIG,,SFC,DERIV) Experiment with 17 MeV 3He beam energy",
+"author": "(A.Tumino, C.Spitaleri, A.M.Mukhamedzhanov, S.Typel, M.Aliotta, V.Burjan, M.Gimenez del Santo, G.G.Kiss, V.Kroha, Z.Hons, M.La Cognata, L.Lamia, J.Mrazek, R.G.Pizzone, S.Piskor, G.G.Rapisarda, S.Romano, M.L.Sergi, R.Sparta)",
+"reference": "(J,PL/B,700,111,2011) (J,JP/CS,337,012017,2012) Same data given in figs. (J,AJ,785,96,2014) Additional data for 2H(d,p)3H",
+"errors": "Total uncertainty is 5% combining in quadrature three sources of uncertainties: (ERR-1) normalization error                (1%); (ERR-2) systematic error of 3% from theory (3%); (ERR-S) Statistical uncertainty            (4%);",
+"method": "(COINC) 3H-p detection in coincidence",
+"sample": "CD2 target, about 150 ug/cm2",
+"comment": "",
+"status": "(TABLE) Plotted in Fig.2 of Phys.Lett.B700(2011)111 for 18 MeV 3He beam energy and Fig.11 of Astrophys.J. 785,96(2014) for 17 and 18 MeV",
+"common": {
+"ERR-1": [
+"PER-CENT",
+1.0
+],
+"ERR-2": [
+"PER-CENT",
+3.0
+]
+},
+"heads": [
+"EN-CM",
+"DATA      1",
+"ERR-S     1",
+"DATA      2",
+"ERR-S     2"
+],
+"units": [
+"MEV",
+"B*KEV",
+"B*KEV",
+"B*KEV",
+"B*KEV"
+],
+"rows": [
+[
+0.0026,
+58.2,
+2.3,
+null,
+null
+],
+[
+0.0075,
+null,
+null,
+56.435,
+5.6435
+],
+[
+0.0226,
+60.1,
+2.4,
+null,
+null
+],
+[
+0.0426,
+63.1,
+2.5,
+null,
+null
+],
+[
+0.0575,
+null,
+null,
+67.8225,
+6.78225
+],
+[
+0.0626,
+67.2,
+2.7,
+null,
+null
+],
+[
+0.0826,
+71.1,
+2.9,
+null,
+null
+],
+[
+0.1026,
+77.1,
+3.1,
+null,
+null
+],
+[
+0.1075,
+null,
+null,
+87.1638,
+8.71638
+],
+[
+0.1226,
+79.2,
+3.2,
+null,
+null
+],
+[
+0.1426,
+86.9,
+3.5,
+null,
+null
+],
+[
+0.1575,
+null,
+null,
+81.0788,
+8.10788
+],
+[
+0.1626,
+91.0,
+3.6,
+null,
+null
+],
+[
+0.1826,
+95.2,
+3.8,
+null,
+null
+],
+[
+0.2026,
+101.8,
+4.1,
+null,
+null
+],
+[
+0.2075,
+null,
+null,
+99.1367,
+9.91367
+],
+[
+0.2226,
+106.5,
+4.3,
+null,
+null
+],
+[
+0.2426,
+111.0,
+4.5,
+null,
+null
+],
+[
+0.2575,
+null,
+null,
+107.065,
+10.7065
+],
+[
+0.2626,
+115.3,
+4.6,
+null,
+null
+],
+[
+0.2826,
+120.8,
+4.8,
+null,
+null
+],
+[
+0.3026,
+122.1,
+4.9,
+null,
+null
+],
+[
+0.3075,
+null,
+null,
+106.821,
+10.6821
+],
+[
+0.3226,
+127.0,
+5.1,
+null,
+null
+],
+[
+0.3426,
+131.8,
+5.3,
+null,
+null
+],
+[
+0.3575,
+null,
+null,
+121.178,
+12.1178
+],
+[
+0.3626,
+140.2,
+5.6,
+null,
+null
+],
+[
+0.3826,
+143.0,
+5.7,
+null,
+null
+],
+[
+0.4026,
+147.0,
+5.9,
+null,
+null
+],
+[
+0.4075,
+null,
+null,
+145.084,
+14.5084
+],
+[
+0.4226,
+151.5,
+6.1,
+null,
+null
+],
+[
+0.4426,
+155.1,
+6.2,
+null,
+null
+],
+[
+0.4575,
+null,
+null,
+142.71,
+14.271
+],
+[
+0.4626,
+157.7,
+6.3,
+null,
+null
+],
+[
+0.4826,
+159.6,
+6.4,
+null,
+null
+],
+[
+0.5026,
+162.3,
+6.5,
+null,
+null
+],
+[
+0.5075,
+null,
+null,
+157.32,
+15.732
+],
+[
+0.5226,
+165.2,
+6.6,
+null,
+null
+],
+[
+0.5426,
+171.8,
+6.9,
+null,
+null
+],
+[
+0.5575,
+null,
+null,
+162.725,
+16.2725
+],
+[
+0.5626,
+175.3,
+7.0,
+null,
+null
+],
+[
+0.5826,
+178.3,
+7.1,
+null,
+null
+],
+[
+0.6026,
+181.1,
+7.2,
+null,
+null
+],
+[
+0.6075,
+null,
+null,
+156.499,
+15.6499
+],
+[
+0.6226,
+183.7,
+7.4,
+null,
+null
+],
+[
+0.6426,
+188.6,
+7.5,
+null,
+null
+],
+[
+0.6575,
+null,
+null,
+186.184,
+18.6184
+],
+[
+0.6626,
+187.7,
+7.5,
+null,
+null
+],
+[
+0.6826,
+192.2,
+7.7,
+null,
+null
+],
+[
+0.7026,
+198.3,
+7.9,
+null,
+null
+],
+[
+0.7075,
+null,
+null,
+180.65,
+18.065
+],
+[
+0.7226,
+201.9,
+8.1,
+null,
+null
+],
+[
+0.7426,
+201.0,
+8.0,
+null,
+null
+],
+[
+0.7575,
+null,
+null,
+227.184,
+22.7184
+],
+[
+0.7626,
+208.3,
+8.3,
+null,
+null
+],
+[
+0.7826,
+208.4,
+8.3,
+null,
+null
+],
+[
+0.8026,
+211.7,
+8.5,
+null,
+null
+],
+[
+0.8075,
+null,
+null,
+229.078,
+22.9078
+],
+[
+0.8226,
+217.0,
+8.7,
+null,
+null
+],
+[
+0.8426,
+215.7,
+8.6,
+null,
+null
+],
+[
+0.8575,
+null,
+null,
+225.75,
+22.575
+],
+[
+0.8626,
+222.4,
+8.9,
+null,
+null
+],
+[
+0.8826,
+219.9,
+8.8,
+null,
+null
+],
+[
+0.9026,
+220.5,
+8.8,
+null,
+null
+],
+[
+0.9075,
+null,
+null,
+243.083,
+24.3083
+],
+[
+0.9226,
+229.4,
+9.2,
+null,
+null
+],
+[
+0.9426,
+228.2,
+9.1,
+null,
+null
+],
+[
+0.9575,
+null,
+null,
+202.12,
+20.212
+],
+[
+0.9626,
+233.8,
+9.4,
+null,
+null
+],
+[
+0.9826,
+236.9,
+9.5,
+null,
+null
+],
+[
+1.0026,
+231.5,
+9.3,
+null,
+null
+],
+[
+1.0226,
+242.2,
+9.7,
+null,
+null
+],
+[
+1.0426,
+244.8,
+9.8,
+null,
+null
+],
+[
+1.0626,
+249.2,
+10.0,
+null,
+null
+],
+[
+1.0826,
+247.4,
+9.9,
+null,
+null
+],
+[
+1.1026,
+247.0,
+9.9,
+null,
+null
+],
+[
+1.1226,
+255.5,
+10.2,
+null,
+null
+],
+[
+1.1426,
+253.8,
+10.2,
+null,
+null
+],
+[
+1.1626,
+258.5,
+10.3,
+null,
+null
+],
+[
+1.1826,
+261.6,
+10.5,
+null,
+null
+],
+[
+1.2026,
+257.2,
+10.3,
+null,
+null
+],
+[
+1.2226,
+265.7,
+10.6,
+null,
+null
+],
+[
+1.2426,
+267.7,
+10.7,
+null,
+null
+],
+[
+1.2626,
+267.0,
+10.7,
+null,
+null
+],
+[
+1.2826,
+262.9,
+10.5,
+null,
+null
+],
+[
+1.3026,
+267.6,
+10.7,
+null,
+null
+],
+[
+1.3226,
+270.2,
+10.8,
+null,
+null
+],
+[
+1.3426,
+272.5,
+10.9,
+null,
+null
+],
+[
+1.3626,
+268.4,
+10.7,
+null,
+null
+],
+[
+1.3826,
+272.2,
+10.9,
+null,
+null
+],
+[
+1.4026,
+280.7,
+11.2,
+null,
+null
+],
+[
+1.4226,
+279.9,
+11.2,
+null,
+null
+],
+[
+1.4426,
+279.7,
+11.2,
+null,
+null
+],
+[
+1.4626,
+281.6,
+11.3,
+null,
+null
+],
+[
+1.4826,
+281.0,
+11.2,
+null,
+null
+]
+]
+},
+{
+"entry": "D0651003",
+"reaction": "dn",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG,,SFC,DERIV)",
+"author": "(A.Tumino, C.Spitaleri, A.M.Mukhamedzhanov, S.Typel, M.Aliotta, V.Burjan, M.Gimenez del Santo, G.G.Kiss, V.Kroha, Z.Hons, M.La Cognata, L.Lamia, J.Mrazek, R.G.Pizzone, S.Piskor, G.G.Rapisarda, S.Romano, M.L.Sergi, R.Sparta)",
+"reference": "(J,PL/B,700,111,2011) (J,JP/CS,337,012017,2012) Same data given in figs. (J,AJ,785,96,2014) Additional data for 2H(d,p)3H",
+"errors": "Total uncertainty is 5% combining in quadrature three sources of uncertainties: (ERR-1) normalization error                (1%); (ERR-2) systematic error of 3% from theory (3%); (ERR-S) Statistical uncertainty            (4%);",
+"method": "(COINC) 3He-p detection in coincidence",
+"sample": "CD2 target, about 150 ug/cm2",
+"comment": "",
+"status": "(TABLE) Plotted in Fig.3 of Phys.Lett.B700(2011)111",
+"common": {
+"ERR-1": [
+"PER-CENT",
+1.0
+],
+"ERR-2": [
+"PER-CENT",
+3.0
+]
+},
+"heads": [
+"EN-CM",
+"DATA",
+"ERR-S"
+],
+"units": [
+"MEV",
+"B*KEV",
+"B*KEV"
+],
+"rows": [
+[
+0.0026,
+60.3,
+2.4
+],
+[
+0.0226,
+63.4,
+2.5
+],
+[
+0.0426,
+65.7,
+2.6
+],
+[
+0.0626,
+70.1,
+2.8
+],
+[
+0.0826,
+74.5,
+2.9
+],
+[
+0.1026,
+79.8,
+3.2
+],
+[
+0.1226,
+85.8,
+3.4
+],
+[
+0.1426,
+90.0,
+3.6
+],
+[
+0.1626,
+96.1,
+3.8
+],
+[
+0.1826,
+102.1,
+4.1
+],
+[
+0.2026,
+108.2,
+4.3
+],
+[
+0.2226,
+112.8,
+4.5
+],
+[
+0.2426,
+119.8,
+4.8
+],
+[
+0.2626,
+125.6,
+5.0
+],
+[
+0.2826,
+131.3,
+5.3
+],
+[
+0.3026,
+135.7,
+5.5
+],
+[
+0.3226,
+141.9,
+5.7
+],
+[
+0.3426,
+146.2,
+5.9
+],
+[
+0.3626,
+149.9,
+6.0
+],
+[
+0.3826,
+156.9,
+6.3
+],
+[
+0.4026,
+162.5,
+6.5
+],
+[
+0.4226,
+166.7,
+6.7
+],
+[
+0.4426,
+168.9,
+6.8
+],
+[
+0.4626,
+173.6,
+7.0
+],
+[
+0.4826,
+176.6,
+7.1
+],
+[
+0.5026,
+181.5,
+7.3
+],
+[
+0.5226,
+185.8,
+7.5
+],
+[
+0.5426,
+193.2,
+7.8
+],
+[
+0.5626,
+195.6,
+7.9
+],
+[
+0.5826,
+204.7,
+8.3
+],
+[
+0.6026,
+205.6,
+8.3
+],
+[
+0.6226,
+212.8,
+8.6
+],
+[
+0.6426,
+214.5,
+8.6
+],
+[
+0.6626,
+217.0,
+8.7
+],
+[
+0.6826,
+222.2,
+8.9
+],
+[
+0.7026,
+230.1,
+9.3
+],
+[
+0.7226,
+232.1,
+9.4
+],
+[
+0.7426,
+236.5,
+9.5
+],
+[
+0.7626,
+237.5,
+9.6
+],
+[
+0.7826,
+240.0,
+9.7
+],
+[
+0.8026,
+248.6,
+10.1
+],
+[
+0.8226,
+248.3,
+10.0
+],
+[
+0.8426,
+256.3,
+10.3
+],
+[
+0.8626,
+255.9,
+10.3
+],
+[
+0.8826,
+262.8,
+10.6
+],
+[
+0.9026,
+262.5,
+10.6
+],
+[
+0.9226,
+266.8,
+10.8
+],
+[
+0.9426,
+269.4,
+10.9
+],
+[
+0.9626,
+276.5,
+11.2
+],
+[
+0.9826,
+275.8,
+11.1
+],
+[
+1.0026,
+280.2,
+11.3
+],
+[
+1.0226,
+287.2,
+11.6
+],
+[
+1.0426,
+286.5,
+11.6
+],
+[
+1.0626,
+293.5,
+11.9
+],
+[
+1.0826,
+297.7,
+12.0
+],
+[
+1.1026,
+299.5,
+12.1
+],
+[
+1.1226,
+298.2,
+12.0
+],
+[
+1.1426,
+307.0,
+12.4
+],
+[
+1.1626,
+308.0,
+12.4
+],
+[
+1.1826,
+310.4,
+12.5
+],
+[
+1.2026,
+315.5,
+12.7
+],
+[
+1.2226,
+312.8,
+12.6
+],
+[
+1.2426,
+318.6,
+12.9
+],
+[
+1.2626,
+315.4,
+12.7
+],
+[
+1.2826,
+320.8,
+12.9
+],
+[
+1.3026,
+328.4,
+13.2
+],
+[
+1.3226,
+323.4,
+13.0
+],
+[
+1.3426,
+330.6,
+13.3
+],
+[
+1.3626,
+330.6,
+13.3
+],
+[
+1.3826,
+339.1,
+13.7
+],
+[
+1.4026,
+342.2,
+13.8
+],
+[
+1.4226,
+340.8,
+13.8
+],
+[
+1.4426,
+343.0,
+13.9
+],
+[
+1.4626,
+343.5,
+13.9
+],
+[
+1.4826,
+351.3,
+14.2
+]
+]
+},
+{
+"entry": "D0756008",
+"reaction": "dn",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG,,,EVAL)",
+"author": "(M.Drosg, N.Otuka)",
+"reference": "(R,INDC(AUS)-0019,2015)",
+"errors": "",
+"method": "Evaluation",
+"sample": "",
+"comment": "",
+"status": "(TABLE) Table 2.3 of INDC(AUS)-0019 (COREL,D0756007) 0 deg c.m. cross sections given",
+"common": {},
+"heads": [
+"EN",
+"DATA"
+],
+"units": [
+"MEV",
+"MB"
+],
+"rows": [
+[
+45.0,
+27.632
+],
+[
+50.0,
+23.601
+],
+[
+55.0,
+20.158
+],
+[
+60.0,
+17.217
+],
+[
+65.0,
+14.705
+],
+[
+70.0,
+12.56
+],
+[
+75.0,
+10.727
+],
+[
+80.0,
+9.162
+],
+[
+85.0,
+7.826
+],
+[
+90.0,
+6.684
+],
+[
+95.0,
+5.709
+],
+[
+100.0,
+4.876
+],
+[
+120.0,
+2.595
+],
+[
+140.0,
+1.381
+],
+[
+160.0,
+0.735
+],
+[
+180.0,
+0.391
+],
+[
+200.0,
+0.208
+]
+]
+},
+{
+"entry": "E2095002",
+"reaction": "dp",
+"quantity": "SIG",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG)",
+"author": "(Wang Tie-Shan, Yang Zhen, H.Yunemura, A.Nakagawa, Lv Hui-Yi, Chen Jian-Yong, Liu Sheng-Jin, J.Kasagi)",
+"reference": "(J,CPL,24,(11),3103,200711)",
+"errors": "(DATA-ERR) No information on source of uncertainties",
+"method": "",
+"sample": "- Chemical-form of target is element. - Physical-form of target is gas. (in Sm metal at 133.2K)",
+"comment": "",
+"status": "(CURVE) Scanned from Fig.3, p3106 of reference",
+"common": {
+"EN-RSL": [
+"PER-CENT",
+2.0
+]
+},
+"heads": [
+"EN",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"B",
+"B"
+],
+"rows": [
+[
+10.991,
+3.07e-05,
+8.661e-06
+],
+[
+12.001,
+4.52e-05,
+1.15e-05
+],
+[
+12.998,
+9.384e-05,
+1.718e-05
+],
+[
+13.992,
+0.0001126,
+2.217e-05
+],
+[
+15.003,
+0.0001564,
+2.801e-05
+],
+[
+16.014,
+0.0001744,
+3.228e-05
+],
+[
+17.008,
+0.0001731,
+3.509e-05
+],
+[
+18.004,
+0.0003196,
+5.143e-05
+],
+[
+19.014,
+0.0003265,
+5.454e-05
+],
+[
+20.009,
+0.000341,
+5.95e-05
+]
+]
+},
+{
+"entry": "E2095003",
+"reaction": "dp",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG,,SFC)",
+"author": "(Wang Tie-Shan, Yang Zhen, H.Yunemura, A.Nakagawa, Lv Hui-Yi, Chen Jian-Yong, Liu Sheng-Jin, J.Kasagi)",
+"reference": "(J,CPL,24,(11),3103,200711)",
+"errors": "(DATA-ERR) No information on source of uncertainties",
+"method": "",
+"sample": "- Chemical-form of target is element. - Physical-form of target is gas. (in Sm metal at 133.2K)",
+"comment": "",
+"status": "(CURVE) Scanned from Fig.4, p3106 of reference (DEP,E2095002)",
+"common": {
+"EN-RSL": [
+"PER-CENT",
+2.0
+]
+},
+"heads": [
+"EN",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"B*KEV",
+"B*KEV"
+],
+"rows": [
+[
+11.0,
+110.0,
+30.94
+],
+[
+12.0,
+100.2,
+25.35
+],
+[
+12.996,
+135.6,
+25.35
+],
+[
+13.993,
+112.3,
+21.73
+],
+[
+15.004,
+112.6,
+20.69
+],
+[
+15.991,
+92.85,
+17.45
+],
+[
+17.023,
+70.51,
+14.12
+],
+[
+18.0,
+101.9,
+16.13
+],
+[
+19.0,
+82.98,
+13.83
+],
+[
+20.006,
+70.83,
+12.22
+]
+]
+},
+{
+"entry": "O1073002",
+"reaction": "dp",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG,,SFC)",
+"author": "(F.Raiola, P.Migliardi, G.Gyurky, M.Aliotta, A.Formicola, R.Bonetti, C.Broggini, L.Campajola, P.Corvisiero, H.Costantini, J.Cruz, A.D.Onofrio, Z.Fulop, G.Gervino, L.Gialanella, A.Guglielmetti, G.Imbriani, C.Gustavino, A.P.Jesus, M.Junker, R.W.Kavanagh, P.G.P.Moroni, A.Ordine, J.V.Pinto, P.Prati, V.Roca, J.P.Ribeiro, D.Rogalla, C.Rolfs, M.Romano, F.Schumann, D.Schurmann, E.Somorjai, F.Strieder, F.Terrasi, H.P.Trautvetter, S.Zavatarelli)",
+"reference": "(J,EPJ/A,13,377,2002)",
+"errors": "(ERR-T) The errors arise predominantly from the spread of thin-target yields from various runs. (ERR-1) The uncertainty of beam current measurements.",
+"method": "(BCINT) (SITA) See SAMPLE",
+"sample": "The 0.1-mm thick Ta target was oriented with its normal antiparallel to the beam direction. The deuterated Ta target was produced in the following way. A fresh Ta foil was bombarded with 10-KeV deuterons, whereby the deuterons were scanned over the target area leading to a 20% current reduction compared to the unscanned case, a stoichiometry Ta(X)D has been produced near the surface of the Ta sheet. The deuterated Ta sheet should thus represent an infinitely thick target for the incident deutero",
+"comment": "",
+"status": "(TABLE)",
+"common": {
+"ERR-1": [
+"PER-CENT",
+3.0
+]
+},
+"heads": [
+"EN-CM",
+"DATA",
+"ERR-T",
+"FLAG"
+],
+"units": [
+"KEV",
+"B*KEV",
+"B*KEV",
+"NO-DIM"
+],
+"rows": [
+[
+2.1,
+197.0,
+17.0,
+1.0
+],
+[
+2.35,
+141.0,
+10.0,
+1.0
+],
+[
+2.6,
+126.0,
+11.0,
+1.0
+],
+[
+2.85,
+99.0,
+7.0,
+1.0
+],
+[
+3.1,
+99.0,
+7.0,
+1.0
+],
+[
+3.35,
+94.0,
+9.0,
+1.0
+],
+[
+3.6,
+88.0,
+10.0,
+1.0
+],
+[
+3.75,
+73.0,
+5.0,
+2.0
+],
+[
+3.85,
+89.0,
+10.0,
+1.0
+],
+[
+4.1,
+79.0,
+6.0,
+1.0
+],
+[
+4.25,
+79.0,
+5.0,
+2.0
+],
+[
+4.35,
+80.0,
+10.0,
+1.0
+],
+[
+4.6,
+74.0,
+9.0,
+1.0
+],
+[
+4.75,
+61.0,
+5.0,
+2.0
+],
+[
+4.9,
+71.0,
+6.0,
+1.0
+],
+[
+5.25,
+64.0,
+14.0,
+1.0
+],
+[
+5.25,
+66.0,
+3.0,
+2.0
+],
+[
+5.75,
+65.0,
+14.0,
+1.0
+],
+[
+5.75,
+57.0,
+5.0,
+2.0
+],
+[
+6.25,
+59.0,
+9.0,
+1.0
+],
+[
+6.25,
+57.0,
+7.0,
+2.0
+],
+[
+6.75,
+61.0,
+22.0,
+1.0
+],
+[
+6.75,
+60.0,
+12.0,
+2.0
+],
+[
+7.25,
+58.0,
+14.0,
+1.0
+],
+[
+7.25,
+58.0,
+6.0,
+2.0
+],
+[
+7.75,
+55.0,
+5.0,
+1.0
+],
+[
+7.75,
+61.0,
+7.0,
+2.0
+],
+[
+8.25,
+59.0,
+16.0,
+1.0
+],
+[
+8.75,
+56.0,
+10.0,
+1.0
+],
+[
+9.25,
+56.0,
+6.0,
+1.0
+],
+[
+9.25,
+57.0,
+3.0,
+2.0
+],
+[
+9.75,
+58.0,
+10.0,
+1.0
+],
+[
+9.75,
+64.0,
+16.0,
+2.0
+],
+[
+10.5,
+61.0,
+12.0,
+1.0
+],
+[
+10.5,
+58.0,
+2.0,
+2.0
+],
+[
+11.5,
+59.0,
+11.0,
+1.0
+],
+[
+11.5,
+54.0,
+1.0,
+2.0
+],
+[
+12.5,
+52.0,
+15.0,
+1.0
+],
+[
+12.5,
+57.0,
+6.0,
+2.0
+],
+[
+13.5,
+57.0,
+13.0,
+1.0
+],
+[
+13.5,
+53.0,
+5.0,
+2.0
+],
+[
+14.5,
+57.0,
+13.0,
+1.0
+],
+[
+14.5,
+55.0,
+2.0,
+2.0
+],
+[
+15.5,
+58.0,
+16.0,
+1.0
+],
+[
+15.5,
+56.0,
+2.0,
+2.0
+],
+[
+16.5,
+51.0,
+1.0,
+2.0
+],
+[
+17.5,
+56.0,
+6.0,
+2.0
+],
+[
+18.5,
+55.0,
+3.0,
+2.0
+],
+[
+19.5,
+56.0,
+3.0,
+2.0
+],
+[
+20.5,
+50.0,
+7.0,
+2.0
+],
+[
+21.5,
+60.0,
+5.0,
+2.0
+],
+[
+22.5,
+60.0,
+9.0,
+2.0
+],
+[
+23.5,
+57.0,
+7.0,
+2.0
+],
+[
+24.5,
+62.0,
+5.0,
+2.0
+],
+[
+25.5,
+60.0,
+3.0,
+2.0
+],
+[
+26.5,
+57.0,
+1.0,
+2.0
+],
+[
+27.5,
+62.0,
+7.0,
+2.0
+],
+[
+28.5,
+65.0,
+7.0,
+2.0
+],
+[
+29.5,
+63.0,
+7.0,
+2.0
+],
+[
+30.5,
+59.0,
+3.0,
+2.0
+],
+[
+31.5,
+62.0,
+3.0,
+2.0
+],
+[
+32.5,
+62.0,
+3.0,
+2.0
+],
+[
+33.5,
+66.0,
+6.0,
+2.0
+],
+[
+34.5,
+62.0,
+4.0,
+2.0
+],
+[
+35.5,
+61.0,
+8.0,
+2.0
+],
+[
+36.5,
+66.0,
+8.0,
+2.0
+],
+[
+37.5,
+57.0,
+8.0,
+2.0
+],
+[
+38.5,
+61.0,
+8.0,
+2.0
+],
+[
+39.5,
+64.0,
+3.0,
+2.0
+],
+[
+40.5,
+66.0,
+6.0,
+2.0
+],
+[
+42.0,
+59.0,
+9.0,
+2.0
+],
+[
+43.5,
+75.0,
+12.0,
+2.0
+],
+[
+45.0,
+68.0,
+12.0,
+2.0
+],
+[
+47.5,
+78.0,
+4.0,
+2.0
+]
+]
+},
+{
+"entry": "O1171007",
+"reaction": "dp",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG,,SFC) Table 4. Close geometry.",
+"author": "(U.Greife, F.Gorris, M.Junker, C.Rolfs, D.Zahnow)",
+"reference": "(J,ZP/A,351,107,1995)",
+"errors": "(ERR-T) The uncertainties are given by authors in data table. Due to absolute normalization to the value reported by H.S.Bosch, The quoted errors include uncertainties: 1.In number of counts and 2.  Relative errors: 2.1. In calorimeter, 2.2. Gas pressure, 2.3. Stopping power, 2.4. Energy straggling, 2.5. Thermal Doppler broadening, 2.6. Effective gas target length, 2.7. Energy calibration of 30-kv accelerator 2.8. Coulomb Explosion in case of molecular deuterons beams.",
+"method": "(BCINT)",
+"sample": "The windowless gas target system of the LUNA project was used allowing a set up in close geometry.",
+"comment": "-By compiler. E in data-section is effective center- of-mass energy.",
+"status": "(TABLE)",
+"common": {},
+"heads": [
+"EN-CM",
+"DATA",
+"ERR-T",
+"FLAG"
+],
+"units": [
+"KEV",
+"B*KEV",
+"B*KEV",
+"NO-DIM"
+],
+"rows": [
+[
+1.62,
+74.0,
+11.0,
+null
+],
+[
+1.77,
+58.6,
+4.9,
+null
+],
+[
+2.01,
+62.1,
+2.2,
+null
+],
+[
+2.26,
+59.5,
+2.6,
+null
+],
+[
+2.5,
+59.5,
+1.6,
+null
+],
+[
+2.75,
+59.8,
+1.6,
+null
+],
+[
+3.0,
+59.1,
+1.4,
+null
+],
+[
+3.25,
+57.6,
+2.0,
+null
+],
+[
+3.5,
+58.6,
+1.0,
+null
+],
+[
+3.75,
+58.5,
+1.6,
+null
+],
+[
+3.97,
+58.9,
+0.8,
+null
+],
+[
+4.5,
+58.5,
+1.2,
+null
+],
+[
+4.98,
+59.0,
+1.0,
+null
+],
+[
+5.97,
+58.8,
+0.4,
+null
+],
+[
+6.46,
+58.6,
+1.0,
+null
+],
+[
+6.97,
+58.2,
+0.6,
+null
+],
+[
+7.46,
+58.3,
+0.9,
+null
+],
+[
+7.94,
+58.6,
+0.6,
+null
+],
+[
+8.48,
+58.4,
+0.9,
+null
+],
+[
+8.96,
+58.2,
+0.6,
+null
+],
+[
+9.48,
+58.2,
+0.9,
+null
+],
+[
+9.98,
+58.9,
+0.6,
+null
+],
+[
+10.96,
+58.2,
+0.6,
+null
+],
+[
+11.95,
+58.3,
+0.6,
+null
+],
+[
+12.93,
+58.1,
+0.6,
+null
+],
+[
+13.95,
+58.1,
+0.6,
+null
+],
+[
+14.95,
+58.6,
+0.8,
+1.0
+]
+]
+},
+{
+"entry": "O1220002",
+"reaction": "dp",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG,,SFC)",
+"author": "(F.Raiola, L.Gang, C.Bonomo, G.Gyurky, M.Aliotta, H.W.Becker, R.Bonetti, C.Broggini, P.Corvisiero, A.D'Onofrio, Z.Fuelop, G.Gervino, L.Gialanella, M.Junker, P.Prati, V.Roca, C.Rolfs, M.Romano, E.Somorjai, F.Strieder, F.Terrasi, G.Fiorentini, K.Langanke, J.Winter)",
+"reference": "(J,EPJ/A,19,(2),283,2004)",
+"errors": "(DATA-ERR) An analysis is not given.",
+"method": "(BCINT) (SITA) Rutherford-Backscattering Spectrometry of used Samples exhibited no detectable surface contamination except for Al.",
+"sample": "The deuterated Cu-target was used.",
+"comment": "",
+"status": "(CURVE) Fig.1 (upper) from Eur.Phis.J.,A19,283",
+"common": {
+"EN-ERR-DIG": [
+"KEV",
+0.6
+]
+},
+"heads": [
+"EN-CM",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"B*KEV",
+"B*KEV"
+],
+"rows": [
+[
+4.135,
+94.0,
+11.0
+],
+[
+4.393,
+73.0,
+13.0
+],
+[
+4.608,
+94.0,
+12.0
+],
+[
+4.895,
+70.0,
+10.0
+],
+[
+5.272,
+80.0,
+5.0
+],
+[
+5.81,
+74.0,
+6.0
+],
+[
+6.3,
+80.0,
+5.0
+],
+[
+6.81,
+75.0,
+5.0
+],
+[
+7.26,
+63.0,
+5.0
+],
+[
+7.79,
+62.0,
+5.0
+],
+[
+8.26,
+67.0,
+7.0
+],
+[
+8.78,
+62.0,
+5.0
+],
+[
+9.23,
+61.0,
+5.0
+],
+[
+9.75,
+68.0,
+7.0
+],
+[
+10.21,
+53.0,
+5.0
+],
+[
+10.74,
+65.0,
+6.0
+],
+[
+11.2,
+54.0,
+5.0
+],
+[
+11.74,
+61.0,
+6.0
+],
+[
+12.24,
+51.0,
+5.0
+],
+[
+12.73,
+58.0,
+6.0
+],
+[
+13.23,
+57.0,
+6.0
+],
+[
+13.81,
+55.0,
+5.0
+],
+[
+14.3,
+51.0,
+5.0
+],
+[
+14.75,
+53.0,
+5.0
+]
+]
+},
+{
+"entry": "O1220003",
+"reaction": "dp",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG,,SFC)",
+"author": "(F.Raiola, L.Gang, C.Bonomo, G.Gyurky, M.Aliotta, H.W.Becker, R.Bonetti, C.Broggini, P.Corvisiero, A.D'Onofrio, Z.Fuelop, G.Gervino, L.Gialanella, M.Junker, P.Prati, V.Roca, C.Rolfs, M.Romano, E.Somorjai, F.Strieder, F.Terrasi, G.Fiorentini, K.Langanke, J.Winter)",
+"reference": "(J,EPJ/A,19,(2),283,2004)",
+"errors": "(DATA-ERR) An analysis is not given.",
+"method": "(BCINT) (SITA) Rutherford-Backscattering Spectrometry of used Samples exhibited no detectable surface contamination except for Al.",
+"sample": "The deuterated Nd-target was used.",
+"comment": "",
+"status": "(CURVE) Fig.1 (middle) from Eur.Phis.J.,A19,283",
+"common": {
+"EN-ERR-DIG": [
+"KEV",
+0.6
+]
+},
+"heads": [
+"EN-CM",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"B*KEV",
+"B*KEV"
+],
+"rows": [
+[
+4.162,
+45.0,
+4.0
+],
+[
+4.412,
+51.0,
+5.0
+],
+[
+4.673,
+40.6,
+2.8
+],
+[
+4.858,
+42.0,
+3.0
+],
+[
+5.312,
+45.0,
+4.0
+],
+[
+5.76,
+42.0,
+9.0
+],
+[
+6.3,
+46.0,
+10.0
+],
+[
+6.78,
+48.0,
+9.0
+],
+[
+7.27,
+47.0,
+11.0
+],
+[
+7.77,
+48.0,
+5.0
+],
+[
+8.26,
+47.0,
+4.0
+],
+[
+8.75,
+46.0,
+3.0
+],
+[
+9.25,
+52.0,
+4.0
+],
+[
+9.76,
+51.0,
+4.0
+],
+[
+10.3,
+49.0,
+5.0
+],
+[
+10.8,
+54.0,
+5.0
+],
+[
+11.26,
+46.0,
+5.0
+],
+[
+11.76,
+57.0,
+5.0
+],
+[
+12.27,
+55.0,
+4.0
+],
+[
+12.81,
+57.0,
+5.0
+],
+[
+13.26,
+52.0,
+6.0
+],
+[
+13.78,
+52.0,
+4.0
+],
+[
+14.28,
+62.0,
+6.0
+],
+[
+14.77,
+52.0,
+4.0
+]
+]
+},
+{
+"entry": "O1220004",
+"reaction": "dp",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG,,SFC)",
+"author": "(F.Raiola, L.Gang, C.Bonomo, G.Gyurky, M.Aliotta, H.W.Becker, R.Bonetti, C.Broggini, P.Corvisiero, A.D'Onofrio, Z.Fuelop, G.Gervino, L.Gialanella, M.Junker, P.Prati, V.Roca, C.Rolfs, M.Romano, E.Somorjai, F.Strieder, F.Terrasi, G.Fiorentini, K.Langanke, J.Winter)",
+"reference": "(J,EPJ/A,19,(2),283,2004)",
+"errors": "(DATA-ERR) An analysis is not given.",
+"method": "(BCINT) (SITA) Rutherford-Backscattering Spectrometry of used Samples exhibited no detectable surface contamination except for Al.",
+"sample": "The deuterated Hf-target was used.",
+"comment": "",
+"status": "(CURVE) Fig.1 (middle) from Eur.Phis.J.,A19,283",
+"common": {
+"EN-ERR-DIG": [
+"KEV",
+0.6
+]
+},
+"heads": [
+"EN-CM",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"B*KEV",
+"B*KEV"
+],
+"rows": [
+[
+4.168,
+38.0,
+11.0
+],
+[
+4.435,
+40.0,
+5.0
+],
+[
+4.682,
+42.0,
+4.0
+],
+[
+4.866,
+37.0,
+4.0
+],
+[
+5.321,
+43.0,
+4.0
+],
+[
+5.77,
+44.0,
+8.0
+],
+[
+6.34,
+49.0,
+4.0
+],
+[
+6.79,
+46.0,
+4.0
+],
+[
+7.29,
+56.0,
+5.0
+],
+[
+7.81,
+57.0,
+5.0
+],
+[
+8.28,
+50.0,
+3.0
+],
+[
+8.84,
+45.0,
+4.0
+],
+[
+9.3,
+46.0,
+4.0
+],
+[
+9.82,
+53.0,
+5.0
+],
+[
+10.32,
+51.0,
+13.0
+],
+[
+10.81,
+49.0,
+9.0
+],
+[
+11.29,
+53.0,
+8.0
+],
+[
+11.82,
+52.0,
+4.0
+],
+[
+12.29,
+55.0,
+5.0
+],
+[
+12.83,
+52.0,
+4.0
+],
+[
+13.33,
+51.0,
+10.0
+],
+[
+13.75,
+46.0,
+4.0
+],
+[
+14.35,
+48.0,
+6.0
+],
+[
+14.8,
+54.0,
+5.0
+]
+]
+},
+{
+"entry": "O1220005",
+"reaction": "dp",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG,,SFC)",
+"author": "(F.Raiola, L.Gang, C.Bonomo, G.Gyurky, M.Aliotta, H.W.Becker, R.Bonetti, C.Broggini, P.Corvisiero, A.D'Onofrio, Z.Fuelop, G.Gervino, L.Gialanella, M.Junker, P.Prati, V.Roca, C.Rolfs, M.Romano, E.Somorjai, F.Strieder, F.Terrasi, G.Fiorentini, K.Langanke, J.Winter)",
+"reference": "(J,EPJ/A,19,(2),283,2004)",
+"errors": "(DATA-ERR) An analysis is not given.",
+"method": "(BCINT) (SITA) Rutherford-Backscattering Spectrometry of used Samples exhibited no detectable surface contamination except for Al.",
+"sample": "The deuterated Pt-target was used.",
+"comment": "",
+"status": "(CURVE) Fig.1 (lower) from Eur.Phis.J.,A19,283",
+"common": {
+"EN-ERR-DIG": [
+"KEV",
+0.6
+]
+},
+"heads": [
+"EN-CM",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"B*KEV",
+"B*KEV"
+],
+"rows": [
+[
+4.165,
+118.0,
+13.0
+],
+[
+4.431,
+117.0,
+16.0
+],
+[
+4.692,
+104.0,
+10.0
+],
+[
+4.933,
+99.0,
+9.0
+],
+[
+5.349,
+95.0,
+9.0
+],
+[
+5.8,
+83.0,
+12.0
+],
+[
+6.32,
+92.0,
+12.0
+],
+[
+6.8,
+93.0,
+6.0
+],
+[
+7.31,
+78.0,
+6.0
+],
+[
+7.87,
+68.0,
+7.0
+],
+[
+8.31,
+83.0,
+9.0
+],
+[
+8.86,
+60.0,
+6.0
+],
+[
+9.33,
+76.0,
+7.0
+],
+[
+9.8,
+52.0,
+9.0
+],
+[
+10.35,
+68.0,
+16.0
+],
+[
+10.76,
+69.0,
+6.0
+],
+[
+11.32,
+65.0,
+11.0
+],
+[
+11.85,
+60.0,
+11.0
+],
+[
+12.41,
+50.0,
+7.0
+],
+[
+12.81,
+68.0,
+7.0
+],
+[
+13.3,
+50.0,
+7.0
+],
+[
+13.88,
+47.0,
+6.0
+],
+[
+14.33,
+61.0,
+6.0
+],
+[
+14.82,
+46.0,
+5.0
+]
+]
+},
+{
+"entry": "O1263002",
+"reaction": "dn",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,N)2-HE-3,,SIG,,SFC)",
+"author": "(Vyach.M.Bystritsky, V.V.Gerasimov, A.R.Krylov, S.S.Parzhitski, F.M.Penkov, O.M.Shvyryaev, V.A.Stolupin, G.N.Dudkin, B.A.Nechaev, V.M.Padalko, J.Wozniak, G.A.Mesyats, V.M.Bystritskii, V.I.Makhrin, N.A.Ratakhin)",
+"reference": "(J,YF,66,1731,2003) In English (J,PAN,66,1683,2003) (X,JINR-D15-2002-200,2002) In Russian",
+"errors": "(ERR-S) The root-mean-square deviation.",
+"method": "(TOF) All details see in REFERENCE",
+"sample": "The target was a cylindrical copper shell with a radius 185 mm and with a length of 40 mm. The inner surface of the target was coated with a CD2 layer 0.25 mm thick.",
+"comment": "-By authors. Beam energy is the most probable center-of-mass deutron energy.",
+"status": "",
+"common": {},
+"heads": [
+"EN-CM",
+"DATA",
+"ERR-S"
+],
+"units": [
+"KEV",
+"B*KEV",
+"B*KEV"
+],
+"rows": [
+[
+3.56,
+58.2,
+18.1
+]
+]
+},
+{
+"entry": "O1381002",
+"reaction": "dp",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG,,SFC)",
+"author": "(F.Raiola, P.Migliardi, L.Gang, C.Bonomo, G.Gyurky, R.Bonetti, C.Broggini, N.E.Christensen, P.Corvisiero, J.Cruz, A.D'Onofrio, Z.Fulop, G.Gervino, L.Gialanella, A.P.Jesus, M.Junker, K.Langanke, P.Prati, V.Roca, C.Rolf, M.Romano, E.Somorjai, F.Strieder, A.Svane, F.Terrasi, J.Winter)",
+"reference": "(J,PL/B,547,193,2002)",
+"errors": "(ERR-DIG).Digitizing error of data.",
+"method": "(BCINT,SITA) (EXTB) Used accelerator provided the deuteron beam, with 54 microampers on target.",
+"sample": "The  deuterated  Au-target was used.",
+"comment": "-By author: 1. The reaction yield of the infinitely thick target was obtained in several runs at E/d = 5 to 30 KeV with energy step at 0.5 KeV at E/d =5 to 10 KeV and 1.0 KeV at E/d = 10 to 30 KeV. The energy step correspond to about 50 and 100 atomic layers near the surface. 2. The absolute scale was obtained by normalization to revious work (see REL-REF) at 30 KeV including the effects screening where applicable. The normalization led to a value for the stoichiometric ratio. 3. The resulting cross section is the weighted average of several runs.",
+"status": "(CURVE) By CAJAD.",
+"common": {
+"EN-ERR-DIG": [
+"PER-CENT",
+0.9
+],
+"ERR-DIG": [
+"B*KEV",
+5.0
+]
+},
+"heads": [
+"EN",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"B*KEV",
+"B*KEV"
+],
+"rows": [
+[
+3.18,
+53.0,
+null
+],
+[
+3.41,
+51.0,
+null
+],
+[
+3.66,
+55.0,
+null
+],
+[
+3.87,
+54.0,
+null
+],
+[
+4.1,
+48.0,
+null
+],
+[
+4.34,
+49.0,
+null
+],
+[
+4.66,
+55.0,
+null
+],
+[
+4.89,
+52.0,
+null
+],
+[
+5.29,
+54.0,
+null
+],
+[
+5.76,
+49.0,
+7.0
+],
+[
+6.27,
+51.0,
+null
+],
+[
+6.73,
+52.0,
+null
+],
+[
+7.23,
+54.0,
+null
+],
+[
+7.7,
+52.0,
+null
+],
+[
+9.01,
+53.0,
+null
+],
+[
+10.09,
+54.0,
+null
+],
+[
+10.98,
+55.0,
+null
+],
+[
+12.04,
+50.0,
+null
+],
+[
+13.02,
+53.0,
+null
+],
+[
+14.08,
+52.0,
+12.0
+],
+[
+14.79,
+64.0,
+11.0
+]
+]
+},
+{
+"entry": "O1381003",
+"reaction": "dp",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG,,SFC)",
+"author": "(F.Raiola, P.Migliardi, L.Gang, C.Bonomo, G.Gyurky, R.Bonetti, C.Broggini, N.E.Christensen, P.Corvisiero, J.Cruz, A.D'Onofrio, Z.Fulop, G.Gervino, L.Gialanella, A.P.Jesus, M.Junker, K.Langanke, P.Prati, V.Roca, C.Rolf, M.Romano, E.Somorjai, F.Strieder, A.Svane, F.Terrasi, J.Winter)",
+"reference": "(J,PL/B,547,193,2002)",
+"errors": "(ERR-DIG).Digitizing error of data.",
+"method": "(BCINT,SITA) (EXTB) Used accelerator provided the deuteron beam, with 54 microampers on target.",
+"sample": "The  deuterated  Al-target was used.",
+"comment": "-By author: 1. The reaction yield of the infinitely thick target was obtained in several runs at E/d = 5 to 30 KeV with energy step at 0.5 KeV at E/d =5 to 10 KeV and 1.0 KeV at E/d = 10 to 30 KeV. The energy step correspond to about 50 and 100 atomic layers near the surface. 2. The absolute scale was obtained by normalization to revious work (see REL-REF) at 30 KeV including the effects screening where applicable. The normalization led to a value for the stoichiometric ratio. 3. The resulting cross section is the weighted average of several runs.",
+"status": "(CURVE) By CAJAD.",
+"common": {
+"EN-ERR-DIG": [
+"PER-CENT",
+0.9
+],
+"ERR-DIG": [
+"B*KEV",
+5.0
+]
+},
+"heads": [
+"EN",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"B*KEV",
+"B*KEV"
+],
+"rows": [
+[
+2.387,
+43.0,
+8.0
+],
+[
+2.636,
+38.0,
+8.0
+],
+[
+2.911,
+45.0,
+null
+],
+[
+3.147,
+51.0,
+null
+],
+[
+3.4,
+49.0,
+null
+],
+[
+3.68,
+47.0,
+null
+],
+[
+3.8,
+53.0,
+null
+],
+[
+4.18,
+55.0,
+null
+],
+[
+4.39,
+45.0,
+null
+],
+[
+4.58,
+57.0,
+null
+],
+[
+4.78,
+47.0,
+null
+],
+[
+5.21,
+42.0,
+null
+],
+[
+5.75,
+51.0,
+null
+],
+[
+6.26,
+52.0,
+null
+],
+[
+6.72,
+53.0,
+null
+],
+[
+7.32,
+50.0,
+null
+],
+[
+7.97,
+49.0,
+9.0
+],
+[
+8.68,
+54.0,
+null
+],
+[
+9.25,
+56.0,
+null
+],
+[
+9.73,
+40.0,
+16.0
+],
+[
+10.29,
+47.0,
+null
+],
+[
+10.74,
+48.0,
+null
+],
+[
+11.37,
+45.0,
+9.0
+],
+[
+11.77,
+53.0,
+6.0
+],
+[
+12.83,
+48.0,
+9.0
+],
+[
+13.76,
+61.0,
+6.0
+],
+[
+14.37,
+51.0,
+7.0
+],
+[
+14.67,
+59.0,
+12.0
+]
+]
+},
+{
+"entry": "O1381004",
+"reaction": "dp",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG,,SFC)",
+"author": "(F.Raiola, P.Migliardi, L.Gang, C.Bonomo, G.Gyurky, R.Bonetti, C.Broggini, N.E.Christensen, P.Corvisiero, J.Cruz, A.D'Onofrio, Z.Fulop, G.Gervino, L.Gialanella, A.P.Jesus, M.Junker, K.Langanke, P.Prati, V.Roca, C.Rolf, M.Romano, E.Somorjai, F.Strieder, A.Svane, F.Terrasi, J.Winter)",
+"reference": "(J,PL/B,547,193,2002)",
+"errors": "(ERR-DIG).Digitizing error of data.",
+"method": "(BCINT,SITA) (EXTB) Used accelerator provided the deuteron beam, with 54 microampers on target.",
+"sample": "The  deuterated  Pb-target was used.",
+"comment": "-By author: 1. The reaction yield of the infinitely thick target was obtained in several runs at E/d = 5 to 30 KeV with energy step at 0.5 KeV at E/d =5 to 10 KeV and 1.0 KeV at E/d = 10 to 30 KeV. The energy step correspond to about 50 and 100 atomic layers near the surface. 2. The absolute scale was obtained by normalization to revious work (see REL-REF) at 30 KeV including the effects screening where applicable. The normalization led to a value for the stoichiometric ratio. 3. The resulting cross section is the weighted average of several runs.",
+"status": "(CURVE) By CAJAD.",
+"common": {
+"EN-ERR-DIG": [
+"PER-CENT",
+0.9
+],
+"ERR-DIG": [
+"B*KEV",
+5.0
+]
+},
+"heads": [
+"EN",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"B*KEV",
+"B*KEV"
+],
+"rows": [
+[
+2.668,
+203.0,
+21.0
+],
+[
+2.932,
+120.0,
+20.0
+],
+[
+3.15,
+80.0,
+8.0
+],
+[
+3.41,
+99.0,
+9.0
+],
+[
+3.66,
+125.0,
+12.0
+],
+[
+3.93,
+88.0,
+12.0
+],
+[
+4.16,
+75.0,
+11.0
+],
+[
+4.41,
+74.0,
+14.0
+],
+[
+4.63,
+101.0,
+20.0
+],
+[
+4.87,
+82.0,
+9.0
+],
+[
+5.23,
+75.0,
+6.0
+],
+[
+5.83,
+77.0,
+9.0
+],
+[
+6.26,
+58.0,
+6.0
+],
+[
+6.82,
+80.0,
+9.0
+],
+[
+7.27,
+59.0,
+8.0
+],
+[
+7.75,
+56.0,
+6.0
+],
+[
+8.33,
+52.0,
+8.0
+],
+[
+8.82,
+54.0,
+8.0
+],
+[
+9.21,
+53.0,
+null
+],
+[
+9.82,
+52.0,
+null
+],
+[
+10.25,
+54.0,
+null
+],
+[
+10.85,
+54.0,
+9.0
+],
+[
+11.49,
+50.0,
+null
+],
+[
+11.83,
+49.0,
+null
+],
+[
+12.17,
+48.0,
+null
+],
+[
+13.07,
+52.0,
+9.0
+],
+[
+13.45,
+50.0,
+8.0
+],
+[
+13.94,
+53.0,
+8.0
+],
+[
+14.34,
+33.0,
+8.0
+],
+[
+14.97,
+55.0,
+8.0
+]
+]
+},
+{
+"entry": "O1381005",
+"reaction": "dp",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG,,SFC)",
+"author": "(F.Raiola, P.Migliardi, L.Gang, C.Bonomo, G.Gyurky, R.Bonetti, C.Broggini, N.E.Christensen, P.Corvisiero, J.Cruz, A.D'Onofrio, Z.Fulop, G.Gervino, L.Gialanella, A.P.Jesus, M.Junker, K.Langanke, P.Prati, V.Roca, C.Rolf, M.Romano, E.Somorjai, F.Strieder, A.Svane, F.Terrasi, J.Winter)",
+"reference": "(J,PL/B,547,193,2002)",
+"errors": "(DATA-ERR) The error is shown by authors on figure. (EN-ERR-DIG) Digitizing error of incident energy.",
+"method": "(BCINT,SITA) (EXTB) Used accelerator provided the deuteron beam, with 54 microampers on target.",
+"sample": "The  deuterated  Pd-target was used.",
+"comment": "-By author: 1. The reaction yield of the infinitely thick target was obtained in several runs at E/d = 5 to 30 KeV with energy step at 0.5 KeV at E/d =5 to 10 KeV and 1.0 KeV at E/d = 10 to 30 KeV. The energy step correspond to about 50 and 100 atomic layers near the surface. 2. The absolute scale was obtained by normalization to revious work (see REL-REF) at 30 KeV including the effects screening where applicable. The normalization led to a value for the stoichiometric ratio. 3. The resulting cross section is the weighted average of several runs.",
+"status": "(CURVE) By CAJAD.",
+"common": {
+"EN-ERR-DIG": [
+"PER-CENT",
+1.2
+]
+},
+"heads": [
+"EN",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"KEV",
+"B*KEV",
+"B*KEV"
+],
+"rows": [
+[
+3.28,
+270.0,
+30.0
+],
+[
+3.54,
+211.0,
+21.0
+],
+[
+3.83,
+136.0,
+17.0
+],
+[
+4.1,
+130.0,
+14.0
+],
+[
+4.37,
+141.0,
+14.0
+],
+[
+4.54,
+123.0,
+10.0
+],
+[
+4.72,
+94.0,
+10.0
+],
+[
+5.14,
+96.0,
+10.0
+],
+[
+5.68,
+87.0,
+10.0
+],
+[
+6.24,
+90.0,
+10.0
+],
+[
+6.64,
+84.0,
+12.0
+],
+[
+7.4,
+69.0,
+15.0
+],
+[
+8.19,
+66.0,
+13.0
+],
+[
+8.71,
+68.0,
+10.0
+],
+[
+9.13,
+79.0,
+10.0
+],
+[
+9.64,
+57.0,
+10.0
+],
+[
+10.42,
+75.0,
+8.0
+],
+[
+11.26,
+68.0,
+10.0
+],
+[
+11.71,
+71.0,
+12.0
+],
+[
+12.17,
+58.0,
+7.0
+],
+[
+12.85,
+76.0,
+10.0
+],
+[
+13.25,
+51.0,
+8.0
+],
+[
+13.57,
+67.0,
+10.0
+],
+[
+14.55,
+62.0,
+8.0
+]
+]
+},
+{
+"entry": "O2146002",
+"reaction": "dp",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG,,SFC,DERIV)",
+"author": "(R.G.Pizzone, C.Spitaleri, C.A.Bertulani, A.M.Mukhamedzhanov, L.Blokhintsev, M.La Cognata, L.Lamia, A.Rinollo, R.Sparta, A.Tumino)",
+"reference": "(J,PR/C,87,025805,2013)",
+"errors": "(DATA-ERR).No information on source of uncertainty",
+"method": "(EDE)",
+"sample": "A deuterated polyethylene foil, thickness approx. 170-mug/cm**2 was used.",
+"comment": "",
+"status": "(TABLE).Table data received from authors for fig.7 of J,PR/C,87,025805,2013 16.07.2013",
+"common": {},
+"heads": [
+"EN-CM",
+"DATA",
+"ERR-S"
+],
+"units": [
+"MEV",
+"B*KEV",
+"B*KEV"
+],
+"rows": [
+[
+0.075,
+86.5,
+12.0
+],
+[
+0.225,
+122.5,
+25.0
+],
+[
+0.375,
+125.0,
+30.0
+],
+[
+0.525,
+145.0,
+50.0
+],
+[
+0.675,
+213.0,
+85.0
+],
+[
+0.825,
+210.0,
+90.0
+]
+]
+},
+{
+"entry": "O2217002",
+"reaction": "dp",
+"quantity": "SFC",
+"reaction_string": "(1-H-2(D,P)1-H-3,,SIG,,SFC,DERIV)",
+"author": "(A.Rinollo, S.Romano, C.Spitaleri, C.Bonomo, S.Cherubini, A.Del Zoppo, P.Figuera, M.La Cognata, L.Lamia, A.Musumarra, M.G.Pellegriti, R.G.Pizzone, C.Rolfs, D.Schuermann, F.Strieder, S.Tudisco, A.Tumino)",
+"reference": "(J,NP/A,758,146,2005) prelim results",
+"errors": "(DATA-ERR).No information on source of uncertainty",
+"method": "(EDE)",
+"sample": "A  174 mug/cm**2 CD(2) target was used.",
+"comment": "",
+"status": "(CURVE).Fig.4 of J,NP/A,758,146,2005",
+"common": {},
+"heads": [
+"EN-CM",
+"DATA",
+"DATA-ERR"
+],
+"units": [
+"MEV",
+"B*KEV",
+"B*KEV"
+],
+"rows": [
+[
+74.1,
+86.5,
+23.3
+],
+[
+224.0,
+153.0,
+32.7
+],
+[
+374.0,
+126.0,
+30.2
+],
+[
+525.0,
+157.0,
+34.1
+],
+[
+681.0,
+193.0,
+40.5
+],
+[
+834.0,
+186.0,
+36.9
+],
+[
+990.0,
+242.0,
+40.6
+],
+[
+1140.0,
+260.0,
+41.9
+],
+[
+1300.0,
+364.0,
+56.1
+],
+[
+1460.0,
+265.0,
+53.5
+]
+]
+}
+]

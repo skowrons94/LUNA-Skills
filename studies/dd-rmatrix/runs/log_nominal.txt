@@ -1,0 +1,11 @@
+start  0: chi2 = 3302.51  nfev = 27
+start  1: chi2 = 819.23  nfev = 3000
+start  2: chi2 = 818.92  nfev = 3000
+start  3: chi2 = 828.12  nfev = 3000
+start  4: chi2 = 817.51  nfev = 3000
+start  5: chi2 = 828.26  nfev = 3000
+start  6: chi2 = 828.07  nfev = 3000
+start  7: chi2 = 817.62  nfev = 3000
+nominal: chi2 data 751.3 prior 66.2 / 224 pts, 31 par, 171 s
+ norms {np.str_('AR54'): 0.9942, np.str_('BJ90'): 1.0445, np.str_('BO56'): 0.9791, np.str_('CH56'): 0.6943, np.str_('DA53'): 1.0279, np.str_('GR95'): 1.0434, np.str_('HO01'): 1.0089, np.str_('KR87a'): 0.9375, np.str_('KR87b'): 0.9701, np.str_('LE06'): 0.9393, np.str_('PR54'): 0.9753, np.str_('YI73'): 0.8863}
+ per-exp chi2/N {'AR54_dp': '71.3/19', 'AR54_dn': '73.4/19', 'BJ90_dp': '7.9/11', 'BJ90_dn': '53.1/11', 'BO56_dp': '0.3/2', 'BO56_dn': '0.5/2', 'CH56_dn': '67.9/7', 'DA53_dp': '17.2/14', 'GR95_dp': '4.6/27', 'HO01_dn': '4.8/2', 'KR87a_dp': '20.7/14', 'KR87a_dn': '39.9/10', 'KR87b_dp': '117.2/21', 'KR87b_dn': '162.7/21', 'LE06_dp': '47.5/8', 'LE06_dn': '49.2/8', 'PR54_dp': '2.1/5', 'PR54_dn': '2.2/5', 'YI73_dp': '5.2/9', 'YI73_dn': '3.6/9'}

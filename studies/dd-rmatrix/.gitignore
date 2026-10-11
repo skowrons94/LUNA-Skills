@@ -1,0 +1,13 @@
+# large or regenerable outputs
+runs/mcmc*/chain.npy
+runs/mcmc*/logp.npy
+runs/mcmc_8k/
+runs/archive_*/
+runs/*/output/
+runs/*/checks/
+runs/nom_setup/
+runs/nominal/
+runs/freeE/
+__pycache__/
+runs/*/data/
+runs/*.log
