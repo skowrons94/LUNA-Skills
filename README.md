@@ -13,6 +13,7 @@ spectra ──► yield-analysis ──► peak-shape-analysis ──► target-
                                                                  │
 nuclear-research-project  (project layout, provenance, LaTeX report, handoff) ◄──────────┘
                                                                  │
+     proposals: proposal-project (layout, registers) · proposal-analysis (feasibility, design, back-tests, review cycle)
      writing: clear-experimental-writing · methods-paper-style · proposal-style · unslop
      figures: prc-figures (PRC / ROOT-like matplotlib style, stacked spectra, heatmaps, render check)
      talks:   research-slides (built-in house layout or your own template, Manim animations, render + audit)
@@ -29,6 +30,8 @@ nuclear-research-project  (project layout, provenance, LaTeX report, handoff) �
 | `delta-beta-dsam` | Femtosecond lifetimes with the Doppler-velocity (Δβ) DSAM method: centroids, nuisance fit, Δβ–τ calibration, sensitivity |
 | `azure2` | AZURE2/pyazr R-matrix calculations, fits, decompositions, extrapolations, rates |
 | `nuclear-research-project` | Scaffolding and auditing reproducible feasibility-study projects and reports |
+| `proposal-project` | Scaffolding and tidying grant-proposal projects: versioned drafts, number provenance, PI placeholders, decision and objection registers |
+| `proposal-analysis` | The quantitative case of a proposal: feasibility, Bayesian design, pre-registered decision rules, power simulations, back-tests, covariances, sampling checks, simulated review |
 | `clear-experimental-writing` | Experimental manuscripts, abstracts, captions, referee replies |
 | `methods-paper-style` | Formalism, methods and R-matrix sections in a plain, reusable technical register |
 | `proposal-style` | Proposals, grants, fellowships, beam-time requests |
@@ -60,6 +63,8 @@ python3 efficiency-analysis/scripts/demo_cascade.py --out /tmp/demo-cascade
 python3 underground-gamma-simulation/scripts/test_physics_checks.py && python3 underground-gamma-simulation/scripts/test_helpers.py
 python3 agata-simulation/scripts/test_agata_lm.py
 python3 delta-beta-dsam/scripts/selftest.py
+python3 proposal-project/scripts/test_create_proposal_project.py
+python3 proposal-analysis/scripts/selftest.py
 python3 prc-figures/scripts/demo.py --out /tmp/demo-prc
 python3 research-slides/scripts/demo_deck.py --out /tmp/demo-deck
 ```

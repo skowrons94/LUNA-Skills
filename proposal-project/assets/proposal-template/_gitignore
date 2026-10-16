@@ -1,0 +1,5 @@
+private/
+proposal/build/*.aux
+proposal/build/*.log
+__pycache__/
+*.pyc
