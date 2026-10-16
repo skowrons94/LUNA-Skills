@@ -13,9 +13,10 @@ Question: did the uncertainties quoted by an evaluation cover what was measured 
 ## Statistics
 
 - Pull = (later − earlier) / sqrt(σ_earlier² + σ_later²); report it as primary. The ratio (later − earlier)/σ_earlier exaggerates shifts when the later measurement is less precise.
+- For quantities quoted with factor (lognormal) or asymmetric uncertainties, compute pulls in ln x with the corresponding log-widths, or use the asymmetric side facing the shift.
 - Report coverage at both 1σ and 2σ, each with its exact binomial probability under calibration, so that no threshold is chosen after the comparison. Coverage of the combined pull tests the earlier and later uncertainties together; a miscalibrated later measurement is indistinguishable from a miscalibrated evaluation.
-- Root-mean-square pull is not a mean; give mean |pull| and median as well, and say which cases drive the result.
+- The rms pull is dominated by the largest pulls; also give mean |pull| (0.80 for calibrated Gaussian pulls) and median |pull| (0.67), and say which cases drive the result.
 - Pairs that share a lineage (same evaluation group, same reference data) are not independent; a bootstrap over lineages needs more than a handful of lineages to give a meaningful interval.
 - A small back-test motivates; only a pre-registered, outcome-blind selection over many pairs tests.
 
-`scripts/backtest_skeleton.py` implements the pull, coverage and binomial probabilities with a synthetic self-test.
+`scripts/backtest_skeleton.py` implements the pull, coverage, binomial probabilities and a lineage bootstrap, with a synthetic self-test (including clustered pulls).

@@ -15,4 +15,4 @@ Each item below can reverse or halve a proposal's central claim after it has bee
 11. **Optimistic power.** Independent-error simulations overstate power; see design-and-decisions.md.
 12. **Unverified sources.** A value "quoted by" an evaluation may be a single measurement; read the primary source, record page and line.
 13. **Small effects stated as large.** Give the observable's uncertainty before and after; a modest effect stated honestly is more credible than an inflated one.
-14. **Convergence.** A growing autocorrelation time means the tails are not known; say so.
+14. **Convergence.** A τ that grows with chain length means the chain has not converged: neither the tails nor the Monte Carlo error of the central values are known. Say so, and use the quantile-stability test (sampling-checks.md).

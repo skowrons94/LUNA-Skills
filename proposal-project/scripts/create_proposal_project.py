@@ -17,12 +17,13 @@ DIRECTORIES = (
     "analysis/scripts",
     "analysis/results",
     "analysis/plots",
-    "analysis/data/raw",
-    "analysis/data/external",
-    "analysis/data/processed",
+    "analysis/data",
     "docs",
     "private",
 )
+# Directories that stay empty after scaffolding get a .gitkeep so that git keeps them;
+# private/ is git-ignored and gets none.
+NO_GITKEEP = {"private"}
 
 
 def render(text: str, acronym: str, call: str) -> str:
@@ -32,13 +33,18 @@ def render(text: str, acronym: str, call: str) -> str:
     return text
 
 
-def plan(target: Path, template_root: Path) -> list[tuple[Path, Path]]:
-    files = []
+def plan(target: Path, template_root: Path) -> list[tuple[Path | None, Path]]:
+    """(template source, destination) pairs; source None means an empty .gitkeep."""
+    files: list[tuple[Path | None, Path]] = []
     for source in sorted(p for p in template_root.rglob("*") if p.is_file()):
         rel = source.relative_to(template_root)
         if rel.name == "_gitignore":
             rel = rel.with_name(".gitignore")
         files.append((source, target / rel))
+    filled = {dest.parent for _, dest in files}
+    for d in DIRECTORIES:
+        if d not in NO_GITKEEP and target / d not in filled:
+            files.append((None, target / d / ".gitkeep"))
     return files
 
 
@@ -47,6 +53,9 @@ def create(target: Path, acronym: str, call: str, merge: bool = False, dry_run: 
     template_root = Path(__file__).resolve().parent.parent / "assets" / "proposal-template"
     if not template_root.is_dir():
         print(f"Template directory is missing: {template_root}", file=sys.stderr)
+        return 2
+    if target.exists() and not target.is_dir():
+        print(f"Destination exists and is not a directory: {target}", file=sys.stderr)
         return 2
     if target.exists() and any(target.iterdir()) and not merge:
         print(f"Destination is not empty: {target}\nUse --merge to add only missing pieces.",
@@ -68,7 +77,8 @@ def create(target: Path, acronym: str, call: str, merge: bool = False, dry_run: 
         if dest.exists():
             skipped += 1
             continue
-        dest.write_text(render(source.read_text(encoding="utf-8"), acronym, call), encoding="utf-8")
+        text = "" if source is None else render(source.read_text(encoding="utf-8"), acronym, call)
+        dest.write_text(text, encoding="utf-8")
         created += 1
     print(f"Created {created} files; skipped {skipped} existing files", file=out)
     print("Next: fill docs/CALL.md before writing.", file=out)

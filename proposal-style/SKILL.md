@@ -12,4 +12,6 @@ Scientific accuracy comes before persuasive effect. Never invent citations, prio
 
 Prefer plain research questions, evidence followed by what it implies, parallel work packages and sparing emphasis reserved for objectives and commitments. Any numerical guidance in the style guide is a rule of thumb, not a quota. The funder's template, page limits and evaluation criteria override this guide, as does the user's own format.
 
+Use `proposal-project` for the proposal directory and registers and `proposal-analysis` for the quantitative case.
+
 For revisions, keep the technical meaning and make only the level of change requested. Return the revised text and list substantive evidence gaps separately rather than filling them silently. Check that each question, objective, method, risk and deliverable can be traced to the others.

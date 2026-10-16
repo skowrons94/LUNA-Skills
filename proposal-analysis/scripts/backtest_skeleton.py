@@ -5,7 +5,10 @@ Input: a CSV with columns id, lineage, earlier, sigma_earlier, later, sigma_late
 (one row per pair that passed the pre-stated selection rule).
 
     python backtest_skeleton.py pairs.csv
-    python backtest_skeleton.py --selftest
+    python backtest_skeleton.py --selftest [--seed S]
+
+For quantities quoted with factor (lognormal) uncertainties, pass ln x and the
+log-widths; for asymmetric uncertainties use the side facing the shift.
 """
 import argparse
 import csv
@@ -16,6 +19,8 @@ from scipy import stats
 
 P1 = stats.norm.cdf(1) - stats.norm.cdf(-1)  # 0.6827
 P2 = stats.norm.cdf(2) - stats.norm.cdf(-2)  # 0.9545
+MEAN_ABS = np.sqrt(2 / np.pi)                 # 0.798, mean |pull| if calibrated
+MEDIAN_ABS = stats.norm.ppf(0.75)             # 0.674, median |pull| if calibrated
 
 
 def pulls(earlier, s_earlier, later, s_later):
@@ -62,7 +67,8 @@ def report(rows):
     print(f"pairs: {c['n']}")
     print(f"inside 1 sigma: {c['in1']}/{c['n']} (expected {P1 * c['n']:.1f}), exact binomial p = {c['p1']:.3g}")
     print(f"inside 2 sigma: {c['in2']}/{c['n']} (expected {P2 * c['n']:.1f}), exact binomial p = {c['p2']:.3g}")
-    print(f"pull rms {c['rms']:.2f}, mean |pull| {c['mean_abs']:.2f}, median |pull| {c['median_abs']:.2f}")
+    print(f"pull rms {c['rms']:.2f} (calibrated 1), mean |pull| {c['mean_abs']:.2f} ({MEAN_ABS:.3f}), "
+          f"median |pull| {c['median_abs']:.2f} ({MEDIAN_ABS:.3f})")
     if "lineage" in rows[0]:
         (lo, hi), ng = lineage_bootstrap(z, [r["lineage"] for r in rows])
         print(f"rms pull 68% lineage bootstrap [{lo:.2f}, {hi:.2f}] over {ng} lineages"
@@ -71,8 +77,8 @@ def report(rows):
         print(f"  {r['id']:<20s} pull {zi:+.2f}   z_e {zei:+.2f}")
 
 
-def selftest(check):
-    rng = np.random.default_rng(3)
+def selftest(check, seed=3):
+    rng = np.random.default_rng(seed)
     n = 4000
     truth = rng.normal(10, 1, n)
     se = np.full(n, 0.5)
@@ -84,7 +90,9 @@ def selftest(check):
     check(f"calibrated: 1-sigma coverage {c['in1'] / n:.3f} near {P1:.3f}", abs(c["in1"] / n - P1) < 0.03)
     check("calibrated: binomial p not small", c["p1"] > 0.001 and c["p2"] > 0.001)
     check("calibrated: rms pull near 1", abs(c["rms"] - 1) < 0.05)
-    check("z_e exceeds pull in magnitude", np.all(np.abs(ze) >= np.abs(z)))
+    check(f"calibrated: mean |pull| {c['mean_abs']:.3f} near {MEAN_ABS:.3f}, median {c['median_abs']:.3f} "
+          f"near {MEDIAN_ABS:.3f}", abs(c["mean_abs"] - MEAN_ABS) < 0.04 and abs(c["median_abs"] - MEDIAN_ABS) < 0.05)
+    check("sanity: |z_e| >= |pull| (identity)", np.all(np.abs(ze) >= np.abs(z)))
 
     e_bad = truth + rng.normal(0, 2 * se)  # quoted sigma is half the true error
     c_bad = coverage(pulls(e_bad, se, l, sl)[0])
@@ -94,15 +102,22 @@ def selftest(check):
     small = coverage(pulls(e[:8], se[:8], l[:8], sl[:8])[0])
     check("eight pairs: exact p defined and in (0, 1]", 0 < small["p1"] <= 1)
 
+    # Clustered pulls: a shared shift per lineage (40 lineages of 100 pairs each).
     lineage = np.repeat(np.arange(40), n // 40)
-    (lo, hi), ng = lineage_bootstrap(z, lineage, n_boot=300, rng=rng)
-    check(f"lineage bootstrap interval [{lo:.2f}, {hi:.2f}] contains 1", lo < 1 < hi and ng == 40)
+    zc = rng.normal(0, 1.0, 40)[lineage] + rng.normal(0, 1, n)
+    rms_c = np.sqrt(np.mean(zc ** 2))
+    (lo, hi), ng = lineage_bootstrap(zc, lineage, n_boot=400, rng=rng)
+    (ilo, ihi), _ = lineage_bootstrap(zc, np.arange(n), n_boot=400, rng=rng)
+    check(f"clustered pulls: lineage bootstrap [{lo:.2f}, {hi:.2f}] over {ng} lineages at least 2x wider than "
+          f"item-level [{ilo:.2f}, {ihi:.2f}]", hi - lo > 2 * (ihi - ilo) and ng == 40)
+    check(f"sanity: lineage interval contains the sample rms {rms_c:.2f}", lo < rms_c < hi)
 
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("csv", nargs="?")
     ap.add_argument("--selftest", action="store_true")
+    ap.add_argument("--seed", type=int, default=3)
     a = ap.parse_args()
     if a.selftest or not a.csv:
         failed = []
@@ -112,7 +127,7 @@ if __name__ == "__main__":
             if not cond:
                 failed.append(name)
 
-        selftest(check)
+        selftest(check, a.seed)
         print("FAIL" if failed else "PASS")
         sys.exit(1 if failed else 0)
     with open(a.csv, newline="") as f:

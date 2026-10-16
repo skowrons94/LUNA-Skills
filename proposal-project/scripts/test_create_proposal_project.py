@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Offline test of create_proposal_project.py: dry run writes nothing, creation works, nothing is overwritten.
+"""Offline test of create_proposal_project.py: dry run writes nothing, creation works, nothing is overwritten,
+--merge restores missing template files, and a file or non-empty directory as target is refused.
 Run: python3 test_create_proposal_project.py   -> prints PASS/FAIL lines, exit code 1 on failure."""
 
 import io
@@ -31,10 +32,22 @@ with tempfile.TemporaryDirectory() as tmp:
     readme = (target / "README.md").read_text()
     check("tokens rendered", "ACME" in readme and "@@" not in readme)
     check("private is git-ignored", "private/" in (target / ".gitignore").read_text())
+    check("empty directories keep a .gitkeep", (target / "analysis/results/.gitkeep").exists()
+          and (target / "proposal/source/.gitkeep").exists())
+    check("no .gitkeep in private/", not (target / "private/.gitkeep").exists())
     (target / "docs/DECISIONS.md").write_text("user content")
     check("refuses non-empty without --merge", C.create(target, "ACME", "x", out=sink) == 2)
     check("merge returns 0", C.create(target, "ACME", "x", merge=True, out=sink) == 0)
     check("merge never overwrites", (target / "docs/DECISIONS.md").read_text() == "user content")
+    check("dry run on a non-empty directory without --merge returns 2",
+          C.create(target, "ACME", "x", dry_run=True, out=sink) == 2)
+    (target / "docs/CALL.md").unlink()
+    check("merge returns 0 after a template file was deleted", C.create(target, "ACME", "x", merge=True, out=sink) == 0)
+    check("merge restores the deleted template file", (target / "docs/CALL.md").exists())
+    a_file = Path(tmp) / "not_a_dir"
+    a_file.write_text("x")
+    check("target that is a file is refused (returns 2)", C.create(a_file, "ACME", "x", merge=True, out=sink) == 2)
+    check("file target left unchanged", a_file.read_text() == "x")
 
 print("PASS" if ok else "FAIL")
 sys.exit(0 if ok else 1)

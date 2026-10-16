@@ -16,7 +16,7 @@ A panel funds a proposal it believes; a specialist believes only numbers that su
 - **Simulated review cycle** (generalist panel member, specialist referee, style editor; convergence; what reviewers may and may not change): [review-cycle.md](references/review-cycle.md).
 - Before quoting any result, read [lessons.md](references/lessons.md): a checklist of failure modes that have each overturned a headline number.
 
-R-matrix calculations themselves use `azure2`; detector response uses `underground-gamma-simulation` or `agata-simulation`; yields use `yield-analysis`.
+R-matrix calculations themselves use `azure2`; detector response uses `underground-gamma-simulation` or `agata-simulation`; yields use `yield-analysis`; stopping powers and target profiles use `target-analysis`; detection efficiency and summing use `efficiency-analysis`.
 
 ## Non-negotiable boundaries
 
@@ -32,6 +32,6 @@ R-matrix calculations themselves use `azure2`; detector response uses `undergrou
 2. Compute feasibility and design with the simplest model that captures the decision; check it against an independent estimate (analytic limit, exact-observable floor, a second sampler).
 3. Simulate the planned analysis on pseudo-data, including realistic correlated errors and gross failures; report power, false-pass and wrong-decision rates.
 4. Run the review cycle until the reviewers' remaining points are wording or applicant-only inputs; log every change in the decision register.
-5. Run `scripts/selftest.py` after changing any helper; it must print PASS.
+5. Run `scripts/selftest.py` after changing any helper (requirements: `requirements.txt`); it must print PASS, also with `--seed` set to a few other values.
 
 Write results to the proposal project (`analysis/results/`), never into the skill directory.
