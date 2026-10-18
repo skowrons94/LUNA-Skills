@@ -5,7 +5,7 @@ Agent skills (Claude Code / Agent Skills format) for experimental nuclear physic
 ## The chain
 
 ```
-spectra ──► yield-analysis ──► peak-shape-analysis ──► target-analysis ──► azure2 (R-matrix, S-factor, rate)
+spectra ──► yield-analysis ──► peak-shape-analysis ──► target-analysis ──► azure2 (R-matrix, S-factor, rate) ──► resonance-search (level-scheme campaigns)
                ▲                                                ▲
       efficiency-analysis                                   geant4-simulation (general Geant4: neutron counters, sources, kinematics, validation)
                                                             underground-gamma-simulation (Geant4 detector response, kinematics)
@@ -31,6 +31,7 @@ nuclear-research-project  (project layout, provenance, LaTeX report, handoff) �
 | `agata-simulation` | AGATA Geant4 code: custom geometries (e.g. one triplet in close geometry), external cascade events, list-mode conversion, PSA/resolution emulation, summing-in tags and OFT tracking |
 | `delta-beta-dsam` | Femtosecond lifetimes with the Doppler-velocity (Δβ) DSAM method: centroids, nuisance fit, Δβ–τ calibration, sensitivity |
 | `azure2` | AZURE2/pyazr R-matrix calculations, fits, decompositions, extrapolations, rates |
+| `resonance-search` | Automated, gated search for missing or misassigned resonances in a multichannel R-matrix evaluation: data audit, pattern map, window searches, structure-aware gates, merges, unattended driver |
 | `nuclear-research-project` | Scaffolding and auditing reproducible feasibility-study projects and reports |
 | `proposal-project` | Scaffolding and tidying grant-proposal projects: versioned drafts, number provenance, PI placeholders, decision and objection registers, and the layout and size policy of tool studies (R-matrix, Geant4, transport, MCMC) |
 | `proposal-analysis` | The quantitative case of a proposal: feasibility, Bayesian design, pre-registered decision rules, power simulations, back-tests, covariances, sampling checks, simulated review |
