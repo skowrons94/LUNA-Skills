@@ -1,0 +1,23 @@
+# Smoke test: small PE counter, 1 MeV point source, a few thousand events.
+# Run:  ncounter macros/smoke.mac --seeds 12345 67890
+# Pass: the run completes, no overlaps, gas_captures > 0, and the same seeds reproduce the JSON.
+/control/verbose 1
+/run/verbose 1
+/nc/geo/moderator PE
+/nc/geo/modX 30 cm
+/nc/geo/modY 30 cm
+/nc/geo/modZ 40 cm
+/nc/geo/holeR 2 cm
+/nc/geo/nTubes 8
+/nc/geo/ringR 9 cm
+/nc/geo/tubeR 1.25 cm
+/nc/geo/tubeActive 30 cm
+/nc/geo/gasPressure 4 bar
+/run/initialize
+/nc/gun/spectrum mono
+/nc/gun/energy 1 MeV
+/nc/out/dir out
+/nc/out/tag smoke
+/nc/out/csv true
+/run/printProgress 1000
+/run/beamOn 3000

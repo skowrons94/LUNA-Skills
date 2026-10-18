@@ -1,0 +1,9 @@
+{
+  "study": "@@STUDY@@",
+  "created": "@@DATE@@",
+  "status": "empty",
+  "values": {},
+  "runs": [],
+  "code_revision": null,
+  "environment": "docs/ENVIRONMENT.md"
+}

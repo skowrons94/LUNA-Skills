@@ -1,0 +1,17 @@
+# Analytic check: thermal point source in a large moderator block, no tubes, no channel.
+# One-group diffusion theory gives <r^2> = 6 L^2 for the capture points (L = thermal diffusion
+# length). Compare sqrt(mean_r2_capture_cm2 / 6) with a textbook value for the moderator, and
+# rerun with --no-tsl to see how much the free-gas treatment of hydrogen changes it.
+/nc/geo/moderator water
+/nc/geo/modX 200 cm
+/nc/geo/modY 200 cm
+/nc/geo/modZ 200 cm
+/nc/geo/holeR 0 cm
+/nc/geo/nTubes 0
+/run/initialize
+/nc/gun/spectrum thermal
+/nc/gun/kT 0.0253 eV
+/nc/out/dir out
+/nc/out/tag diffusion
+/run/printProgress 1000
+/run/beamOn 3000

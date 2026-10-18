@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Offline test of create_proposal_project.py: dry run writes nothing, creation works, nothing is overwritten,
---merge restores missing template files, and a file or non-empty directory as target is refused.
+--merge restores missing template files, a file or non-empty directory as target is refused, and
+--tools / --study add the tool directories and per-study REPORT.md and results.json.
 Run: python3 test_create_proposal_project.py   -> prints PASS/FAIL lines, exit code 1 on failure."""
 
 import io
@@ -48,6 +49,41 @@ with tempfile.TemporaryDirectory() as tmp:
     a_file.write_text("x")
     check("target that is a file is refused (returns 2)", C.create(a_file, "ACME", "x", merge=True, out=sink) == 2)
     check("file target left unchanged", a_file.read_text() == "x")
+
+with tempfile.TemporaryDirectory() as tmp:
+    target = Path(tmp) / "TOOLS"
+    sink = io.StringIO()
+    check("tools: bad study name refused", C.create(target, "T", "x", studies=("geant4/a",), out=sink) == 2)
+    check("tools: bad study name writes nothing", not target.exists())
+    check("tools: create returns 0", C.create(target, "T", "x", tools=True, out=sink) == 0)
+    for rel in ("r-matrix/master/.gitkeep", "r-matrix/studies/.gitkeep", "simulation/.gitkeep",
+                "transport/.gitkeep", "docs/ENVIRONMENT.md"):
+        check(f"tools: exists {rel}", (target / rel).exists())
+    check("tools: no .gitkeep in ignored r-matrix/runs and analysis/chains",
+          (target / "r-matrix/runs").is_dir() and not (target / "r-matrix/runs/.gitkeep").exists()
+          and (target / "analysis/chains").is_dir() and not (target / "analysis/chains/.gitkeep").exists())
+    gi = (target / ".gitignore").read_text()
+    check("tools: .gitignore covers builds, ROOT files, statepoint runs, chains",
+          all(r in gi for r in ("simulation/*/build/", "*.root", "transport/*/runs/", "analysis/chains/")))
+    check("tools: .gitignore does not ignore JSON", "*.json" not in gi)
+    check("tools: merge adds a simulation study",
+          C.create(target, "T", "x", merge=True, studies=("simulation/counter-eff",), out=sink) == 0)
+    study = target / "simulation/counter-eff"
+    for sub in ("src", "macros", "scripts", "runs"):
+        check(f"tools: study has {sub}/", (study / sub).is_dir())
+    rep = (study / "REPORT.md").read_text()
+    check("tools: study REPORT.md rendered", "counter-eff" in rep and "@@" not in rep)
+    import json
+    check("tools: study results.json is valid JSON", json.loads((study / "results.json").read_text())["study"]
+          == "counter-eff")
+    check("tools: study dir itself has no stray .gitkeep", not (study / ".gitkeep").exists())
+    (study / "REPORT.md").write_text("edited")
+    check("tools: transport study added by merge",
+          C.create(target, "T", "x", merge=True, studies=("transport/shield", "simulation/counter-eff"),
+                   out=sink) == 0)
+    check("tools: transport study has model/ and runs/", (target / "transport/shield/model").is_dir()
+          and (target / "transport/shield/runs").is_dir())
+    check("tools: merge never overwrites a study report", (study / "REPORT.md").read_text() == "edited")
 
 print("PASS" if ok else "FAIL")
 sys.exit(0 if ok else 1)

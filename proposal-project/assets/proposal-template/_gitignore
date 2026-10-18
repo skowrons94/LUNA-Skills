@@ -3,3 +3,17 @@ proposal/build/*.aux
 proposal/build/*.log
 __pycache__/
 *.pyc
+
+# Tool outputs (see the proposal-project skill, references/tools-layout.md).
+# JSON is never ignored: run summaries, manifests and results.json stay tracked.
+simulation/*/build/
+transport/*/build/
+simulation/*/runs/**/*.root
+simulation/*/runs/**/*.csv
+simulation/*/runs/**/*.log
+transport/*/runs/
+r-matrix/runs/
+analysis/chains/
+*.h5
+*.npy
+*.npz

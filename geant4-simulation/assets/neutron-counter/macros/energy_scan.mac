@@ -1,0 +1,14 @@
+# Efficiency against energy: one run (one JSON) per source energy.
+/nc/geo/nTubes 8
+/run/initialize
+/nc/out/dir out
+/nc/out/tag scan
+/nc/gun/spectrum mono
+/nc/gun/energy 0.1 MeV
+/run/beamOn 2000
+/nc/gun/energy 1 MeV
+/run/beamOn 2000
+/nc/gun/energy 5 MeV
+/run/beamOn 2000
+/nc/gun/spectrum watt
+/run/beamOn 2000

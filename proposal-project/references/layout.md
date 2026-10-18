@@ -17,7 +17,9 @@ ACRONYM/
 │   ├── results/              numerical outputs (JSON/CSV) with the script and inputs that made them
 │   ├── plots/                diagnostic and proposal figures
 │   └── data/                 only small inputs specific to the proposal; link the feasibility project for everything else
+├── r-matrix/, simulation/<study>/, transport/<study>/   with --tools: see tools-layout.md
 ├── docs/
+│   ├── ENVIRONMENT.md        environment paths, code and data-library versions, build directories
 │   ├── CALL.md               call rules: edition, page limits, budget caps, criteria, deadline
 │   ├── DECISIONS.md          dated decisions on framing, scope and numbers, with reasons
 │   ├── OBJECTIONS.md         reviewer objections: status, answer, evidence path
@@ -44,8 +46,13 @@ ACRONYM/
 - A placeholder is never a guess. If a number is estimated, write it as an estimate with its basis.
 - Before submission, every placeholder is either resolved or deliberately removed together with the claim that depended on it.
 
+## Tools and large outputs
+
+When the proposal runs its own R-matrix fits, Geant4 or transport simulations or MCMC samplers, follow [tools-layout.md](tools-layout.md): one directory per study with one `REPORT.md` and one `results.json`, bulk outputs git-ignored, environments and data on a data disk, and results reaching the text only through `numbers.tex`.
+
 ## Combining with other skills
 
 - `nuclear-research-project` for the reproducible analysis or feasibility study behind the proposal (data, R-matrix, simulation, report).
 - `proposal-analysis` for feasibility, design, decision rules, back-tests and the simulated-review cycle; `target-analysis` and `efficiency-analysis` for stopping powers, target profiles and detection efficiencies behind the rate estimates.
+- `geant4-simulation` for Geant4 applications (building, geometry, physics lists, sources, scoring, validation); `azure2` for R-matrix runs.
 - `proposal-style` for the prose; `prc-figures` for figures; `research-slides` for the interview talk.

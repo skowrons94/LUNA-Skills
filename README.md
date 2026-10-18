@@ -7,13 +7,14 @@ Agent skills (Claude Code / Agent Skills format) for experimental nuclear physic
 ```
 spectra ──► yield-analysis ──► peak-shape-analysis ──► target-analysis ──► azure2 (R-matrix, S-factor, rate)
                ▲                                                ▲
-      efficiency-analysis                                   underground-gamma-simulation (Geant4 detector response, kinematics)
+      efficiency-analysis                                   geant4-simulation (general Geant4: neutron counters, sources, kinematics, validation)
+                                                            underground-gamma-simulation (Geant4 detector response, kinematics)
                                                             agata-simulation (AGATA Geant4, PSA emulation, summing, tracking)
                                                             delta-beta-dsam (fs lifetimes from Δβ = β_reac − β_ems)
                                                                  │
 nuclear-research-project  (project layout, provenance, LaTeX report, handoff) ◄──────────┘
                                                                  │
-     proposals: proposal-project (layout, registers) · proposal-analysis (feasibility, design, back-tests, review cycle)
+     proposals: proposal-project (layout, registers, tool studies) · proposal-analysis (feasibility, design, back-tests, review cycle)
      writing: clear-experimental-writing · methods-paper-style · proposal-style · unslop
      figures: prc-figures (PRC / ROOT-like matplotlib style, stacked spectra, heatmaps, render check)
      talks:   research-slides (built-in house layout or your own template, Manim animations, render + audit)
@@ -25,12 +26,13 @@ nuclear-research-project  (project layout, provenance, LaTeX report, handoff) �
 | `peak-shape-analysis` | Bin-integrated fits of asymmetric γ peaks and target energy-loss shapes |
 | `efficiency-analysis` | Photopeak efficiency, IAEA NDS decay data, cascade summing corrections |
 | `target-analysis` | Target profiles, stoichiometry and degradation from excitation curves; SRIM tables |
+| `geant4-simulation` | General Geant4 applications: environment and datasets, simple geometries and materials, physics lists (neutron HP with thermal scattering), sources, two-body kinematics, scoring, efficiency and die-away analyses, validation ladder, tested neutron-counter template |
 | `underground-gamma-simulation` | Building, extending and validating Geant4/ROOT simulations of gamma-detection setups at underground accelerator laboratories |
 | `agata-simulation` | AGATA Geant4 code: custom geometries (e.g. one triplet in close geometry), external cascade events, list-mode conversion, PSA/resolution emulation, summing-in tags and OFT tracking |
 | `delta-beta-dsam` | Femtosecond lifetimes with the Doppler-velocity (Δβ) DSAM method: centroids, nuisance fit, Δβ–τ calibration, sensitivity |
 | `azure2` | AZURE2/pyazr R-matrix calculations, fits, decompositions, extrapolations, rates |
 | `nuclear-research-project` | Scaffolding and auditing reproducible feasibility-study projects and reports |
-| `proposal-project` | Scaffolding and tidying grant-proposal projects: versioned drafts, number provenance, PI placeholders, decision and objection registers |
+| `proposal-project` | Scaffolding and tidying grant-proposal projects: versioned drafts, number provenance, PI placeholders, decision and objection registers, and the layout and size policy of tool studies (R-matrix, Geant4, transport, MCMC) |
 | `proposal-analysis` | The quantitative case of a proposal: feasibility, Bayesian design, pre-registered decision rules, power simulations, back-tests, covariances, sampling checks, simulated review |
 | `clear-experimental-writing` | Experimental manuscripts, abstracts, captions, referee replies |
 | `methods-paper-style` | Formalism, methods and R-matrix sections in a plain, reusable technical register |
@@ -62,12 +64,15 @@ python3 efficiency-analysis/scripts/demo.py --out /tmp/demo-eff
 python3 efficiency-analysis/scripts/demo_cascade.py --out /tmp/demo-cascade
 python3 underground-gamma-simulation/scripts/test_physics_checks.py && python3 underground-gamma-simulation/scripts/test_helpers.py
 python3 agata-simulation/scripts/test_agata_lm.py
+python3 geant4-simulation/scripts/selftest.py
 python3 delta-beta-dsam/scripts/selftest.py
 python3 proposal-project/scripts/test_create_proposal_project.py
 python3 proposal-analysis/scripts/selftest.py
 python3 prc-figures/scripts/demo.py --out /tmp/demo-prc
 python3 research-slides/scripts/demo_deck.py --out /tmp/demo-deck
 ```
+
+`geant4-simulation/scripts/test_template.py --build-dir DIR --jobs N` additionally builds and smoke-tests the Geant4 template (needs a Geant4 installation).
 
 Python 3 (tested with 3.12) with NumPy, SciPy, Matplotlib; `uproot` for ROOT input; `python-pptx` for decks; `manim`, `ffmpeg` and `pdftoppm` for animations and rendering. See each skill's `requirements.txt`.
 

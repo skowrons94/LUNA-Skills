@@ -1,6 +1,6 @@
 ---
 name: proposal-project
-description: Scaffold, maintain or tidy a grant-proposal project directory (ERC, MSCA, national or institutional calls, beam-time science cases) in which every quoted number traces to a result file, superseded drafts are archived, PI-only facts are marked as placeholders, and reviewer objections, decisions and the pre-submission checklist are kept as registers. Use when starting a proposal, reorganising an existing one, or preparing it for submission; use `proposal-style` for the prose and `proposal-analysis` for the scientific case.
+description: Scaffold, maintain or tidy a grant-proposal project directory (ERC, MSCA, national or institutional calls, beam-time science cases) in which every quoted number traces to a result file, each tool (feasibility scripts, R-matrix, Geant4, transport, MCMC) has one place and a size policy, superseded drafts are archived, PI-only facts are marked as placeholders, and reviewer objections, decisions and the pre-submission checklist are kept as registers. Use when starting a proposal, reorganising an existing one, or preparing it for submission; use `proposal-style` for the prose and `proposal-analysis` for the scientific case.
 ---
 # Proposal project
 
@@ -11,6 +11,7 @@ A proposal is a small research project with a hard deadline and many revisions. 
 - **New proposal.** Read [layout.md](references/layout.md), then run `scripts/create_proposal_project.py` (dry-run first).
 - **Existing proposal.** Inspect it first and propose a mapping to the layout. Do not move, rename or delete files unless the user asks for the reorganisation. Move superseded drafts to `proposal/archive/`; never delete them without explicit approval.
 - **Registers and checklists.** Read [registers.md](references/registers.md) for the decision log, objections register, PI-input sheet and final checklist.
+- **Proposal with its own tools** (feasibility scripts, AZURE2, Geant4, OpenMC or other transport codes, MCMC): read [tools-layout.md](references/tools-layout.md) for where each tool's material goes, what enters git, environments on a data disk, job caps on shared machines, and the tidy-up checklist. Scaffold with `--tools` and one `--study simulation/NAME` (or `transport/NAME`) per study; write Geant4 code with `geant4-simulation`.
 - **Feasibility study or long analysis behind the proposal.** Keep it as a separate project scaffolded with `nuclear-research-project` and link it from `analysis/README.md`; do not duplicate its data (`analysis/data/` holds only small inputs specific to the proposal).
 
 ## Non-negotiable boundaries
@@ -34,6 +35,8 @@ A proposal is a small research project with a hard deadline and many revisions. 
 ```bash
 python3 scripts/create_proposal_project.py /absolute/path/to/proposal --acronym ACRONYM --call "Call name and edition" --dry-run
 python3 scripts/create_proposal_project.py /absolute/path/to/proposal --acronym ACRONYM --call "Call name and edition"
+python3 scripts/create_proposal_project.py /absolute/path/to/proposal --acronym ACRONYM --merge \
+  --tools --study simulation/counter-efficiency --study transport/shielding   # add tools to an existing project
 python3 scripts/test_create_proposal_project.py    # must print PASS
 ```
 

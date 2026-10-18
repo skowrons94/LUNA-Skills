@@ -1,0 +1,4 @@
+interface:
+  display_name: "Geant4 simulation"
+  short_description: "Build, run and validate small Geant4 applications for feasibility studies"
+  default_prompt: "Use $geant4-simulation to set up, build and validate a reproducible Geant4 simulation for my detector."
