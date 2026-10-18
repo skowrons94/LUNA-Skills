@@ -137,6 +137,22 @@ Report:
 - Check the AZURE2 build: identical-particle factors and THM options differ between branches; plot
   with the same build that fitted.
 
+- Local-data windows: screening and trial fits on the data within the window +- ~0.25 MeV are ~8x
+  faster, but widths fitted locally damage far data. Polish the accepted variant on ALL data
+  (and once more for near misses) and gate on all data; locally gate only on total chi^2.
+- Normalisation priors must be centred on 1 (the experimental value), never on the norm currently
+  in the file: re-centring at every refit lets norms random-walk far outside their errors.
+- Merging two evaluations: carry EVERY decay channel of the ported levels, including channels no
+  data set measures; dropping them changes the levels' total widths and every observed channel.
+  Prove the port is lossless (same chi^2 with the source's radii) before fitting.
+- Changing channel radii: move in steps and refit at each (radius continuation); a jump leaves
+  the fit far from any minimum.
+- Know which Jacobian rows are analytic. Finite-differenced rows (e.g. THM/HOES observables in
+  some AZURE2 versions) cost two evaluations per FREE parameter of the session, not per fitted
+  column: fix everything outside the fitted block in the file, or add the analytic adjoint.
+- Agents and long runs: launch detached with a PID file; never kill a PID you did not write;
+  check for a live copy before starting another.
+
 ## Deliverables
 - The evaluation file of the best model and its folded (reported) version.
 - A campaign log: every pass, every accepted and rejected change, every data decision.
