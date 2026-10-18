@@ -6,10 +6,12 @@
 // Source   : point source; mono, Watt fission, thermal Maxwellian, histogram file or event list;
 //            isotropic or Legendre (a2, a4) angular distribution about +z.
 // Scoring  : stepping action. Gas captures (neutron step producing p + t), energy deposit per
-//            tube, first-capture time (die-away), and neutron captures anywhere (r^2 from the
-//            source, for diffusion-length checks). One JSON summary per run, optional CSV.
+//            tube, first-capture time (die-away), and neutron absorptions anywhere (any hadronic
+//            end of a neutron without an outgoing neutron: r^2 from the source and time, for
+//            diffusion-length and capture-time checks). One JSON summary per run, optional CSV.
 //
-// Usage : ncounter MACRO [--phys QGSP_BIC_HP] [--no-tsl] [--seeds S1 S2]
+// Usage : ncounter MACRO --seeds S1 S2 [--phys QGSP_BIC_HP] [--no-tsl]
+//         Seeds are required on the command line and must not be set again in the macro.
 
 #include "G4Box.hh"
 #include "G4Element.hh"
@@ -27,6 +29,7 @@
 #include "G4PVPlacement.hh"
 #include "G4Proton.hh"
 #include "G4Run.hh"
+#include "G4RunManager.hh"
 #include "G4RunManagerFactory.hh"
 #include "G4Step.hh"
 #include "G4SubtractionSolid.hh"
@@ -41,6 +44,7 @@
 #include "G4UserSteppingAction.hh"
 #include "G4VModularPhysicsList.hh"
 #include "G4VProcess.hh"
+#include "G4ProcessType.hh"
 #include "G4VUserActionInitialization.hh"
 #include "G4VUserDetectorConstruction.hh"
 #include "G4VUserPrimaryGeneratorAction.hh"
@@ -51,6 +55,7 @@
 #include <cmath>
 #include <cstdlib>
 #include <fstream>
+#include <iomanip>
 #include <sstream>
 #include <string>
 #include <sys/stat.h>
@@ -83,25 +88,28 @@ struct Config {
   G4String outDir = ".", tag = "run";
   G4double threshold = 150 * keV;       // per-tube deposit threshold for a "count"
   G4bool csv = false;                   // per-capture CSV
+  size_t listRows = 0;                  // list source: rows read, and whether they were reused
+  G4bool listWrapped = false;
 };
 static Config CFG;
 static G4LogicalVolume* gGasLV = nullptr;
 static std::vector<G4ThreeVector> gTubeXY;
 static G4String gPhysName = "QGSP_BIC_HP";
 static G4bool gTSL = true;
-static long gSeeds[2] = {0, 0};
+static long gSeeds[2] = {-1, -1};
+static G4String gRunManagerType = "";
 
 // ------------------------------------------------------------------ accumulators
 static const int NT = 60;  // log10(t/us) from -1 to 5, 10 bins per decade
 struct Event {
   std::vector<G4double> edep;
-  G4int nGasCap = 0, capTube = -1, nCap = 0;
+  G4int nGasCap = 0, capTube = -1;
   G4double capTime = -1, w = 1, e0 = 0;
 };
 struct Run {
   long nGen = 0;
-  G4double sumW = 0, wGasCap = 0, wGasCap2 = 0, wCount = 0, wCount2 = 0, sumT = 0, sumT2 = 0;
-  G4double wCap = 0, sumR2 = 0;  // neutron captures anywhere, r^2 from source (cm^2)
+  G4double sumW = 0, sumW2 = 0, wGasCap = 0, wGasCap2 = 0, wCount = 0, wCount2 = 0, sumT = 0, sumT2 = 0;
+  G4double wAbs = 0, sumR2 = 0, sumTAbs = 0;  // neutron absorptions anywhere: r^2 (cm^2), time (us)
   G4double sumE0 = 0;
   std::vector<G4double> tube, tHist;
 };
@@ -258,8 +266,16 @@ class Source : public G4VUserPrimaryGeneratorAction {
     return w + 0.25 * a * a * b + (2 * G4UniformRand() - 1) * std::sqrt(a * a * b * w);
   }
   // Isotropic, or W(cos) = 1 + a2 P2 + a4 P4 about +z by rejection.
-  G4ThreeVector Direction() const {
+  G4ThreeVector Direction() {
     const G4double wmax = 1 + std::fabs(CFG.a2) + std::fabs(CFG.a4);
+    if (CFG.a2 != fCheckedA2 || CFG.a4 != fCheckedA4) {  // W must be non-negative everywhere
+      for (int i = 0; i <= 2000; ++i) {
+        const G4double x = -1 + i / 1000.0, q2 = 0.5 * (3 * x * x - 1), q4 = (35 * x * x * x * x - 30 * x * x + 3) / 8;
+        if (1 + CFG.a2 * q2 + CFG.a4 * q4 < 0)
+          G4Exception("Source", "nc014", FatalException, "a2, a4 give W(theta) < 0 somewhere");
+      }
+      fCheckedA2 = CFG.a2; fCheckedA4 = CFG.a4;
+    }
     G4double c;
     while (true) {
       c = 2 * G4UniformRand() - 1;
@@ -299,6 +315,13 @@ class Source : public G4VUserPrimaryGeneratorAction {
   }
   void FromList(G4double& E, G4ThreeVector& dir, G4double& w) {  // cycles through the file
     if (fList.empty()) fList = ReadCsv(CFG.file, 4);
+    if (fNext == fList.size() && !fWrapped) {
+      fWrapped = true;
+      G4Exception("Source", "nc013", JustWarning,
+                  "event list exhausted: rows are reused, so events are no longer independent");
+    }
+    CFG.listRows = fList.size();
+    CFG.listWrapped = fWrapped;
     const auto& r = fList[fNext++ % fList.size()];
     E = r[0] * MeV;
     dir = G4ThreeVector(r[1], r[2], r[3]).unit();
@@ -307,9 +330,11 @@ class Source : public G4VUserPrimaryGeneratorAction {
   G4ParticleGun* fGun;
   G4GenericMessenger* fM;
   G4double fWattB = 1.034;  // 1/MeV
+  G4double fCheckedA2 = 0, fCheckedA4 = 0;
   std::vector<std::vector<G4double>> fBins, fList;
   std::vector<G4double> fCdf;
   size_t fNext = 0;
+  G4bool fWrapped = false;
 };
 
 // ------------------------------------------------------------------ scoring
@@ -320,11 +345,17 @@ class Stepping : public G4UserSteppingAction {
     auto track = step->GetTrack();
     const bool neutron = track->GetDefinition() == G4Neutron::Definition();
     if (neutron && track->GetTrackStatus() == fStopAndKill) {
+      // Absorption: the neutron ends in a hadronic process without an outgoing neutron
+      // (radiative capture, 3He(n,p)t, 10B(n,a)7Li, ...). Process names differ between versions.
       auto proc = step->GetPostStepPoint()->GetProcessDefinedStep();
-      if (proc && proc->GetProcessName() == "nCapture") {
-        EV.nCap++;
-        RUN.wCap += EV.w;
-        RUN.sumR2 += EV.w * (step->GetPostStepPoint()->GetPosition() - CFG.position).mag2() / (cm * cm);
+      if (proc && proc->GetProcessType() == fHadronic) {
+        bool nOut = false;
+        for (auto sec : *step->GetSecondaryInCurrentStep()) nOut |= sec->GetDefinition() == G4Neutron::Definition();
+        if (!nOut) {
+          RUN.wAbs += EV.w;
+          RUN.sumR2 += EV.w * (step->GetPostStepPoint()->GetPosition() - CFG.position).mag2() / (cm * cm);
+          RUN.sumTAbs += EV.w * step->GetPostStepPoint()->GetGlobalTime() / microsecond;
+        }
       }
     }
     if (pre->GetPhysicalVolume()->GetLogicalVolume() != gGasLV) return;
@@ -354,6 +385,7 @@ class EventAction : public G4UserEventAction {
   void EndOfEventAction(const G4Event* ev) override {
     RUN.nGen++;
     RUN.sumW += EV.w;
+    RUN.sumW2 += EV.w * EV.w;
     RUN.sumE0 += EV.w * EV.e0;
     G4double emax = 0;
     for (auto e : EV.edep) emax = std::max(emax, e);
@@ -397,11 +429,11 @@ class RunAction : public G4UserRunAction {
     const G4double tm = RUN.wGasCap > 0 ? RUN.sumT / RUN.wGasCap : 0;
     std::ofstream f(Name(run, ".json"));
     f.precision(10);
-    f << "{\n  \"run\": " << run->GetRunID() << ", \"tag\": \"" << CFG.tag << "\",\n"
+    f << "{\n  \"run\": " << run->GetRunID() << ", \"tag\": " << Q(CFG.tag) << ",\n"
       << "  \"geant4\": \"" << G4Version << "\", \"physics_list\": \"" << gPhysName << "\", \"thermal_scattering\": "
       << (gTSL ? "true" : "false") << ",\n"
-      << "  \"seeds_cli\": [" << gSeeds[0] << ", " << gSeeds[1] << "], \"engine\": \""
-      << G4Random::getTheEngine()->name() << "\",\n"
+      << "  \"seeds\": [" << gSeeds[0] << ", " << gSeeds[1] << "], \"engine\": \""
+      << G4Random::getTheEngine()->name() << "\", \"run_manager\": " << Q(gRunManagerType) << ",\n"
       << "  \"geometry\": {\"moderator\": \"" << CFG.moderator << "\", \"mod_cm\": [" << CFG.modX / cm << ", "
       << CFG.modY / cm << ", " << CFG.modZ / cm << "], \"mod_density_g_cm3\": " << CFG.modDensity / (g / cm3)
       << ", \"hole_r_cm\": " << CFG.holeR / cm << ", \"n_tubes\": " << CFG.nTubes << ", \"ring_r_cm\": " << CFG.ringR / cm
@@ -410,27 +442,40 @@ class RunAction : public G4UserRunAction {
       << CFG.bpeThick / cm << ", \"bpe_boron\": " << CFG.bpeBoron << "},\n"
       << "  \"source\": {\"spectrum\": \"" << CFG.spectrum << "\", \"energy_MeV\": " << CFG.energy / MeV
       << ", \"watt_a_MeV\": " << CFG.wattA / MeV << ", \"watt_b_per_MeV\": " << CFG.wattB * MeV << ", \"kT_eV\": "
-      << CFG.kT / eV << ", \"file\": \"" << CFG.file << "\", \"position_cm\": [" << CFG.position.x() / cm << ", "
+      << CFG.kT / eV << ", \"file\": " << Q(CFG.file) << ", \"list_rows\": " << CFG.listRows
+      << ", \"list_wrapped\": " << (CFG.listWrapped ? "true" : "false") << ", \"position_cm\": [" << CFG.position.x() / cm << ", "
       << CFG.position.y() / cm << ", " << CFG.position.z() / cm << "], \"a2\": " << CFG.a2 << ", \"a4\": " << CFG.a4
       << ", \"mean_E0_MeV\": " << RUN.sumE0 / W / MeV << "},\n"
-      << "  \"n_generated\": " << RUN.nGen << ", \"sum_weights\": " << RUN.sumW << ",\n"
+      << "  \"n_generated\": " << RUN.nGen << ", \"sum_weights\": " << RUN.sumW << ", \"sum_weights2\": " << RUN.sumW2 << ",\n"
       << "  \"gas_captures\": " << RUN.wGasCap << ", \"gas_captures_w2\": " << RUN.wGasCap2
       << ", \"efficiency_capture\": " << RUN.wGasCap / W << ",\n"
       << "  \"threshold_keV\": " << CFG.threshold / keV << ", \"counts_above_threshold\": " << RUN.wCount
-      << ", \"efficiency_threshold\": " << RUN.wCount / W << ",\n"
+      << ", \"counts_above_threshold_w2\": " << RUN.wCount2 << ", \"efficiency_threshold\": " << RUN.wCount / W << ",\n"
       << "  \"captures_per_tube\": " << Arr(RUN.tube) << ",\n"
       << "  \"capture_time_mean_us\": " << tm << ", \"capture_time_rms_us\": "
       << (RUN.wGasCap > 0 ? std::sqrt(std::max(0., RUN.sumT2 / RUN.wGasCap - tm * tm)) : 0) << ",\n"
       << "  \"capture_time_hist\": {\"edges\": \"log10(t/us) from -1 to 5, 10 bins per decade; first entry underflow, last overflow\", \"counts\": "
       << Arr(RUN.tHist) << "},\n"
-      << "  \"neutron_captures_anywhere\": " << RUN.wCap << ", \"mean_r2_capture_cm2\": "
-      << (RUN.wCap > 0 ? RUN.sumR2 / RUN.wCap : 0) << "\n}\n";
+      << "  \"neutron_absorptions_anywhere\": " << RUN.wAbs << ", \"mean_r2_absorption_cm2\": "
+      << (RUN.wAbs > 0 ? RUN.sumR2 / RUN.wAbs : 0) << ", \"absorption_time_mean_us\": "
+      << (RUN.wAbs > 0 ? RUN.sumTAbs / RUN.wAbs : 0) << "\n}\n";
     G4cout << "NCSUMMARY tag=" << CFG.tag << " run=" << run->GetRunID() << " events=" << RUN.nGen
            << " gas_captures=" << RUN.wGasCap << " eff=" << RUN.wGasCap / W << " t_mean_us=" << tm
-           << " captures_anywhere=" << RUN.wCap << G4endl;
+           << " absorptions_anywhere=" << RUN.wAbs << G4endl;
   }
 
  private:
+  static std::string Q(const std::string& in) {  // JSON string with escaping
+    std::ostringstream o;
+    o << '"';
+    for (char c : in) {
+      if (c == '"' || c == '\\') o << '\\' << c;
+      else if ((unsigned char)c < 0x20) o << "\\u" << std::hex << std::setw(4) << std::setfill('0') << (int)c << std::dec;
+      else o << c;
+    }
+    o << '"';
+    return o.str();
+  }
   static std::string Arr(const std::vector<G4double>& v) {
     std::ostringstream o;
     o << "[";
@@ -465,37 +510,71 @@ static bool IsDir(const char* p) { struct stat st; return p && stat(p, &st) == 0
 
 int main(int argc, char** argv) {
   if (argc < 2) {
-    G4cerr << "usage: ncounter MACRO [--phys NAME] [--no-tsl] [--seeds S1 S2]" << G4endl;
+    G4cerr << "usage: ncounter MACRO --seeds S1 S2 [--phys NAME] [--no-tsl]" << G4endl;
     return 2;
   }
   for (int i = 2; i < argc; ++i) {
     const std::string a = argv[i];
     if (a == "--no-tsl") gTSL = false;
     else if (a == "--phys" && i + 1 < argc) gPhysName = argv[++i];
-    else if (a == "--seeds" && i + 2 < argc) { gSeeds[0] = std::atol(argv[++i]); gSeeds[1] = std::atol(argv[++i]); }
+    else if (a == "--seeds" && i + 2 < argc) {
+      for (int k = 0; k < 2; ++k) {
+        char* end = nullptr;
+        const char* v = argv[++i];
+        gSeeds[k] = std::strtol(v, &end, 10);
+        if (end == v || *end || gSeeds[k] < 0) { G4cerr << "--seeds needs two non-negative integers" << G4endl; return 2; }
+      }
+    }
     else { G4cerr << "unknown option " << a << G4endl; return 2; }
   }
+  if (gSeeds[0] < 0) { G4cerr << "explicit seeds are required: --seeds S1 S2" << G4endl; return 2; }
+  {  // seeds set in the macro would silently replace the recorded ones
+    std::ifstream mac(argv[1]);
+    if (!mac) { G4cerr << "cannot open macro " << argv[1] << G4endl; return 2; }
+    std::string line;
+    while (std::getline(mac, line))
+      if (line.find("/random/") != std::string::npos && line.find_first_not_of(" \t") == line.find("/random/")) {
+        G4cerr << "the macro sets random-engine state; give seeds only with --seeds" << G4endl;
+        return 2;
+      }
+  }
+  // Neutron counting needs the HP neutron models; _HPT lists already contain thermal scattering.
+  const bool hpt = gPhysName.size() > 4 && gPhysName.compare(gPhysName.size() - 4, 4, "_HPT") == 0;
+  const bool hp = hpt || gPhysName.find("_HP") != std::string::npos || gPhysName.rfind("Shielding", 0) == 0;
+  if (!hp) {
+    G4cerr << "neutron counting needs an HP list (QGSP_BIC_HP, FTFP_BERT_HP, Shielding, or an _HPT list): "
+           << gPhysName << G4endl;
+    return 2;
+  }
+  if (hpt && !gTSL) { G4cerr << "--no-tsl contradicts an _HPT list" << G4endl; return 2; }
   // Fail early if the neutron data (and its thermal-scattering part) are not where Geant4 will look.
   const char* ndl = std::getenv("G4NEUTRONHPDATA");
   if (!IsDir(ndl) || (gTSL && !IsDir((std::string(ndl) + "/ThermalScattering").c_str()))) {
     G4cerr << "G4NEUTRONHPDATA is unset or lacks ThermalScattering/: " << (ndl ? ndl : "(unset)") << G4endl;
     return 3;
   }
+  // Serial on purpose: the accumulators are not thread-safe. G4FORCE_RUN_MANAGER_TYPE could override
+  // the factory's choice, so check the type actually created.
   auto rm = G4RunManagerFactory::CreateRunManager(G4RunManagerType::Serial);
+  if (rm->GetRunManagerType() != G4RunManager::sequentialRM) {
+    G4cerr << "this template needs the serial run manager (unset G4FORCE_RUN_MANAGER_TYPE)" << G4endl;
+    return 2;
+  }
+  gRunManagerType = "Serial";
   rm->SetUserInitialization(new Detector);
   G4PhysListFactory factory;
   G4VModularPhysicsList* phys = factory.GetReferencePhysList(gPhysName);
   if (!phys) { G4cerr << "unknown physics list " << gPhysName << G4endl; return 2; }
-  if (gTSL) phys->RegisterPhysics(new G4ThermalNeutrons(0));
+  if (gTSL && !hpt) phys->RegisterPhysics(new G4ThermalNeutrons(0));  // never twice
   rm->SetUserInitialization(phys);
   rm->SetUserInitialization(new Actions);
   auto ui = G4UImanager::GetUIpointer();
-  if (gSeeds[0] > 0 && gSeeds[1] > 0) {
+  {
     std::ostringstream cmd;  // note: "s" is the Geant4 unit of time; do not reuse it as a name
     cmd << "/random/setSeeds " << gSeeds[0] << " " << gSeeds[1];
-    ui->ApplyCommand(cmd.str());
+    if (ui->ApplyCommand(cmd.str()) != 0) { G4cerr << "/random/setSeeds failed" << G4endl; return 2; }
   }
-  G4cout << "NCSTART geant4=" << G4Version << " physics=" << gPhysName << " tsl=" << gTSL
+  G4cout << "NCSTART geant4=" << G4Version << " run_manager=" << gRunManagerType << " physics=" << gPhysName << " tsl=" << gTSL
          << " seeds=" << gSeeds[0] << "," << gSeeds[1] << " G4NEUTRONHPDATA=" << ndl << G4endl;
   const G4int status = ui->ApplyCommand("/control/execute " + G4String(argv[1]));
   delete rm;

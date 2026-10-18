@@ -7,6 +7,8 @@ description: Build, extend and validate Geant4/ROOT simulations of gamma-ray det
 
 Produce reproducible, checked simulations using the user's actual variant of their Geant4/ROOT application. Throughout this skill, `APP` stands for the application's executable name and `APP.cc` for its main source file in the user's checkout. Separate successful execution, detector-response checks, and experimentally validated physics; none implies the next.
 
+For a new or general Geant4 application (neutron counters, moderators, shielding, generic sources and validation), use `geant4-simulation` instead.
+
 ## Establish the variant
 
 Read the project's instructions, `APP.cc`, `CMakeLists.txt`, relevant messenger implementations, and a nearby working macro. The upstream repository required authentication during skill development; do not imply the local source was verified against current upstream.

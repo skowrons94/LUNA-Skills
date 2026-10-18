@@ -4,7 +4,7 @@
 
 ## Efficiency
 
-- Absolute efficiency ε = N_det / N_gen per source particle (or Σw_det / Σw_gen). Binomial uncertainty √(ε(1 − ε)/N_gen); for small counts or ε near 0 or 1 quote the Wilson interval. Weighted events: σ = √Σw²_det / Σw_gen.
+- Absolute efficiency ε = N_det / N_gen per source particle (or Σw_det / Σw_gen). Binomial uncertainty √(ε(1 − ε)/N_gen); for small counts or ε near 0 or 1 quote the Wilson interval. Weighted events: Var(ε) = [(1 − ε)² Σ_det w² + ε² Σ_fail w²] / (Σ_gen w)², which reduces to ε(1 − ε)/N for unit weights; √Σw²_det / Σw_gen is its small-ε limit (the template writes `sum_weights2` for this).
 - Name the definition: captures, counts above threshold, coincidences, full-energy peak. Intrinsic efficiency (per particle entering the detector) is a different number; do not mix them.
 - Choose the number of events from the target precision: σ_ε/ε = √((1 − ε)/(ε N)), so ε = 0.2 at 1 % needs N ≈ 4 × 10⁴.
 - Merge batches by summing counts and weights, never by averaging ratios of unequal batches.
@@ -25,7 +25,7 @@
 ## Dead time, pile-up and accidentals from rates
 
 - Non-paralyzable dead time τ: measured rate m = n/(1 + nτ), true rate n = m/(1 − mτ). Paralyzable: m = n exp(−nτ), maximum 1/(eτ); invert on the low-rate branch. Real systems are often in between; bracket the correction with both models.
-- Pile-up probability within a resolving time τ_r at rate R: 1 − exp(−Rτ_r) ≈ Rτ_r.
+- Pile-up probability within a resolving time τ_r at rate R: 1 − exp(−Rτ_r) ≈ Rτ_r for a following pulse within τ_r; for another pulse within ±τ_r use 1 − exp(−2Rτ_r). State the convention.
 - Accidental counts in a gate of length G opened by each trigger: R·G per trigger; accidental coincidence rate between two channels: 2R₁R₂τ_c for a coincidence window ±τ_c (state the window convention).
 - Use the rates expected in the measurement (signal, beam-induced and room background) and state which channel or system the dead time applies to (per tube, per preamplifier group, whole DAQ).
 

@@ -33,7 +33,7 @@ TOOL_DIRECTORIES = (
 )
 # Sub-directories of one study, by kind (--study KIND/NAME).
 STUDY_DIRECTORIES = {
-    "simulation": ("src", "macros", "scripts", "runs"),
+    "simulation": ("src", "macros", "scripts", "inputs", "runs"),
     "transport": ("scripts", "model", "runs"),
 }
 # Directories that stay empty after scaffolding get a .gitkeep so that git keeps them;
@@ -75,7 +75,8 @@ def plan(target: Path, assets: Path, dirs: list[str],
     filled = {dest.parent for _, dest, _ in files}
     parents = {str(a) for d in dirs for a in Path(d).parents}  # directories with sub-directories
     for d in dirs:
-        if d not in NO_GITKEEP and d not in parents and target / d not in filled:
+        ignored = d in NO_GITKEEP or (d.startswith("transport/") and d.endswith("/runs"))
+        if not ignored and d not in parents and target / d not in filled:
             files.append((None, target / d / ".gitkeep", ""))
     return files
 
@@ -107,6 +108,8 @@ def create(target: Path, acronym: str, call: str, merge: bool = False, dry_run: 
             print(f"DIR  {target / d}", file=out)
         for _, dest, _ in files:
             print(f"{'SKIP' if dest.exists() else 'FILE'} {dest}", file=out)
+        if (target / ".gitignore").is_file():
+            report_missing_ignore_rules(target, assets, tools or bool(studies), out)
         return 0
     for d in dirs:
         (target / d).mkdir(parents=True, exist_ok=True)
@@ -120,8 +123,30 @@ def create(target: Path, acronym: str, call: str, merge: bool = False, dry_run: 
         dest.write_text(text, encoding="utf-8")
         created += 1
     print(f"Created {created} files; skipped {skipped} existing files", file=out)
+    report_missing_ignore_rules(target, assets, tools or bool(studies), out)
     print("Next: fill docs/CALL.md before writing.", file=out)
     return 0
+
+
+def missing_ignore_rules(target: Path, assets: Path) -> list[str]:
+    """Tool rules of the template .gitignore that an existing project .gitignore lacks."""
+    template = (assets / "proposal-template" / "_gitignore").read_text(encoding="utf-8").splitlines()
+    start = next((i for i, line in enumerate(template) if line.startswith("# Tool outputs")), len(template))
+    rules = [line for line in template[start:] if line and not line.startswith("#")]
+    gi = target / ".gitignore"
+    have = set(gi.read_text(encoding="utf-8").splitlines()) if gi.is_file() else set()
+    return [r for r in rules if r not in have]
+
+
+def report_missing_ignore_rules(target: Path, assets: Path, tools: bool, out) -> None:
+    if not tools:
+        return
+    missing = missing_ignore_rules(target, assets)
+    if missing:  # never edit an existing .gitignore: list the rules instead
+        print(".gitignore exists without the tool rules; add these lines by hand "
+              "(references/tools-layout.md, Size policy):", file=out)
+        for rule in missing:
+            print(f"    {rule}", file=out)
 
 
 def main() -> int:

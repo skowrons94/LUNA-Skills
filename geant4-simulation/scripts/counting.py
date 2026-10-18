@@ -28,10 +28,18 @@ def efficiency(k: float, n: float, z: float = 1.0) -> dict:
     return {"eff": p, "sigma": math.sqrt(p * (1 - p) / n), "lo": centre - half, "hi": centre + half}
 
 
-def weighted_efficiency(sum_w_pass: float, sum_w2_pass: float, sum_w_all: float) -> dict:
-    """Efficiency from weighted events; sigma from sum of w^2 of passing events (valid when the pass
-    fraction is small or the weights of all events are known only through their sum)."""
-    return {"eff": sum_w_pass / sum_w_all, "sigma": math.sqrt(sum_w2_pass) / sum_w_all}
+def weighted_efficiency(sum_w_pass: float, sum_w2_pass: float, sum_w_all: float,
+                        sum_w2_all: float | None = None) -> dict:
+    """Efficiency from weighted events.
+
+    Var = [(1 - eps)^2 sum_pass w^2 + eps^2 sum_fail w^2] / (sum_all w)^2, which reduces to the binomial
+    eps(1 - eps)/N for unit weights. Without sum_w2_all only the small-eps limit sqrt(sum_pass w^2)/sum_all w
+    is available (an overestimate for eps not small); it is returned with "approximate": True."""
+    eps = sum_w_pass / sum_w_all
+    if sum_w2_all is None:
+        return {"eff": eps, "sigma": math.sqrt(sum_w2_pass) / sum_w_all, "approximate": True}
+    var = ((1 - eps) ** 2 * sum_w2_pass + eps ** 2 * (sum_w2_all - sum_w2_pass)) / sum_w_all ** 2
+    return {"eff": eps, "sigma": math.sqrt(max(var, 0.0)), "approximate": False}
 
 
 def flatness(values: list[float], sigmas: list[float] | None = None) -> dict:
@@ -116,13 +124,18 @@ def _cli_efficiency(paths):
     rows = []
     for p in paths:
         d = json.load(open(p))
-        e = efficiency(d["gas_captures"], d["n_generated"]) if d.get("sum_weights") == d["n_generated"] else \
-            weighted_efficiency(d["gas_captures"], d["gas_captures_w2"], d["sum_weights"])
-        rows.append((d["source"]["spectrum"], d["source"]["mean_E0_MeV"], e["eff"], e["sigma"], p))
-    for spec, e0, eff, sig, p in rows:
-        print(f"{spec:8s} E0_mean={e0:10.5g} MeV  eff={eff:.5f} +- {sig:.5f}  {p}")
-    if len(rows) > 1:
-        print(json.dumps(flatness([r[2] for r in rows], [r[3] for r in rows])))
+        if d.get("sum_weights") == d["n_generated"] and d.get("sum_weights2", d["n_generated"]) == d["n_generated"]:
+            e = efficiency(d["gas_captures"], d["n_generated"])
+        else:
+            e = weighted_efficiency(d["gas_captures"], d["gas_captures_w2"], d["sum_weights"], d.get("sum_weights2"))
+        rows.append((d["source"]["spectrum"], d["source"]["mean_E0_MeV"], e["eff"], e["sigma"], p,
+                     e.get("lo"), e.get("hi")))
+    for spec, e0, eff, sig, p, lo, hi in rows:
+        wil = f"  Wilson68=[{lo:.5f}, {hi:.5f}]" if lo is not None else ""
+        print(f"{spec:8s} E0_mean={e0:10.5g} MeV  eff={eff:.5f} +- {sig:.5f}{wil}  {p}")
+    mono = [r for r in rows if r[0] == "mono"]  # flatness only over monoenergetic points
+    if len(mono) > 1:
+        print("flatness over mono points: " + json.dumps(flatness([r[2] for r in mono], [r[3] for r in mono])))
 
 
 def main(argv=None) -> int:
@@ -159,7 +172,12 @@ def selftest(check, seed: int = 11):
     check("efficiency: Wilson interval brackets k/n", e["lo"] < 0.3 < e["hi"])
     check("efficiency: k = 0 gives a positive upper bound", efficiency(0, 50)["hi"] > 0)
     w = weighted_efficiency(10.0, 10.0, 100.0)
-    check("weighted efficiency with unit weights", abs(w["eff"] - 0.1) < 1e-12 and abs(w["sigma"] - 10 ** 0.5 / 100) < 1e-12)
+    check("weighted efficiency, small-eps limit flagged approximate", w["approximate"] and abs(w["sigma"] - 10 ** 0.5 / 100) < 1e-12)
+    wf = weighted_efficiency(30.0, 30.0, 100.0, 100.0)
+    check("weighted efficiency with unit weights equals the binomial sigma",
+          abs(wf["sigma"] - efficiency(30, 100)["sigma"]) < 1e-12)
+    ws = weighted_efficiency(60.0, 120.0, 200.0, 400.0)  # all weights 2: same eps and sigma as unit weights
+    check("weighted efficiency is invariant under a common weight scale", abs(ws["sigma"] - wf["sigma"]) < 1e-12)
     f = flatness([0.20, 0.21, 0.19], [0.005] * 3)
     check("flatness: ratio and chi2", abs(f["max_over_min"] - 0.21 / 0.19) < 1e-12 and abs(f["chi2_flat"] - 8.0) < 1e-9)
     tau = 80.0

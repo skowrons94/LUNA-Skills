@@ -13,7 +13,7 @@ Each rung proves something specific and leaves the rest unproven. State the high
 ## Rung 3 examples
 
 - **Thermal diffusion length.** Thermal point source in a large block of moderator, no detectors: in one-group diffusion theory the capture points satisfy ⟨r²⟩ = 6L². Compare L with a textbook value (water about 2.7–2.9 cm, polyethylene about 2.1 cm at room temperature); rerun without thermal scattering to see the bias. The template's `macros/diffusion.mac` does this.
-- **Capture time in an infinite medium.** For thermal neutrons the mean capture time is 1/(vΣ_a) with v Σ_a independent of energy for a 1/v absorber (about 0.2 ms in water).
+- **Capture time in an infinite medium.** For thermal neutrons the mean capture time is 1/(vΣ_a) with v Σ_a independent of energy for a 1/v absorber (about 0.2 ms in water); the template's `diffusion.mac` writes it as `absorption_time_mean_us`.
 - **Narrow-beam attenuation** exp(−Σx) of monoenergetic neutrons or gammas through a slab, scoring only unscattered particles, against tabulated cross sections or attenuation coefficients.
 - **Kinematic endpoints and source moments**: maximum neutron energy at 0° from `kinematics.py`; sampled Watt mean 3a/2 + a²b/4; histogram means.
 - **Physics-list and data variation**: two HP lists, thermal scattering on and off, a ±density change. These bound model sensitivity; agreement between two lists is not validation.
@@ -21,7 +21,7 @@ Each rung proves something specific and leaves the rest unproven. State the high
 ## Reproducibility
 
 - Seeds explicit on the command line or in the macro (`/random/setSeeds a b`) and written into every output, together with the engine name. Same seeds and same build must give identical summaries; different seeds a different sample with consistent results within statistics. `scripts/test_template.py` checks both for the template.
-- The same seeds reproduce only with the same executable, datasets, macro and number of threads; record all of them.
+- The same seeds reproduce only with the same executable, datasets and macro; record all of them. In multi-threaded mode the master pre-draws per-event seeds, so merged totals do not depend on the thread count but the event order does: compare merged quantities, not event order.
 - Batches: distinct seeds per batch, recorded in the manifest; never reuse seeds across batches that will be merged.
 - Statistical convergence: a result whose uncertainty does not fall as 1/√N, or which moves by more than its uncertainty when N is quadrupled, has a problem (rare large weights, a bug in accumulation, a time cut).
 

@@ -80,6 +80,9 @@ def run(check):
 
         m = go("ok", "ok")
         check("run: good run is ok", m["status"] == "ok" and m["return_code"] == 0)
+        check("run: required log pattern present passes", go("req1", "ok", require_log=["run finished"])["status"] == "ok")
+        check("run: required log pattern missing fails",
+              any("required pattern" in p for p in go("req2", "ok", require_log=["Element TS_H_of_"])["problems"]))
         check("run: input copied and hashed", (tmp / "runs/ok/inputs/ok.mac").is_file() and
               all(len(v["sha256"]) == 64 for v in m["inputs"].values()))
         check("run: manifest written and warnings counted",

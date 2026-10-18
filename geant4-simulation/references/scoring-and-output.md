@@ -11,14 +11,15 @@ Whatever the route: reset per-event buffers at the start of each event, accumula
 ## Captures
 
 - Identify a reaction by its products in the step where the neutron interacts: 3He(n,p)t → proton + triton; ¹⁰B(n,α)⁷Li → alpha + ⁷Li; ⁶Li(n,t)α → triton + alpha; H(n,γ)d → deuteron + gamma. Loop over `step->GetSecondaryInCurrentStep()`.
-- Process names (`nCapture`, `neutronInelastic`, ...) depend on the version and the list; print the name once for each reaction you score, and do not rely on it for reactions that are not radiative capture. The template counts gas captures by products and "captures anywhere" by the `nCapture` process.
+- Process names (`nCapture`, `neutronInelastic`, ...) depend on the version and the list; print the name once for each reaction you score, and do not rely on it for reactions that are not radiative capture. The template counts gas captures by products, and "absorptions anywhere" as any neutron that ends in a hadronic process without an outgoing neutron (radiative capture and the (n,p), (n,α), (n,t) channels alike).
 - Count the first capture per event for efficiency and time; count all captures if multiplicity matters (sources emitting several neutrons per event, cosmic showers).
 - Store the capture position when spatial information is needed (diffusion checks, tube-by-tube rates).
 
 ## Energy deposits
 
-- Sum `step->GetTotalEnergyDeposit()` per sensitive volume and event. In a 3He tube, a full-energy capture deposits 764 keV (proton 573 keV + triton 191 keV); wall effects give a continuum down to the triton or proton energy, so a counting threshold (often 100–200 keV) trades gamma rejection against efficiency. Report efficiency both for captures and above the threshold.
-- Electronic noise, gas gain and quenching are not in the transport; apply resolution and thresholds in the analysis and vary them as systematics.
+- Sum `step->GetTotalEnergyDeposit()` per sensitive volume and event. In a 3He tube, a full-energy capture deposits 764 keV (proton 573 keV + triton 191 keV). Wall effects give a continuum below 764 keV with steps at 573 keV (triton lost in the wall) and 191 keV (proton lost); deposits below 191 keV occur only when both particles leave the gas (tube ends, small radius or low pressure). The proton range in 3He scales as 1/p, so the wall-effect fraction depends on pressure and radius; check it at the extremes of any pressure scan. A counting threshold (often 100–200 keV) trades gamma rejection against efficiency. Report efficiency both for captures and above the threshold.
+- Rung-2 check of the HP final state: the deposit spectrum of captures has its full-energy edge at 764 keV for 3He (2.79 and 2.31 MeV for ¹⁰B) and the wall-effect steps above; record any `/process/had/particle_hp/` option you set.
+- The deposit does not include W-value statistics, gas gain, space charge, electronic noise or shaping, so the threshold efficiency is a model quantity: apply resolution and thresholds in the analysis and vary them as systematics.
 - For scintillators and semiconductors, apply light yield (Birks quenching for heavy ions) or energy resolution offline, from a calibration.
 
 ## Timing (die-away)

@@ -15,6 +15,7 @@ Create a project in which every number in a report or presentation can be traced
 - For a scientific deck, read [references/presentation-style.md](references/presentation-style.md) for the feasibility-deck narrative and use the `research-slides` skill to build, animate and check the deck.
 - For reproducibility, validation, or handoff work, also read [references/reproducibility.md](references/reproducibility.md).
 - For a grant proposal built on the project, use `proposal-project` for the proposal directory and `proposal-analysis` for its quantitative case.
+- For writing, building or validating a Geant4 application (neutron counters, shielding, sources, kinematics), use `geant4-simulation`; for LUNA-type gamma setups, `underground-gamma-simulation`.
 
 ## Non-negotiable boundaries
 

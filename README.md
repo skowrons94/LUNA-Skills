@@ -72,7 +72,7 @@ python3 prc-figures/scripts/demo.py --out /tmp/demo-prc
 python3 research-slides/scripts/demo_deck.py --out /tmp/demo-deck
 ```
 
-`geant4-simulation/scripts/test_template.py --build-dir DIR --jobs N` additionally builds and smoke-tests the Geant4 template (needs a Geant4 installation).
+`python3 geant4-simulation/scripts/test_template.py --build-dir DIR --jobs N` additionally builds and smoke-tests the Geant4 template (needs a Geant4 installation).
 
 Python 3 (tested with 3.12) with NumPy, SciPy, Matplotlib; `uproot` for ROOT input; `python-pptx` for decks; `manim`, `ffmpeg` and `pdftoppm` for animations and rendering. See each skill's `requirements.txt`.
 

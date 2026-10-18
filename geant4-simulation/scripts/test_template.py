@@ -3,7 +3,10 @@
 
 Configures and builds assets/neutron-counter in BUILD_DIR, then runs macros/smoke.mac three times
 through run_checked.py: twice with the same seeds (outputs must be identical) and once with other seeds
-(outputs must differ). Passes when every run is clean, has gas captures > 0 and the checks hold.
+(outputs must differ). Passes when every run is clean, registers thermal scattering for the moderator
+hydrogen, has gas captures > 0, and the checks hold. It also checks that the application refuses to run
+without explicit seeds and with a non-HP physics list. Configure, build and runs use nice; choose --jobs
+from the current load (uptime), not from the core count.
 
     python3 test_template.py --build-dir /data/scratch/ncounter-build --jobs 4
 """
@@ -49,10 +52,11 @@ def main() -> int:
     cfg = ["cmake", "-S", str(TEMPLATE), "-B", str(build), "-DCMAKE_BUILD_TYPE=Release"]
     if a.cxx:
         cfg.append(f"-DCMAKE_CXX_COMPILER={a.cxx}")
+    nice = ["nice", "-n", "10"]
     with open(build / "configure.log", "w") as log:
-        ok = subprocess.run(cfg, stdout=log, stderr=subprocess.STDOUT).returncode == 0
+        ok = subprocess.run(nice + cfg, stdout=log, stderr=subprocess.STDOUT).returncode == 0
     with open(build / "build.log", "w") as log:
-        ok = ok and subprocess.run(["cmake", "--build", str(build), "-j", str(a.jobs)],
+        ok = ok and subprocess.run(nice + ["cmake", "--build", str(build), "-j", str(a.jobs)],
                                    stdout=log, stderr=subprocess.STDOUT).returncode == 0
     exe = build / "ncounter"
     check("template configures and builds", ok and exe.is_file())
@@ -60,6 +64,9 @@ def main() -> int:
         print("FAIL")
         return 1
     macro = build / "macros" / "smoke.mac"
+    for label, extra in (("without --seeds", []), ("with a non-HP list", ["--seeds", "1", "2", "--phys", "FTFP_BERT"])):
+        r = subprocess.run([str(exe), str(macro), *extra], capture_output=True, text=True, cwd=build)
+        check(f"refuses to run {label}", r.returncode == 2)
     runs = {}
     for name, seeds in (("same-a", ("12345", "67890")), ("same-b", ("12345", "67890")), ("other", ("24680", "13579"))):
         out = build / "smoke-runs" / name
@@ -67,7 +74,8 @@ def main() -> int:
             shutil.rmtree(out)
         m = run_checked.run(out, [str(exe), str(macro), "--seeds", *seeds],
                             expect=["out/smoke_r0.json", "out/smoke_r0_captures.csv"],
-                            json_min=["out/smoke_r0.json:gas_captures=1"], timeout=1800, nice=10)
+                            json_min=["out/smoke_r0.json:gas_captures=1", "out/smoke_r0.json:n_generated=3000"],
+                            require_log=[r"Element TS_H_of_Polyethylene"], timeout=1800, nice=10)
         check(f"smoke run {name}: clean log, outputs present, gas captures > 0", m["status"] == "ok")
         for p in m["problems"]:
             print("      " + p)

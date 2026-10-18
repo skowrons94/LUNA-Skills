@@ -24,7 +24,7 @@ A simulation result is an input to a decision. Make it reproducible from a named
 
 ## Template
 
-[assets/neutron-counter/](assets/neutron-counter/README.md) is a minimal tested application: a moderated 3He counter with configurable geometry, an optional borated-PE shell and a point source (mono, Watt, thermal, histogram file or event list; isotropic or Legendre angular distribution), with gas-capture, deposit, die-away and capture-position scoring and one JSON summary per run. Copy it into `simulation/<study>/src/` of the project; build outside git; change the geometry through the messenger before editing the code.
+[assets/neutron-counter/](assets/neutron-counter/README.md) is a minimal tested application: a moderated 3He counter with configurable geometry, an optional borated-PE shell and a point source (mono, Watt, thermal, histogram file or event list; isotropic or Legendre angular distribution), with gas-capture, deposit, die-away and capture-position scoring and one JSON summary per run. Copy its contents into `simulation/<study>/` of the project (giving `CMakeLists.txt`, `src/` and `macros/` at study level); build outside git; change the geometry through the messenger before editing the code.
 
 ## Non-negotiable boundaries
 
@@ -52,7 +52,7 @@ python3 SKILL_DIR/scripts/selftest.py                       # pure-Python tests,
 python3 SKILL_DIR/scripts/check_g4_datasets.py --tsl        # datasets found? (exit 1 if not)
 python3 SKILL_DIR/scripts/kinematics.py "13C(a,n)16O" --T1 5 --theta 0 90 --spectrum spec.csv
 python3 SKILL_DIR/scripts/run_checked.py --out RUN --expect out/x_r0.json --json-min out/x_r0.json:gas_captures=1 \
-  --nice 10 -- /path/to/app macro.mac --seeds 1 2
+  --require-log 'Element TS_H_of_' --nice 10 -- /path/to/app macro.mac --seeds 1 2
 python3 SKILL_DIR/scripts/counting.py efficiency RUN/out/*.json
 python3 SKILL_DIR/scripts/test_template.py --build-dir /data/scratch/ncounter-test --jobs 4   # needs Geant4
 ```

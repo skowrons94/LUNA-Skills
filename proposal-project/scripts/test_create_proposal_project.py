@@ -84,6 +84,23 @@ with tempfile.TemporaryDirectory() as tmp:
     check("tools: transport study has model/ and runs/", (target / "transport/shield/model").is_dir()
           and (target / "transport/shield/runs").is_dir())
     check("tools: merge never overwrites a study report", (study / "REPORT.md").read_text() == "edited")
+    check("tools: simulation study has inputs/ (tracked inputs)", (study / "inputs/.gitkeep").exists())
+    check("tools: no .gitkeep in ignored transport runs/", not (target / "transport/shield/runs/.gitkeep").exists())
+
+with tempfile.TemporaryDirectory() as tmp:  # existing project with an old .gitignore
+    target = Path(tmp) / "OLD"
+    target.mkdir()
+    (target / ".gitignore").write_text("private/\n")
+    sink = io.StringIO()
+    check("old project: merge with --tools returns 0", C.create(target, "O", "x", merge=True, tools=True, out=sink) == 0)
+    msg = sink.getvalue()
+    check("old project: .gitignore left unchanged", (target / ".gitignore").read_text() == "private/\n")
+    check("old project: missing tool ignore rules are listed", "add these lines by hand" in msg
+          and "analysis/chains/" in msg and "*.root" in msg)
+    (target / ".gitignore").write_text((C.Path(C.__file__).resolve().parent.parent / "assets/proposal-template/_gitignore").read_text())
+    sink = io.StringIO()
+    C.create(target, "O", "x", merge=True, tools=True, out=sink)
+    check("old project: no message once the rules are present", "add these lines by hand" not in sink.getvalue())
 
 print("PASS" if ok else "FAIL")
 sys.exit(0 if ok else 1)

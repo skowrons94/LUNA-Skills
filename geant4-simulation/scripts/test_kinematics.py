@@ -73,10 +73,42 @@ def run(check):
     check("thick target: total weight = T0 - threshold", abs(sum(w for _, w in tt) - 5.0) < 1e-9)
     tmax = K.lab_at_angle(*an, 5.0, 0)[0]["T3"]
     check("thick target: T3 never above the 0-deg maximum", max(t for t, _ in tt) <= tmax + 1e-9)
-    tt0 = K.thick_target_spectrum(*pn, 2.5, lambda e: 1.0, lambda e: 1.0, theta_deg=0, n_e=40)
-    rng = 2.5 - K.threshold(*pn)  # two 0-deg solutions only in the first ~40 keV above threshold
-    check("thick target at 0 deg: weight between range and twice the range (double-valued region)",
-          rng < sum(w for _, w in tt0) < 1.2 * rng)
+    # CM -> lab Jacobian: against finite differences of d(cos theta_cm)/d(cos theta_lab), each branch
+    worst = 0.0
+    for m, t1, th in ((an, 5.0, 40.0), (pn, 1.885, 10.0), (pn, 2.3, 10.0)):
+        h = 1e-4
+        lo, mid, hi = (K.lab_at_angle(*m, t1, th + d) for d in (-h, 0.0, h))
+        for b in range(len(mid)):
+            dc_cm = math.cos(math.radians(hi[b]["theta_cm"])) - math.cos(math.radians(lo[b]["theta_cm"]))
+            dc_lab = math.cos(math.radians(th + h)) - math.cos(math.radians(th - h))
+            worst = max(worst, abs(K.cm_to_lab_jacobian(*m, t1, mid[b]) / abs(dc_cm / dc_lab) - 1))
+    check("Jacobian dOmega_cm/dOmega_lab matches finite differences (1e-4)", worst < 1e-4)
+
+    def solid_angle_integral(m, t1, n=4000):  # integral of the Jacobian over the lab sphere, all branches
+        tot = 0.0
+        for i in range(n):  # midpoint rule in theta; the integrable edge singularity converges slowly
+            th = (i + 0.5) * 180.0 / n
+            tot += sum(K.cm_to_lab_jacobian(*m, t1, sl) for sl in K.lab_at_angle(*m, t1, th)) * \
+                2 * math.pi * math.sin(math.radians(th)) * math.radians(180.0 / n)
+        return tot
+    check("Jacobian integrates to 4 pi (one branch, 13C(a,n) 5 MeV)", abs(solid_angle_integral(an, 5.0) / (4 * math.pi) - 1) < 1e-4)
+    check("Jacobian integrates to 4 pi (two branches, 7Li(p,n) 1.885 MeV)",
+          abs(solid_angle_integral(pn, 1.885, 20000) / (4 * math.pi) - 1) < 0.02)
+
+    # thick target at fixed lab angles: integrating the per-steradian weights over the sphere gives back
+    # the angle-integrated total (would fail without the Jacobian)
+    sig, eps = (lambda e: 1.0 + 0.3 * e), (lambda e: 2.0 / (0.5 + e))
+    total = sum(w for _, w in K.thick_target_spectrum(*an, 5.0, sig, eps, n_e=20, n_cos=20))
+    n_th, integ = 360, 0.0
+    for i in range(n_th):
+        th = (i + 0.5) * 180.0 / n_th
+        w_th = sum(w for _, w in K.thick_target_spectrum(*an, 5.0, sig, eps, theta_deg=th, n_e=20))
+        integ += w_th * 2 * math.pi * math.sin(math.radians(th)) * math.radians(180.0 / n_th)
+    check("thick target: lab-angle weights integrate over 4 pi to the angle-integrated yield",
+          abs(integ / total - 1) < 1e-3)
+    fwd = sum(w for _, w in K.thick_target_spectrum(*an, 5.0, sig, eps, theta_deg=0.0, n_e=20))
+    bwd = sum(w for _, w in K.thick_target_spectrum(*an, 5.0, sig, eps, theta_deg=180.0, n_e=20))
+    check("thick target: forward focusing (yield per lab sr larger at 0 than at 180 deg)", fwd > bwd)
     h = K.histogram(K.isotropic_spectrum(*an, 5.0, 500), 20)
     check("histogram preserves total weight", abs(sum(w for _, _, w in h) - 1.0) < 1e-9)
 

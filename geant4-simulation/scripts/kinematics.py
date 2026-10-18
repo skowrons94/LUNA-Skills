@@ -137,6 +137,21 @@ def lab_from_cm(m1, m2, m3, m4, t1, cos_cm, phi=0.0):
     return e3 - m3, (pt * math.cos(phi) / p, pt * math.sin(phi) / p, pz / p)
 
 
+def cm_to_lab_jacobian(m1, m2, m3, m4, t1, sol):
+    """dOmega_cm / dOmega_lab for ejectile 3 on one kinematic branch `sol` (from lab_at_angle).
+
+    Diverges at the maximum lab angle of a two-branch region; integrable there."""
+    e_tot, p_tot, s = _initial(m1, m2, t1)
+    rs = math.sqrt(s)
+    beta, gamma = p_tot / e_tot, e_tot / rs
+    e3c = (s + m3 ** 2 - m4 ** 2) / (2.0 * rs)
+    p3c = math.sqrt(max(0.0, e3c ** 2 - m3 ** 2))
+    p3 = sol["p3"]
+    e3 = math.sqrt(p3 ** 2 + m3 ** 2)
+    c = math.cos(math.radians(sol["theta3"]))
+    return p3 ** 2 / (gamma * p3c * abs(p3 - beta * e3 * c))
+
+
 def isotropic_spectrum(m1, m2, m3, m4, t1, n_cos=2000):
     """(T3, weight) pairs for isotropic CM emission, integrated over all lab angles (equal CM solid angle)."""
     return [(lab_from_cm(m1, m2, m3, m4, t1, -1.0 + (i + 0.5) * 2.0 / n_cos)[0], 1.0 / n_cos)
@@ -144,11 +159,18 @@ def isotropic_spectrum(m1, m2, m3, m4, t1, n_cos=2000):
 
 
 def thick_target_spectrum(m1, m2, m3, m4, t0, sigma, stopping, theta_deg=None, n_e=200, n_cos=200):
-    """Ejectile spectrum from a thick target: projectile slows from t0 to threshold (or 0).
+    """Ejectile spectrum from a thick target: the projectile slows from t0 to threshold (or 0).
 
-    Each energy step dE is weighted by sigma(E)/stopping(E) (any consistent units; the product is a yield
-    per incident projectile up to a constant). With theta_deg the ejectile is taken at that lab angle (all
-    kinematic solutions), otherwise isotropic CM emission integrated over angle. Returns (T3, weight) pairs.
+    Continuous slowing down, no straggling: the slice [E, E + dE] contributes sigma(E) dE / eps(E), with
+    sigma the angle-integrated cross section and eps the effective stopping cross section per active
+    nucleus, both functions of the LAB projectile energy (consistent units give a yield per incident
+    projectile). Emission is isotropic in the CM frame.
+    - theta_deg None: angle-integrated spectrum; weights sum to the total yield.
+    - theta_deg set: yield per incident projectile per LAB steradian at theta, i.e. each kinematic branch
+      weighted by sigma/(4 pi) * dOmega_cm/dOmega_lab (multiply by W(theta_cm) for an anisotropic
+      distribution). Near threshold the Jacobian diverges at the maximum angle: histogram in energy with
+      bins wider than the energy step.
+    Returns (T3, weight) pairs.
     """
     e_lo = max(threshold(m1, m2, m3, m4), 0.0)
     if t0 <= e_lo:
@@ -163,7 +185,8 @@ def thick_target_spectrum(m1, m2, m3, m4, t0, sigma, stopping, theta_deg=None, n
         if theta_deg is None:
             out += [(t3, w * wc) for t3, wc in isotropic_spectrum(m1, m2, m3, m4, e, n_cos)]
         else:
-            out += [(sol["T3"], w) for sol in lab_at_angle(m1, m2, m3, m4, e, theta_deg)]
+            out += [(sol["T3"], w / (4 * math.pi) * cm_to_lab_jacobian(m1, m2, m3, m4, e, sol))
+                    for sol in lab_at_angle(m1, m2, m3, m4, e, theta_deg)]
     return out
 
 

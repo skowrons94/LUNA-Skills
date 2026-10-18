@@ -24,7 +24,7 @@
   auto gas = new G4Material("He3_gas", rho, 1, kStateGas, T, p);
   ```
 
-  At 4 bar and 293.15 K this gives 4.95 × 10⁻⁴ g/cm³; print the density at construction and compare with the hand value. Give gases and moderators their temperature: the HP models use the material temperature for Doppler broadening and thermal motion.
+  At 4 bar and 293.15 K this gives 4.95 × 10⁻⁴ g/cm³; print the density at construction and compare with the hand value. Use the absolute fill pressure: suppliers quote atm (4 atm = 4.053 bar) or psi, and a 1 % pressure error is a 1 % density error. Give gases and moderators their temperature: the HP models use the material temperature for Doppler broadening and thermal motion.
 - Mixtures (detector gas with quench gas, concrete, steel grades): use the composition from the supplier or a cited compilation and record it.
 
 ## Overlaps

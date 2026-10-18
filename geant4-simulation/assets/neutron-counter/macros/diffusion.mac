@@ -1,6 +1,7 @@
 # Analytic check: thermal point source in a large moderator block, no tubes, no channel.
-# One-group diffusion theory gives <r^2> = 6 L^2 for the capture points (L = thermal diffusion
-# length). Compare sqrt(mean_r2_capture_cm2 / 6) with a textbook value for the moderator, and
+# One-group diffusion theory gives <r^2> = 6 L^2 for the absorption points (L = thermal diffusion
+# length). Compare sqrt(mean_r2_absorption_cm2 / 6) with a textbook value for the moderator, and
+# absorption_time_mean_us with 1/(v Sigma_a) (about 0.2 ms in water), and
 # rerun with --no-tsl to see how much the free-gas treatment of hydrogen changes it.
 /nc/geo/moderator water
 /nc/geo/modX 200 cm

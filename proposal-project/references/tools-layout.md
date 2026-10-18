@@ -23,6 +23,7 @@ ACRONYM/
 │       ├── build/            compiled code (git-ignored), or a scratch build on the data disk
 │       ├── macros/           reviewed, flat macros; one per configuration
 │       ├── scripts/          run drivers and analysis of this study
+│       ├── inputs/           source spectra, event lists and other small inputs that feed a result (tracked)
 │       ├── runs/<config>/    per-run output, log and manifest (git-ignored; keep summary JSON)
 │       ├── REPORT.md         question, configuration, validation, results, limits
 │       └── results.json      the study's distilled numbers, consumed by analysis/ or numbers.tex
@@ -55,11 +56,11 @@ ACRONYM/
 | In git | Ignored |
 |---|---|
 | source, CMakeLists, macros, model builders, analysis scripts | `build/`, executables, object files |
-| `REPORT.md`, `results.json`, small run summaries (JSON/CSV, under ~1 MB) | ROOT files, per-event CSV, statepoints, `summary.h5`, tallies in HDF5 |
+| `REPORT.md`, `results.json`, JSON run summaries and manifests; source spectra and event lists that feed a result, kept in `simulation/<study>/inputs/` (not under `runs/`) | ROOT files, any CSV under `runs/` (per-event output, copies of inputs), statepoints, `summary.h5`, tallies in HDF5 |
 | run manifests (command, seeds, versions, hashes) | MCMC chains, posterior samples, `.npy`/`.npz` arrays |
-| figures used in the text | AZURE2 `output/` and run directories, logs over ~1 MB (compress or drop) |
+| figures used in the text | AZURE2 `output/` and run directories, run logs under `runs/` (the manifest records the verdict) |
 
-`.gitignore` additions for a project with tools:
+`.gitignore` additions for a project with tools (in the scaffold's `.gitignore`; with `--merge` on a project that already has a `.gitignore`, the script lists the missing rules for you to add by hand):
 
 ```
 # builds and large run products
