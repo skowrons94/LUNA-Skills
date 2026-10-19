@@ -7,7 +7,7 @@ Agent skills (Claude Code / Agent Skills format) for experimental nuclear physic
 ```
 spectra ──► yield-analysis ──► peak-shape-analysis ──► target-analysis ──► azure2 (R-matrix, S-factor, rate) ──► resonance-search (level-scheme campaigns)
                ▲                                                ▲
-      efficiency-analysis                                   geant4-simulation (general Geant4: neutron counters, sources, kinematics, validation)
+      efficiency-analysis        evaluated-nuclear-data     geant4-simulation (general Geant4: neutron counters, sources, kinematics, validation)
                                                             underground-gamma-simulation (Geant4 detector response, kinematics)
                                                             agata-simulation (AGATA Geant4, PSA emulation, summing, tracking)
                                                             delta-beta-dsam (fs lifetimes from Δβ = β_reac − β_ems)
@@ -30,6 +30,7 @@ nuclear-research-project  (project layout, provenance, LaTeX report, handoff) �
 | `underground-gamma-simulation` | Building, extending and validating Geant4/ROOT simulations of gamma-detection setups at underground accelerator laboratories |
 | `agata-simulation` | AGATA Geant4 code: custom geometries (e.g. one triplet in close geometry), external cascade events, list-mode conversion, PSA/resolution emulation, summing-in tags and OFT tracking |
 | `delta-beta-dsam` | Femtosecond lifetimes with the Doppler-velocity (Δβ) DSAM method: centroids, nuisance fit, Δβ–τ calibration, sensitivity |
+| `evaluated-nuclear-data` | Evaluated cross sections (ENDF/B-VIII, JEFF, JENDL, TENDL): OpenMC HDF5 or raw ENDF-6, NJOY at temperature, thermal/RI/MACS/fission-spectrum averages, library spread, MF/MT lookup, SAMMY and Ferdinand checks |
 | `azure2` | AZURE2/pyazr R-matrix calculations, fits, decompositions, extrapolations, rates |
 | `resonance-search` | Automated, gated search for missing or misassigned resonances in a multichannel R-matrix evaluation: data audit, pattern map, window searches, structure-aware gates, merges, unattended driver |
 | `nuclear-research-project` | Scaffolding and auditing reproducible feasibility-study projects and reports |
@@ -63,6 +64,7 @@ python3 peak-shape-analysis/scripts/demo.py --out /tmp/demo-peak
 python3 target-analysis/scripts/demo.py --out /tmp/demo-target
 python3 efficiency-analysis/scripts/demo.py --out /tmp/demo-eff
 python3 efficiency-analysis/scripts/demo_cascade.py --out /tmp/demo-cascade
+python3 evaluated-nuclear-data/scripts/selftest.py
 python3 underground-gamma-simulation/scripts/test_physics_checks.py && python3 underground-gamma-simulation/scripts/test_helpers.py
 python3 agata-simulation/scripts/test_agata_lm.py
 python3 geant4-simulation/scripts/selftest.py

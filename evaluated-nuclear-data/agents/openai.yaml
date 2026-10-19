@@ -1,0 +1,3 @@
+interface:
+  display_name: "Evaluated Nuclear Data"
+  short_description: "Get and compare evaluated cross sections (ENDF, JEFF, JENDL, TENDL)"

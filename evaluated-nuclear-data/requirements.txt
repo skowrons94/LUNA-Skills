@@ -1,0 +1,3 @@
+numpy
+openmc  # conda-forge; includes NJOY2016 for the --njoy route
+endf    # raw ENDF-6 parsing
