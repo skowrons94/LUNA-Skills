@@ -24,7 +24,7 @@ Read [sources.md](references/sources.md) before downloading anything (what each 
 ## Setup
 
 - Python with `numpy`, `openmc` (for HDF5 and NJOY routes) and `endf` (raw files): `mamba create -n nucdata -c conda-forge python=3.12 openmc endf numpy` (NJOY2016 comes with conda-forge OpenMC).
-- Put HDF5 libraries under `~/nuclear-data/<LIBRARY>/` and edit the `LIBRARIES` dictionary at the top of `scripts/xs.py` if your layout differs. Partial libraries (only the nuclides you need) work.
+- Put HDF5 libraries in one folder, one subfolder per library (`ENDF-B-VIII.1/`, `JEFF-3.3/`, …), and point the environment variable `NUCLEAR_DATA_DIR` to that folder (e.g. `export NUCLEAR_DATA_DIR=/path/to/nuclear-data` in the shell profile). Edit the `LIBRARIES` dictionary at the top of `scripts/xs.py` if your subfolder names differ, or pass `--lib PATH` for a one-off library. Partial libraries (only the nuclides you need) work.
 - Run `python3 scripts/selftest.py`: it checks the window integrals analytically and, if a library is found, the thermal $^{10}$B$(n,\alpha)$ value; it must print `PASS`.
 
 ## Rules

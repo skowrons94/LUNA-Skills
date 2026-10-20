@@ -19,22 +19,30 @@ from __future__ import annotations
 
 import argparse
 import glob
+import os
 import sys
 from pathlib import Path
 
 import numpy as np
 
 _trapz = getattr(np, "trapezoid", None) or np.trapz
-ND = Path.home() / "nuclear-data"
+# Root folder of the local HDF5 libraries, taken from the environment so that no
+# machine-specific path lives in the skill: export NUCLEAR_DATA_DIR=/path/to/nuclear-data
+ND = Path(os.environ["NUCLEAR_DATA_DIR"]).expanduser() if os.environ.get("NUCLEAR_DATA_DIR") else None
 
-# Edit to match your installation (first existing entry wins). Partial subsets are fine.
+
+def _under_root(*names: str) -> list[Path]:
+    return [ND / n for n in names] if ND else []
+
+
+# Folder names under NUCLEAR_DATA_DIR (first existing entry wins). Partial subsets are fine.
 LIBRARIES = {
-    "ENDF/B-VIII.1": [ND / "ENDF-B-VIII.1"],
-    "ENDF/B-VIII.0": [ND / "ENDF-B-VIII.0"],
-    "JEFF-3.3": [ND / "JEFF-3.3"],
-    "JEFF-4.0": [ND / "JEFF-4.0", ND / "JEFF-4.0-subset"],
-    "JENDL-5": [ND / "JENDL-5", ND / "JENDL-5-subset"],
-    "FENDL-3.2": [ND / "FENDL-3.2"],
+    "ENDF/B-VIII.1": _under_root("ENDF-B-VIII.1"),
+    "ENDF/B-VIII.0": _under_root("ENDF-B-VIII.0"),
+    "JEFF-3.3": _under_root("JEFF-3.3"),
+    "JEFF-4.0": _under_root("JEFF-4.0", "JEFF-4.0-subset"),
+    "JENDL-5": _under_root("JENDL-5", "JENDL-5-subset"),
+    "FENDL-3.2": _under_root("FENDL-3.2"),
 }
 # nuclide-name aliases in specific OpenMC builds
 ALIAS = {("JEFF-3.3", "C12"): "C0"}
@@ -128,7 +136,9 @@ def load(args, nuc: str | None = None, lib: str | None = None):
     lib = lib or args.lib
     p = find_h5(lib, nuc or args.nuc)
     if p is None:
-        raise SystemExit(f"{nuc or args.nuc} not found for library '{lib}' (edit LIBRARIES in {__file__})")
+        hint = ("set NUCLEAR_DATA_DIR to the folder holding the libraries, or pass --lib PATH"
+                if ND is None and lib in LIBRARIES else f"edit LIBRARIES in {__file__}")
+        raise SystemExit(f"{nuc or args.nuc} not found for library '{lib}' ({hint})")
     return from_hdf5(p, args.mt, args.temp)
 
 

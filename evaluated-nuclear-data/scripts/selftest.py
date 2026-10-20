@@ -3,7 +3,7 @@
 
 1/v cross section sigma = c/sqrt(E):  MACS(kT) = sigma(kT)  and  RI(0.5 eV, inf) = 2 c / sqrt(0.5).
 Constant cross section: averages equal the constant, except MACS = (2/sqrt(pi)) sigma by definition.
-If ~/nuclear-data holds an OpenMC library, also checks that 10B(n,alpha) at 0.0253 eV is ~3840 b.
+If NUCLEAR_DATA_DIR points to an OpenMC library, also checks that 10B(n,alpha) at 0.0253 eV is ~3840 b.
 """
 import sys
 from pathlib import Path
