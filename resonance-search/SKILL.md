@@ -89,6 +89,10 @@ Around each target (±50–70 keV, non-overlapping windows, run in parallel):
   does not move away from its target and correlation does not drop; θ² limits hold; the count of
   unresolvable levels does not grow. An added level must beat its parameter cost (Δχ² > 2k for k
   new parameters, AIC; or an F-test); log Δχ² for every level. Two rounds per window.
+- **Hypothesis ledger**: append every tested change, accepted or not, to `hypotheses.csv`:
+  `pass, window_MeV, operation (add/delete/reassign/move), J^π, channel, E_x, k, Δχ²_total,
+  Δχ² per data set (worst), AIC or F, gate failed, reason, status (accepted/rejected/deferred),
+  fit files`. A rejection without the failed gate and the numbers is not recorded.
 - Target the screen at the data family that shows the feature; allow the parities that family
   permits.
 
@@ -99,7 +103,8 @@ keeping the best passing state. Before merging, drop any added level narrower th
 limit and any duplicate of a level a neighbouring window added at the shared edge.
 
 ### 5. Loop
-Repeat 2–4 automatically, skipping regions rejected in the last passes and a documented blacklist
+Repeat 2–4 automatically, skipping hypotheses already in the ledger with the same parameters, regions
+rejected in the last passes, and a documented blacklist
 of regions where every change has cost another data set. Stop after two passes gaining less than a
 set threshold. Alternate passes between the data families so the weaker data are not swamped.
 
@@ -157,7 +162,8 @@ Report:
 
 ## Deliverables
 - The evaluation file of the best model and its folded (reported) version.
-- A campaign log: every pass, every accepted and rejected change, every data decision.
+- A campaign log: every pass, every accepted and rejected change, every data decision; and the
+  hypothesis ledger, so that a later campaign or referee can see what was tried and why it failed.
 - Figures: data and fit on a common E_x axis (PRC style), proton/alpha excitation functions, census of
   constrained states per J^π, states shared between evaluations.
 - A status report with per-data-set χ²/N, physics checks and limitations.
