@@ -55,6 +55,8 @@ sets intact.
 ## Workflow
 
 ### 0. Data audit (before any fit)
+Delegate a first pass to the `data-auditor` subagent if it is installed (read-only, fresh context), then
+resolve its findings; the items below are the minimum.
 - Cross-check repeated angles/energies between files: identical values at the same energy in two
   angles are transcription copies.
 - Read the paper of every data set for energy ranges with overlapping reactions or contamination,

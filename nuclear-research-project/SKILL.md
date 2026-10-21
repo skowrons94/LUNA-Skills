@@ -37,6 +37,8 @@ Build the dependency chain from evidence to conclusion:
 
 Prefer one shared implementation for units, stopping powers, kinematics, yield integrals, rates, and plotting conventions. Thin workflow scripts should call that implementation and write named outputs. Preserve direct comparisons to measurements; do not rescale data or models merely to make plots agree. If a correction or normalization is scientifically justified, state it and retain the uncorrected comparison.
 
+Separate producing a result from judging it. Before a result is used downstream or quoted, have it checked by an agent that did not produce it: the `data-auditor` subagent for new input data, `physics-referee` for results, `citation-checker` for references (see the repository's `subagents/`). Give them the files and the claim, not the reasoning, and record their findings and your responses in `docs/VALIDATION.md`.
+
 When the analysis is ready, run the verification checks, compile the LaTeX report, render the PDF, and inspect it visually. For a PowerPoint deliverable, build it with the `research-slides` skill and inspect every rendered slide. Update `docs/HANDOFF.md` last so it describes the actual state rather than the intended state.
 
 ## Scaffold command

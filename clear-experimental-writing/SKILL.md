@@ -14,4 +14,6 @@ For technically mature drafts, prefer the minimum restructuring and sentence-lev
 
 Use restrained scientific English and explicit comparisons. Explain what simulation or fitting determines, how it was validated, and how uncertainty enters. Keep conclusions proportional to sensitivity. Apply this manuscript style rather than proposal rhetoric unless the user requests a proposal.
 
+Before submission, or after drafting text with citations, delegate a check of every reference and attributed number to the `citation-checker` subagent if it is installed, and a check of the quantitative claims against the result files to `physics-referee`.
+
 Deliver the revised passage or document in the requested format. Briefly identify substantive scientific ambiguities that remain; do not add a long editorial checklist unless asked.

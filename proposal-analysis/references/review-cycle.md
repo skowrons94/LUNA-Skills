@@ -5,7 +5,7 @@ Simulated reviewers find weaknesses before real ones do. They do not replace col
 ## Reviewers
 
 - **Panel generalist** (the call's panel, outside the subfield): is the question clear in the first half page; is the case ambitious, coherent and feasible; is the applicant's independence visible; score with the call's scale.
-- **Specialist referee** (the subfield): physics and attribution errors, unfair characterisation of prior work, feasibility details, whether each number survives checking against its source and script. Give the specialist read access to the analysis outputs and scripts and ask for re-runs.
+- **Specialist referee** (the subfield): physics and attribution errors, unfair characterisation of prior work, feasibility details, whether each number survives checking against its source and script. Give the specialist read access to the analysis outputs and scripts and ask for re-runs. The `physics-referee` subagent is a ready-made specialist for the numbers; `citation-checker` verifies references and attributed values.
 - **Style editor** (the applicant's style guide, e.g. `proposal-style`): reading flow, sentence length in commitments, one claim per sentence, repetition between parts, consistency of numbers and wording.
 
 ## Rules
