@@ -592,6 +592,8 @@ Plain-text, section-tagged; prefer the GUI or `AzrModel` over hand edits.
 
 ## Data file format (`.dat`)
 
+Convert tables with `analysis-chain`'s `adapters.py to-azure` (frame, units, S factor → cross section) and check them with `contracts.py check azure-dat`.
+
 Four whitespace-delimited columns, **lab frame, forward kinematics**:
 energy (MeV) · angle (deg) · cross section (b, or b/sr if differential) ·
 uncertainty. The angle column is required even for angle-integrated data (dummy

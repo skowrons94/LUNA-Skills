@@ -9,7 +9,7 @@ Turn a measured excitation curve into a reproducible target-response model and, 
 
 ## Establish the measurement
 
-Read [inputs-and-units.md](references/inputs-and-units.md) before modeling. Identify reaction/channel, target/scan, projectile charge state, beam-energy calibration and frame, measured-yield definition, uncertainty convention, efficiency/branching/solid-angle corrections, stopping inputs and cross-section provenance. Preserve run IDs and acquisition order so deterioration during irradiation is not averaged into a false static profile.
+Read [inputs-and-units.md](references/inputs-and-units.md) before modeling. Identify reaction/channel, target/scan, projectile charge state, beam-energy calibration and frame, measured-yield definition, uncertainty convention, efficiency/branching/solid-angle corrections, stopping inputs and cross-section provenance. Preserve run IDs and acquisition order so deterioration during irradiation is not averaged into a false static profile. Yields from `yield-analysis` arrive through `analysis-chain`'s `yields-to-excitation` adapter (contract `excitation-curve`); its error column excludes the shared systematics, which act as a common normalisation.
 
 Use existing project metadata to resolve inputs. If units, energy frame or error definitions remain ambiguous, ask for those specific facts before reporting fitted physical quantities. Continue auditing files and testing the model independently. Do not guess that a column called `Y_error` is an absolute standard deviation or that an AZURE output column is a total cross section.
 

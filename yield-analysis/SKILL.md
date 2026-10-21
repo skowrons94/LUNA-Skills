@@ -22,4 +22,4 @@ Read [example-audit.md](references/example-audit.md) when migrating the original
 
 ## Deliver
 
-Provide the excitation curve, ROI diagnostics, per-run counts and correction factors, uncertainty/covariance ordering, input hashes and reproducible configuration. State whether the result is detected counts, a photon yield, or a reaction yield; dividing by a branch probability is only appropriate for the intended observable.
+Provide the excitation curve, ROI diagnostics, per-run counts and correction factors, uncertainty/covariance ordering, input hashes and reproducible configuration. The output is the `yield-table` contract of `analysis-chain`; when the yields feed another stage (target-analysis, a cross section, AZURE2), convert them with its adapters so shared systematics stay shared. State whether the result is detected counts, a photon yield, or a reaction yield; dividing by a branch probability is only appropriate for the intended observable.

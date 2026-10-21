@@ -30,3 +30,4 @@
 {"id": "r30", "prompt": "Fix the CSS so the sidebar does not overlap the footer on mobile.", "expect": ["none"]}
 {"id": "r31", "prompt": "Turn the excitation-curve points and their covariance into an S-factor and fit it with a resonance plus non-resonant term in AZURE2.", "expect": ["azure2"]}
 {"id": "r32", "prompt": "Summarise the attached meeting minutes in five bullet points for my group.", "expect": ["none"]}
+{"id": "r33", "prompt": "The yields from yesterday's runs and the new efficiency curve are ready. Push everything through to the AZURE2 fit and the S-factor, and keep track of what depends on what.", "expect": ["analysis-chain"]}

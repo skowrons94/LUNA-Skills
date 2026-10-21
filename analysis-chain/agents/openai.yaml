@@ -1,0 +1,3 @@
+interface:
+  display_name: "Analysis Chain"
+  short_description: "Run multi-stage analyses with checked handoffs"
