@@ -10,7 +10,7 @@ Read the relevant sections of [manuscript-guide.md](references/manuscript-guide.
 
 Each paragraph should answer the reader's next question. Introduce the physical purpose before technical detail and the observable before its equation. Preserve quantitative details needed for reproducibility and distinguish measured, assumed and model-derived quantities.
 
-For technically mature drafts, prefer the minimum restructuring and sentence-level edits needed. Preserve precise domain wording, energy-frame conventions, citations, numbers and necessary caveats. Never invent a reference, result, experimental justification or missing numerical value. Flag unresolved inconsistencies separately.
+For technically mature drafts, prefer the minimum restructuring and sentence-level edits needed. Preserve precise domain wording, energy-frame conventions, citations, numbers and necessary caveats. Never invent a reference, result, experimental justification or missing numerical value. Flag unresolved inconsistencies separately. If the project keeps a claims register (`docs/CLAIMS.toml`, see `nuclear-research-project`), quote numbers exactly as registered, add new ones there with their evidence, and run its checker on the manuscript.
 
 Use restrained scientific English and explicit comparisons. Explain what simulation or fitting determines, how it was validated, and how uncertainty enters. Keep conclusions proportional to sensitivity. Apply this manuscript style rather than proposal rhetoric unless the user requests a proposal.
 

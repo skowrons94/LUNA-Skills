@@ -64,6 +64,7 @@ project/
 |   |-- DECISIONS.md
 |   |-- PROVENANCE.md
 |   |-- VALIDATION.md
+|   |-- CLAIMS.toml      # quantitative claims -> evidence files; claims.lock.json freezes accepted ones
 |   `-- HANDOFF.md
 `-- work/
 ```

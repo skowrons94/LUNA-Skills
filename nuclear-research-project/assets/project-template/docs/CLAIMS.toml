@@ -1,0 +1,24 @@
+# Claims register: every quantitative statement that leaves the project (paper, report, talk,
+# proposal) is a claim here, tied to the file that supports it.
+# Check with: python3 <skills>/nuclear-research-project/scripts/check_claims.py .
+#
+# kind:       measured | derived | extrapolated | literature | assumption
+# confidence: high | medium | low      (a claim without evidence is low)
+# status:     open | challenged | revised | accepted
+# assumes:    IDs from docs/ASSUMPTIONS.md;  depends_on: other claim IDs
+# value:      the number exactly as it is written in the text, e.g. "4.3(4)" or "4.3 \pm 0.4"
+#
+# [[claim]]
+# id = "C1"
+# statement = "S(65 keV) of 17O(p,alpha) from the R-matrix extrapolation"
+# value = "4.3 \\pm 0.4"
+# unit = "keV b"
+# kind = "extrapolated"
+# evidence = ["results/sfactor_extrapolation.csv"]
+# produced_by = "python3 scripts/extrapolate.py configs/default.yaml"
+# assumes = ["A2"]
+# depends_on = []
+# limits = "Model dependence from the channel-radius scan is quoted separately."
+# confidence = "medium"
+# status = "open"
+# reviewed_by = ""

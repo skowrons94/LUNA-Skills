@@ -24,7 +24,7 @@ Create a project in which every number in a report or presentation can be traced
 3. Keep simulation source, geometry, macros, and physics settings separate from `simulation/runs/`. A run must be reproducible from a named configuration and seed policy.
 4. Put reusable self-written code in `src/`, small executable entry points in `scripts/`, and exploratory work in `notebooks/`. A notebook must not be the only implementation of a result used downstream.
 5. Write numerical outputs to `results/` and visual outputs to `plots/`. Reports and presentations consume those outputs; they must not hide manual corrections or private copies of the final numbers.
-6. Record assumptions, decisions, provenance, validation, and the current state in `docs/`. Keep units and energy-frame conventions explicit.
+6. Record assumptions, decisions, provenance, validation, and the current state in `docs/`. Register every quantitative statement that leaves the project in `docs/CLAIMS.toml` and run `scripts/check_claims.py` before building a report, talk or submission (see [references/reproducibility.md](references/reproducibility.md)). Keep units and energy-frame conventions explicit.
 7. Reports are LaTeX-first and use simple scientific language. State the physics question, quantitative assumptions, validation, uncertainty, and bounded feasibility conclusion.
 
 ## Working method

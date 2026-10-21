@@ -33,6 +33,12 @@ For detector simulation, validate geometry and response with known dimensions, m
 
 For thick-target yields, test integration convergence, stopping-power units, energy-frame conversion, target composition, and branching normalization. Preserve at least one calculation that can be checked independently by hand.
 
+## Claims register
+
+`docs/CLAIMS.toml` lists every quantitative statement that leaves the project: id, statement, value as written in the text, kind (measured, derived, extrapolated, literature, assumption), evidence files, the command that produced them, assumptions, the claims it depends on, confidence and status (open, challenged, revised, accepted). A claim without evidence has low confidence; an extrapolated claim states its limits.
+
+`scripts/check_claims.py PROJECT --accept C1` freezes the evidence of an accepted claim by hash. Afterwards `check_claims.py PROJECT --text report/main.tex` reports evidence that changed since acceptance (stale claims), claims that depend on a stale, challenged or revised claim, missing files, and values quoted with an uncertainty in the documents that match no claim. Run it before each report, talk or submission build. When a reviewer (human or subagent) challenges a claim, set its status to `challenged` until it is resolved; everything that depends on it is then flagged.
+
 ## Assumptions and decisions
 
 `docs/ASSUMPTIONS.md` is a live register of uncertain inputs. Each entry states the adopted value or scenario, evidence, effect on the result, and what measurement could replace it.
