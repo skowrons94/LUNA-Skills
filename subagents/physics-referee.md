@@ -25,7 +25,7 @@ Statistics and uncertainties
 - Statistical, independent-normalisation and shared systematic errors kept distinct; shared ones propagated through a covariance, not added per point as independent. Peelle-type bias considered where normalisations float.
 - χ² computed against published uncertainties; no silent error inflation or hidden nuisance parameters. Floated normalisations carry a prior equal to the quoted systematic.
 - Negative or low-count net areas retained; Poisson treatment where Gaussian propagation fails.
-- Residuals inspected by region (energy, angle, data set), not only a global χ²/N.
+- Residuals inspected by region (energy, angle, data set), not only a global χ²/N. If the `uncertainty-audit` skill is available, run its `uq_checks.py residuals` and `correlations` on the fit outputs as evidence.
 
 Physics limits
 - R-matrix: reduced widths within the Wigner limit (state the form used), J^π allowed for the channel spins and identical-particle symmetry, channel radii stated, no level narrower than the experimental resolution, parametrisation stated.
