@@ -45,6 +45,8 @@ For thick-target yields, test integration convergence, stopping-power units, ene
 
 `docs/DECISIONS.md` records choices that change the analysis, such as adopting a cross-section envelope, promoting an R-matrix fit to master, excluding a dataset, choosing a detector window, or changing a target model. Include the date, decision, evidence, alternatives, and consequence.
 
+At the end of each work session, have the agent write the decisions it took while the context is fresh: what was chosen, which alternatives were tried or rejected and why, with the evidence files. Mark them `draft` until the researcher confirms them. A rationale reconstructed weeks later is guesswork; rejected alternatives are the part most often lost and most often needed by the next person or agent.
+
 Do not rewrite history after a correction. Add the new decision, mark the earlier one superseded, and note which results were regenerated.
 
 ## Handoff

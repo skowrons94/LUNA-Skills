@@ -10,4 +10,4 @@ Record choices that change the analysis or experimental recommendation.
 - Alternatives considered:
 - Consequence:
 - Affected results:
-- Status: active or superseded
+- Status: draft (written by an agent, not yet confirmed), active, or superseded
