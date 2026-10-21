@@ -49,4 +49,6 @@ python3 scripts/create_research_project.py /absolute/path/to/project \
   --author "Researcher name"
 ```
 
+Then protect the evidence mechanically: `python3 <skills-repo>/settings/install_guard.py /absolute/path/to/project` installs a hook that denies edits to `data/raw/` and `data/external/` and asks before changes to `r-matrix/master/` or anything that leaves the machine.
+
 The command refuses to overwrite files. Use `--merge` only to add missing scaffold pieces to an existing directory, and inspect the dry-run first.
