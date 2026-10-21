@@ -24,7 +24,7 @@
 {"id": "r24", "prompt": "Compute the reaction rate from the AZURE2 extrapolation between 0.01 and 2 GK.", "expect": ["azure2"]}
 {"id": "r25", "prompt": "What is the stopping power of protons in Ta2O5 at 300 keV and how does the effective stopping change with composition?", "expect": ["target-analysis"]}
 {"id": "r26", "prompt": "Fetch the 152Eu decay gamma lines and intensities from IAEA NDS for my efficiency calibration.", "expect": ["efficiency-analysis"]}
-{"id": "r27", "prompt": "Reply to referee 2 who says our efficiency uncertainty is underestimated.", "expect": ["clear-experimental-writing"]}
+{"id": "r27", "prompt": "Draft our reply to referee 2, who writes: \"The authors quote a 3% uncertainty on the photopeak efficiency at 6.8 MeV, but their calibration extends only to 1.8 MeV and the extrapolation relies on a single 14N(p,gamma) resonance. I consider this uncertainty underestimated.\" We used the 278 keV resonance with known branchings and a Geant4 simulation validated at 5 energies.", "expect": ["clear-experimental-writing"]}
 {"id": "r28", "prompt": "Write a Python function that removes duplicate entries from a list while keeping the order.", "expect": ["none"]}
 {"id": "r29", "prompt": "Explain the difference between git rebase and git merge.", "expect": ["none"]}
 {"id": "r30", "prompt": "Fix the CSS so the sidebar does not overlap the footer on mobile.", "expect": ["none"]}

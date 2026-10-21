@@ -1,6 +1,6 @@
 ---
 name: efficiency-analysis
-description: Calibrate gamma-detector photopeak efficiency, retrieve evaluated nuclear data directly from IAEA NDS, and calculate or fit prompt-cascade coincidence summing with explicit peak/total efficiencies and geometry. Use for HPGe or scintillator efficiency curves from calibration sources or reaction lines, summing-in/summing-out corrections, and decay or level data needed for them.
+description: Calibrate gamma-detector photopeak efficiency, retrieve evaluated nuclear data directly from IAEA NDS, and calculate or fit prompt-cascade coincidence summing with explicit peak/total efficiencies and geometry. Use for HPGe or scintillator efficiency curves from calibration sources or reaction lines, summing-in/summing-out corrections, and decay or level data needed for them — including questions about how large a summing or efficiency correction is for a given line and geometry, which must be computed rather than estimated from memory.
 ---
 # Efficiency analysis
 

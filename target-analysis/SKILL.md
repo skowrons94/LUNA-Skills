@@ -1,6 +1,6 @@
 ---
 name: target-analysis
-description: Infer solid-target energy-loss profiles, effective stopping, composition ratios and target evolution from nuclear-reaction excitation curves. Use for implanted or compound targets, SRIM stopping data and cross-section folding; keep peak extraction and detector-efficiency calibration as explicit upstream inputs.
+description: Infer solid-target energy-loss profiles, effective stopping, composition ratios and target evolution from nuclear-reaction excitation curves. Use for implanted or compound targets, SRIM stopping data and cross-section folding, and for stopping powers or effective stopping of compound targets (Bragg's rule, composition dependence), which must come from stopping tables rather than memory; keep peak extraction and detector-efficiency calibration as explicit upstream inputs.
 ---
 
 # Target analysis
