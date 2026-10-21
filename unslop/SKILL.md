@@ -1,6 +1,6 @@
 ---
 name: unslop
-description: Edit prose to remove formulaic wording, filler and repetitive structure while preserving the author's meaning and requested tone. Use when explicitly asked to unslop or de-AI a draft.
+description: Edit prose to remove formulaic wording, filler and repetitive structure while preserving the author's meaning and requested tone. Use when explicitly asked to unslop or de-AI a draft, or when the user says a text reads as if AI wrote it.
 ---
 
 # Unslop
