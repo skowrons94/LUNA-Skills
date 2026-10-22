@@ -1,0 +1,3 @@
+interface:
+  display_name: "Reaction Network"
+  short_description: "pynucastro networks: burns, trajectories, rate sensitivity, measurement impact"

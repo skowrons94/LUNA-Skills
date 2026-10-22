@@ -48,6 +48,20 @@ CONTRACTS = {
                  "valid_energy_keV", "quantity", "geometry"],
         "rules": ["covariance_shape", "quantity_full_energy_peak"],
     },
+    "rate-table": {
+        "doc": "reaction-network input: N_A<sigma v> (cm^3/mol/s, or 1/s for decays) on a T9 grid, "
+               "bare (unscreened), no 1/(1+delta) factor; optional lognormal factor uncertainty fu",
+        "type": "csv",
+        "columns": {"T9": "GK", "rate": "cm^3/mol/s"},
+        "optional": {"fu": "factor"},
+        "rules": ["positive:T9", "increasing:T9", "nonneg:rate", "min:fu:1"],
+    },
+    "thermo-trajectory": {
+        "doc": "reaction-network conditions: time (s), temperature (K), density (g/cm^3)",
+        "type": "csv",
+        "columns": {"time_s": "s", "T_K": "K", "rho_cgs": "g/cm^3"},
+        "rules": ["increasing:time_s", "positive:T_K", "positive:rho_cgs", "peak:T_K:1e5"],
+    },
     "azure-dat": {
         "doc": "AZURE2 data segment: E_lab (MeV), angle (deg), cross section (b or b/sr), uncertainty; "
                "lab frame, forward kinematics; whitespace separated, no header",
@@ -87,6 +101,16 @@ def check_csv(spec, path):
     col = lambda c: [float(r[c]) for r in rows]
     for rule in spec.get("rules", []):
         name, _, arg = rule.partition(":")
+        if name == "min":  # min:column:limit, skipped when an optional column is absent
+            c, _, lim = arg.partition(":")
+            if c in have and min(col(c)) < float(lim):
+                errs.append(f"{c} has values below {lim}")
+            continue
+        if name == "peak":  # peak:column:limit, the maximum must reach it (catches T9 for K)
+            c, _, lim = arg.partition(":")
+            if max(col(c)) < float(lim):
+                errs.append(f"max {c} = {max(col(c)):g} is below {lim}: wrong unit?")
+            continue
         if name == "nonneg" and min(col(arg)) < 0:
             errs.append(f"{arg} has negative values")
         elif name == "positive" and min(col(arg)) <= 0:

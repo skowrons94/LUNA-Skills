@@ -32,3 +32,8 @@
 {"id": "r32", "prompt": "Summarise the attached meeting minutes in five bullet points for my group.", "expect": ["none"]}
 {"id": "r33", "prompt": "The yields from yesterday's runs and the new efficiency curve are ready. Push everything through to the AZURE2 fit and the S-factor, and keep track of what depends on what.", "expect": ["analysis-chain"]}
 {"id": "r34", "prompt": "Our R-matrix fit gives chi2/N = 0.6 and a 3 % uncertainty on S(0). Can we trust that uncertainty?", "expect": ["uncertainty-audit"]}
+{"id": "r35", "prompt": "If the 25Mg(p,g)26Al rate goes down by 30 % at 60–90 MK, how much does the 26Al surviving hot-bottom burning change?", "expect": ["reaction-network"]}
+{"id": "r36", "prompt": "Which reactions control the 12C/13C ratio after CN burning at 25 MK? Do a Monte Carlo over the STARLIB uncertainties.", "expect": ["reaction-network"]}
+{"id": "r37", "prompt": "Put the rate in output/reactionrates.out from my AZURE2 run into a pynucastro network instead of the REACLIB one and compare the oxygen isotopic ratios.", "expect": ["reaction-network"]}
+{"id": "r38", "prompt": "Our proposal measures 22Ne(p,g) to 10 %. How much does that shrink the model uncertainty of the Na yield in the burning zone?", "expect": ["reaction-network", "proposal-analysis"]}
+{"id": "r39", "prompt": "Compute the 12C(p,g)13N reaction rate from the R-matrix fit in this .azr project between T9 = 0.01 and 1.", "expect": ["azure2"]}

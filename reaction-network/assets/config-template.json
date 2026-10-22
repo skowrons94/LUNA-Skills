@@ -1,0 +1,15 @@
+{
+  "network": {
+    "nuclei": ["p", "he4", "c12", "c13", "n13", "n14", "n15", "o14", "o15", "o16", "o17", "f17", "f18"],
+    "with_reverse": true,
+    "screening": "chugunov_2007"
+  },
+  "starlib": {"file": "$NUCLEAR_DATA_DIR/STARLIB/starlib.dat", "use": "uncertainty"},
+  "rates": [],
+  "uncertainty": {"fu": {}},
+  "initial": {"X": {"p": 0.70, "he4": 0.287, "c12": 0.003, "n14": 0.001, "o16": 0.009}, "normalize": false},
+  "conditions": {"type": "constant", "T_K": 3.0e7, "rho_cgs": 100.0, "t_end_s": 3.0e14},
+  "output": {"n_log": 40, "observables": ["X(c12)/X(c13)", "X(n14)", "E"]},
+  "solver": {"rtol": 1e-6, "atol": 1e-20, "method": "BDF"},
+  "_comment": "Template only: the composition and conditions are placeholders. Replace them with sourced values and record the sources in the study REPORT.md."
+}

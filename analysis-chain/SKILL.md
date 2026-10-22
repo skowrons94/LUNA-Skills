@@ -21,7 +21,8 @@ An analysis is a chain of stages, each owned by one skill. Errors that cost week
 | 2 Efficiency | `efficiency-analysis` | fit `result.json` | `efficiency-curve` | line energies inside the validity range; summing treated for the real geometry |
 | 3 Target, effective energy | `target-analysis` | profile, effective energies | `excitation-curve` in | stopping table and composition stated; profile validated on a resonance |
 | 4 Cross section / S factor → R-matrix | `azure2`, `resonance-search` | `.dat` segments, fit | `azure-dat` | lab frame and MeV checked; normalisation priors equal quoted systematics |
-| 5 Extrapolation, rates | `azure2` | S(E), rate tables | — | registered as `extrapolated` claims with model dependence |
+| 5 Extrapolation, rates | `azure2` | S(E), rate tables | `rate-table` out | registered as `extrapolated` claims with model dependence |
+| 5b Astrophysical impact | `reaction-network` | burns, sensitivity rankings | `rate-table`, `thermo-trajectory` in | rates compared at site temperatures; tolerance and completeness checks pass; site conditions sourced |
 | 6 Review | `physics-referee` subagent | findings | — | blocking findings resolved; responses in `docs/VALIDATION.md` |
 | 7 Write-up | writing skills, `prc-figures`, `research-slides` | text, figures | claims register | `check_claims.py` passes on the documents |
 

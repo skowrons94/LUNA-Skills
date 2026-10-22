@@ -41,6 +41,19 @@ Four columns: E_lab (MeV), angle (deg), cross section (b, or b/sr for differenti
 
 The contract check warns when energies exceed 50 MeV, which usually means keV were written. It is a heuristic: data entirely below 50 keV written in keV are not caught, so look at the first lines.
 
+## rate-table: azure2 (or a library) → reaction-network
+
+`T9,rate[,fu]`: N_A⟨σv⟩ in cm³ mol⁻¹ s⁻¹ (s⁻¹ for decays) on a strictly increasing T9 grid. Convert AZURE2 output with `reaction-network/scripts/rates.py from-azure`. The physics the columns cannot show:
+
+- The rate is **bare**: laboratory electron screening was removed from the data before the R-matrix fit, because the network applies plasma screening itself.
+- No identical-particle factor 1/(1+δ) is included (REACLIB convention). The network applies it.
+- `fu` is a lognormal factor uncertainty (median × fu^±1 is the 68 % band). A factor borrowed from another evaluation (e.g. STARLIB) is not the uncertainty of this rate. Say so in the sidecar.
+- The grid covers the temperatures where the rate is used. Outside it the network stops unless told otherwise.
+
+## thermo-trajectory: stellar model or parametrisation → reaction-network
+
+`time_s,T_K,rho_cgs`, strictly increasing time. The network interpolates linearly in (t, ln T, ln ρ), so the sampling must resolve the temperature peak (`reaction-network/scripts/trajectory.py check` flags steps above 10 % in T). A trajectory extracted from a model whose nuclear physics differs from the network's is a post-processing approximation; state it.
+
 ## Into the claims register
 
 A number leaving stage 5 or 7 is a claim with `kind`, `evidence`, `produced_by` and `depends_on` pointing at the upstream claims (yield normalisation, efficiency, target). This lets a rerun upstream mark it stale.
