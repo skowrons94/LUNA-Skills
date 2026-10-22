@@ -14,6 +14,7 @@ A rate change matters to astronomy through a star: its structure, timescales, mi
   - installation and the environment file: [install.md](references/install.md);
   - templates, inlists, threads, output, run checks: [running.md](references/running.md);
   - networks, reaction names, rate factors, rate tables, caches, screening, ²⁶Al isomers: [nuclear.md](references/nuclear.md);
+  - mixing prescriptions (thermohaline with the C_t ↔ `thermohaline_coeff` mapping, rotation, overshoot, third dredge-up, hot-bottom burning, ¹³C pocket) and how to cross them with rate changes: [mixing.md](references/mixing.md);
   - solar models, neutrino fluxes, the B23/SF-III reference models and `ssm.py`: [solar.md](references/solar.md);
   - trajectories and compositions for `reaction-network`: [trajectories.md](references/trajectories.md);
   - validation ladder: [validation.md](references/validation.md).

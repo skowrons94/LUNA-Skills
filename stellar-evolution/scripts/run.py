@@ -72,6 +72,9 @@ def setup(spec):
             bad = [k for k in kv if keys is not None and k.split("(")[0].strip().lower() not in keys]
             if bad:
                 raise SystemExit(f"{fname}: not &{nl} options: {bad}")
+    missing = [src for src in spec.get("files", {}) if not (spec["_base"] / src).is_file()]
+    if missing:
+        raise SystemExit(f"files listed in the spec do not exist (paths are relative to the spec): {missing}")
     shutil.copytree(tpl, run, symlinks=True)
     # test-suite cases refer to MESA_DIR relative paths in their make/ and rn; a copy works with
     # MESA_DIR set, which the env file provides

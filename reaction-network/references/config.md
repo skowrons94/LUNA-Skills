@@ -55,11 +55,14 @@ One JSON file describes one network calculation. `burn.py` runs it once; `sensit
 | `{"branch": {"rate": N, "products": [...], "fraction": f}}` | Split the flow of N: fraction f goes to the new products, 1−f stays. Both branches share N's uncertainty and random variable. Use for isomer feeding (²⁵Mg(p,γ)²⁶Alᵐ → ²⁶Mg) and other effective channels. |
 | `{"add": {"reactants": [...], "products": [...]}, "table": F}` | A rate that REACLIB lacks. `reverse: "derive"` adds its detailed-balance reverse. |
 
+Rate tables can be made with `rates.py from-azure` (AZURE2 output), `from-band` (columns T9 low adopted high, 68 %: fu = √(high/low)) and `from-sfactor` (S(0), S′, S″ → bare non-resonant rate, bare-nucleus reduced mass).
+
 Names are pynucastro short names (`mg25(p,g)al26`, `he4(aa,g)c12`, `al26(g,p)mg25`) or `fname`s (`p_Mg25__Al26`). An ambiguous name stops the build.
 
 ## uncertainty
 
 - `fu`: per rate, a constant (≥ 1) or a rate-table file with an `fu` column. The reverse rate and any branch share it.
+- `correlations`: `[{"rates": [A, B], "rho": r, "why": "..."}]`. The groups' normal variables are drawn with this correlation (Cholesky). For two rates sharing a fully correlated fractional systematic s (e.g. a stopping-power or normalisation uncertainty), ρ(T) = ln(1+s)²/(ln fu_A ln fu_B). `rates.py shared-rho A.csv B.csv --shared s --T9 ...` prints it; use its value at the site temperature. Ratios of correlated rates are much better known than either rate.
 - `default_fu`: a factor for every non-weak rate without one. It is off by default. Each use is written to `info.warnings`, because an assumed factor shapes the ranking as much as a measured one does.
 - Rates without fu are held fixed in Monte Carlo and listed in `info.fixed`. Report that list with any ranking.
 

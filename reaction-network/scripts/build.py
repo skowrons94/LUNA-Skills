@@ -253,6 +253,15 @@ def build(cfg, starlib_entries=None):
             if a == r.fname:
                 fu_tables[b] = fu_tables[r.fname]
 
+    # correlated rate uncertainties: [{"rates": [A, B], "rho": r}], resolved to fnames here and
+    # turned into a correlation matrix of the groups' normal variables by sensitivity.py
+    info["correlations"] = []
+    for c in unc.get("correlations", []):
+        names = [nl.find_rate(rates, n).fname for n in c["rates"]]
+        rho = float(c["rho"])
+        if len(names) != 2 or not -1 < rho < 1:
+            raise ValueError("a correlation entry needs two rates and -1 < rho < 1")
+        info["correlations"].append({"rates": names, "rho": rho, "why": c.get("why", "")})
     net = nl.Network(rates, screening=ncfg.get("screening", "chugunov_2007"),
                      symmetric_screening=ncfg.get("symmetric_screening", False),
                      nuclei=ncfg["nuclei"])

@@ -3,6 +3,7 @@
 
   python3 rates.py compare "mg25(p,g)al26" [--table T.csv] [--starlib FILE] [--T9 0.03 0.05 0.1]
   python3 rates.py from-azure reactionrates.out --out T.csv [--fu-from STARLIB_FILE --rate NAME]
+  python3 rates.py from-band rate.dat --out T.csv          (columns T9 low adopted high, 68 % band)
   python3 rates.py from-sfactor --rate "n14(p,g)o15" --S0 1.68e-3 --S1 -1.7e-3 --T9 0.003 0.06 \
                        --source "SF III Table I" --out T.csv     bare non-resonant rate from S(E)
   python3 rates.py fit T.csv --rate "c12(p,g)n13" --forms nonresonant resonance --out fit.json
@@ -166,6 +167,44 @@ def from_sfactor(a):
     return 0
 
 
+def from_band(a):
+    """T9 low adopted high (68 % band) -> rate-table CSV with fu = sqrt(high/low)."""
+    rows = [ln.split() for ln in Path(a.file).read_text().splitlines()
+            if ln.strip() and not ln.lstrip().startswith("#")]
+    arr = np.array([[float(x) for x in r[:4]] for r in rows])
+    T9, lo, ad, hi = arr.T
+    if np.any(np.diff(T9) <= 0) or np.any(lo > ad) or np.any(hi < ad):
+        raise SystemExit("expected increasing T9 and low <= adopted <= high")
+    fu = np.sqrt(hi / lo)
+    asym = np.max(np.abs(np.log(hi / ad) / np.log(ad / lo) - 1))
+    with open(a.out, "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["T9", "rate", "fu"])
+        for t, v, u in zip(T9, ad, fu):
+            w.writerow([f"{t:.6g}", f"{v:.6e}", f"{u:.5f}"])
+    print(f"wrote {a.out}: {len(T9)} points; fu {fu.min():.4f}-{fu.max():.4f}; "
+          f"band asymmetry in log up to {asym * 100:.1f} % (fu is the geometric mean)")
+    return 0
+
+
+def shared_rho(a):
+    """Correlation of two lognormal rates that share a fully correlated fractional systematic:
+    rho(T) = ln(1+s)^2 / (ln fu_A(T) ln fu_B(T))."""
+    _, _, fa = build.read_rate_table(a.table_a)
+    Ta, _, _ = build.read_rate_table(a.table_a)
+    Tb, _, fb = build.read_rate_table(a.table_b)
+    if fa is None or fb is None:
+        raise SystemExit("both tables need an fu column")
+    ls = np.log(1 + a.shared)
+    print(f"shared systematic {a.shared * 100:.2f} %:")
+    for t in a.T9:
+        ua = np.exp(np.interp(np.log(t), np.log(Ta), np.log(fa)))
+        ub = np.exp(np.interp(np.log(t), np.log(Tb), np.log(fb)))
+        rho = ls ** 2 / (np.log(ua) * np.log(ub))
+        print(f"  T9 {t:6.3f}: fu_A {ua:.4f} fu_B {ub:.4f} rho {rho:.3f}")
+    return 0
+
+
 def compare(a):
     import pynucastro as pyna
     T9s = a.T9 or [0.01, 0.02, 0.03, 0.05, 0.08, 0.1, 0.2, 0.3, 0.5, 1.0, 2.0]
@@ -282,6 +321,14 @@ def main(argv=None):
     f.add_argument("--label", default="fit")
     f.add_argument("--tol", type=float, default=0.03)
     f.add_argument("--seed", type=int, default=0)
+    s = sub.add_parser("shared-rho")
+    s.add_argument("table_a")
+    s.add_argument("table_b")
+    s.add_argument("--shared", type=float, required=True, help="fully correlated fraction, e.g. 0.064")
+    s.add_argument("--T9", type=float, nargs="+", required=True)
+    s = sub.add_parser("from-band")
+    s.add_argument("file", help="columns T9 low adopted high (68 %% band)")
+    s.add_argument("--out", required=True)
     s = sub.add_parser("from-sfactor")
     s.add_argument("--rate", required=True)
     s.add_argument("--S0", type=float, required=True, help="S(0) in MeV b")
@@ -293,7 +340,8 @@ def main(argv=None):
     s.add_argument("--out", required=True)
     a = ap.parse_args(argv)
     return {"compare": compare, "from-azure": from_azure, "fit": do_fit,
-            "from-sfactor": from_sfactor}[a.cmd](a)
+            "from-sfactor": from_sfactor, "from-band": from_band,
+            "shared-rho": shared_rho}[a.cmd](a)
 
 
 if __name__ == "__main__":

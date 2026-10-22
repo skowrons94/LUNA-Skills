@@ -82,6 +82,20 @@ def group_label(members):
     return members[0]
 
 
+def correlation_matrix(net, info, gid):
+    """Correlation of the groups' normal variables from info['correlations'] (identity otherwise)."""
+    C = np.eye(len(gid))
+    pos = {r.fname: int(net.group[i]) for i, r in enumerate(net.rates)}
+    for c in info.get("correlations", []):
+        ga, gb = (pos[n] for n in c["rates"])
+        if ga not in gid or gb not in gid:
+            raise SystemExit(f"correlated rates {c['rates']} need uncertainty factors")
+        i, j = gid.index(ga), gid.index(gb)
+        C[i, j] = C[j, i] = c["rho"]
+    np.linalg.cholesky(C)  # raises if not positive definite
+    return C
+
+
 def noise_threshold(n, ngroups, alpha=0.05):
     """|Spearman| a pure-noise rate exceeds with probability alpha after a Bonferroni
     correction over all groups (normal approximation, sd = 1/sqrt(n-1))."""
@@ -92,7 +106,8 @@ def run_mc(a, cfg, net, info, out):
     groups = group_table(net)
     gid = sorted(groups)
     rng = np.random.default_rng(a.seed)
-    P = rng.standard_normal((a.n, len(gid)))
+    C = correlation_matrix(net, info, gid)
+    P = rng.standard_normal((a.n, len(gid))) @ np.linalg.cholesky(C).T
     ngroup_all = int(net.group.max()) + 1
     tasks = []
     for k in range(a.n):
@@ -113,6 +128,7 @@ def run_mc(a, cfg, net, info, out):
         for k in range(a.n):
             w.writerow([k, int(ok[k])] + [f"{x:.6f}" for x in P[k]] + [f"{x:.8e}" for x in V[k]])
     summary = {"mode": "mc", "n": a.n, "n_failed": int((~ok).sum()), "seed": a.seed,
+               "correlations": info.get("correlations", []),
                "failures": sorted(set(e for e in errs if e))[:10], "nominal": dict(zip(obs_names, nominal)),
                "observables": {}}
     Pk, Vk = P[ok], V[ok]

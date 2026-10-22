@@ -196,6 +196,18 @@ check("multiplier is fu**p", abs(m[i_f] - 1.5) < 1e-12 and abs(m[i_r] - 1.5) < 1
 netm.p[:] = 0
 check("rates without fu are listed as fixed", len(infom["fixed"]) == len(netm.rates) - 2)
 
+# 9b. correlated sampling: requested rho reproduced by the Cholesky draw
+import sensitivity as sens  # noqa: E402
+cfgc = json.loads(json.dumps(cfg))
+cfgc["uncertainty"] = {"fu": {"c12(p,g)n13": 1.07, "c13(p,g)n14": 1.08},
+                       "correlations": [{"rates": ["c12(p,g)n13", "c13(p,g)n14"], "rho": 0.75}]}
+netc2, infoc = build.build(cfgc)
+gid = sorted(sens.group_table(netc2))
+C = sens.correlation_matrix(netc2, infoc, gid)
+Pc = np.random.default_rng(3).standard_normal((20000, len(gid))) @ np.linalg.cholesky(C).T
+emp = np.corrcoef(Pc.T)[0, 1]
+check("correlated groups sampled with the requested rho", abs(emp - 0.75) < 0.02, f"{emp:.3f}")
+
 # 10. branch
 cfgx = {"network": {"nuclei": ["p", "he4", "mg25", "mg26", "al26"], "with_reverse": False,
                     "screening": "none"},
