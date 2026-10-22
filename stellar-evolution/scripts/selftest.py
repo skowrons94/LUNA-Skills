@@ -133,6 +133,9 @@ check("check-run: physical termination ok", r["ok"] and r["retries"] == 3 and r[
 check("check-run: solver-limit termination fails", not mesa.check_run(run)["ok"])
 (run / "rn.log").write_text("model 10\n")
 check("check-run: missing termination fails", not mesa.check_run(run)["ok"])
+(run / "rn.log").write_text("chi^2 3.5\n save best model results to outputs/sample_0001.data\nfinished\n")
+check("check-run: case-specific done pattern accepted",
+      mesa.check_run(run, done_pattern=r"save best model results")["ok"])
 
 print("PASS" if ok else "FAIL")
 sys.exit(0 if ok else 1)

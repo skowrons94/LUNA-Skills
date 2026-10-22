@@ -118,8 +118,10 @@ def cmd_compare(a):
     return 0
 
 
-def check_run(run_dir, log="rn.log"):
-    """Read a run's terminal log: termination code, retries, errors, final energy error."""
+def check_run(run_dir, log="rn.log", done_pattern=None):
+    """Read a run's terminal log: termination code, retries, errors, final energy error.
+    Cases that stop from run_star_extras (e.g. simplex_solar_calibration at its target age)
+    print no termination code; pass done_pattern, a regex their log prints on success."""
     p = Path(run_dir) / log
     if not p.exists():
         return {"ok": False, "problems": [f"no {log} in {run_dir}"]}
@@ -127,9 +129,11 @@ def check_run(run_dir, log="rn.log"):
     out = {"ok": True, "problems": []}
     tc = re.findall(r"termination code:\s*(\S+)", txt)
     out["termination_codes"] = tc
-    if not tc:
+    if done_pattern:
+        out["done_pattern_found"] = bool(re.search(done_pattern, txt))
+    if not tc and not out.get("done_pattern_found"):
         out["ok"] = False
-        out["problems"].append("no termination code: the run did not finish")
+        out["problems"].append("no termination code (and no done pattern): the run did not finish")
     bad = ("max_model_number", "min_timestep_limit", "max_number_retries", "dt_is_zero",
            "nonzero_ierr", "failed_in_")
     for t in tc:
@@ -155,7 +159,7 @@ def check_run(run_dir, log="rn.log"):
 
 
 def cmd_check_run(a):
-    r = check_run(a.dir, a.log)
+    r = check_run(a.dir, a.log, a.done)
     print(json.dumps(r, indent=1))
     return 0 if r["ok"] else 1
 
@@ -336,6 +340,7 @@ def main(argv=None):
     s = sub.add_parser("check-run")
     s.add_argument("dir")
     s.add_argument("--log", default="rn.log")
+    s.add_argument("--done", help="regex printed by cases that stop from run_star_extras")
     s = sub.add_parser("set")
     s.add_argument("file")
     s.add_argument("namelist")

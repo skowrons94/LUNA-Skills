@@ -44,3 +44,16 @@ Two runs that differ only in one rate factor give the logarithmic derivative:
 Run them with identical inputs (same template, same calibration parameters, same MESA version) and compare at the same age. Without recalibration, L and R drift slightly with the changed rate. That is acceptable for small factors (≤ 10–20 %), but report L, R, surface Z/X and R_cz of both runs. In published SSM work the derivatives come from recalibrated models. Expect agreement at the ~10 % level on α, not better.
 
 Published exponents (Serenelli, Peña-Garay & Haxton 2013, PRD 87, 043001, Table I, SFII-GS98 SSM): for S₁₁₄ (¹⁴N(p,γ)), α = 1.000 for ¹⁵O and 0.747 for ¹³N (part of the ¹³N flux comes from primordial ¹²C burning in the outer core), and |α| < 0.01 for pp, pep, ⁷Be and ⁸B. For S₃₄ (³He(α,γ)), α = 0.853 for ⁷Be and 0.806 for ⁸B. The model must reproduce these patterns before any new sensitivity it gives is believed.
+
+## Tested result (MESA r26.04.1, this template, 2026-10-22)
+
+The template at its shipped first values, run unchanged and with `special_rate_factor` 1.10 on `r_n14_pg_o15`. Each run took 89 min on 3 threads, with energy error 10⁻⁹. The template prints no termination code; use `check-run --done "save best model results"`.
+
+| | pp | pep | ⁷Be | ⁸B | ¹³N | ¹⁵O | ¹⁷F |
+|---|---|---|---|---|---|---|---|
+| MESA / B16-GS98 | 0.99 | 0.96 | 0.99 | 0.92 | **1.98** | **2.32** | 1.13 |
+| α(S₁₁₄), MESA | −0.02 | −0.03 | −0.02 | −0.03 | 0.84 | 0.97 | −0.02 |
+| α(S₁₁₄), Serenelli et al. 2013 | −0.007 | −0.010 | −0.001 | 0.007 | 0.747 | 1.000 | — |
+
+- **Rate response: reproduced.** α(¹⁵O) agrees to 3 % and α(¹³N) to 12 %. The pp-chain fluxes are insensitive, as expected. The small negative α values come from the missing recalibration (log L moved from −0.00146 to −0.00171).
+- **Absolute CNO fluxes: not reproduced.** ¹³N and ¹⁵O are ≈2× the SSM, consistently with the model's own CNO luminosity (`cno` = 1.5 % of L). Internal bookkeeping is consistent: ¹⁴N(p,γ), ¹⁵O decay and ¹⁵N(p,α) rates agree. The cause is not established. The template is a test case, not an SSM: surface Z/X is 0.0257 against the 0.0229 target, f_ov = 0.031, TDC convection, and no calibration loop. Do not quote absolute CNO fluxes from it. For absolute fluxes, run the simplex calibration, compare its central T and C+N profile with an SSM, and find the cause first. Ratios and logarithmic derivatives from paired runs are usable with the caveat above.
