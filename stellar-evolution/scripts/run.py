@@ -16,7 +16,8 @@ spec.json:
   "profile_columns": ["add_screened_rates"],     (appended to profile_columns.list)
   "history_columns": [],
   "files": {"rates/r_mg25_pg_al26.dat": "r_mg25_pg_al26.dat"},  (copied into the run dir)
-  "done_pattern": "save best model results"      (only for cases without a termination code)
+  "done_pattern": "save best model results",     (only for cases without a termination code)
+  "allow_termination": ["max_model_number"]      (only when that limit is the intended stop)
 }
 The run directory gets manifest.json: MESA and SDK versions, template, every edit, SHA-256 of
 the inlists and copied files, wall time and the check-run result.
@@ -122,7 +123,8 @@ def run_case(spec, mk=True):
         if r.returncode != 0:
             raise SystemExit(f"./mk failed: see {run / 'mk.log'}")
     subprocess.run(["bash", "-c", "nice -n 10 ./rn > rn.log 2>&1"], cwd=run, env=env)
-    chk = mesa.check_run(run, done_pattern=spec.get("done_pattern"))
+    chk = mesa.check_run(run, done_pattern=spec.get("done_pattern"),
+                         allow=tuple(spec.get("allow_termination", ())))
     man = json.loads((run / "manifest.json").read_text())
     man.update({"wall_min": (time.time() - t0) / 60, "check": chk,
                 "end_time": time.strftime("%Y-%m-%dT%H:%M:%S%z")})

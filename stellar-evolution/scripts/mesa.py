@@ -119,7 +119,7 @@ def cmd_compare(a):
     return 0
 
 
-def check_run(run_dir, log="rn.log", done_pattern=None):
+def check_run(run_dir, log="rn.log", done_pattern=None, allow=()):
     """Read a run's terminal log: termination code, retries, errors, final energy error.
     Cases that stop from run_star_extras (e.g. simplex_solar_calibration at its target age)
     print no termination code; pass done_pattern, a regex their log prints on success."""
@@ -138,6 +138,8 @@ def check_run(run_dir, log="rn.log", done_pattern=None):
     bad = ("max_model_number", "min_timestep_limit", "max_number_retries", "dt_is_zero",
            "nonzero_ierr", "failed_in_")
     for t in tc:
+        if t in allow:  # an intentional stop for this study (e.g. a fixed number of models)
+            continue
         if any(b in t for b in bad):
             out["ok"] = False
             out["problems"].append(f"termination '{t}' is a solver limit, not the physical stop")
@@ -160,7 +162,7 @@ def check_run(run_dir, log="rn.log", done_pattern=None):
 
 
 def cmd_check_run(a):
-    r = check_run(a.dir, a.log, a.done)
+    r = check_run(a.dir, a.log, a.done, tuple(a.allow or ()))
     print(json.dumps(r, indent=1))
     return 0 if r["ok"] else 1
 
@@ -372,6 +374,7 @@ def main(argv=None):
     s.add_argument("dir")
     s.add_argument("--log", default="rn.log")
     s.add_argument("--done", help="regex printed by cases that stop from run_star_extras")
+    s.add_argument("--allow", nargs="*", help="termination codes that are intentional stops here")
     s = sub.add_parser("set")
     s.add_argument("file")
     s.add_argument("namelist")
