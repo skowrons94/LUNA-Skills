@@ -1,0 +1,2 @@
+numpy
+# MESA itself: see references/install.md (not pip-installable)

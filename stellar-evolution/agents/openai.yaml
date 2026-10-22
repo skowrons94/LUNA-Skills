@@ -1,0 +1,3 @@
+interface:
+  display_name: "Stellar Evolution (MESA)"
+  short_description: "Install, run and validate MESA models; rate changes, solar neutrinos, trajectories"

@@ -8,6 +8,8 @@ Agent skills (Claude Code / Agent Skills format) for experimental nuclear physic
 spectra ──► yield-analysis ──► peak-shape-analysis ──► target-analysis ──► azure2 (R-matrix, S-factor, rate) ──► resonance-search (level-scheme campaigns)
                                                                                       │
                                                                                       └──► reaction-network (pynucastro burns, trajectories, rate sensitivity, measurement impact)
+                                                                                                 ▲ trajectories, compositions │ rates that pass the screen
+                                                                                                 └──── stellar-evolution (MESA) ◄┘
                ▲                                                ▲
       efficiency-analysis        evaluated-nuclear-data     geant4-simulation (general Geant4: neutron counters, sources, kinematics, validation)
                                                             underground-gamma-simulation (Geant4 detector response, kinematics)
@@ -36,6 +38,7 @@ nuclear-research-project  (project layout, provenance, claims register, LaTeX re
 | `evaluated-nuclear-data` | Evaluated cross sections (ENDF/B-VIII, JEFF, JENDL, TENDL): OpenMC HDF5 or raw ENDF-6, NJOY at temperature, thermal/RI/MACS/fission-spectrum averages, library spread, MF/MT lookup, SAMMY and Ferdinand checks |
 | `azure2` | AZURE2/pyazr R-matrix calculations, fits, decompositions, extrapolations, rates |
 | `reaction-network` | pynucastro networks: one-zone burns at constant conditions or along trajectories, REACLIB/STARLIB/table rates (AZURE2 output), detailed-balance reverses, ²⁶Al isomer branches, Monte Carlo and OAT rate sensitivity with noise thresholds, what a measurement's precision buys, REACLIB-form fits |
+| `stellar-evolution` | MESA without admin rights (SDK relocation, macOS SDKROOT pitfall), test-suite templates, rate factors and dense rate tables with run-local caches, run driver with manifests, run checks, solar neutrino fluxes from per-cell rates, centre trajectories and compositions for networks, resolution and physics-degeneracy checks |
 | `resonance-search` | Automated, gated search for missing or misassigned resonances in a multichannel R-matrix evaluation: data audit, pattern map, window searches, structure-aware gates, merges, unattended driver |
 | `analysis-chain` | Analyses that span several skills: fixed stages with gates, handoff contracts, unit/frame/correlation-preserving adapters (efficiency → yields, yields → target, tables → AZURE2), provenance sidecars, decision briefs, bounded retries, parallel independent attempts |
 | `uncertainty-audit` | Whether uncertainties support the conclusion: source and correlation assessment against the code; pulls, χ², localised residual structure, held-out coverage, parameter identifiability |
@@ -68,7 +71,7 @@ python3 settings/install_guard.py /path/to/analysis-project
 
 Codex and OpenCode read the same `SKILL.md` format from `.agents/skills/` (Codex also `.codex/skills/`; OpenCode also `.claude/skills/`); link the folders there in the same way and check your tool's documentation for its user-level location. Each skill's `agents/openai.yaml` holds its Codex display metadata.
 
-If a folder of the same name already exists in `~/.claude/skills`, move it aside first. Skills that drive external codes (AZURE2, Geant4, AGATA, ROOT) assume those codes are installed; point the agent at your own installation.
+If a folder of the same name already exists in `~/.claude/skills`, move it aside first. Skills that drive external codes (AZURE2, Geant4, AGATA, ROOT, MESA, pynucastro) assume those codes are installed; point the agent at your own installation.
 
 ## Test
 
@@ -86,6 +89,7 @@ python3 agata-simulation/scripts/test_agata_lm.py
 python3 geant4-simulation/scripts/selftest.py
 python3 delta-beta-dsam/scripts/selftest.py
 python3 reaction-network/scripts/selftest.py     # needs pynucastro; uses $NUCLEAR_DATA_DIR/STARLIB if present
+python3 stellar-evolution/scripts/selftest.py    # no MESA needed
 python3 analysis-chain/scripts/selftest.py
 python3 uncertainty-audit/scripts/selftest.py
 python3 nuclear-research-project/scripts/test_check_claims.py
