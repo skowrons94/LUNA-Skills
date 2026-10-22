@@ -27,6 +27,8 @@ Run times on an 8-core laptop range from minutes (`custom_rates` final part: 15 
 - Output: `LOGS/history.data` (one row per `history_interval` steps), `LOGS/profileN.data` (every `profile_interval` steps, indexed in `LOGS/profiles.index`), `photos/` for restarts. Add columns in `history_columns.list` and `profile_columns.list`. `add_screened_rates` and `add_raw_rates` add per-cell rates for every reaction in the net.
 - `write_profile_when_terminate = .true.` with `filename_for_profile_when_terminate = 'final.profile'` (both in `&star_job`) guarantees a profile at the stopping point. `mesa.py set` and `run.py` refuse keys that are not in the namelist's defaults file.
 
+- A model created with `create_pre_main_sequence_model = .true.` first takes `pre_ms_relax_num_steps` (default 300) steps at a fixed tiny timestep (the terminal shows `dt_limit max_dt`, lg_dt ≈ −5). With `pre_ms_relax_to_start_radiative_core` it then relaxes until a radiative core appears. `LOGS/` appears only afterwards. Several minutes of this is normal, not a stuck run.
+
 ## Judge a run on its log and outputs
 
 `python3 SKILL_DIR/scripts/mesa.py check-run RUN_DIR` reads `rn.log`:
