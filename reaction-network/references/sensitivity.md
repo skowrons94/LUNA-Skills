@@ -4,7 +4,7 @@ The question is usually one of these. *Which reactions control this observable a
 
 ## Monte Carlo (`--mode mc`)
 
-- **Convention.** Rates are lognormal: λ(T) = λ_med(T) · fu(T)^p, with one p ~ N(0,1) per sample and per rate group, constant in T (Longland et al. 2010; Iliadis et al. 2015). A forward rate, its reverse and its branches form one group. Sampling them independently would break detailed balance and inflate the spread.
+- **Convention.** Rates are lognormal: λ(T) = λ_med(T) · fu(T)^p, with one p ~ N(0,1) per sample and per rate group, constant in T (Iliadis et al. 2015, J. Phys. G 42, 034007, §3.1–3.2; the lognormal rate distribution itself is from Longland et al. 2010, Nucl. Phys. A 841, 1). A forward rate and its reverse form one group (Iliadis et al. 2015, §3). Sampling them independently would break detailed balance and inflate the spread. Putting branches in the same group is this skill's extension.
 - **Which rates vary.** Only rates with an fu: STARLIB matches, table fu columns, explicit `uncertainty.fu`. Everything else is fixed and listed in `info.fixed`. A reaction absent from the ranking may be fixed, not unimportant. Check the list before saying a reaction does not matter.
 - **Median vs recommended.** With `starlib.use: "uncertainty"` the network keeps REACLIB rates and borrows STARLIB's fu. Where the REACLIB rate lies outside STARLIB's 68 % band, the sampled distribution is shifted. Use `starlib.use: "rates"` for a self-consistent study, and `rates.py compare` to see where the two differ.
 - **Reading the ranking.**

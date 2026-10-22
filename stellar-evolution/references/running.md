@@ -12,7 +12,7 @@ Never edit `$MESA_DIR`. Copy a case (the run driver does this) and change the co
 | ¹³C pocket, s-process neutron source | `c13_pocket` | pocket set up by a parametrised mixing profile |
 | Massive stars to core collapse, C/Ne/O burning | `12M_pre_ms_to_core_collapse`, `20M_pre_ms_to_core_collapse` | hours; `approx21` by default, larger nets for yields |
 | Carbon ignition, flames | `carbon_kh`, `cburn_inward`, `wd_c_core_ignition` | ¹²C+¹²C sensitivity |
-| Pair-instability, black-hole mass gap | `pisn`, `ppisn` | ¹²C(α,γ) studies (Farmer et al. 2020 style) |
+| Pair-instability, black-hole mass gap | `pisn`, `ppisn` | ¹²C(α,γ) studies (Farmer et al. 2020, ApJL 902, L36) |
 | Custom rates mechanism | `custom_rates` | rate tables via `rate_list.txt` |
 | Novae, accreting WDs | `wd_acc_small_dm`, `ns_h` (accreting NS) | burning on accretion; check the net |
 

@@ -13,11 +13,11 @@ Read this before quoting a network number. Most wrong results here do not come f
 ## Weak rates
 
 - REACLIB weak rates are laboratory decay rates: no temperature or density dependence. For T9 ≳ 0.5, or densities where electron captures matter (ρYe ≳ 10⁶ g/cm³), use tabulated stellar weak rates. pynucastro provides `TabularLibrary` (Suzuki, Langanke, FFN); the engine evaluates them with ρ and composition.
-- Energy generation `E` counts the mass change of every reaction. For REACLIB β decays the neutrino energy is not removed (pynucastro removes it only for tabulated weak rates). For CNO burning this overstates the energy by ~6 %. Do not quote `E` as a luminosity without that correction.
+- Energy generation `E` counts the mass change of every reaction. For REACLIB β decays the neutrino energy is not removed (pynucastro removes it only for tabulated weak rates). For CN-I burning this overstates the energy by ≈6.4 % (mean ν energies 0.706 MeV for ¹³N and 0.996 MeV for ¹⁵O, Bahcall 1997, PRC 56, 3391, out of 26.73 MeV). Do not quote `E` as a luminosity without that correction.
 
 ## Isomers: ²⁶Al and others
 
-pynucastro's REACLIB contains only total `al26`, which decays with the ground-state half-life (0.717 Myr). Below roughly 0.15 GK the ground state and the 228-keV isomer (6.3 s) do not communicate thermally. Between ~0.15 and ~0.4 GK the coupling is partial, and above ~0.4 GK they are in equilibrium (Gupta & Meyer 2001; Iliadis et al. 2011). Consequences at hydrostatic temperatures:
+pynucastro's REACLIB contains only total `al26`, which decays with the ground-state half-life (0.717 Myr). Below roughly 0.15 GK the ground state and the 228-keV isomer (6.34 s) do not communicate thermally. Between ~0.15 and ~0.45 GK the coupling is partial, and above ~0.45 GK they are in equilibrium (Coc et al. 1999 and Runkle, Champagne & Engel 2001, as summarised in Iliadis et al. 2011, ApJS 193, 16, §2.3; method: Gupta & Meyer 2001, PRC 64, 025805). Consequences at hydrostatic temperatures:
 
 - A total ²⁵Mg(p,γ)²⁶Al rate puts the isomer's share into long-lived ²⁶Al. The ground-state yield is then overestimated by 1/f_gs.
 - The effective fix below ~0.15 GK is `branch`: fraction 1−f_gs of ²⁵Mg(p,γ) goes directly to ²⁶Mg (the isomer decays before it can capture). Take f_gs(T) from the measured branchings to the ground state and isomer (it is temperature dependent: use the value at the burning temperature, or split into separate table rates). Record its source in `why`.

@@ -33,7 +33,7 @@ Standard solar models B16 (Vinyoles et al. 2017, ApJ 835, 202), fluxes in cm⁻�
 | ¹⁵O | 2.05 × 10⁸ | 1.44 × 10⁸ |
 | ¹⁷F | 5.29 × 10⁶ | 3.26 × 10⁶ |
 
-Check these against the paper before quoting them (`citation-checker`), and use the newer SSMs where they apply (e.g. Magg et al. 2022 abundances). The GS98/AGSS09 difference in the CNO fluxes, ~30–40 %, is the solar-abundance problem that CNO-neutrino measurements (Borexino, and later SNO+ and JUNO) are meant to resolve. It is also why the ¹⁴N(p,γ) and ¹²C(p,γ) rates matter: the CNO flux is proportional to the rate times the core C+N content, so a rate uncertainty limits how well a measured flux constrains the core composition.
+Values checked against Vinyoles et al. 2017, Table 6 (fractional uncertainties there: e.g. ⁸B ±12 %, ¹³N ±15 %, ¹⁵O ±17 % for GS98). Use newer SSMs where they apply (e.g. Magg et al. 2022, A&A 661, A140). The CNO fluxes are ~25–40 % lower with AGSS09met than with GS98. That difference is the solar-abundance problem that CNO-neutrino measurements (Borexino, and later SNO+ and JUNO) are meant to resolve. It is also why the ¹⁴N(p,γ) and ¹²C(p,γ) rates matter: the CNO flux is proportional to the rate times the core C+N content, so a rate uncertainty limits how well a measured flux constrains the core composition.
 
 ## Rate sensitivity of the fluxes
 
@@ -43,4 +43,4 @@ Two runs that differ only in one rate factor give the logarithmic derivative:
 
 Run them with identical inputs (same template, same calibration parameters, same MESA version) and compare at the same age. Without recalibration, L and R drift slightly with the changed rate. That is acceptable for small factors (≤ 10–20 %), but report L, R, surface Z/X and R_cz of both runs. In published SSM work the derivatives come from recalibrated models. Expect agreement at the ~10 % level on α, not better.
 
-What to expect qualitatively: changing S₁₁₄ (¹⁴N(p,γ)) moves the ¹⁵O and ¹³N fluxes almost proportionally (α near 1 for ¹⁵O, smaller for ¹³N, because part of the ¹³N flux comes from ¹²C burning outside the CN-equilibrium core) and leaves pp, ⁷Be and ⁸B nearly unchanged. Changing S₃₄ (³He(α,γ)) moves ⁷Be and ⁸B by α ≈ 0.8–0.9. The model must reproduce these patterns before any new sensitivity it gives is believed.
+Published exponents (Serenelli, Peña-Garay & Haxton 2013, PRD 87, 043001, Table I, SFII-GS98 SSM): for S₁₁₄ (¹⁴N(p,γ)), α = 1.000 for ¹⁵O and 0.747 for ¹³N (part of the ¹³N flux comes from primordial ¹²C burning in the outer core), and |α| < 0.01 for pp, pep, ⁷Be and ⁸B. For S₃₄ (³He(α,γ)), α = 0.853 for ⁷Be and 0.806 for ⁸B. The model must reproduce these patterns before any new sensitivity it gives is believed.
