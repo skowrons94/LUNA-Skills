@@ -187,6 +187,35 @@ def known_keys(namelist, mesa_dir=None):
     return keys
 
 
+def known_columns(kind, mesa_dir=None):
+    """(names, templated first words) MESA accepts in history_ or profile_columns.list, from its
+    defaults list (commented entries count: they are valid but off by default)."""
+    mesa_dir = mesa_dir or os.environ.get("MESA_DIR")
+    f = Path(mesa_dir or "") / "star" / "defaults" / f"{kind}_columns.list"
+    if not mesa_dir or not f.exists():
+        return None
+    names, firsts = set(), set()
+    for ln in f.read_text().splitlines():
+        t = ln.strip().lstrip("!").strip()
+        if not t:
+            continue
+        entry = t.split("!")[0].strip()
+        if not entry or not re.match(r"^[A-Za-z_]", entry):
+            continue
+        names.add(entry.lower())
+        if " " in entry:  # templated entries such as 'surface c12', 'center h1', 'raw_rate r_pp'
+            firsts.add(entry.split()[0].lower())
+    return names, firsts
+
+
+def bad_columns(kind, cols, mesa_dir=None):
+    known = known_columns(kind, mesa_dir)
+    if known is None:
+        return []
+    names, firsts = known
+    return [c for c in cols if c.lower() not in names and c.split()[0].lower() not in firsts]
+
+
 def set_inlist(path, namelist, assignments, mesa_dir=None):
     """Set key = value inside &namelist ... / of an inlist file; insert the key if absent.
     Values are written verbatim (Fortran syntax: 1d-3, .true., 'string'). Keys are checked

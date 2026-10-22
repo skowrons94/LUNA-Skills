@@ -102,6 +102,12 @@ check("inlist: key in the wrong namelist refused, right one named", "star_job" i
 mesa.set_inlist(inl, "star_job", [("special_rate_factor(2)", "1.1d0")], mesa_dir=md)
 check("inlist: indexed key accepted against defaults", "special_rate_factor(2) = 1.1d0" in inl.read_text())
 
+(md / "star" / "defaults" / "history_columns.list").write_text(
+    "   star_age\n   !he_core_mass\n   surface c12   ! templated\n   !co_core_mass\n")
+bad = mesa.bad_columns("history", ["star_age", "he_core_mass", "surface c13", "c_core_mass"], mesa_dir=md)
+check("history columns: templated and commented-off names accepted, unknown refused", bad == ["c_core_mass"],
+      str(bad))
+
 # 4. rate table resampling
 T9 = np.geomspace(0.01, 2, 25)
 rate = 3e-5 * T9 ** 12.5

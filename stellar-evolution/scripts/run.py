@@ -73,6 +73,11 @@ def setup(spec):
             bad = [k for k in kv if keys is not None and k.split("(")[0].strip().lower() not in keys]
             if bad:
                 raise SystemExit(f"{fname}: not &{nl} options: {bad}")
+    for kind in ("history", "profile"):
+        bad = mesa.bad_columns(kind, spec.get(f"{kind}_columns", []), env["MESA_DIR"])
+        if bad:
+            raise SystemExit(f"not valid {kind} columns in this MESA (see star/defaults/"
+                             f"{kind}_columns.list): {bad}")
     missing = [src for src in spec.get("files", {}) if not (spec["_base"] / src).is_file()]
     if missing:
         raise SystemExit(f"files listed in the spec do not exist (paths are relative to the spec): {missing}")
