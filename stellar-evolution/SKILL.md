@@ -14,7 +14,7 @@ A rate change matters to astronomy through a star: its structure, timescales, mi
   - installation and the environment file: [install.md](references/install.md);
   - templates, inlists, threads, output, run checks: [running.md](references/running.md);
   - networks, reaction names, rate factors, rate tables, caches, screening, ²⁶Al isomers: [nuclear.md](references/nuclear.md);
-  - solar models and neutrino fluxes: [solar.md](references/solar.md);
+  - solar models, neutrino fluxes, the B23/SF-III reference models and `ssm.py`: [solar.md](references/solar.md);
   - trajectories and compositions for `reaction-network`: [trajectories.md](references/trajectories.md);
   - validation ladder: [validation.md](references/validation.md).
 
@@ -24,9 +24,10 @@ A rate change matters to astronomy through a star: its structure, timescales, mi
 2. **One change per comparison.** A rate study compares runs that differ only in the rate (same template, inputs, version, resolution). Two changes in one run cannot be separated afterwards.
 3. **A changed rate gets a run-local cache** (`rates_cache_dir = './rates_cache'`) and a net in which the reaction is explicit. A factor on a reaction the net lacks does nothing. Confirm it in the run's reaction list.
 4. **Tabulated rates are resampled densely** (`mesa.py rate-table`). MESA interpolates tables linearly in rate vs T8. Rates are bare (MESA screens).
-5. **Judge a run by its termination code and energy error** (`mesa.py check-run`), not by the existence of output. A solver-limit termination is a failed run.
-6. **The effect must exceed the noise.** Show the resolution check, and before claiming astrophysical impact, the effect of the phase's dominant mixing or mass-loss uncertainty (validation rungs 2 and 4).
-7. **Long runs are planned.** Pilot with a small `max_model_number`, estimate the wall time, run with `nice` and an explicit `OMP_NUM_THREADS`, and ask before runs longer than about an hour or several in parallel on a shared machine.
+5. **MESA's built-in rates are not all modern.** About 45 charged-particle rates, ¹⁴N(p,γ) among them, are hard-coded NACRE. Supply current rates as tables for every rate the conclusion depends on ([nuclear.md](references/nuclear.md)).
+6. **Judge a run by its termination code and energy error** (`mesa.py check-run`), not by the existence of output. A solver-limit termination is a failed run.
+7. **The effect must exceed the noise.** Show the resolution check, and before claiming astrophysical impact, the effect of the phase's dominant mixing or mass-loss uncertainty (validation rungs 2 and 4).
+8. **Long runs are planned.** Pilot with a small `max_model_number`, estimate the wall time, run with `nice` and an explicit `OMP_NUM_THREADS`, and ask before runs longer than about an hour or several in parallel on a shared machine.
 
 ## Working method
 
@@ -45,6 +46,8 @@ python3 SKILL_DIR/scripts/mesa.py check-run runs/solar_nominal
 python3 SKILL_DIR/scripts/mesa.py set inlist_solar star_job "special_rate_factor(1)=1.1d0"
 python3 SKILL_DIR/scripts/mesa.py rate-table rates/mg25pg.csv --out r_mg25_pg_al26_lu.dat --reaction r_mg25_pg_al26
 python3 SKILL_DIR/scripts/mesa.py neutrinos runs/solar_nominal/final.profile --json neutrinos.json
+python3 SKILL_DIR/scripts/ssm.py budget --model GS98 S114=0.084 --what-if S114=0.03   # B23/SF-III solar models
+python3 SKILL_DIR/scripts/ssm.py compare --model GS98 --profile RUN/final.profile --neutrinos RUN/neutrinos.json
 python3 SKILL_DIR/scripts/mesa.py trajectory LOGS/history.data --center --out traj.csv
 python3 SKILL_DIR/scripts/mesa.py composition LOGS/profile5.data --mass 0.0 --out X0.json
 python3 SKILL_DIR/scripts/mesa.py compare runA/LOGS/history.data runB/LOGS/history.data star_age log_L

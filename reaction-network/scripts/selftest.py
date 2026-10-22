@@ -170,6 +170,18 @@ back = pyna.load_rate(str(tmp / "rt.reaclib"))
 dev = max(abs(back.eval(t * 1e9) / rc12.eval(t * 1e9) - 1) for t in T9f)
 check("REACLIB text round trip", dev < 1e-5, f"{dev:.1e}")
 
+# 8b. rate from an S factor: numerical Maxwellian average vs the analytic non-resonant formula
+#     N_A<sv> = 7.8327e9 (Z1Z2/(mu T9^2))^(1/3) S_eff e^-tau, tau = 4.2487 (Z1^2 Z2^2 mu/T9)^(1/3),
+#     S_eff = S0 (1 + 5/(12 tau)) for constant S (Iliadis, Nuclear Physics of Stars, Sec. 3.2.1)
+mu_amu = 14 / 15
+worst = 0.0
+for T9 in (0.01, 0.016, 0.03):
+    v, E0, _ = rtools.sfactor_rate(T9, lambda E: 1.68e-3, 1, 7, mu_amu * rtools.AMU_MEV)
+    tau = 4.2487 * (49 * mu_amu / T9) ** (1 / 3)
+    ana = 7.8327e9 * (7 / (mu_amu * T9 ** 2)) ** (1 / 3) * 1.68e-3 * (1 + 5 / (12 * tau)) * np.exp(-tau)
+    worst = max(worst, abs(v / ana - 1))
+check("S-factor rate equals the analytic non-resonant formula", worst < 3e-3, f"max rel {worst:.1e}")
+
 # 9. Monte Carlo multipliers
 cfgm = json.loads(json.dumps(cfg))
 cfgm["network"]["with_reverse"] = True

@@ -87,6 +87,21 @@ mesa.set_inlist(inl, "star_job", [("reaction_for_special_factor(1)", "'r_n14_pg_
 check("inlist: indexed key with string value", "reaction_for_special_factor(1) = 'r_n14_pg_o15'"
       in inl.read_text())
 
+# 3b. key validation against a (synthetic) MESA defaults tree
+md = tmp / "mesa"
+(md / "star" / "defaults").mkdir(parents=True)
+(md / "star" / "defaults" / "star_job.defaults").write_text(
+    "    write_profile_when_terminate = .false.\n    special_rate_factor(:) = 1\n")
+(md / "star" / "defaults" / "controls.defaults").write_text("    mesh_delta_coeff = 1\n")
+try:
+    mesa.set_inlist(inl, "controls", [("write_profile_when_terminate", ".true.")], mesa_dir=md)
+    raised = ""
+except KeyError as e:
+    raised = str(e)
+check("inlist: key in the wrong namelist refused, right one named", "star_job" in raised, raised[:80])
+mesa.set_inlist(inl, "star_job", [("special_rate_factor(2)", "1.1d0")], mesa_dir=md)
+check("inlist: indexed key accepted against defaults", "special_rate_factor(2) = 1.1d0" in inl.read_text())
+
 # 4. rate table resampling
 T9 = np.geomspace(0.01, 2, 25)
 rate = 3e-5 * T9 ** 12.5
@@ -136,6 +151,25 @@ check("check-run: missing termination fails", not mesa.check_run(run)["ok"])
 (run / "rn.log").write_text("chi^2 3.5\n save best model results to outputs/sample_0001.data\nfinished\n")
 check("check-run: case-specific done pattern accepted",
       mesa.check_run(run, done_pattern=r"save best model results")["ok"])
+
+# 8. B23 SSM port: reproduces the package's own R routine (N = O = +0.1 dex, its shipped
+#    example; R output for GS98 recorded 2026-10-22 from SSM-variations.R v1.2)
+import os  # noqa: E402
+import ssm  # noqa: E402
+ddir = Path(os.environ.get("NUCLEAR_DATA_DIR", "/nonexistent")) / "SolarModels_B23" / "extracted"
+if (ddir / "SolarModels").is_dir():
+    cols, M = ssm.pld(ddir, "GS98")
+    ref = ssm.reference(ddir, "GS98")
+    fac = {"N": 10 ** 0.1, "O": 10 ** 0.1}
+    r_out = {"pp": 5.95177e10, "be7": 4.92039e9, "b8": 5.18345e6, "n13": 2.94498e8,
+             "o15": 2.22147e8, "f17": 6.92202e6, "ys": 0.243943, "rcz": 0.706758}
+    dev = max(abs(ref[k] * np.prod([fac[j] ** M[k][j] for j in fac]) / v - 1) for k, v in r_out.items())
+    check("B23 variations reproduce the package's R routine", dev < 2e-5, f"max rel {dev:.1e}")
+    f, e, c = ssm.fluxes(ddir, "GS98")
+    check("B23 flux file parsed (GS98 15O, correlation symmetric)",
+          abs(f["15O"] - 2.067e8) < 1e3 and np.allclose(c, c.T))
+else:
+    print("SKIP  B23 solar models not under $NUCLEAR_DATA_DIR/SolarModels_B23/extracted")
 
 print("PASS" if ok else "FAIL")
 sys.exit(0 if ok else 1)

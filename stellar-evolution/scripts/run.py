@@ -66,12 +66,18 @@ def setup(spec):
     if run.exists():
         raise SystemExit(f"{run} exists: one run directory per configuration; remove it or "
                          "choose a new run_dir")
+    for fname, nls in spec.get("inlists", {}).items():
+        for nl, kv in nls.items():
+            keys = mesa.known_keys(nl, env["MESA_DIR"])
+            bad = [k for k in kv if keys is not None and k.split("(")[0].strip().lower() not in keys]
+            if bad:
+                raise SystemExit(f"{fname}: not &{nl} options: {bad}")
     shutil.copytree(tpl, run, symlinks=True)
     # test-suite cases refer to MESA_DIR relative paths in their make/ and rn; a copy works with
     # MESA_DIR set, which the env file provides
     for fname, nls in spec.get("inlists", {}).items():
         for nl, kv in nls.items():
-            mesa.set_inlist(run / fname, nl, list(kv.items()))
+            mesa.set_inlist(run / fname, nl, list(kv.items()), mesa_dir=env["MESA_DIR"])
     for listname, key in (("profile_columns.list", "profile_columns"),
                           ("history_columns.list", "history_columns")):
         extra = spec.get(key, [])

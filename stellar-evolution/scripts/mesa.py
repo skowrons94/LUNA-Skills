@@ -18,6 +18,7 @@ values, 5 column numbers, 6 column names, data from line 7.
 import argparse
 import csv
 import json
+import os
 import re
 import sys
 from pathlib import Path
@@ -164,9 +165,39 @@ def cmd_check_run(a):
     return 0 if r["ok"] else 1
 
 
-def set_inlist(path, namelist, assignments):
+DEFAULTS_FILES = {"star_job": "star/defaults/star_job.defaults",
+                  "controls": "star/defaults/controls.defaults",
+                  "pgstar": "star/defaults/pgstar.defaults",
+                  "eos": "eos/defaults/eos.defaults", "kap": "kap/defaults/kap.defaults"}
+
+
+def known_keys(namelist, mesa_dir=None):
+    """Keys MESA accepts in a namelist, from its *.defaults file (None if unavailable)."""
+    mesa_dir = mesa_dir or os.environ.get("MESA_DIR")
+    rel = DEFAULTS_FILES.get(namelist.lower())
+    if not mesa_dir or not rel or not (Path(mesa_dir) / rel).exists():
+        return None
+    keys = set()
+    for ln in (Path(mesa_dir) / rel).read_text().splitlines():
+        m = re.match(r"^\s*([A-Za-z_][A-Za-z0-9_]*)\s*(\([^)]*\))?\s*=", ln)
+        if m:
+            keys.add(m.group(1).lower())
+    return keys
+
+
+def set_inlist(path, namelist, assignments, mesa_dir=None):
     """Set key = value inside &namelist ... / of an inlist file; insert the key if absent.
-    Values are written verbatim (Fortran syntax: 1d-3, .true., 'string')."""
+    Values are written verbatim (Fortran syntax: 1d-3, .true., 'string'). Keys are checked
+    against $MESA_DIR's defaults for that namelist: a key in the wrong namelist makes MESA stop
+    with 'Failed while trying to read ... namelist'."""
+    keys = known_keys(namelist, mesa_dir)
+    if keys is not None:
+        bad = [k for k, _ in assignments if re.sub(r"\(.*\)", "", k).strip().lower() not in keys]
+        if bad:
+            others = [nl for nl in DEFAULTS_FILES if nl != namelist and (known_keys(nl, mesa_dir) or set())
+                      & {re.sub(r"\(.*\)", "", b).lower() for b in bad}]
+            raise KeyError(f"not &{namelist} options in this MESA: {bad}"
+                           + (f" (found in &{', &'.join(others)})" if others else ""))
     txt = Path(path).read_text()
     m = re.search(rf"(&{namelist}\b)(.*?)(\n\s*/)", txt, flags=re.S | re.I)
     if not m:

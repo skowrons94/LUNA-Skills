@@ -3,6 +3,8 @@
 
   python3 rates.py compare "mg25(p,g)al26" [--table T.csv] [--starlib FILE] [--T9 0.03 0.05 0.1]
   python3 rates.py from-azure reactionrates.out --out T.csv [--fu-from STARLIB_FILE --rate NAME]
+  python3 rates.py from-sfactor --rate "n14(p,g)o15" --S0 1.68e-3 --S1 -1.7e-3 --T9 0.003 0.06 \
+                       --source "SF III Table I" --out T.csv     bare non-resonant rate from S(E)
   python3 rates.py fit T.csv --rate "c12(p,g)n13" --forms nonresonant resonance --out fit.json
                        [--reaclib-out fit.reaclib] [--tol 0.03]
 
@@ -103,6 +105,65 @@ def fit(T9, rate, forms, seed=0, restarts=30):
     if best is None:
         raise RuntimeError("all fits failed")
     return best
+
+
+ALPHA = 1 / 137.035999084
+AMU_MEV = 931.49410242
+KB_MEV = 8.617333262e-11
+C_CMS = 2.99792458e10
+NA = 6.02214076e23
+
+
+def sfactor_rate(T9, S, Z1, Z2, mu_mev):
+    """Bare non-resonant N_A<sigma v> (cm^3 mol^-1 s^-1) from S(E) in MeV b (E in MeV, c.m.),
+    by numerical integration of the Maxwell-Boltzmann average. No identical-particle factor."""
+    kT = KB_MEV * T9 * 1e9
+    E0 = (np.pi * Z1 * Z2 * ALPHA * kT) ** (2 / 3) * (mu_mev / 2) ** (1 / 3)
+    from scipy.integrate import quad
+
+    def f(E):
+        return S(E) * np.exp(-2 * np.pi * Z1 * Z2 * ALPHA * np.sqrt(mu_mev / (2 * E)) - E / kT)
+
+    tau = 3 * E0 / kT
+    width = 4 / np.sqrt(3) * np.sqrt(E0 * kT)
+    lo, hi = max(E0 - 8 * width, E0 / 50), E0 + 12 * width
+    val, _ = quad(f, lo, hi, points=[E0], limit=400, epsrel=1e-10)
+    return NA * np.sqrt(8 / (np.pi * mu_mev)) * kT ** -1.5 * C_CMS * val * 1e-24, E0, tau
+
+
+def from_sfactor(a):
+    import pynucastro as pyna
+    r = pyna.ReacLibLibrary().get_rate_by_name(a.rate)
+    if len(r.reactants) != 2:
+        raise SystemExit("from-sfactor needs a two-body entrance channel")
+    n1, n2 = r.reactants
+    # bare-nucleus masses (MeV): the Gamow exponent tau ~ mu^(1/3) is 60-150 at T9 = 0.016-0.001,
+    # so 0.1 % in mu moves the rate by 2-5 %; mass numbers or atomic masses are not good enough
+    me = 0.51099895  # pynucastro's Nucleus.mass is the atomic mass: remove the electrons
+    m1, m2 = n1.mass - n1.Z * me, n2.mass - n2.Z * me
+    mu = m1 * m2 / (m1 + m2)
+    S = lambda E: a.S0 + a.S1 * E + 0.5 * a.S2 * E * E  # noqa: E731  Eq. (4) of SF III
+    T9 = np.geomspace(a.T9[0], a.T9[1], a.n)
+    rows = []
+    for t in T9:
+        v, E0, _ = sfactor_rate(t, S, n1.Z, n2.Z, mu)
+        rows.append((t, v, E0))
+    with open(a.out, "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["T9", "rate"])
+        for t, v, _ in rows:
+            w.writerow([f"{t:.8g}", f"{v:.8e}"])
+    Path(a.out + ".meta.json").write_text(json.dumps({
+        "rate": a.rate, "S0_MeVb": a.S0, "S1_b": a.S1, "S2_b_per_MeV": a.S2, "source": a.source,
+        "kind": "bare, non-resonant, S(E) = S0 + S1 E + S2 E^2 / 2 (E c.m. in MeV)",
+        "valid_T9": [float(T9[0]), float(T9[-1])], "E0_keV_range": [rows[0][2] * 1e3, rows[-1][2] * 1e3],
+        "note": "valid only where the expansion describes S(E) over the Gamow window; resonances are not included"},
+        indent=1))
+    print(f"wrote {a.out}: {a.n} points, T9 {T9[0]:g}-{T9[-1]:g}, Gamow peak {rows[0][2] * 1e3:.1f}-{rows[-1][2] * 1e3:.1f} keV")
+    for t in (T9[0], T9[len(T9) // 2], T9[-1]):
+        v = [x for x in rows if x[0] == t][0][1]
+        print(f"  T9 {t:.4g}: rate {v:.4e}, REACLIB {r.label} {r.eval(t * 1e9):.4e}, ratio {v / r.eval(t * 1e9):.4f}")
+    return 0
 
 
 def compare(a):
@@ -221,8 +282,18 @@ def main(argv=None):
     f.add_argument("--label", default="fit")
     f.add_argument("--tol", type=float, default=0.03)
     f.add_argument("--seed", type=int, default=0)
+    s = sub.add_parser("from-sfactor")
+    s.add_argument("--rate", required=True)
+    s.add_argument("--S0", type=float, required=True, help="S(0) in MeV b")
+    s.add_argument("--S1", type=float, default=0.0, help="S'(0) in b")
+    s.add_argument("--S2", type=float, default=0.0, help="S''(0) in b/MeV")
+    s.add_argument("--T9", type=float, nargs=2, required=True, metavar=("MIN", "MAX"))
+    s.add_argument("--n", type=int, default=80)
+    s.add_argument("--source", required=True, help="where S0, S1, S2 come from")
+    s.add_argument("--out", required=True)
     a = ap.parse_args(argv)
-    return {"compare": compare, "from-azure": from_azure, "fit": do_fit}[a.cmd](a)
+    return {"compare": compare, "from-azure": from_azure, "fit": do_fit,
+            "from-sfactor": from_sfactor}[a.cmd](a)
 
 
 if __name__ == "__main__":

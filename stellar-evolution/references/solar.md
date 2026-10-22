@@ -8,7 +8,7 @@ To compute neutrino fluxes:
 
 - the net must contain the decays explicitly (`new_net_name = 'pp_and_cno_extras.net'`, as the template does);
 - add `add_screened_rates` to `profile_columns.list`;
-- set `write_profile_when_terminate = .true.` and `filename_for_profile_when_terminate = 'final.profile'` in `&controls`.
+- set `write_profile_when_terminate = .true.` and `filename_for_profile_when_terminate = 'final.profile'` in `&star_job` (not `&controls`: MESA then stops reading the inlist).
 
 Then:
 
@@ -65,5 +65,7 @@ Herrera & Serenelli, Zenodo 10822316 (v1.2, 2023, CC-BY-4.0), stored under `$NUC
 - radial structure with abundances and neutrino-production profiles (`SolarModels/struct+nu_SF3_*.dat`);
 - fluxes with fractional errors and correlation matrices (`fluxes_SF3_*.dat`; e.g. GS98: ¹³N 2.795×10⁸, ¹⁵O 2.067×10⁸ cm⁻² s⁻¹);
 - logarithmic partial derivatives of the fluxes, surface Y and R_cz with respect to S11, S33, S34, Se7, S17, Shep, S114, S116, age, diffusion, luminosity, opacity and the element abundances (`PLD/pwrlaws_SF3_*.dat`). For example, GS98 gives α(S₁₁₄) = 1.051 for ¹⁵O and 0.762 for ¹³N. The file headers still say "B16"; the values differ from B16-era ones, so treat them as SF-III.
+
+`scripts/ssm.py` reads them. `fluxes`, `vary` (power-law variations, identical to the package's `SSM-variations.R` to 10⁻⁵, checked in the selftest), `budget` (flux uncertainty from chosen input uncertainties, with `--what-if` for a planned measurement: e.g. S₁₁₄ at SF-III's 8.4 % gives 8.8 % on ¹⁵O, and at 3 % gives 3.2 %), and `compare` (MESA centre and fluxes against a B23 model).
 
 Prefer these over the B16 table above for absolute values, and the PLDs over paired MESA runs for small variations of the listed inputs. The PLDs are linear (small variations only) and cover no ¹²C(p,γ) or ¹³C(p,γ) S-factor; those still need a model.

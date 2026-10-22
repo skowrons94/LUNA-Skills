@@ -25,7 +25,7 @@ Run times on an 8-core laptop range from minutes (`custom_rates` final part: 15 
 - Edit inlists with `mesa.py set FILE NAMELIST key=value` (or `run.py` from a spec), not with `sed`. Repeated keys and inline comments are common, and a silently unmatched edit is the usual failure.
 - Threads: `OMP_NUM_THREADS` (2–4 is efficient for 1D models; several runs in parallel beat one run with many threads). Always `nice` long runs on a shared machine.
 - Output: `LOGS/history.data` (one row per `history_interval` steps), `LOGS/profileN.data` (every `profile_interval` steps, indexed in `LOGS/profiles.index`), `photos/` for restarts. Add columns in `history_columns.list` and `profile_columns.list`. `add_screened_rates` and `add_raw_rates` add per-cell rates for every reaction in the net.
-- `write_profile_when_terminate = .true.` with `filename_for_profile_when_terminate = 'final.profile'` guarantees a profile at the stopping point.
+- `write_profile_when_terminate = .true.` with `filename_for_profile_when_terminate = 'final.profile'` (both in `&star_job`) guarantees a profile at the stopping point. `mesa.py set` and `run.py` refuse keys that are not in the namelist's defaults file.
 
 ## Judge a run on its log and outputs
 
