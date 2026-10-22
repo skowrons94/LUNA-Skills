@@ -29,6 +29,18 @@ Run times on an 8-core laptop range from minutes (`custom_rates` final part: 15 
 
 - A model created with `create_pre_main_sequence_model = .true.` first takes `pre_ms_relax_num_steps` (default 300) steps at a fixed tiny timestep (the terminal shows `dt_limit max_dt`, lg_dt ≈ −5). With `pre_ms_relax_to_start_radiative_core` it then relaxes until a radiative core appears. `LOGS/` appears only afterwards. Several minutes of this is normal, not a stuck run.
 
+## Making grids fast
+
+In order of payoff:
+
+1. **Do not oversubscribe.** MESA scales poorly beyond 2–4 threads per run, so a grid runs fastest with one thread per run and no more concurrent runs than fast cores. Apple-silicon machines mix performance and efficiency cores (an M1 has 4 + 4, the efficiency cores roughly 3× slower). Nine single-thread runs on an 8-core M1 ran at about half speed each. Check the load before launching (`uptime`, `ps`) and stop runaway system daemons (Spotlight indexing of the MESA tree: put an empty `.metadata_never_index` in it).
+2. **Compute shared phases once.** Variants that differ only in a late-acting ingredient (thermohaline or other extra mixing above the RGB bump, AGB mass loss) share the evolution before it. Run one base model per rate set to a branch point (e.g. `he_core_mass_limit` after first dredge-up), save it, and start each variant from it. In the branch spec, `load_saved_model`, `load_model_filename` and the model copied in through `files`. Set `set_initial_age`, `set_initial_model_number` and `set_initial_cumulative_energy_error` to `.false.` (many test cases reset them). Keep one run that includes the ingredient from the start, to show the branch approximation is good enough.
+3. **Resolution is a speed knob only after a check.** Test-case settings such as `varcontrol_target = 1d-4` with gold tolerances can be stricter than the question needs. Run one model at both settings and adopt the looser one only if the observable changes much less than the effect under study (validation rung 2). Record the check.
+4. **Smallest adequate network.** Explicit isotopes only where the question needs them.
+5. **Clusters for grids.** One single-thread run per core; the specs and `run.py` only need the environment-file path changed.
+
+Never rename or move a run directory while MESA runs in it. MESA continues (it holds the directory open), but the driver loses track and cannot record the final check.
+
 ## Judge a run on its log and outputs
 
 `python3 SKILL_DIR/scripts/mesa.py check-run RUN_DIR` reads `rn.log`:
