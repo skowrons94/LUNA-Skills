@@ -166,6 +166,9 @@ if (ddir / "SolarModels").is_dir():
     dev = max(abs(ref[k] * np.prod([fac[j] ** M[k][j] for j in fac]) / v - 1) for k, v in r_out.items())
     check("B23 variations reproduce the package's R routine", dev < 2e-5, f"max rel {dev:.1e}")
     f, e, c = ssm.fluxes(ddir, "GS98")
+    sn, sd = ssm.structure(ddir, "GS98")
+    check("B23 structure columns aligned (GS98 centre log T = 7.192)",
+          abs(sd[0, sn.index("logT")] - 7.19217) < 1e-4 and abs(sd[0, sn.index("N14")] - 4.86668e-3) < 1e-7)
     check("B23 flux file parsed (GS98 15O, correlation symmetric)",
           abs(f["15O"] - 2.067e8) < 1e3 and np.allclose(c, c.T))
 else:

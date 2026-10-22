@@ -72,7 +72,7 @@ def pld(d, model):
 
 def structure(d, model):
     path = d / "SolarModels" / f"struct+nu_SF3_{model}.dat"
-    names = path.read_text().splitlines()[0].lstrip("#").split()
+    names = path.read_text().splitlines()[0].strip().lstrip("#").split()  # header is ' #  R_sun ...'
     return names, np.loadtxt(path, comments="#")
 
 

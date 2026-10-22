@@ -58,6 +58,15 @@ The template at its shipped first values, run unchanged and with `special_rate_f
 - **Rate response: reproduced.** α(¹⁵O) agrees to 3 % and α(¹³N) to 12 %. The pp-chain fluxes are insensitive, as expected. The small negative α values come from the missing recalibration (log L moved from −0.00146 to −0.00171).
 - **Absolute CNO fluxes: not reproduced, cause found.** ¹³N and ¹⁵O come out ≈2× the SSM. The bookkeeping is consistent (¹⁴N(p,γ), ¹⁵O decay and ¹⁵N(p,α) rates agree; `cno` = 1.5 % of L). Compared with the B23-GS98 SSM structure, MESA's centre is 1.1 % hotter and has 2× the central ¹²C at the same ¹⁴N. That is the CN-equilibrium signature of a larger λ(¹⁴N+p)/λ(¹²C+p). The cause is in the source: MESA r26.04.1 hard-codes `rate_n14pg_nacre` for `ir_n14_pg_o15` (`rates/private/raw_rates.f90`), the pre-LUNA NACRE rate, 1.68× REACLIB `im05` at T9 = 0.016. With the hotter core (≈1.2×) this accounts for the 2.3× on ¹⁵O. See [nuclear.md](nuclear.md) for the other NACRE defaults. To get modern CNO fluxes, give MESA ¹⁴N(p,γ) (and ¹²C(p,γ), ¹³C(p,γ)) as tables from the current evaluation (Solar Fusion III), then compare with the B23 SSMs below.
 
+**After replacing the four NACRE CNO rates by SF-III tables** (`rates.py from-sfactor`, then `mesa.py rate-table` and `filename_of_special_rate`; 83 min per run):
+
+- central ¹²C went from 2.0× to 1.11× the B23-GS98 SSM;
+- α(S₁₁₄) = 0.985 for ¹⁵O and 0.768 for ¹³N (B23: 1.051 and 0.762);
+- ¹³N, ¹⁵O and ¹⁷F are 1.21, 1.27 and 1.24× B23 (≤ 1.5σ). B23's own derivatives for the template's 12 % higher surface Z/X predict 1.21, 1.25 and 1.26 (`ssm.py vary` with all elements × 1.121), so the residual is composition, not nuclear physics.
+- Open: the same composition shift predicts ⁷Be and ⁸B at 1.07 and 1.15, but MESA gives 1.01 for both. MESA's pp-chain rates are also NACRE (³He(α,γ), ⁷Be(p,γ)). Replace them before quoting pp-chain fluxes.
+
+Lesson: compare a model with an SSM only after matching composition, or use the SSM derivatives to remove the composition difference. Then the remaining residual tests the nuclear inputs.
+
 ## B23 / SF-III standard solar models (reference data)
 
 Herrera & Serenelli, Zenodo 10822316 (v1.2, 2023, CC-BY-4.0), stored under `$NUCLEAR_DATA_DIR/SolarModels_B23` with `SOURCE.txt`. These are GARSTEC SSMs with Solar Fusion III rates for six compositions (GS98, AGSS09, C11, AAG21, MB22m, MB22p). They provide:
