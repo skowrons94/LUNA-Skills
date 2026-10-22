@@ -8,6 +8,10 @@ Checked against MESA r26.04.1 (`star/defaults/star_job.defaults`, `controls.defa
 - `basic.net` uses compound reactions (`rc12_to_n14` = ¹²C(p,γ)¹³N(e⁺ν)¹³C(p,γ)¹⁴N), which is fast but has no individual intermediates. To change one step, use a net in which that step is explicit: `pp_and_cno_extras.net` (explicit pp chains, ¹³N, ¹⁵O, ¹⁷F), `cno_extras_o18_to_mg26.net`, `sagb_NeNa_MgAl.net` (Ne–Na and Mg–Al cycles), `mesa_49.net` and larger. A rate factor on a reaction the net does not contain does nothing. Check the reaction list printed at the start of the run (or `show_net_reactions_info = .true.`).
 - Names: `r_<target>_<projectile+ejectile>_<product>`, e.g. `r_n14_pg_o15`, `r_c12_ag_o16`, `r_mg25_pg_al26`, `r_he4_he4_he4_to_c12`, `r1212`. The list is `$MESA_DIR/data/rates_data/reactions.list`. A new name needs a local copy of that file (`net_reaction_filename`).
 
+## MESA's default rates are not all REACLIB
+
+`rates/private/raw_rates.f90` hard-codes many charged-particle rates to old compilations instead of REACLIB: about 45 to NACRE (1999) and 17 to Caughlan–Fowler-era fits (`_fxt`), in r26.04.1. The NACRE ones include pp, d(p,γ), ³He+³He, ³He(α,γ), ⁷Be(p,γ), ¹²C(p,γ), ¹³C(p,γ), ¹⁴N(p,γ), ¹⁶O(p,γ), ¹⁶O(α,γ), ¹⁸O(p,α) and ¹⁹F(p,α). Example: `ir_n14_pg_o15 → rate_n14pg_nacre` is 1.68× the LUNA-based REACLIB `im05` at solar-core temperature, which doubles the solar CNO neutrino fluxes (see [solar.md](solar.md)). Before using MESA for any of these reactions, look up the dispatch in `raw_rates.f90` (`case(ir_<reaction>)`), and supply the modern rate as a table (below) for every rate the conclusion depends on. In a paper, state which rates were replaced.
+
 ## Changing a rate
 
 **Constant factor**, in `&star_job`:

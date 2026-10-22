@@ -56,4 +56,14 @@ The template at its shipped first values, run unchanged and with `special_rate_f
 | α(S₁₁₄), Serenelli et al. 2013 | −0.007 | −0.010 | −0.001 | 0.007 | 0.747 | 1.000 | — |
 
 - **Rate response: reproduced.** α(¹⁵O) agrees to 3 % and α(¹³N) to 12 %. The pp-chain fluxes are insensitive, as expected. The small negative α values come from the missing recalibration (log L moved from −0.00146 to −0.00171).
-- **Absolute CNO fluxes: not reproduced.** ¹³N and ¹⁵O are ≈2× the SSM, consistently with the model's own CNO luminosity (`cno` = 1.5 % of L). Internal bookkeeping is consistent: ¹⁴N(p,γ), ¹⁵O decay and ¹⁵N(p,α) rates agree. The cause is not established. The template is a test case, not an SSM: surface Z/X is 0.0257 against the 0.0229 target, f_ov = 0.031, TDC convection, and no calibration loop. Do not quote absolute CNO fluxes from it. For absolute fluxes, run the simplex calibration, compare its central T and C+N profile with an SSM, and find the cause first. Ratios and logarithmic derivatives from paired runs are usable with the caveat above.
+- **Absolute CNO fluxes: not reproduced, cause found.** ¹³N and ¹⁵O come out ≈2× the SSM. The bookkeeping is consistent (¹⁴N(p,γ), ¹⁵O decay and ¹⁵N(p,α) rates agree; `cno` = 1.5 % of L). Compared with the B23-GS98 SSM structure, MESA's centre is 1.1 % hotter and has 2× the central ¹²C at the same ¹⁴N. That is the CN-equilibrium signature of a larger λ(¹⁴N+p)/λ(¹²C+p). The cause is in the source: MESA r26.04.1 hard-codes `rate_n14pg_nacre` for `ir_n14_pg_o15` (`rates/private/raw_rates.f90`), the pre-LUNA NACRE rate, 1.68× REACLIB `im05` at T9 = 0.016. With the hotter core (≈1.2×) this accounts for the 2.3× on ¹⁵O. See [nuclear.md](nuclear.md) for the other NACRE defaults. To get modern CNO fluxes, give MESA ¹⁴N(p,γ) (and ¹²C(p,γ), ¹³C(p,γ)) as tables from the current evaluation (Solar Fusion III), then compare with the B23 SSMs below.
+
+## B23 / SF-III standard solar models (reference data)
+
+Herrera & Serenelli, Zenodo 10822316 (v1.2, 2023, CC-BY-4.0), stored under `$NUCLEAR_DATA_DIR/SolarModels_B23` with `SOURCE.txt`. These are GARSTEC SSMs with Solar Fusion III rates for six compositions (GS98, AGSS09, C11, AAG21, MB22m, MB22p). They provide:
+
+- radial structure with abundances and neutrino-production profiles (`SolarModels/struct+nu_SF3_*.dat`);
+- fluxes with fractional errors and correlation matrices (`fluxes_SF3_*.dat`; e.g. GS98: ¹³N 2.795×10⁸, ¹⁵O 2.067×10⁸ cm⁻² s⁻¹);
+- logarithmic partial derivatives of the fluxes, surface Y and R_cz with respect to S11, S33, S34, Se7, S17, Shep, S114, S116, age, diffusion, luminosity, opacity and the element abundances (`PLD/pwrlaws_SF3_*.dat`). For example, GS98 gives α(S₁₁₄) = 1.051 for ¹⁵O and 0.762 for ¹³N. The file headers still say "B16"; the values differ from B16-era ones, so treat them as SF-III.
+
+Prefer these over the B16 table above for absolute values, and the PLDs over paired MESA runs for small variations of the listed inputs. The PLDs are linear (small variations only) and cover no ¹²C(p,γ) or ¹³C(p,γ) S-factor; those still need a model.
