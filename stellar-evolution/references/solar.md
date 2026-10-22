@@ -62,8 +62,8 @@ The template at its shipped first values, run unchanged and with `special_rate_f
 
 - central ¹²C went from 2.0× to 1.11× the B23-GS98 SSM;
 - α(S₁₁₄) = 0.985 for ¹⁵O and 0.768 for ¹³N (B23: 1.051 and 0.762);
-- ¹³N, ¹⁵O and ¹⁷F are 1.21, 1.27 and 1.24× B23 (≤ 1.5σ). B23's own derivatives for the template's 12 % higher surface Z/X predict 1.21, 1.25 and 1.26 (`ssm.py vary` with all elements × 1.121), so the residual is composition, not nuclear physics.
-- Open: the same composition shift predicts ⁷Be and ⁸B at 1.07 and 1.15, but MESA gives 1.01 for both. MESA's pp-chain rates are also NACRE (³He(α,γ), ⁷Be(p,γ)). Replace them before quoting pp-chain fluxes.
+- ¹³N, ¹⁵O and ¹⁷F are 1.21, 1.27 and 1.24× B23 (≤ 1.5σ). B23's own derivatives for the run's 13 % higher surface Z/X (0.0259, measured in `final.profile`, vs GS98 0.0229) predict 1.23, 1.27 and 1.29 (`ssm.py vary` with all elements × 1.132). The residual is composition, not nuclear physics. Measure Z/X in your own run; the test-case README value (0.0257) differs.
+- Open: the same composition shift predicts ⁷Be and ⁸B at 1.07 and 1.16, but MESA gives 1.01 for both. MESA's pp-chain rates are also NACRE (³He(α,γ), ⁷Be(p,γ)). Replace them before quoting pp-chain fluxes.
 
 Lesson: compare a model with an SSM only after matching composition, or use the SSM derivatives to remove the composition difference. Then the remaining residual tests the nuclear inputs.
 
