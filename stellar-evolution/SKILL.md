@@ -25,7 +25,7 @@ A rate change matters to astronomy through a star: its structure, timescales, mi
 2. **One change per comparison.** A rate study compares runs that differ only in the rate (same template, inputs, version, resolution). Two changes in one run cannot be separated afterwards.
 3. **A changed rate gets a run-local cache** (`rates_cache_dir = './rates_cache'`) and a net in which the reaction is explicit. A factor on a reaction the net lacks does nothing. Confirm it in the run's reaction list.
 4. **Tabulated rates are resampled densely** (`mesa.py rate-table`). MESA interpolates tables linearly in rate vs T8. Rates are bare (MESA screens).
-5. **MESA's built-in rates are not all modern.** About 45 charged-particle rates, ¹⁴N(p,γ) among them, are hard-coded NACRE. Supply current rates as tables for every rate the conclusion depends on ([nuclear.md](references/nuclear.md)).
+5. **MESA's built-in rates are not all modern.** Sixteen charged-particle reactions, ¹⁴N(p,γ) and ¹²C(α,γ) among them, are hard-coded NACRE (r26.04.1). Supply current rates as tables for every rate the conclusion depends on ([nuclear.md](references/nuclear.md)).
 6. **Judge a run by its termination code and energy error** (`mesa.py check-run`), not by the existence of output. A solver-limit termination is a failed run.
 7. **The effect must exceed the noise.** Show the resolution check, and before claiming astrophysical impact, the effect of the phase's dominant mixing or mass-loss uncertainty (validation rungs 2 and 4).
 8. **Long runs are planned.** Pilot with a small `max_model_number`, estimate the wall time, run with `nice` and an explicit `OMP_NUM_THREADS`, and ask before runs longer than about an hour or several in parallel on a shared machine.

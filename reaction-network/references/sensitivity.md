@@ -11,6 +11,8 @@ The question is usually one of these. *Which reactions control this observable a
   - Spearman ρ between p and the observable (log-transformed when positive) measures monotonic influence. Its bootstrap interval shows sampling noise.
   - The noise threshold is the |ρ| a rate with no influence would exceed with 5 % probability after a Bonferroni correction over all varied groups. Rates below it are not distinguished from zero.
   - Variance share (β²/Var from regressing ln O on all p) is the fraction of the spread a rate explains, if effects are additive in ln λ. A linear R² well below 1 means interactions or non-linear response; then rely on ρ and look at scatter plots from `samples.csv`.
+- **Correlations state their assumption.** For rates sharing a systematic, say which fraction is common and show how the result moves with it. Define it explicitly: a common systematic of c × s gives ρ = (c ln(1+s))²/(ln fu_A ln fu_B). A ratio of correlated rates is limited by the *non-shared* parts. An independent normalisation of one rate removes the cancellation and makes the ratio worse; measuring the ratio in one setup improves it.
+- **Small samples bias.** With a few hundred samples the deviates of one rate can have a mean of ±0.15, which shifts medians by 1–2 % and narrows widths by ~8 %. For a ratio of two lognormal rates the analytic σ = √(σ_A² + σ_B² − 2ρσ_Aσ_B) is exact. Quote it, or the nominal value with the MC width, and use the MC as a check (or N ≳ 2000).
 - **Sample size.** The noise floor of ρ is ~1/√N, so separating ρ = 0.1 effects needs N ≳ 1000. A ranking of the top few needs ~200–500. Report N and failed samples. A failed sample is recorded and never dropped silently.
 
 ## One-at-a-time (`--mode oat`)
