@@ -49,6 +49,10 @@ Linker warnings `building for macOS-11.0, but linking with dylib ... built for n
 
 Install the Linux SDK tarball in the same way (`tar xf` into a user directory, same environment file without the `SDKROOT` line). On shared machines, set `OMP_NUM_THREADS` from the current load and run with `nice`.
 
+- The tarball unpacks to `mesasdk-<ver>/`, not `mesasdk/` as the macOS package does. Take the directory name from the archive (`tar tzf … | head -1`) and point `MESASDK_ROOT` at it, or link `mesasdk -> mesasdk-<ver>`. If `MESASDK_ROOT` is wrong, `./install` stops at once with "You need to install ndiff": the message means the SDK environment is not loaded, not that ndiff is missing.
+- Cloud machines often have a small system disk and a separate data volume: check `df -h` and put MESA (~25 GB installed) on the volume with space.
+- The build parallelises within each module (`MAKEFLAGS=-jN`); memory, not cores, limits `N` (about 0.5–1 GB per job; with 4 GB RAM use 2).
+
 ## Check the installation
 
 1. `grep "MESA installation was successful" build.log`.
