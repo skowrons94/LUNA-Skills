@@ -49,9 +49,10 @@ Linker warnings `building for macOS-11.0, but linking with dylib ... built for n
 
 Install the Linux SDK tarball in the same way (`tar xf` into a user directory, same environment file without the `SDKROOT` line). On shared machines, set `OMP_NUM_THREADS` from the current load and run with `nice`.
 
+- The Linux SDK relies on a few system packages it does not ship: zlib development files (`-lz`), X11 libraries, binutils, make, perl, tcsh (RHEL/Alma/Rocky: `dnf install zlib-devel libX11-devel binutils make perl tcsh glibc-devel`; Debian/Ubuntu: `zlib1g-dev libx11-dev binutils make perl tcsh libc6-dev`). Without zlib the build stops in `forum` with "ld: cannot find -lz". Install them before the build; without root, ask the administrator.
 - The tarball unpacks to `mesasdk-<ver>/`, not `mesasdk/` as the macOS package does. Take the directory name from the archive (`tar tzf … | head -1`) and point `MESASDK_ROOT` at it, or link `mesasdk -> mesasdk-<ver>`. If `MESASDK_ROOT` is wrong, `./install` stops at once with "You need to install ndiff": the message means the SDK environment is not loaded, not that ndiff is missing.
 - Cloud machines often have a small system disk and a separate data volume: check `df -h` and put MESA (~25 GB installed) on the volume with space.
-- The build parallelises within each module (`MAKEFLAGS=-jN`); memory, not cores, limits `N` (about 0.5–1 GB per job; with 4 GB RAM use 2).
+- Do not set `MAKEFLAGS=-jN` for `./install`: the module makefiles do not declare Fortran module dependencies, so a parallel make compiles e.g. `mtx/test/src/test_mtx.f90` before `test_mtx_support.mod` exists ("Cannot open module file … .mod", `build_and_test FAILED`). After such a failure run `./clean`, then `./install` serially. Many cores do not shorten the build; they pay off later in parallel runs.
 
 ## Check the installation
 
