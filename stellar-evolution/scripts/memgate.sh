@@ -24,7 +24,7 @@ flock 9
 while [ "$(awk '/MemAvailable/{print int($2/1048576)}' /proc/meminfo)" -lt "$need" ]; do sleep 30; done
 "$@" 9>&- &
 pid=$!
-sleep "$settle"
+sleep "$settle" 9>&-        # not inherited: a killed gate must not leave the lock held
 flock -u 9
 exec 9>&-
 wait "$pid"
