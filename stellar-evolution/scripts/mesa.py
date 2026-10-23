@@ -158,6 +158,8 @@ def check_run(run_dir, log="rn.log", done_pattern=None, allow=()):
     rt = re.findall(r"runtime \(minutes\), retries, steps\s+(\S+)\s+(\S+)\s+(\S+)", txt)
     if rt:
         out["runtime_min"], out["retries"], out["steps"] = float(rt[-1][0]), int(rt[-1][1]), int(rt[-1][2])
+    # MESA's final 'retries' can miss solver retries logged as "retry: ..." lines; count those too
+    out["retry_lines"] = len(re.findall(r"^\s*retry:", txt, flags=re.M))
     return out
 
 
