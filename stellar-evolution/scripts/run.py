@@ -3,6 +3,8 @@
 
   python3 run.py setup spec.json            copy template, apply edits, write manifest
   python3 run.py run spec.json [--no-mk]    setup (if needed), ./mk, ./rn, check, manifest
+  python3 run.py restart spec.json [--photo x8100] [--set inlist_x:controls:key=value ...] [--run-dir D]
+                                            restart from a photo with overrides, logged in the manifest
 
 spec.json:
 {
@@ -138,13 +140,54 @@ def run_case(spec, mk=True):
     return 0 if chk["ok"] else 1
 
 
+def restart(spec, photo=None, overrides=(), mk=False):
+    """Restart a run from a photo (default: the most recent), optionally with inlist overrides
+    given as 'file:namelist:key=value'. Each restart gets its own log and a manifest entry."""
+    run = spec["_run"]
+    env = env_vars(spec)
+    edits = {}
+    for o in overrides:
+        if o.count(":") < 2 or "=" not in o:
+            raise SystemExit(f"override {o!r} is not file:namelist:key=value (in zsh, write ${{VAR}}:key, "
+                             "not $VAR:key, which zsh treats as a modifier)")
+        f, nl, kv = o.split(":", 2)
+        k, _, v = kv.partition("=")
+        edits.setdefault((f, nl), []).append((k.strip(), v.strip()))
+    for (f, nl), kv in edits.items():
+        mesa.set_inlist(run / f, nl, kv, mesa_dir=env["MESA_DIR"])
+    if mk:
+        r = subprocess.run(["bash", "-c", "./mk > mk.log 2>&1"], cwd=run, env=env)
+        if r.returncode != 0:
+            raise SystemExit(f"./mk failed: see {run / 'mk.log'}")
+    stamp = time.strftime("%Y%m%d-%H%M%S")
+    log = f"re_{stamp}.log"
+    t0 = time.time()
+    subprocess.run(["bash", "-c", f"nice -n 10 ./re {photo or ''} > {log} 2>&1"], cwd=run, env=env)
+    chk = mesa.check_run(run, log=log, done_pattern=spec.get("done_pattern"),
+                         allow=tuple(spec.get("allow_termination", ())))
+    man = json.loads((run / "manifest.json").read_text())
+    man.setdefault("restarts", []).append({"photo": photo or "most recent", "overrides": list(overrides),
+                                           "log": log, "wall_min": (time.time() - t0) / 60,
+                                           "check": chk, "inlist_sha256": {p.name: sha(p) for p in run.glob("inlist*")}})
+    (run / "manifest.json").write_text(json.dumps(man, indent=1))
+    print(json.dumps(chk, indent=1))
+    return 0 if chk["ok"] else 1
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("cmd", choices=["setup", "run"])
+    ap.add_argument("cmd", choices=["setup", "run", "restart"])
     ap.add_argument("spec")
     ap.add_argument("--no-mk", action="store_true")
+    ap.add_argument("--photo", help="restart: photo name in photos/ (default: most recent)")
+    ap.add_argument("--set", nargs="*", default=[], help="restart: file:namelist:key=value overrides")
+    ap.add_argument("--run-dir", help="restart: act on this run directory instead of the spec's")
     a = ap.parse_args(argv)
     spec = load(a.spec)
+    if a.run_dir:
+        spec["_run"] = Path(a.run_dir).resolve()
+    if a.cmd == "restart":
+        return restart(spec, a.photo, a.set)
     if a.cmd == "setup":
         setup(spec)
         return 0
