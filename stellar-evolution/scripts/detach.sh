@@ -12,6 +12,12 @@
 # MESA_RESERVE_GB, default 2.5) keeps out-of-memory events inside the slice. The working directory
 # is kept; each --env FILE is sourced first (environment files, conda activate scripts).
 # Needs systemd and `loginctl enable-linger $USER` for jobs to survive logout.
+#
+# MESA_KSM=1 (needs sudo): the job runs as a system unit for $USER with MemoryKSM=yes, and ksmd is
+# switched on. Every MESA run loads its own copy of the same EOS tables (FreeEOS cache files, ~134 MB
+# each, up to several GB per run); kernel samepage merging keeps one copy of identical pages across
+# all runs of the unit. Results are unchanged (same bytes); ksmd costs some CPU. User units cannot
+# use MemoryKSM (needs CAP_SYS_RESOURCE). The system mesa.slice has its own MemoryMax.
 set -euo pipefail
 unit=${1:?usage: detach.sh UNIT_NAME [--env FILE]... -- command}; shift
 envs=()
@@ -24,6 +30,16 @@ max_mb=$(( (total_kb - reserve_kb) / 1024 ))
 pre=""
 for f in "${envs[@]}"; do pre+="source $(printf %q "$f"); "; done
 cmd=$(printf '%q ' "$@")
+if [ "${MESA_KSM:-0}" = 1 ]; then
+  sudo sh -c 'echo 1 > /sys/kernel/mm/ksm/run; echo 1000 > /sys/kernel/mm/ksm/pages_to_scan'
+  sudo systemd-run --unit="$unit" --slice=mesa.slice --collect -p User="$(id -un)" \
+    -p WorkingDirectory="$PWD" -p MemoryKSM=yes -p OOMPolicy=continue -p "MemoryMax=${max_mb}M" \
+    -E HOME="$HOME" -E USER="$(id -un)" -E PATH="$PATH" \
+    bash -c "${pre}exec $cmd"
+  sudo systemctl set-property --runtime mesa.slice "MemoryMax=${max_mb}M"
+  echo "started system unit $unit (KSM) in mesa.slice (MemoryMax ${max_mb} MB); logs: journalctl -u $unit"
+  exit 0
+fi
 systemd-run --user --unit="$unit" --slice=mesa.slice --same-dir --collect \
   -p OOMPolicy=continue -p "MemoryMax=${max_mb}M" \
   -E HOME="$HOME" -E USER="${USER:-$(id -un)}" -E PATH="$PATH" \
