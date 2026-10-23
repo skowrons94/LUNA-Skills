@@ -22,12 +22,12 @@ Grep `/\* .* -> .*\*/` in `bbnrate.c` for the full list (100 reactions in the de
 
 ## Output
 
-`ratioH[6]` = Y_p (⁴He mass fraction), `ratioH[3]` D/H, `[5]` ³He/H, `[8]` ⁷Li/H **including ⁷Be decay**, `[7]` ⁶Li/H, `[9]` ⁷Be/H. Defaults: N_ν = 3 (with the code's neutrino decoupling treatment), τ_n = 880.2 s (PDG 2018), η = 6.10e-10 (Planck 2015) — set η from the current CMB value.
+`ratioH[6]` = Y_p (⁴He mass fraction), `ratioH[3]` D/H, `[5]` ³He/H, `[8]` ⁷Li/H **including ⁷Be decay**, `[7]` ⁶Li/H, `[9]` ⁷Be/H. Defaults: N_ν = 3 (with the code's neutrino decoupling treatment), τ_n = 880.2 s (PDG 2018), η = 6.10e-10 (attributed to PDG 2018 by Arbey et al. 2020) — set η from the current CMB value.
 
 ## The patch (scripts/patch/)
 
-- `rate_override.c`, included at the top of `bbnrate.c` and called just before the code clips rates and applies uncertainties: `ALTERBBN_RATES=FILE` with lines `INDEX PATH`; table columns T9, rate, fu; `#` comments; log–log interpolation; outside a table the code's rate is used and counted.
-- `bbn_driver.c`: `central ETA [FAILSAFE]` and `mc ETA N SEED [FAILSAFE]`, JSON lines. The Monte Carlo uses AlterBBN's `err=4` sampling (every rate, including weak rates and the neutron lifetime: linear in the relative error, low side capped at −20 %, high side at +100 %) with reproducible normal deviates.
+- `rate_override.c`, included at the top of `bbnrate.c` and called just before the code clips rates and applies uncertainties: `ALTERBBN_RATES=FILE` with lines `INDEX PATH`; table columns T9, rate, fu = high/central and optional fl = central/low; `#` comments; log–log interpolation; outside a table the code's rate is used and counted.
+- `bbn_driver.c`: `central ETA [FAILSAFE]` and `mc ETA N SEED [FAILSAFE]`, JSON lines. The Monte Carlo uses AlterBBN's `err=4` sampling (every rate, including weak rates and the neutron lifetime: linear in the relative error, low side capped at −20 %, high side at +100 %) with reproducible normal deviates; failed samples are retried at failsafe 2 (mode `mc_retry_fs2`).
 - `dump_rates.c`: `dump_rates.x INDEX [NPTS]` writes the built-in forward rate and fu = high/central on T9 = 1e-3–10.
 - `ALTERBBN_PREC`: overrides the relative precision of the adaptive RK methods (failsafe 10–32).
 
@@ -47,9 +47,9 @@ The higher-order methods at their built-in precisions are not better than `fails
 
 ## Conversions and inputs to source
 
-- η₁₀ = 273.78 Ω_b h² (Steigman 2006, used by Cooke et al. 2018); conventions differ at the 0.1–0.3 % level, state the one used.
+- η₁₀ = 273.78 Ω_b h² (Cooke et al. 2018, after Steigman 2006, whose Eq. 12 gives 273.9 ± 0.3 + 1.95(Y_p − 0.25)); conventions differ at the 0.05–0.3 % level, state the one used.
 - Planck 2018 Ω_b h² (paper VI, Table 2): 0.02236 ± 0.00015 (TT,TE,EE+lowE), 0.02237 ± 0.00015 (+lensing), 0.02242 ± 0.00014 (+BAO).
-- Observations: D/H = (2.527 ± 0.030)e-5 (Cooke et al. 2018, Eq. 10); Y_p (Aver et al. 2021); ⁷Li/H (Sbordone et al. 2010); ⁶Li has no confirmed detection.
+- Observations: D/H = (2.527 ± 0.030)e-5 (Cooke et al. 2018, Eq. 10); Y_p (Aver et al. 2021); ⁷Li/H = (1.6 ± 0.3)e-10 (Fields et al. 2020, Eq. 6; Sbordone et al. 2010 give A(Li) = 2.199 ± 0.086); ⁶Li has no confirmed detection.
 
 ## Known defects
 

@@ -2,7 +2,9 @@
  *   bbn_driver.x central ETA [FAILSAFE]          -> one JSON line: central abundances
  *   bbn_driver.x mc ETA N SEED [FAILSAFE]         -> one JSON line per sample (AlterBBN err=4 sampling,
  *                                                   every rate incl. weak rates and neutron lifetime,
- *                                                   with a reproducible per-sample seed)
+ *                                                   with a reproducible per-sample seed; a sample
+ *                                                   whose solver fails, flagged or not (Yp <= 0.2),
+ *                                                   is rerun with failsafe 2 and tagged mc_retry_fs2)
  * Rates replaced through ALTERBBN_RATES (patch/rate_override.c). Abundances: Yp = 4He mass fraction,
  * others number ratios to H; Li7/H includes 7Be decay (AlterBBN convention). */
 #include "src/include.h"
@@ -53,10 +55,15 @@ int main(int argc, char **argv)
         for (int j = 0; j <= NNUCREAC + 1; j++) e.random[j] = gauss48(st);
         for (int j = 1; j <= NNUC; j++) res[k][j] = 0.;
         fail[k] = nucl_single(&p, res[k], &e) > 0;
+        if (fail[k] || !(res[k][6] > 0.2)) {   /* unflagged solver failure (all abundances ~0): retry */
+            struct relicparam p2 = p; p2.failsafe = 2;   /* same deviates, less tight stiff solver */
+            for (int j = 1; j <= NNUC; j++) res[k][j] = 0.;
+            fail[k] = (nucl_single(&p2, res[k], &e) > 0 || !(res[k][6] > 0.2)) ? 1 : 2;
+        }
     }
     for (long k = 0; k < n; k++) {
-        if (fail[k]) { printf("{\"mode\":\"mc\",\"sample\":%ld,\"failed\":true}\n", k); continue; }
-        print_json("mc", k, eta, fs, res[k]);
+        if (fail[k] == 1) { printf("{\"mode\":\"mc\",\"sample\":%ld,\"failed\":true}\n", k); continue; }
+        print_json(fail[k] == 2 ? "mc_retry_fs2" : "mc", k, eta, fail[k] == 2 ? 2 : fs, res[k]);
     }
     return 0;
 }

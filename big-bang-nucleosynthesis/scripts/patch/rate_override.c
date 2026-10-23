@@ -1,11 +1,13 @@
 /* Replace AlterBBN forward rates by tables (project patch, case 07; applied by build_alterbbn.sh).
  *
  * ALTERBBN_RATES=FILE, each line "INDEX PATH" (INDEX = AlterBBN reaction number, e.g. 20 for
- * H2(p,g)He3). Each table has columns T9, N_A<sigma v> (cm^3 mol^-1 s^-1), fu (factor
- * uncertainty, lognormal); '#' lines are comments. Between table points the rate is interpolated
+ * H2(p,g)He3). Each table has columns T9, N_A<sigma v> (cm^3 mol^-1 s^-1), fu = high/central and
+ * optionally fl = central/low (default fl = fu); '#' lines are comments. Tables must be dense:
+ * log-log interpolation between points a factor 2-5 apart in T9 misses the curvature of a
+ * charged-particle rate by several % (build tables as ratio x a dense reference rate instead). Between table points the rate is interpolated
  * linearly in (log T9, log rate). Outside the table range the code's own rate is kept and the
  * count of such calls is printed at exit (ALTERBBN_RATES_VERBOSE=1), so a table that does not
- * cover the BBN range is visible. Uncertainties: ferrhigh = fu - 1, ferrlow = 1/fu - 1.
+ * cover the BBN range is visible. Uncertainties: ferrhigh = fu - 1, ferrlow = 1/fl - 1.
  * The reverse rates are computed by AlterBBN from the forward ones (detailed balance). */
 #include <stdio.h>
 #include <stdlib.h>
@@ -17,7 +19,7 @@
 
 static int ovr_loaded = 0, ovr_n = 0;
 static int ovr_idx[OVR_MAXREAC], ovr_np[OVR_MAXREAC];
-static double ovr_lt[OVR_MAXREAC][OVR_MAXPTS], ovr_lr[OVR_MAXREAC][OVR_MAXPTS], ovr_fu[OVR_MAXREAC][OVR_MAXPTS];
+static double ovr_lt[OVR_MAXREAC][OVR_MAXPTS], ovr_lr[OVR_MAXREAC][OVR_MAXPTS], ovr_fu[OVR_MAXREAC][OVR_MAXPTS], ovr_fl[OVR_MAXREAC][OVR_MAXPTS];
 static long ovr_outside[OVR_MAXREAC];
 
 static void ovr_report(void)
@@ -32,21 +34,23 @@ static void ovr_load(void)
     const char *list = getenv("ALTERBBN_RATES");
     ovr_loaded = 1;
     if (!list || !*list) return;
-    FILE *fl = fopen(list, "r");
-    if (!fl) { fprintf(stderr, "rate_override: cannot open %s\n", list); exit(2); }
+    FILE *flist = fopen(list, "r");
+    if (!flist) { fprintf(stderr, "rate_override: cannot open %s\n", list); exit(2); }
     int idx; char path[4096];
-    while (fscanf(fl, "%d %4095s", &idx, path) == 2) {
+    while (fscanf(flist, "%d %4095s", &idx, path) == 2) {
         if (ovr_n >= OVR_MAXREAC) { fprintf(stderr, "rate_override: too many reactions\n"); exit(2); }
         FILE *ft = fopen(path, "r");
         if (!ft) { fprintf(stderr, "rate_override: cannot open %s\n", path); exit(2); }
         char line[512]; int np = 0;
         while (fgets(line, sizeof line, ft)) {
-            double t, r, fu;
+            double t, r, fu, fl;
             if (line[0] == '#') continue;
-            if (sscanf(line, "%lf %lf %lf", &t, &r, &fu) != 3) continue;
-            if (np >= OVR_MAXPTS || t <= 0 || r <= 0 || fu < 1) {
+            int nc = sscanf(line, "%lf %lf %lf %lf", &t, &r, &fu, &fl);
+            if (nc < 3) continue;
+            if (nc == 3) fl = fu;
+            if (np >= OVR_MAXPTS || t <= 0 || r <= 0 || fu < 1 || fl < 1) {
                 fprintf(stderr, "rate_override: bad row in %s: %s", path, line); exit(2); }
-            ovr_lt[ovr_n][np] = log(t); ovr_lr[ovr_n][np] = log(r); ovr_fu[ovr_n][np] = fu; np++;
+            ovr_lt[ovr_n][np] = log(t); ovr_lr[ovr_n][np] = log(r); ovr_fu[ovr_n][np] = fu; ovr_fl[ovr_n][np] = fl; np++;
         }
         fclose(ft);
         for (int i = 1; i < np; i++) if (ovr_lt[ovr_n][i] <= ovr_lt[ovr_n][i-1]) {
@@ -57,7 +61,7 @@ static void ovr_load(void)
             fprintf(stderr, "rate_override: reaction %d <- %s (%d points, T9 %.3g-%.3g)\n",
                     idx, path, np, exp(ovr_lt[ovr_n-1][0]), exp(ovr_lt[ovr_n-1][np-1]));
     }
-    fclose(fl);
+    fclose(flist);
     if (getenv("ALTERBBN_RATES_VERBOSE")) atexit(ovr_report);
 }
 
@@ -82,7 +86,8 @@ void rate_override(double f[], double ferrlow[], double ferrhigh[], double T9, i
         if (with_err) {
             double fu = ovr_fu[k][i-1] + w * (ovr_fu[k][i] - ovr_fu[k][i-1]);
             ferrhigh[ovr_idx[k]] = fu - 1.;
-            ferrlow[ovr_idx[k]] = 1. / fu - 1.;
+            double fl = ovr_fl[k][i-1] + w * (ovr_fl[k][i] - ovr_fl[k][i-1]);
+            ferrlow[ovr_idx[k]] = 1. / fl - 1.;
         }
     }
 }
