@@ -29,6 +29,7 @@ Grep `/\* .* -> .*\*/` in `bbnrate.c` for the full list (100 reactions in the de
 - `rate_override.c`, included at the top of `bbnrate.c` and called just before the code clips rates and applies uncertainties: `ALTERBBN_RATES=FILE` with lines `INDEX PATH`; table columns T9, rate, fu = high/central and optional fl = central/low; `#` comments; log–log interpolation; outside a table the code's rate is used and counted.
 - `bbn_driver.c`: `central ETA [FAILSAFE]` and `mc ETA N SEED [FAILSAFE]`, JSON lines. The Monte Carlo uses AlterBBN's `err=4` sampling (every rate, including weak rates and the neutron lifetime: linear in the relative error, low side capped at −20 %, high side at +100 %) with reproducible normal deviates; failed samples are retried at failsafe 2 (mode `mc_retry_fs2`).
 - `dump_rates.c`: `dump_rates.x INDEX [NPTS]` writes the built-in forward rate and fu = high/central on T9 = 1e-3–10.
+- `ALTERBBN_TRACE=FILE`: one line per step of the stiff integrator (failsafe < 5): t (s), T9, molar abundances Y of all 26 nuclides (mass fraction = Y·A); results unchanged. For evolution plots and animations; mark events from the trace itself (e.g. n/p leaving equilibrium, X(⁴He) rising), not from textbook values.
 - `ALTERBBN_PREC`: overrides the relative precision of the adaptive RK methods (failsafe 10–32).
 
 ## Solver settings (measured with v2.2, built-in rates, η = 6.10e-10)
