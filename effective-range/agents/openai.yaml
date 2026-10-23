@@ -1,0 +1,3 @@
+interface:
+  display_name: "Effective Range"
+  short_description: "Coulomb-modified effective-range analysis: a0, r0 from phase shifts; one-level theta^2"

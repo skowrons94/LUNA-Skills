@@ -1,0 +1,3 @@
+interface:
+  display_name: "Microscopic Cluster"
+  short_description: "Antisymmetrized GCM/RGM with the microscopic R-matrix: parameter-free cluster phase shifts"

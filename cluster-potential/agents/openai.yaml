@@ -1,0 +1,3 @@
+interface:
+  display_name: "Cluster Potential"
+  short_description: "Two-body cluster models: Pauli-forbidden states, ANCs, phase shifts, widths, norm kernel"

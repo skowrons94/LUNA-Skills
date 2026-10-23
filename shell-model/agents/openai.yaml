@@ -1,0 +1,3 @@
+interface:
+  display_name: "Shell Model"
+  short_description: "KSHELL runs for light nuclei: intruder bands, spurious states, calibration, occupancies"

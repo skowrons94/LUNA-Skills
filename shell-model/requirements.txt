@@ -1,0 +1,2 @@
+numpy
+# KSHELL itself (Fortran; Shimizu et al., Comput. Phys. Commun. 244, 372 (2019)) for the runs

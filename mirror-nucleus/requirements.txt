@@ -1,0 +1,4 @@
+numpy
+scipy
+mpmath
+# needs the cluster-potential skill in a sibling folder

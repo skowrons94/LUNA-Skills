@@ -10,6 +10,9 @@ spectra ──► yield-analysis ──► peak-shape-analysis ──► target-
                                                                                       └──► reaction-network (pynucastro burns, trajectories, rate sensitivity, measurement impact)
                                                                                                  ▲ trajectories, compositions │ rates that pass the screen
                                                                                                  └──── stellar-evolution (MESA) ◄┘
+     structure behind an R-matrix level (azure2):  shell-model (KSHELL: where, what)  ·  cluster-potential (two-body: widths, ANCs, phases)
+                                                   microscopic-cluster (GCM/RGM: antisymmetrized, parameter-free)  ·  effective-range (a0, r0, one-level theta^2)
+                                                   mirror-nucleus (charge-symmetry predictions and tests, built on cluster-potential)
                ▲                                                ▲
       efficiency-analysis        evaluated-nuclear-data     geant4-simulation (general Geant4: neutron counters, sources, kinematics, validation)
                                                             underground-gamma-simulation (Geant4 detector response, kinematics)
@@ -39,6 +42,11 @@ nuclear-research-project  (project layout, provenance, claims register, LaTeX re
 | `azure2` | AZURE2/pyazr R-matrix calculations, fits, decompositions, extrapolations, rates |
 | `reaction-network` | pynucastro networks: one-zone burns at constant conditions or along trajectories, REACLIB/STARLIB/table rates (AZURE2 output), detailed-balance reverses, ²⁶Al isomer branches, Monte Carlo and OAT rate sensitivity with noise thresholds, what a measurement's precision buys, REACLIB-form fits |
 | `stellar-evolution` | MESA without admin rights (SDK relocation, macOS SDKROOT pitfall), test-suite templates, rate factors and dense rate tables with run-local caches, run driver with manifests, run checks, solar neutrino fluxes from per-cell rates, centre trajectories and compositions for networks, resolution and physics-degeneracy checks |
+| `shell-model` | KSHELL for light nuclei: p and p-sd interactions, ħω truncations, Lawson term and spurious states, occupancies, intruder-band calibration on neighbours referred to thresholds, identification of R-matrix levels (no widths) |
+| `cluster-potential` | Two-body cluster models with Pauli-forbidden states: depths on known levels, bound states, ANCs, phase shifts, resonances, penetrabilities and θ² of a width, norm-kernel μ_N, parity-dependent potentials |
+| `microscopic-cluster` | Antisymmetrized GCM/RGM of 0s clusters with the Minnesota force and the microscopic R-matrix: one exchange parameter on the other parity, oscillator-width scan, parameter-free phase shifts and scattering lengths |
+| `effective-range` | Coulomb-modified effective-range analysis of phase shifts (data, R-matrix eigenphases, models), fit-window systematics, the θ² one R-matrix level needs for a given scattering length |
+| `mirror-nucleus` | Charge-symmetry tests: mirror spectra with one potential, ANC ratios over geometries, widths at a common radius, Thomas–Ehrman shifts, free-versus-constrained mirror refits |
 | `resonance-search` | Automated, gated search for missing or misassigned resonances in a multichannel R-matrix evaluation: data audit, pattern map, window searches, structure-aware gates, merges, unattended driver |
 | `analysis-chain` | Analyses that span several skills: fixed stages with gates, handoff contracts, unit/frame/correlation-preserving adapters (efficiency → yields, yields → target, tables → AZURE2), provenance sidecars, decision briefs, bounded retries, parallel independent attempts |
 | `uncertainty-audit` | Whether uncertainties support the conclusion: source and correlation assessment against the code; pulls, χ², localised residual structure, held-out coverage, parameter identifiability |
@@ -90,6 +98,11 @@ python3 geant4-simulation/scripts/selftest.py
 python3 delta-beta-dsam/scripts/selftest.py
 python3 reaction-network/scripts/selftest.py     # needs pynucastro; uses $NUCLEAR_DATA_DIR/STARLIB if present
 python3 stellar-evolution/scripts/selftest.py    # no MESA needed
+python3 shell-model/scripts/selftest.py          # no KSHELL needed
+python3 cluster-potential/scripts/selftest.py
+python3 effective-range/scripts/selftest.py
+python3 microscopic-cluster/scripts/selftest.py  # --full adds the end-to-end 7Be check (~1 min)
+python3 mirror-nucleus/scripts/selftest.py       # needs cluster-potential next to it
 python3 analysis-chain/scripts/selftest.py
 python3 uncertainty-audit/scripts/selftest.py
 python3 nuclear-research-project/scripts/test_check_claims.py

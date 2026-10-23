@@ -41,3 +41,13 @@
 {"id": "r41", "prompt": "MESA stops at the start with 'unknown type name FILE' while compiling utils on my Mac. How do I fix the install?", "expect": ["stellar-evolution"]}
 {"id": "r42", "prompt": "Give me the central temperature and density history of a 15 Msun star during carbon burning so I can post-process it with a network.", "expect": ["stellar-evolution"]}
 {"id": "r43", "prompt": "Does a 30 % lower 12C+12C rate change the minimum mass for carbon ignition in a full stellar model?", "expect": ["stellar-evolution"]}
+{"id": "r44", "prompt": "Where should the 1/2+ and 5/2+ intruder states of 7Be lie? Run KSHELL with YSOX in the p-sd space and calibrate the band on 9Be, 11Be and 13C.", "expect": ["shell-model"]}
+{"id": "r45", "prompt": "My KSHELL run in the 1-3 hbar-omega space gives three very low positive-parity states in 11B. Are they real?", "expect": ["shell-model"]}
+{"id": "r46", "prompt": "Fit a deep Gaussian alpha+t potential to the 7Li ground state, keep the Pauli-forbidden states, and give me the ground-state ANC.", "expect": ["cluster-potential"]}
+{"id": "r47", "prompt": "Our R-matrix fit gives the 1/2+ level of 7Be a 3He+alpha reduced width above the Wigner limit. What would a two-body cluster model say about the single-particle width at that energy?", "expect": ["cluster-potential"]}
+{"id": "r48", "prompt": "Extract the s-wave scattering length and effective range of 3He+alpha from these phase shifts with the Coulomb-modified expansion.", "expect": ["effective-range"]}
+{"id": "r49", "prompt": "Which theta^2 does a single 1/2+ R-matrix level at Ex = 8.4 MeV need to reproduce a scattering length of 50 fm?", "expect": ["effective-range"]}
+{"id": "r50", "prompt": "Compute the alpha+3He s- and d-wave phase shifts with all seven nucleons antisymmetrized, the Minnesota force and a microscopic R-matrix, fixing the exchange parameter on the negative-parity states only.", "expect": ["microscopic-cluster"]}
+{"id": "r51", "prompt": "Check the norm-kernel eigenvalues of alpha+d in a GCM basis and tell me which relative-motion shells are Pauli forbidden.", "expect": ["microscopic-cluster", "cluster-potential"]}
+{"id": "r52", "prompt": "Do the 7Li t+alpha data accept the alpha widths of the 7Be positive-parity levels? Set up the constrained mirror refit.", "expect": ["mirror-nucleus"]}
+{"id": "r53", "prompt": "Use the ratio of the 7Be and 7Li ground-state ANCs to constrain C^2 of 7Be from the measured 7Li value.", "expect": ["mirror-nucleus"]}

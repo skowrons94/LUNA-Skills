@@ -1,0 +1,3 @@
+interface:
+  display_name: "Mirror Nucleus"
+  short_description: "Charge-symmetry tests: mirror spectra, ANC ratios, widths at a common radius, mirror refits"
