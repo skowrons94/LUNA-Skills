@@ -15,6 +15,9 @@ settle=180
 if [ "${1:-}" != "--" ]; then settle=$1; shift; fi
 [ "${1:-}" = "--" ] && shift
 [ -r /proc/meminfo ] || exec "$@"
+# if memory still runs out, the kernel kills a run (inherited by MESA's child processes), not the
+# shell, the driver or the agent session that started it
+echo "${MEMGATE_OOM_ADJ:-800}" > /proc/self/oom_score_adj 2>/dev/null || true
 lock=${MEMGATE_LOCK:-/tmp/memgate.${USER:-$(id -u)}.lock}
 exec 9>"$lock"
 flock 9

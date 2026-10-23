@@ -43,7 +43,7 @@ A rate change matters to astronomy through a star: its structure, timescales, mi
 ```bash
 python3 SKILL_DIR/scripts/selftest.py                                   # must print PASS (no MESA needed)
 python3 SKILL_DIR/scripts/run.py run spec.json                          # setup + mk + rn + check + manifest
-ls specs/*.json | xargs -P 18 -I{} SKILL_DIR/scripts/memgate.sh 3 -- python3 SKILL_DIR/scripts/run.py run {}   # grid: cores x memory
+ls specs/*.json | xargs -P 18 -I{} SKILL_DIR/scripts/memgate.sh 5 -- python3 SKILL_DIR/scripts/run.py run {}   # grid: cores x memory
 python3 SKILL_DIR/scripts/run.py restart spec.json --photo x8100 --set inlist_x:controls:key=value   # resume with overrides
 python3 SKILL_DIR/scripts/mesa.py check-run runs/solar_nominal
 python3 SKILL_DIR/scripts/mesa.py set inlist_solar star_job "special_rate_factor(1)=1.1d0"
