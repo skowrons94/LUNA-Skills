@@ -1,11 +1,19 @@
 ---
 name: unslop
-description: Edit prose to remove formulaic wording, filler and repetitive structure while preserving the author's meaning and requested tone. Use when explicitly asked to unslop or de-AI a draft, or when the user says a text reads as if AI wrote it.
+description: Edit prose to remove formulaic wording, filler and repetitive structure while preserving the author's meaning and requested tone. Use only when explicitly asked to unslop or de-AI a draft, or when the user says a text reads as if AI wrote it. It is a final editing pass, not a drafting guide; papers, methods sections and proposals are written with `clear-experimental-writing`, `methods-paper-style` or `proposal-style`.
 ---
 
 # Unslop
 
-Edit text to remove formulaic patterns and preserve the author's voice. Apply these as editorial heuristics, not proof of how text was produced.
+This skill edits a finished text to remove formulaic patterns while preserving the author's voice. Such patterns make a reader stop trusting the text even where its content is sound, so removing them is worth a separate pass. You need the draft and the tone the author wants. You get the edited text with its facts unchanged. Apply the patterns below as editorial heuristics, not proof of how text was produced.
+
+## Where this fits
+
+- Comes from: a draft the user supplies, often one written with `clear-experimental-writing`, `methods-paper-style` or `proposal-style`.
+- Used by: no other skill calls it. It runs only on explicit request (`agents/openai.yaml` sets `allow_implicit_invocation: false`), and then as the last edit of the Write-up stage (7) of `analysis-chain`, after the skill of the genre.
+- Checked by: a comparison with the original, in which facts, citations, numbers and equations must be unchanged.
+
+## What to preserve
 
 Preserve facts, citations, uncertainty, technical terminology, equations, quotations and the requested format. Do not invent opinions or personal experience, add deliberate errors, or remove necessary qualifications to make prose sound human. For scientific text, accuracy and discipline-specific meaning take priority over the vocabulary and punctuation preferences below.
 

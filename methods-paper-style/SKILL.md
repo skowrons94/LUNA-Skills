@@ -1,36 +1,42 @@
 ---
 name: methods-paper-style
-description: Write or revise technical nuclear-physics methods and R-matrix papers in a plain, reusable register — first-person-plural exposition, every symbol defined where it appears, assumptions and neglected effects stated with their size, conventions made explicit, balanced treatment of alternative approaches, and conclusions that say what was clarified and what remains open. Use when drafting or editing formalism sections, method descriptions, R-matrix analyses, validation sections, or conclusions of a technical nuclear-physics or nuclear-astrophysics paper, or when asked to make a manuscript "more scientific" in this register.
+description: Write or revise technical nuclear-physics methods and R-matrix papers in a plain, reusable register: first-person plural, every symbol defined where it appears, assumptions and neglected effects stated with their size, explicit conventions, balanced treatment of alternative approaches. Use when drafting or editing formalism sections, method descriptions, R-matrix analyses, validation sections or conclusions of a technical paper, or when asked to make a manuscript "more scientific" in this register; measurement papers use `clear-experimental-writing`.
 ---
 
 # Methods-paper style
 
-The reader is a working physicist who wants to reuse the result. Every sentence should do one of three things: say what is done, say under which assumptions, or say what the result means. Nothing is there to persuade.
+A methods paper is read by a working physicist who wants to reuse the result, so its value lies in what another group can take over: the formalism, its assumptions and its conventions. This skill gives the register for that kind of text, in nuclear physics and nuclear astrophysics and in particular for R-matrix work. You need the draft or the derivation, the conventions it uses and the results with their uncertainties. You get text in which every sentence does one of three things: say what is done, say under which assumptions, or say what the result means. Nothing is there to persuade.
+
+## Where this fits
+
+- Comes from: a method or evaluation to describe, for example an R-matrix analysis made with `azure2` or `resonance-search`, at the Write-up stage (7) of `analysis-chain`.
+- Used by: the formalism, method and validation sections of a paper whose measurement parts follow `clear-experimental-writing`; the repository's STYLE.md takes its rules for skill prose partly from §§1, 4 and 6 of this skill. No other skill calls it directly.
+- Checked by: the revision checklist in §7; `physics-referee` for the numbers and `citation-checker` for borrowed results.
 
 ## 1. Voice
 
-- **First person plural, active voice, present tense** for what the paper does; past tense only for what was measured or computed.
-- **Plain declarative sentences of moderate length.** One idea per sentence; add a second clause only to qualify the first. The only question in the paper, if any, is the one that states the problem.
-- **Temperate adjectives** (important, significant, useful, convenient, relatively small). Avoid dramatic or colloquial wording and metaphors. Let numbers carry the strength of a statement.
-- **Signposts used sparingly and literally** (in practice, in principle, note that, however, therefore, thus, in other words); about one per paragraph at most.
-- **Courteous treatment of other work.** Cite the approach, state its limitation for the case at hand, and continue. Acknowledge that it may be the better choice in other situations.
+- First person plural, active voice, present tense for what the paper does; past tense only for what was measured or computed.
+- Plain declarative sentences of moderate length. One idea per sentence; add a second clause only to qualify the first. The only question in the paper, if any, is the one that states the problem.
+- Temperate adjectives (important, significant, useful, convenient, relatively small). Avoid dramatic or colloquial wording and metaphors. Let numbers carry the strength of a statement.
+- Signposts used sparingly and literally (in practice, in principle, note that, however, therefore, thus, in other words); about one per paragraph at most.
+- Courteous treatment of other work. Cite the approach, state its limitation for the case at hand, and continue. Acknowledge that it may be the better choice in other situations.
 - No chains of dashes, no italics or bold for emphasis in running text.
 
 ## 2. Architecture
 
-**Abstract.** Three to five sentences (or the journal's structured format): what is missing, what the paper provides, how it is demonstrated.
+Abstract. Three to five sentences (or the journal's structured format): what is missing, what the paper provides, how it is demonstrated.
 
-**Introduction**, in four steps:
+The introduction has four steps:
 1. The general setting, briefly, as accepted fact.
 2. The specific gap, stated concretely: a missing capability, or an inconsistency in the literature with values and references.
 3. The purpose of the paper in one sentence. Optionally, the problem as a single explicit question followed by a plain restatement.
 4. A roadmap with one sentence per section.
 
-**Formalism or method.** Begin from the most general expression, cite its origin, and specialise step by step to the case actually used. Announce each specialisation and the condition under which it holds.
+Formalism or method. Begin from the most general expression, cite its origin, and specialise step by step to the case actually used. Announce each specialisation and the condition under which it holds.
 
-**Application.** Present it as a demonstration of the method, not as the result in itself.
+Application. Present it as a demonstration of the method, not as the result in itself.
 
-**Conclusions.** Summarise what was done in a sentence or two, then say what the work clarified and what it did not, which open issues dominate the remaining uncertainty and what kind of measurement or analysis would address them, and how the results are expected to be used.
+Conclusions. Summarise what was done in a sentence or two, then say what the work clarified and what it did not, which open issues dominate the remaining uncertainty and what kind of measurement or analysis would address them, and how the results are expected to be used.
 
 ## 3. Equations
 
