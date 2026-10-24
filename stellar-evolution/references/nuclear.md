@@ -33,6 +33,7 @@ and in `&star_job`: `filename_of_special_rate(1) = 'r_mg25_pg_al26_lu.dat'` with
 
 - MESA interpolates tables piecewise-monotonically in **linear** rate vs T8. `mesa.py rate-table` therefore resamples onto 2000 log-spaced points, interpolating the source in (ln T, ln rate), from T8 = 0.01 up to the table's end. Below the source table the rate is set to zero (`--below zero`, recorded in the file header). Choose `--below error` if the star burns there.
 - For a tabulated forward rate MESA builds the reverse as table × REACLIB's detailed-balance factor (`eval_table_reverse`), so forward and reverse stay consistent.
+- **Switching a table off needs blank names, not `num_special_rate_factors = 0`.** MESA (r26.04.1, `star/private/net.f90:735`, `read_rates_from_files`) loads every non-blank `filename_of_special_rate(i)` for `reaction_for_special_factor(i)` whatever `num_special_rate_factors` says. To branch a default-rate run from a table run (restart from a photo), set `reaction_for_special_factor(i) = ''` and `filename_of_special_rate(i) = ''` as well; otherwise the "default" branch silently keeps the table (or stops with `cannot open rate info file` if the file was removed). Check the inlist of every default-rate branch with `grep filename_of_special_rate inlist*`.
 - The older mechanism `rate_tables_dir` + `rate_list.txt` replaces rates for every reaction named in the list (see the `custom_rates` test case).
 
 **Run-local rate cache.** Always set `rates_cache_dir = './rates_cache'` when a rate changes. The shared cache does not know the rate changed.
