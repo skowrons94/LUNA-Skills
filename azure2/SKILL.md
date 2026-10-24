@@ -1,58 +1,38 @@
 ---
 name: azure2
-description: Run AZURE2 R-matrix evaluations of nuclear reaction/scattering data — calculate cross sections & chi-squared, fit levels/widths, add/remove levels, decompose a cross section into level/interference/external contributions, extrapolate, compute reaction rates, or drive AZURE2 from Python via pyazr. Use whenever the task involves an .azr project file, AZURE2 levels/channels/segments, R-matrix fitting, S-factors, resonance significance tests, or the o17_guardo (THM) example in this repo.
+description: Run AZURE2 R-matrix evaluations of reaction and scattering data from the CLI or from Python via pyazr: calculate cross sections and chi-squared, fit levels and widths, add or remove levels, decompose a cross section into level, interference and external contributions, extrapolate S-factors, compute reaction rates. Use whenever a task involves an .azr project file, AZURE2 levels, channels or segments, R-matrix fitting, resonance significance tests or the o17_guardo (THM) example; automated, gated searches for missing or misassigned levels are `resonance-search`.
 ---
 
 # Running AZURE2 evaluations
 
-AZURE2 is a multi-channel, multi-level R-matrix code. An evaluation is driven by
-a single `.azr` project file that describes the compound nucleus, particle
-pairs, levels/channels, and data segments. Two headless ways to run it: the
-**interactive CLI** (`--no-gui`) and the **pyazr** Python API. Use the CLI for a
-one-shot calculate/fit/extrapolate/rate that writes the standard output files;
-use **pyazr for all evaluation work** — χ², parameter scans, level add/remove
-tests, cross-section decomposition, custom fitters and samplers.
+An R-matrix evaluation turns measured cross sections, scattering data and S factors into a level scheme of the compound nucleus, and through it into an S factor at stellar energies and a reaction rate. AZURE2 is a multi-channel, multi-level R-matrix code that does this; this skill explains how to run it headless, how to fit, edit and decompose a model, and what goes wrong. You need AZURE2 with its pyazr package and an evaluation driven by a single `.azr` project file, which describes the compound nucleus, the particle pairs, the levels and channels, and the data segments. You get χ² per segment, fitted parameters, extrapolated cross sections or S factors, decompositions and reaction rates, all in the centre-of-mass frame.
 
-The binary is on `$PATH` as `AZURE2` (also `build/src/AZURE2` in the source
-repo); pyazr resolves it via `$AZURE2_BINARY` → `<repo>/build/src/AZURE2` →
-`$PATH`, so `binary=` is usually unnecessary. **The two can drift**:
-`/usr/local/bin/AZURE2` is a copy, not a symlink, so a `make AZURE2` in the
-source repo does not reach it — `sudo cp build/src/AZURE2 /usr/local/bin/` after
-every rebuild, or export `$AZURE2_BINARY`. AZURE2 must be installed (with its `pyazr/`
-package, v2.3.0 or later, at the source repo root); pyazr is often mirrored into
-evaluation directories, so `from pyazr import ...` works when cwd is either.
+## Where this fits
 
-Full reference docs: `docs/_build/html/_sources/` — `reference/` covers
-command_line, data_formats, output_files; `user_guide/` covers levels_channels,
-segments, particle_pairs, fitting, mcmc. Worked example: `examples/o17_guardo/`.
+- Comes from: `yield-analysis` and cross-section tables through the `to-azure` adapter of `analysis-chain` (contract `azure-dat`); effective energies and target thickness from `target-analysis`; lifetimes and widths from `delta-beta-dsam`; the structure behind a level or width from `shell-model`, `cluster-potential`, `microscopic-cluster` and `mirror-nucleus`, and scattering lengths from `effective-range`; repaired level schemes from `resonance-search`; evaluated data to compare with from `evaluated-nuclear-data`; the reactions that matter most, from the sensitivity runs of `reaction-network`.
+- Goes to: `reaction-network` (contract `rate-table`, converted with `rates.py from-azure`) and `stellar-evolution`; cross sections for `target-analysis`; phase-shift grids for `effective-range`; fits to compare with in `cluster-potential`, `microscopic-cluster` and `mirror-nucleus`; repairs of the level scheme against many data sets in `resonance-search`.
+- Checked by: the run checks in "Verifying a run", and `uncertainty-audit` or `physics-referee` before a fit, S factor or rate is quoted.
 
-## Golden rules
+## Two ways to run it
 
-- **Input is LAB frame, forward kinematics** (light particle = projectile).
-  **All output files and API results are CENTER-OF-MASS.** Never mix them.
-  This includes `add_extrapolation(e_min, e_max, e_step)` — those are **lab**
-  energies (multiply c.m. by `(m_beam + m_target)/m_target`), while the energies
-  that come *back* from `calculate_energies` are c.m.
-- Always run **from the directory that contains the `.azr` file** (pyazr does
-  this for you via `cwd=`, defaulting to the `.azr`'s directory), because the
-  `.azr` stores `output/`, `checks/` and data paths *relative to itself*.
-- The `output/` directory must exist; AZURE2 writes results there.
-- **Delete `output/intEC.extrap` whenever the `<segmentsTest>` grid changes.**
-  AZURE2 caches external-capture integrals there and silently reuses them on a
-  different grid — this corrupts capture cross sections *and* data-mode χ²
-  (integrals for data and test segments are built together at INITIALIZE).
-  `intEC.dat` is the data-segment equivalent and is safe while `<segmentsData>`
-  is untouched. Both are safe to delete; they just cost time to rebuild.
-- **One AZURE2 session per process.** Opening a second `azure2()` in the same
-  interpreter desyncs `GET_PARAMS_INFO`. Sweep variants from a shell loop, or
-  build one temp `.azr` that carries everything the run needs.
-- CLI mode does **not** read Runtime Options from the `.azr` — pass them as
-  flags every time (`--use-brune`, `--gsl-coul`, …).
+AZURE2 runs headless in two ways, the interactive CLI (`--no-gui`) and the pyazr Python API. The CLI suits a one-shot calculate, fit, extrapolate or rate run that writes the standard output files. We use pyazr for all evaluation work: χ², parameter scans, level add/remove tests, cross-section decomposition, custom fitters and samplers.
 
-## Workflow A — interactive CLI (one-shot runs)
+The binary is on `$PATH` as `AZURE2`, and also at `build/src/AZURE2` in the source repo. pyazr resolves it via `$AZURE2_BINARY` → `<repo>/build/src/AZURE2` → `$PATH`, so `binary=` is usually unnecessary. The two copies can drift, because `/usr/local/bin/AZURE2` is a copy, not a symlink, and a `make AZURE2` in the source repo does not reach it. After every rebuild, therefore, run `sudo cp build/src/AZURE2 /usr/local/bin/` or export `$AZURE2_BINARY`. AZURE2 must be installed with its `pyazr/` package, v2.3.0 or later, at the source repo root. pyazr is often mirrored into evaluation directories, so `from pyazr import ...` works when cwd is either.
 
-Prompt order: **(1) menu choice → (2) external parameter file → (3) mode-specific
-prompts**. Pipe stdin to run non-interactively.
+The full reference documentation is in `docs/_build/html/_sources/`: `reference/` covers command_line, data_formats and output_files, and `user_guide/` covers levels_channels, segments, particle_pairs, fitting and mcmc. The worked example is `examples/o17_guardo/`.
+
+## Rules and their reasons
+
+1. The input is in the LAB frame with forward kinematics, the light particle being the projectile, while all output files and API results are in the CENTER-OF-MASS frame. The two are never mixed. A c.m. energy given where a lab energy is expected is wrong by the mass factor, and the extrapolation grids of the older 7Be scripts predate this finding ([scripts-and-examples.md](references/scripts-and-examples.md)). The rule includes `add_extrapolation(e_min, e_max, e_step)`, whose arguments are lab energies (multiply c.m. by `(m_beam + m_target)/m_target`), while the energies that come back from `calculate_energies` are c.m.
+2. Always run from the directory that contains the `.azr` file, because the `.azr` stores `output/`, `checks/` and data paths relative to itself. pyazr does this for you via `cwd=`, which defaults to the directory of the `.azr`.
+3. The `output/` directory must exist, since AZURE2 writes its results there.
+4. Delete `output/intEC.extrap` whenever the `<segmentsTest>` grid changes. AZURE2 caches the external-capture integrals in that file and silently reuses them on a different grid. Because the integrals for data and test segments are built together at INITIALIZE, a stale cache corrupts both the capture cross sections and the data-mode χ². `intEC.dat` is the equivalent for the data segments and is safe while `<segmentsData>` is untouched. Both files are safe to delete; they only cost time to rebuild.
+5. Open one AZURE2 session per process, because a second `azure2()` in the same interpreter desyncs `GET_PARAMS_INFO`. Variants are therefore swept from a shell loop, or one temporary `.azr` is built that carries everything the run needs.
+6. CLI mode does not read the Runtime Options from the `.azr`, so they must be passed as flags every time (`--use-brune`, `--gsl-coul`, …).
+
+## Workflow A: interactive CLI (one-shot runs)
+
+The CLI prompts in a fixed order: the menu choice, then the external parameter file, then the prompts of the chosen mode. Piping stdin runs it non-interactively.
 
 | # | Mode |
 |---|------|
@@ -64,9 +44,7 @@ prompts**. Pipe stdin to run non-interactively.
 | 6 | MCMC Bayesian Sampling (`samples.mcmc`) |
 | 7 | Exit |
 
-The **external parameter file** prompt: give a saved `output/param.sav` to start
-from those best-fit formal parameters, or leave **blank** to build fresh from
-the `.azr` levels.
+At the external parameter file prompt, a saved `output/param.sav` starts the run from those best-fit formal parameters, and a blank answer builds the parameters fresh from the `.azr` levels.
 
 ```bash
 # Calculate with saved best-fit params; writes chiSquared.out + AZUREOut_*.out
@@ -80,16 +58,11 @@ printf '2\n\nn\n' | AZURE2 --no-gui 7Be.azr
 printf '3\noutput/param.sav\nn\n' | AZURE2 --no-gui 7Be.azr
 ```
 
-Non-interactive band control: `--covariance-band` (+ `--scale-covariance`) skips
-the y/n prompts. Other flags: `--use-brune`, `--gsl-coul`, `--ignore-externals`,
-`--use-rmc`, `--no-transform`; `--help` lists all.
+The flag `--covariance-band`, with `--scale-covariance`, controls the band without the y/n prompts. Other flags are `--use-brune`, `--gsl-coul`, `--ignore-externals`, `--use-rmc` and `--no-transform`; `--help` lists all.
 
-## Workflow B — pyazr
+## Workflow B: pyazr
 
-pyazr spawns headless `AZURE2 --no-gui --use-api` processes and talks to them
-over a socket. A session is a context manager; always close it.
-
-Install it from the repository root (it is not on PyPI):
+pyazr spawns headless `AZURE2 --no-gui --use-api` processes and talks to them over a socket. A session is a context manager and is always closed. The package is not on PyPI and is installed from the repository root.
 
 ```bash
 pip install -e .                # core: numpy, mpmath, scipy
@@ -97,12 +70,7 @@ pip install -e ".[examples]"    # + matplotlib, emcee, multiprocess
 pip install -e ".[all]"         # + zeus-mcmc
 ```
 
-`-e` is the useful form, since the package lives in the checkout. AZURE2 itself
-is C++ and is **not** installed by pip — build it separately. pyazr locates the
-binary via `$AZURE2_BINARY`, then `build/src/AZURE2`, then `$PATH`, and it must
-be built with `USE_API=ON` (the default). Installing also puts `pyazr-cleanup`
-on the path, which reaps API instances orphaned by an interpreter that died
-before it could close them.
+The `-e` form is the useful one, since the package lives in the checkout. AZURE2 itself is C++ and is not installed by pip, so it is built separately. pyazr locates the binary via `$AZURE2_BINARY`, then `build/src/AZURE2`, then `$PATH`, and the binary must be built with `USE_API=ON`, which is the default. Installing also puts `pyazr-cleanup` on the path; it reaps API instances orphaned by an interpreter that died before it could close them.
 
 ```python
 import os
@@ -115,14 +83,7 @@ with azure2("7Be.azr", nprocs=1, cwd=HERE) as m:
     chi2 = np.sum(m.calculate_chi2_rwa(best))
 ```
 
-`nprocs=N` spawns N independent instances (`proc=i` selects one) — for one χ²
-per walker in emcee/zeus. Ports are OS-assigned, so parallel sessions never
-collide.
-
-
-The rest of the pyazr API — the two parameter conventions, data vs extrapolation
-mode, inspecting a model, per-dataset χ², observables and analysing power, fitting
-from Python — is in [references/pyazr.md](references/pyazr.md).
+`nprocs=N` spawns N independent instances, and `proc=i` selects one; this gives one χ² per walker in emcee/zeus. Ports are OS-assigned, so parallel sessions never collide. The rest of the pyazr API, namely the two parameter conventions, data and extrapolation mode, inspecting a model, χ² per data set, observables and analysing power, and fitting from Python, is described in [references/pyazr.md](references/pyazr.md).
 
 ## Where to read next
 
@@ -135,14 +96,14 @@ from Python — is in [references/pyazr.md](references/pyazr.md).
 | `.azr` anatomy, `.dat` data format, output files | [references/files.md](references/files.md) |
 | Ready-made 7Be scripts, pyazr examples | [references/scripts-and-examples.md](references/scripts-and-examples.md) |
 
-Read the relevant file before editing a model, writing a fitter or interpreting a
-decomposition; the golden rules above apply throughout.
+The relevant file is read before editing a model, writing a fitter or interpreting a decomposition. The rules above apply throughout.
 
 ## Verifying a run
 
-`cat output/chiSquared.out` — a finite total χ² and the expected N per segment.
-From pyazr: `np.sum(m.calculate_chi2_rwa(m.params_rwa))` must reproduce the
-model's known total (record it whenever the `.azr` changes; a jump concentrated
-in the capture datasets almost always means a stale `intEC.extrap`). After a
-fit, check `param.sav` updated and compare `parameters.out` widths — and their
-θ² — against expectations.
+The quickest check is `cat output/chiSquared.out`, which must show a finite total χ² and the expected N per segment. From pyazr, `np.sum(m.calculate_chi2_rwa(m.params_rwa))` must reproduce the known total of the model. We record that total whenever the `.azr` changes, because a jump concentrated in the capture datasets almost always means a stale `intEC.extrap`. After a fit, check that `param.sav` was updated, and compare the widths in `parameters.out`, and their θ², against expectations.
+
+## What to deliver
+
+- The `.azr` file and the `param.sav` of the reported model, with the total χ² recorded for it.
+- `chiSquared.out` and `parameters.out` of the final run, with the frame of every quoted energy stated.
+- Extrapolated S factors or rates, with the AZURE2 build and the flags used.
