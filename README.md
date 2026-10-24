@@ -1,32 +1,38 @@
 # Nuclear physics skills
 
-Agent skills (Claude Code / Agent Skills format) for experimental nuclear physics and nuclear astrophysics, covering low-energy reaction measurements and gamma-ray spectroscopy: from raw spectra to a published paper and a talk. Each folder is one self-contained skill (`SKILL.md` plus optional `references/`, `scripts/`, `assets/`). Around them: review subagents that check results with a fresh context (`subagents/`), a hook that enforces project boundaries (`settings/`), and evaluations of how well an agent uses the skills (`evals/`).
+Agent skills (Claude Code / Agent Skills format) for experimental nuclear physics and nuclear astrophysics. Together they cover the path of a low-energy reaction measurement, from the raw spectra through the cross section and the reaction rate to its consequences in stars and in the early Universe, and finally to the paper and the talk. Each folder is one self-contained skill (`SKILL.md` plus optional `references/`, `scripts/`, `assets/`). Around them are review subagents that check results with a fresh context (`subagents/`), a hook that enforces project boundaries (`settings/`), and evaluations of how well an agent uses the skills (`evals/`).
 
-## The chain
+## The path
+
+The skills are grouped in seven sections that follow the order in which a thesis or a measurement campaign usually proceeds. Each `SKILL.md` opens with the question it answers and a short "Where this fits" block that names the skill its inputs come from, the skill its results go to, and what checks them. Handoffs between stages are files with a checked format (the contracts of `analysis-chain`: `spectrum-csv`, `yield-table`, `efficiency-curve`, `excitation-curve`, `azure-dat`, `rate-table`, `thermo-trajectory`), so that units, frames and shared uncertainties survive the step from one skill to the next.
 
 ```
-spectra ──► yield-analysis ──► peak-shape-analysis ──► target-analysis ──► azure2 (R-matrix, S-factor, rate) ──► resonance-search (level-scheme campaigns)
-                                                                                      │
-                                                                                      └──► reaction-network (pynucastro burns, trajectories, rate sensitivity, measurement impact)
-                                                                                                 ▲ trajectories, compositions │ rates that pass the screen
-                                                                                                 └──── stellar-evolution (MESA) ◄┘
-     structure behind an R-matrix level (azure2):  shell-model (KSHELL: where, what)  ·  cluster-potential (two-body: widths, ANCs, phases)
-                                                   microscopic-cluster (GCM/RGM: antisymmetrized, parameter-free)  ·  effective-range (a0, r0, one-level theta^2)
-                                                   mirror-nucleus (charge-symmetry predictions and tests, built on cluster-potential)
-               ▲                                                ▲
-      efficiency-analysis        evaluated-nuclear-data     geant4-simulation (general Geant4: neutron counters, sources, kinematics, validation)
-                                                            underground-gamma-simulation (Geant4 detector response, kinematics)
-                                                            agata-simulation (AGATA Geant4, PSA emulation, summing, tracking)
-                                                            delta-beta-dsam (fs lifetimes from Δβ = β_reac − β_ems)
-                                                                 │
-nuclear-research-project  (project layout, provenance, claims register, LaTeX report, handoff) ◄──┘
-                                                                 │
-     proposals: proposal-project (layout, registers, tool studies) · proposal-analysis (feasibility, design, back-tests, review cycle)
-     across stages: analysis-chain (stages, gates, handoff contracts, adapters, state) · uncertainty-audit (are the errors right?)
-     writing: clear-experimental-writing · methods-paper-style · proposal-style · unslop
-     figures: prc-figures (PRC / ROOT-like matplotlib style, stacked spectra, heatmaps, render check)
-     talks:   research-slides (built-in house layout or your own template, Manim animations, render + audit)
+0 Running a project ─ layout, claims register, staged chains with gates, uncertainty audit, reviewers
+        │ (applies to every stage below)
+1 In the lab ──────────► 3 From cross section to rate ──────────► 5 In the cosmos ──────► 6 Telling people
+  spectra → yields,         R-matrix fits, resonance search,        networks, BBN, MESA,     figures, papers,
+  efficiency, target,       extrapolation, rate tables              stellar observables      talks, proposals
+  lifetimes                       ▲
+        ▲                          │
+2 Simulating the experiment      4 The nucleus behind the rate
+  Geant4, AGATA, evaluated data    shell model, cluster models, mirror nuclei
 ```
+
+A student new to the field can read the sections in this order. The first exercise in each analysis skill is its offline demo or selftest (see [Test](#test)), and the graded tasks in `evals/` are worked problems with a known answer and a built-in trap. How the skills are written is described in [STYLE.md](STYLE.md).
+
+### 0. Running a project
+
+How is the work kept reproducible, staged and checked? Read this first; every other section uses it.
+
+| Skill | Use it for |
+|---|---|
+| `nuclear-research-project` | Scaffolding and auditing reproducible feasibility-study projects and reports; claims register with staleness checks |
+| `analysis-chain` | Analyses that span several skills: fixed stages with gates, handoff contracts, unit/frame/correlation-preserving adapters (efficiency → yields, yields → target, tables → AZURE2), provenance sidecars, decision briefs, bounded retries, parallel independent attempts |
+| `uncertainty-audit` | Whether uncertainties support the conclusion: source and correlation assessment against the code; pulls, χ², localised residual structure, held-out coverage, parameter identifiability |
+
+### 1. In the lab
+
+What did the detector record, and what yield, efficiency, target and lifetime follow from it?
 
 | Skill | Use it for |
 |---|---|
@@ -34,33 +40,65 @@ nuclear-research-project  (project layout, provenance, claims register, LaTeX re
 | `peak-shape-analysis` | Bin-integrated fits of asymmetric γ peaks and target energy-loss shapes |
 | `efficiency-analysis` | Photopeak efficiency, IAEA NDS decay data, cascade summing corrections |
 | `target-analysis` | Target profiles, stoichiometry and degradation from excitation curves; SRIM tables |
+| `delta-beta-dsam` | Femtosecond lifetimes with the Doppler-velocity (Δβ) DSAM method: centroids, nuisance fit, Δβ–τ calibration, sensitivity |
+
+### 2. Simulating the experiment
+
+What should the detector record, and which evaluated data describe the reaction?
+
+| Skill | Use it for |
+|---|---|
 | `geant4-simulation` | General Geant4 applications: environment and datasets, simple geometries and materials, physics lists (neutron HP with thermal scattering), sources, two-body kinematics, scoring, efficiency and die-away analyses, validation ladder, tested neutron-counter template |
 | `underground-gamma-simulation` | Building, extending and validating Geant4/ROOT simulations of gamma-detection setups at underground accelerator laboratories |
 | `agata-simulation` | AGATA Geant4 code: custom geometries (e.g. one triplet in close geometry), external cascade events, list-mode conversion, PSA/resolution emulation, summing-in tags and OFT tracking |
-| `delta-beta-dsam` | Femtosecond lifetimes with the Doppler-velocity (Δβ) DSAM method: centroids, nuisance fit, Δβ–τ calibration, sensitivity |
 | `evaluated-nuclear-data` | Evaluated cross sections (ENDF/B-VIII, JEFF, JENDL, TENDL): OpenMC HDF5 or raw ENDF-6, NJOY at temperature, thermal/RI/MACS/fission-spectrum averages, library spread, MF/MT lookup, SAMMY and Ferdinand checks |
+
+### 3. From cross section to rate
+
+Which level scheme describes the data, and what is the rate at stellar energies?
+
+| Skill | Use it for |
+|---|---|
 | `azure2` | AZURE2/pyazr R-matrix calculations, fits, decompositions, extrapolations, rates |
+| `resonance-search` | Automated, gated search for missing or misassigned resonances in a multichannel R-matrix evaluation: data audit, pattern map, window searches, structure-aware gates, merges, unattended driver |
+| `effective-range` | Coulomb-modified effective-range analysis of phase shifts (data, R-matrix eigenphases, models), fit-window systematics, the θ² one R-matrix level needs for a given scattering length |
+
+### 4. The nucleus behind the rate
+
+What structure explains a level, a width or an ANC, and is it physical?
+
+| Skill | Use it for |
+|---|---|
+| `shell-model` | KSHELL for light nuclei: p and p-sd interactions, ħω truncations, Lawson term and spurious states, occupancies, intruder-band calibration on neighbours referred to thresholds, identification of R-matrix levels (no widths) |
+| `cluster-potential` | Two-body cluster models with Pauli-forbidden states: depths on known levels, bound states, ANCs, phase shifts, resonances, penetrabilities and θ² of a width, norm-kernel μ_N, parity-dependent potentials |
+| `microscopic-cluster` | Antisymmetrized GCM/RGM of 0s clusters with the Minnesota force and the microscopic R-matrix: one exchange parameter on the other parity, oscillator-width scan, parameter-free phase shifts and scattering lengths |
+| `mirror-nucleus` | Charge-symmetry tests: mirror spectra with one potential, ANC ratios over geometries, widths at a common radius, Thomas–Ehrman shifts, free-versus-constrained mirror refits |
+
+### 5. In the cosmos
+
+What does the rate change in the Big Bang, in a star, and in what astronomers observe?
+
+| Skill | Use it for |
+|---|---|
 | `reaction-network` | pynucastro networks: one-zone burns at constant conditions or along trajectories, REACLIB/STARLIB/table rates (AZURE2 output), detailed-balance reverses, ²⁶Al isomer branches, Monte Carlo and OAT rate sensitivity with noise thresholds, what a measurement's precision buys, REACLIB-form fits |
 | `big-bang-nucleosynthesis` | AlterBBN built reproducibly from the unmodified tarball with a small patch: any nuclear rate replaced by a table (rate + factor uncertainty), JSON driver, reproducible Monte Carlo, precision override for convergence tests; checks (patch identity, table round trip, solver convergence), Omega_b h^2 from D/H, known code defects |
 | `stellar-evolution` | MESA without admin rights (SDK relocation, macOS SDKROOT pitfall), test-suite templates, rate factors and dense rate tables with run-local caches, run driver with manifests, run checks, solar neutrino fluxes from per-cell rates, centre trajectories and compositions for networks, resolution and physics-degeneracy checks |
 | `stellar-observables` | Physics of surface, wind and grain observables a rate can change (12C/13C, 14N/15N, O, Mg and Al isotopes, Li, Na, s-process): which burning sets each, which phase exposes it (dredge-ups, extra mixing, HBB, winds), which levers are larger than the rate, how to match models with observed stars and presolar grains; a general method plus a worked 12C/13C example |
-| `shell-model` | KSHELL for light nuclei: p and p-sd interactions, ħω truncations, Lawson term and spurious states, occupancies, intruder-band calibration on neighbours referred to thresholds, identification of R-matrix levels (no widths) |
-| `cluster-potential` | Two-body cluster models with Pauli-forbidden states: depths on known levels, bound states, ANCs, phase shifts, resonances, penetrabilities and θ² of a width, norm-kernel μ_N, parity-dependent potentials |
-| `microscopic-cluster` | Antisymmetrized GCM/RGM of 0s clusters with the Minnesota force and the microscopic R-matrix: one exchange parameter on the other parity, oscillator-width scan, parameter-free phase shifts and scattering lengths |
-| `effective-range` | Coulomb-modified effective-range analysis of phase shifts (data, R-matrix eigenphases, models), fit-window systematics, the θ² one R-matrix level needs for a given scattering length |
-| `mirror-nucleus` | Charge-symmetry tests: mirror spectra with one potential, ANC ratios over geometries, widths at a common radius, Thomas–Ehrman shifts, free-versus-constrained mirror refits |
-| `resonance-search` | Automated, gated search for missing or misassigned resonances in a multichannel R-matrix evaluation: data audit, pattern map, window searches, structure-aware gates, merges, unattended driver |
-| `analysis-chain` | Analyses that span several skills: fixed stages with gates, handoff contracts, unit/frame/correlation-preserving adapters (efficiency → yields, yields → target, tables → AZURE2), provenance sidecars, decision briefs, bounded retries, parallel independent attempts |
-| `uncertainty-audit` | Whether uncertainties support the conclusion: source and correlation assessment against the code; pulls, χ², localised residual structure, held-out coverage, parameter identifiability |
-| `nuclear-research-project` | Scaffolding and auditing reproducible feasibility-study projects and reports; claims register with staleness checks |
-| `proposal-project` | Scaffolding and tidying grant-proposal projects: versioned drafts, number provenance, PI placeholders, decision and objection registers, and the layout and size policy of tool studies (R-matrix, Geant4, transport, MCMC) |
-| `proposal-analysis` | The quantitative case of a proposal: feasibility, Bayesian design, pre-registered decision rules, power simulations, back-tests, covariances, sampling checks, simulated review |
+
+### 6. Telling people
+
+How are the results shown and written: figures, papers, talks and proposals?
+
+| Skill | Use it for |
+|---|---|
+| `prc-figures` | PRC / ROOT-like matplotlib figures: spectra, stacked components, S factors with data, heatmaps, method comparisons, annotated Geant4 renders, overlap checks |
+| `research-slides` | Talks in a consistent house style, Manim animations, rendering and deck audit |
 | `clear-experimental-writing` | Experimental manuscripts, abstracts, captions, referee replies |
 | `methods-paper-style` | Formalism, methods and R-matrix sections in a plain, reusable technical register |
 | `proposal-style` | Proposals, grants, fellowships, beam-time requests |
 | `unslop` | De-formulaic editing of any prose (explicit invocation only) |
-| `prc-figures` | PRC / ROOT-like matplotlib figures: spectra, stacked components, S factors with data, heatmaps, method comparisons, annotated Geant4 renders, overlap checks |
-| `research-slides` | Talks in a consistent house style, Manim animations, rendering and deck audit |
+| `proposal-project` | Scaffolding and tidying grant-proposal projects: versioned drafts, number provenance, PI placeholders, decision and objection registers, and the layout and size policy of tool studies (R-matrix, Geant4, transport, MCMC) |
+| `proposal-analysis` | The quantitative case of a proposal: feasibility, Bayesian design, pre-registered decision rules, power simulations, back-tests, covariances, sampling checks, simulated review |
 
 ## Install
 
@@ -133,7 +171,7 @@ Python 3 (tested with 3.12) with NumPy, SciPy, Matplotlib; `uproot` for ROOT inp
 ## Notes
 
 - `research-slides` ships no logos or institutional templates. It draws its own house layout; pass your own template or logo files only where you are entitled to use them.
-- The writing skills contain original, general guidance; they do not reproduce text from books, papers or proposals.
+- The writing skills contain original, general guidance; they do not reproduce text from books, papers or proposals. `STYLE.md` quotes single sentences from the owner's papers and three methods papers as evidence for its measurements, with their references.
 - Numerical examples in the skills are synthetic or published values; they are not results to cite.
 
 ## License
