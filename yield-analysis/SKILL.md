@@ -8,7 +8,7 @@ A yield analysis turns the counts of a gamma-ray spectrum into excitation-curve 
 
 ## Where this fits
 
-- Comes from: raw spectra (contract `spectrum-csv`); the efficiency curve from `efficiency-analysis` (contract `efficiency-curve`).
+- Comes from: raw spectra (contract `spectrum-csv`); the efficiency curve from `efficiency-analysis` (contract `efficiency-curve`); net areas fitted by `peak-shape-analysis` where sidebands cannot isolate a peak.
 - Goes to: `target-analysis` and cross-section extraction (contract `excitation-curve`, through the `yields-to-excitation` adapter of `analysis-chain`), and `azure2` (contract `azure-dat`, adapter `to-azure`). When sidebands cannot isolate a peak, the fit moves to `peak-shape-analysis`.
 - Checked by: `scripts/demo.py` (must print PASS), the `data-auditor` subagent before the analysis, `uncertainty-audit` and `physics-referee` before the yields are quoted.
 
