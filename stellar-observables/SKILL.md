@@ -1,21 +1,23 @@
 ---
 name: stellar-observables
-description: Physics of the stellar observables a reaction rate can change. Covers surface, envelope, wind and grain isotopic ratios (12C/13C, 14N/15N, 16O/17O, 16O/18O, 25Mg/26Mg, 26Al/27Al), elements (Li, C, N, O, Na, Al) and s-process tracers; the burning that sets each one (temperature range, cycle, equilibrium or transient value); the phase that brings it to the surface (first, second and third dredge-up, extra mixing above the RGB bump, hot-bottom burning, winds); the non-nuclear levers that can be larger than the rate (mass, metallicity, mixing efficiency, rotation, convective boundaries, mass loss, code and composition); and how to compare a model with observed stars or presolar grains (same phase, matched mass and [Fe/H], one point per star, clump against tip, code spread). Use when planning or interpreting a rate-to-observable question in stars, or when asking whether a rate change could show at a stellar surface or in grains and which observations would test it. Numbers must come from models, data files or papers read, not from memory.
+description: Physics of the stellar observables a reaction rate can change: surface, wind and grain ratios (12C/13C, 14N/15N, 16O/17O, 16O/18O, 25Mg/26Mg, 26Al/27Al), Li, C, N, O, Na, Al and s-process tracers; the burning and phase that expose them (dredge-up, extra mixing above the RGB bump, hot-bottom burning, winds); levers larger than the rate (mass, metallicity, mixing, rotation, mass loss, code); comparison with observed stars or presolar grains. Use when planning or interpreting a rate-to-observable question, or asking whether a rate change could show at a stellar surface or in grains and which observations would test it; numbers come from models, data or papers read, not memory.
 ---
 # Stellar observables
 
-A rate changes an observable only if three conditions hold. The reaction must run in a layer hot enough, for long enough, to move the local abundance. Some mixing or mass-loss process must carry that layer to a surface, a wind or a grain. And the change must be larger than what mass, metallicity, mixing and the code already do at that phase. Check them in this order, from cheap to expensive, and stop at the first one that fails.
+A rate changes an observable only if three conditions hold. The reaction must run in a layer hot enough, for long enough, to move the local abundance. Some mixing or mass-loss process must carry that layer to a surface, a wind or a grain. And the change must be larger than what mass, metallicity, mixing and the code already do at that phase. Check them in this order, from cheap to expensive, and stop at the first one that fails. You need the rate pair under study, the observable (an isotopic ratio such as 12C/13C, 14N/15N, 16O/17O, 16O/18O, 25Mg/26Mg or 26Al/27Al, an element abundance, or an s-process tracer) and the stars or grains that measure it. You get the burning site and the phase that expose the observable, the non-nuclear levers with their sizes, the model pairs worth running, and a statement of the shift with its uncertainty next to the larger levers and the matched observations.
 
-## Route the task
+## Where this fits
 
-- Local effect of a rate at fixed conditions or along a trajectory (equilibrium and transient values, Monte Carlo with correlated rates): `reaction-network`.
-- Running the star (templates, networks, rate tables, mixing controls, run checks, resources): `stellar-evolution`.
-- Primordial abundances and the Population III starting composition: `big-bang-nucleosynthesis`.
-- This skill:
-  - which burning and which phase set each observable, and the levers: [burning-and-mixing.md](references/burning-and-mixing.md);
-  - matching models with observed stars: [observations.md](references/observations.md);
-  - presolar grains as tests: [grains.md](references/grains.md);
-  - a worked example with numbers (12C(p,γ), 13C(p,γ) and 12C/13C in giants): [example-12c13c.md](references/example-12c13c.md).
+- Comes from: local equilibrium and transient values from `reaction-network`; model pairs, profiles and histories from `stellar-evolution`; observed stars and presolar grains from the papers read.
+- Goes to: the specification of the stellar-model pairs run with `stellar-evolution`, and the statement of a rate's observable effect for the report or proposal.
+- Checked by: `physics-referee` for the numbers and `citation-checker` for the literature statements (step 10).
+
+Running the star (templates, networks, rate tables, mixing controls, run checks, resources) belongs to `stellar-evolution`, and the local effect of a rate at fixed conditions or along a trajectory, including Monte Carlo with correlated rates, belongs to `reaction-network`. Primordial abundances and the Population III starting composition belong to `big-bang-nucleosynthesis`. This skill decides which of those calculations an observable needs and how to read them. Its references hold:
+
+- which burning and which phase set each observable, and the levers: [burning-and-mixing.md](references/burning-and-mixing.md);
+- matching models with observed stars: [observations.md](references/observations.md);
+- presolar grains as tests: [grains.md](references/grains.md);
+- a worked example with numbers (12C(p,γ), 13C(p,γ) and 12C/13C in giants): [example-12c13c.md](references/example-12c13c.md).
 
 Literature statements cite Zotero keys of the Astrophysics project's snapshot (`tools/zotlib.py text KEY`). The Karakas & Lattanzio 2014 and Charbonnel & Lagarde 2010 numbers were checked against the arXiv preprints held there.
 
@@ -32,7 +34,7 @@ Literature statements cite Zotero keys of the Astrophysics project's snapshot (`
 9. Matched observations ([observations.md](references/observations.md)): same stage, mass and [Fe/H], one point per star, clump stars against tip values, and the code spread stated.
 10. Rate uncertainty and the statement. Propagate the uncertainty either with runs on ±1σ tables (correlations kept) or, only where the observable is an equilibrium value, through the one-zone sensitivity d ln(obs)/d ln(rate). Say which. The statement gives the observable, phase, mass and Z, mixing (prescription and coefficient), rate pair, the shift with its uncertainty, the larger levers, and the lever the data actually constrain. Send the numbers to `physics-referee` and the literature statements to `citation-checker`.
 
-## Boundaries
+## Rules
 
 1. Every number comes with its phase, mixing and sample.
 2. A rate effect is a ratio within one code. Absolute values differ between codes by as much as a rate effect does. Do not carry mass or metallicity factors from one code to another either.
@@ -40,7 +42,9 @@ Literature statements cite Zotero keys of the Astrophysics project's snapshot (`
 4. Write "not tested here" where neither the project nor a paper we read has checked a statement.
 5. Every number traces to a file or a page: a model summary, a data table with provenance, or a paper in the library (table, equation or section).
 
-## Pitfalls (each met in this project; examples from case 02, 2026-10-24)
+## Pitfalls
+
+Each of these was met in this project; the examples are from case 02, 2026-10-24.
 
 - A code's default rate may come from an old compilation; MESA hard-codes 16 NACRE reactions. Name the rate source of the "default" partner.
 - A network changed on a loaded model starts the new isotopes at zero (13C here). Start from the pre-main sequence with the final network.
