@@ -10,6 +10,7 @@ A rate change matters to astronomy through a star: its structure, timescales, mi
 
 - **Rate impact at fixed conditions, rankings over many rates, Monte Carlo**: `reaction-network` (cheap). Use this skill for the conditions and for the few rates that pass that screen.
 - **The rate itself** (R-matrix, extrapolation, rate integration): `azure2`. Hand it over in the `rate-table` contract.
+- **What physics sets a surface, wind or grain observable, which phase and levers matter, and how to compare a model with observed stars or grains**: `stellar-observables`.
 - Everything here:
   - installation and the environment file: [install.md](references/install.md);
   - templates, inlists, threads, output, run checks: [running.md](references/running.md);
