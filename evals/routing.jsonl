@@ -51,3 +51,7 @@
 {"id": "r51", "prompt": "Check the norm-kernel eigenvalues of alpha+d in a GCM basis and tell me which relative-motion shells are Pauli forbidden.", "expect": ["microscopic-cluster", "cluster-potential"]}
 {"id": "r52", "prompt": "Do the 7Li t+alpha data accept the alpha widths of the 7Be positive-parity levels? Set up the constrained mirror refit.", "expect": ["mirror-nucleus"]}
 {"id": "r53", "prompt": "Use the ratio of the 7Be and 7Li ground-state ANCs to constrain C^2 of 7Be from the measured 7Li value.", "expect": ["mirror-nucleus"]}
+{"id": "r54", "prompt": "Would a 10 % change in the 17O(p,alpha) rate be visible anywhere in stars? Which phase would bring it to the surface and which observations could test it?", "expect": ["stellar-observables"]}
+{"id": "r55", "prompt": "Our MESA 1.25 Msun model ends with surface 12C/13C of 7.5, the M67 clump giants are around 16. How should I compare them properly, and is the mass or the mixing the bigger lever?", "expect": ["stellar-observables"]}
+{"id": "r56", "prompt": "How do the primordial deuterium and lithium abundances change if I replace the d(p,gamma)3He rate with our new measured table? And what baryon density does that imply?", "expect": ["big-bang-nucleosynthesis"]}
+{"id": "r57", "prompt": "I need the starting composition for a zero-metallicity Population III star from standard BBN, with the uncertainty from the nuclear rates.", "expect": ["big-bang-nucleosynthesis"]}
