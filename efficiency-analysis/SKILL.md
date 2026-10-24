@@ -1,25 +1,39 @@
 ---
 name: efficiency-analysis
-description: Calibrate gamma-detector photopeak efficiency, retrieve evaluated nuclear data directly from IAEA NDS, and calculate or fit prompt-cascade coincidence summing with explicit peak/total efficiencies and geometry. Use for HPGe or scintillator efficiency curves from calibration sources or reaction lines, summing-in/summing-out corrections, and decay or level data needed for them — including questions about how large a summing or efficiency correction is for a given line and geometry, which must be computed rather than estimated from memory.
+description: Calibrate gamma-detector photopeak efficiency, retrieve evaluated nuclear data directly from IAEA NDS, and calculate or fit prompt-cascade coincidence summing with explicit peak/total efficiencies and geometry. Use for HPGe or scintillator efficiency curves from calibration sources or reaction lines, summing-in/summing-out corrections, and decay or level data needed for them, including how large a summing or efficiency correction is for a given line and geometry, which must be computed rather than estimated from memory.
 ---
 # Efficiency analysis
 
-Create reproducible efficiency calibrations and summing calculations without `nudel`. Match each calibration to detector, source position, source extent, absorber arrangement and acquisition conditions. Distinguish full-energy peak efficiency from total interaction efficiency.
+The efficiency curve converts a peak area into a number of emitted gamma rays, and the summing correction accounts for cascade photons that are detected together. This skill builds both reproducibly, without `nudel`. You need calibration-source spectra or reaction lines with their net areas, the source certificates, and the detector geometry. You get a correlated efficiency curve with its validity range, summing corrections where they matter, and the nuclear-data snapshots behind them. Each calibration belongs to one detector, source position, source extent, absorber arrangement and set of acquisition conditions, and it is not transferred to another without a reason. The full-energy peak efficiency and the total interaction efficiency are different quantities and are kept apart.
+
+## Where this fits
+
+- Comes from: net areas of calibration lines (`yield-analysis`, `peak-shape-analysis`); evaluated decay and level data from IAEA NDS (this skill's `nds.py`, or `evaluated-nuclear-data` for cross sections); a validated detector model (`geant4-simulation`, `underground-gamma-simulation`) where the total efficiency is not measured.
+- Goes to: `yield-analysis` (contract `efficiency-curve`, evaluated with the `efficiency-at` adapter of `analysis-chain`).
+- Checked by: `scripts/demo.py` and `scripts/demo_cascade.py`, the direct limits listed under the rules, and `uncertainty-audit`.
 
 ## Choose the workflow
 
-- **Known source activity and peak areas:** read [calibration.md](references/calibration.md); use `build_points.py` and `fit_efficiency.py` to build points and fit a correlated log-polynomial curve over the measured range.
-- **Evaluated line and level data:** read [direct-nds.md](references/direct-nds.md); use `nds.py` to fetch/cache official data, select the parent state/decay mode, and preserve provenance. Network access is only needed for fetching new data.
-- **Coincidence summing or simultaneous peak/total fits:** read [cascades.md](references/cascades.md). Review a complete prompt scheme, then use `cascade.py` or `fit_cascade_efficiency.py`. A normalized adopted-level graph is conditional on its initial population, not automatically a complete radioactive-decay model.
+- Known source activity and peak areas: read [calibration.md](references/calibration.md), build the points with `build_points.py` and fit a correlated log-polynomial curve over the measured range with `fit_efficiency.py`.
+- Evaluated line and level data: read [direct-nds.md](references/direct-nds.md). `nds.py` fetches and caches the official data, selects the parent state and decay mode, and keeps the provenance. Network access is needed only to fetch new data.
+- Coincidence summing or a simultaneous peak/total fit: read [cascades.md](references/cascades.md), review a complete prompt scheme, then use `cascade.py` or `fit_cascade_efficiency.py`. A normalised adopted-level graph is conditional on its initial population, so it is not automatically a complete model of a radioactive decay.
 
-Run `python scripts/demo.py --out NEW_DEMO` for an offline calibration and analytic summing checks. Run `python scripts/demo_cascade.py --out NEW_DEMO` for a joint single/sum-peak fit at several distances. Both generate editable configurations and reports. Use Python with NumPy, SciPy and Matplotlib; NDS retrieval itself uses the standard library.
+`python scripts/demo.py --out NEW_DEMO` runs an offline calibration and analytic summing checks, and `python scripts/demo_cascade.py --out NEW_DEMO` a joint single- and sum-peak fit at several distances. Both generate editable configurations and reports. The scripts need Python with NumPy, SciPy and Matplotlib; the NDS retrieval uses the standard library only.
 
-## Scientific checks
+## Rules and their reasons
 
-Resolve activity reference date, half-life, measurement duration, live-time convention, emission probability, net-area errors and any prior correction. Keep source activity and emission-probability correlations through the calibration. Resolve metastable/ground-state ambiguities before using decay lines. Do not match transitions merely to the nearest energy.
+1. Resolve the activity reference date, half-life, measurement duration, live-time convention, emission probability, net-area errors and any correction already applied, because each one scales the efficiency directly. The correlations of source activities and emission probabilities are carried through the calibration.
+2. Metastable and ground-state ambiguities are resolved before a decay line is used, and transitions are identified from the level scheme, not matched to the nearest energy.
+3. Inspect the fit residuals, rank, bounds and the degeneracy between source scale and efficiency. A total efficiency must be constrained by the data or come from an independently validated model; renaming the photopeak curve does not produce one.
+4. Before a summing correction is applied to measured yields, test its direct limits (zero efficiency, an isolated photon, two-photon sum-in and sum-out) and the neglected effects that are relevant for the geometry.
 
-Inspect fit residuals, rank, bounds and source-scale/efficiency degeneracy. Data must constrain the requested total efficiency or it must come from an independently validated model. Never obtain it by renaming the photopeak curve. Test direct limits (zero efficiency, isolated photon, two-photon sum-in/out) and relevant neglected effects before applying a correction to measured yields.
+[example-audit.md](references/example-audit.md) records the migration decisions and the validation limits, and [agent-code.md](references/agent-code.md) is to be read before extending the scripts. Original data are preserved; working products go to the user's project, never into the skill directory.
 
-Read [example-audit.md](references/example-audit.md) for migration decisions and validation limits, and [agent-code.md](references/agent-code.md) before extending scripts. Preserve original data; write working products to the user's project, never into the skill directory.
+## What to deliver
 
-When the curve feeds yields, evaluate it with `analysis-chain`'s `adapters.py efficiency-at`: its uncertainty is a shared systematic across runs, not a per-run error. Deliver calibration coefficients/covariance and validity range, geometry, nuclear-data snapshots/hashes, a reviewed cascade and assumptions where used, fit plots/residuals and a reproducible report. Report statistical/local-fit uncertainty separately from incomplete nuclear-data, geometry, angular-correlation and timing systematics.
+- Calibration coefficients with covariance, and the validity range.
+- The geometry and the nuclear-data snapshots with their hashes.
+- Where used, the reviewed cascade and its assumptions.
+- Fit plots with residuals, and a reproducible report.
+
+The statistical and local-fit uncertainty is reported separately from the systematics of incomplete nuclear data, geometry, angular correlation and timing. When the curve feeds yields, its uncertainty is a shared systematic across runs, not a per-run error, which is why it is evaluated with `adapters.py efficiency-at`.
