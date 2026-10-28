@@ -133,3 +133,28 @@ def theta2_for_a0(pair, E_lam, a0_target, a, emin=0.20, emax=2.00, tmax=3.5):
         return brentq(f, lo, min(hi, tmax), xtol=1e-5)
     except ValueError:
         return float("nan")
+
+
+# ---- charged hard sphere: the reference a large Coulomb-modified a0 must be compared with
+def delta_hard_sphere(pair, E, R, l=0):
+    """Phase (deg) of a charged hard sphere of radius R: delta = -atan(F_l(kR)/G_l(kR))."""
+    out = []
+    for e in np.atleast_1d(np.asarray(E, float)):
+        k, eta = float(pair.k(e)), float(pair.eta(e))
+        F, G, _, _ = _coul(l, round(eta, 12), round(k * R, 12))
+        out.append(-np.arctan2(F, G))
+    return np.degrees(np.unwrap(2 * np.array(out)) / 2)
+
+
+def ere_hard_sphere(pair, R, emin=0.20, emax=2.00):
+    """a0, r0 of a charged hard sphere of radius R with the same recipe as fit_ere."""
+    Es = np.linspace(emin, emax, 60)
+    return fit_ere(pair, Es, delta_hard_sphere(pair, Es, R), emin, emax, order=2)
+
+
+def core_radius(pair, E, delta_deg):
+    """Equivalent hard-sphere radius (fm) of a phase delta (deg, any branch) at one energy.
+    Tracking it against E shows whether a phase is one hard sphere (constant) or not."""
+    d = (float(delta_deg) + 90.0) % 180.0 - 90.0
+    f = lambda R: float(delta_hard_sphere(pair, E, R)[0]) - d
+    return brentq(f, 0.2, 8.0)

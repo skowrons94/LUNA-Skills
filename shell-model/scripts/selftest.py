@@ -68,5 +68,11 @@ with tempfile.TemporaryDirectory() as d:
     txt = kt.write_input(f"{d}/in_x.input", "ysox.snt", "Be7_p13.ptn", 25)
     check("namelist has the Lawson term and the files", "beta_cm = 10.0" in txt and 'fn_ptn = "Be7_p13.ptn"' in txt)
 
+import amplitudes as amp  # noqa: E402
+for s in (0.5, 1.5):
+    tot = sum(amp.recouple(1, j, 1, 1.5, s) ** 2 for j in (0.5, 1.5))
+    check(f"6j recoupling unitary (s = {s})", abs(tot - 1) < 1e-10, f"{tot:.10f}")
+check("7Be 1/2+ alpha SF renormalized by mu_4", abs(amp.renormalized_sf(0.0762, 4, {4: 0.5955}) - 0.1280) < 1e-3)
+
 print("PASS" if ok else "FAIL")
 sys.exit(0 if ok else 1)

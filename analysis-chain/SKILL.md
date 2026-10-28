@@ -22,8 +22,8 @@ One stage only is handled by that stage's skill directly. Several stages, a hand
 | 1 Yields | `yield-analysis`, `peak-shape-analysis` | `yields.csv`, `covariance.csv`, `result.json` | `yield-table` | every ROI overlay reviewed; negative areas kept; shared systematics named |
 | 2 Efficiency | `efficiency-analysis` | fit `result.json` | `efficiency-curve` | line energies inside the validity range; summing treated for the real geometry |
 | 3 Target, effective energy | `target-analysis` | profile, effective energies | `excitation-curve` in | stopping table and composition stated; profile validated on a resonance |
-| 4 Cross section / S factor → R-matrix | `azure2`, `resonance-search` | `.dat` segments, fit | `azure-dat` | lab frame and MeV checked; normalisation priors equal quoted systematics |
-| 5 Extrapolation, rates | `azure2` | S(E), rate tables | `rate-table` out | registered as `extrapolated` claims with model dependence |
+| 4 Cross section / S factor → R-matrix | `r-matrix`, `resonance-search` | `.dat` segments, fit | `azure-dat` | lab frame and MeV checked; normalisation priors equal quoted systematics |
+| 5 Extrapolation, rates | `r-matrix` | S(E), rate tables | `rate-table` out | registered as `extrapolated` claims with model dependence |
 | 5b Astrophysical impact | `reaction-network` | burns, sensitivity rankings | `rate-table`, `thermo-trajectory` in | rates compared at site temperatures; tolerance and completeness checks pass; site conditions sourced |
 | 5c Stellar models | `stellar-evolution` | MESA runs with `manifest.json`, `results.json`, trajectories | `rate-table` in, `thermo-trajectory` out | `mesa.py check-run` passes on every run; effect larger than the resolution and dominant mixing or mass-loss noise |
 | 6 Review | `physics-referee` subagent | findings | — | blocking findings resolved; responses in `docs/VALIDATION.md` |

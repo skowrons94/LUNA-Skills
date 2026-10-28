@@ -61,3 +61,16 @@ Write the conclusion the analysis draws, then ask:
 - Would a plausible alternative treatment of the dominant source change the conclusion?
 
 If yes, the result needs that alternative quoted, or the conclusion needs weakening.
+
+## Lessons (R-matrix, 7Be 2026)
+
+- **Profile the parameter the argument rests on.** The quoted θ²_α of a 1/2⁺ level was ±52 % (J^T J covariance,
+  scaled); fixing the width ±20 % and refitting everything else cost Δχ² 18–53, i.e. ±4.8 %: 11× too wide. The
+  covariance was near-singular (cond 5.6e15) because two levels were saturated (`r-matrix`, physicality.md);
+  after bounding them, cond 2.8e9 and covariance and profile agreed.
+- **Shrinking errors after a model change are not automatically suspicious**: check which of the two was right
+  with a profile before rejecting either.
+- **A refit can stop in a local minimum.** Compare a constrained refit with the lowest minimum of the identical
+  free model (state which), not with the free run that happened to start from the same point.
+- **Free normalizations hide in a global scale.** Datasets with no prior (or large per-point χ²) inflate
+  √(χ²/ndf); list them, do not let one scale factor stand for all.

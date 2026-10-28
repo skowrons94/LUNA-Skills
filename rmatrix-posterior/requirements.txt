@@ -1,0 +1,5 @@
+numpy
+scipy
+arviz-stats
+emcee
+h5py

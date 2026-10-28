@@ -13,7 +13,7 @@ A small error bar that fails the second question is worse than a large honest on
 
 ## Where this fits
 
-- Comes from: the results of the stages it checks, namely yields from `yield-analysis` and `peak-shape-analysis` (contract `yield-table`), efficiency curves from `efficiency-analysis` (`efficiency-curve`), target profiles and effective energies from `target-analysis`, R-matrix fits, S factors, resonance parameters and extrapolations from `azure2` and `resonance-search`, rate tables (`rate-table`), and simulation-based corrections from section 2 Simulating the experiment.
+- Comes from: the results of the stages it checks, namely yields from `yield-analysis` and `peak-shape-analysis` (contract `yield-table`), efficiency curves from `efficiency-analysis` (`efficiency-curve`), target profiles and effective energies from `target-analysis`, R-matrix fits, S factors, resonance parameters and extrapolations from `r-matrix` and `resonance-search`, rate tables (`rate-table`), and simulation-based corrections from section 2 Simulating the experiment.
 - Goes to: the `physics-referee` subagent, which uses these checks as its evidence, and the gate of the corresponding `analysis-chain` stage before the number is quoted.
 - Checked by: `scripts/selftest.py`, and a look at the plotted residuals before any flag is turned into a conclusion.
 

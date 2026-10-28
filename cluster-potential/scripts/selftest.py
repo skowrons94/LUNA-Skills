@@ -61,5 +61,11 @@ G = 2 * P * 1.3 * cl.gamma2_W(be7, 4.7)
 t = cl.theta2_from_width(be7, G, 2.0, 0, 4.7)
 check("theta2_from_width round trip", abs(t - 1.3) < 1e-12, f"{t:.6f}")
 
+# orthogonality-condition model, Pauli only (no nuclear well): alpha+3He s wave, b = 1.36 fm (7Be study)
+d1 = np.degrees(cl.ocm_phase(be7, 0, 1.0, 1.36)); d1 = (d1 + 90) % 180 - 90
+d2 = np.degrees(cl.ocm_phase(be7, 0, 1.0, 1.36, lam=1e4)); d2 = (d2 + 90) % 180 - 90
+check("OCM Pauli-only delta0(1 MeV) = -6.83 deg", abs(d1 + 6.83) < 0.05, f"{d1:.3f}")
+check("OCM converged in lambda (1e4 vs 1e5)", abs(d1 - d2) < 0.02, f"{d2 - d1:+.3f} deg")
+
 print("PASS" if ok else "FAIL")
 sys.exit(0 if ok else 1)

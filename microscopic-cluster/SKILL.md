@@ -8,7 +8,7 @@ A local cluster potential cannot see exchange, so the parity dependence of the e
 
 ## Where this fits
 
-- Comes from: the local potential of `cluster-potential`, which is fast (node counting, ANCs, widths), is done first and is tested here; the R-matrix fit to compare with from `azure2`, as eigenphases from phase-shift grids; partitions outside the cluster model from `shell-model`; scattering lengths to compare with from `effective-range`.
+- Comes from: the local potential of `cluster-potential`, which is fast (node counting, ANCs, widths), is done first and is tested here; the R-matrix fit to compare with from `r-matrix`, as eigenphases from phase-shift grids; partitions outside the cluster model from `shell-model`; scattering lengths to compare with from `effective-range`.
 - Goes to: `effective-range` for a0 and r0 from the phase shifts, with the same recipe for model, fit and data. Intruder states with a nucleon outside a core (6Li ⊗ sd) belong to `shell-model`, because this model contains only the cluster partition.
 - Checked by: `scripts/selftest.py` (must print PASS, and `--full` end to end) and the validation ladder in [validation.md](references/validation.md), which also records the lessons that changed results.
 
@@ -30,6 +30,7 @@ The kernels are built once on a generator grid; because they are linear in u, th
 4. The threshold is the model's own. Energies are relative to the sum of the model's cluster energies, which `build_kernels` returns, not to the experimental threshold, because the underbound ³He would otherwise shift every energy.
 5. Pauli-forbidden directions are removed numerically, by a cutoff on the eigenvalues of the norm kernel. The phases must therefore be checked not to move when the norm-kernel cutoff eps (1e-6 vs 1e-7) and the channel radius (7–9 fm) change.
 6. No conclusion is drawn about states this model cannot contain. A missing resonance in a cluster-only calculation says that the cluster continuum has none. It says nothing about a state built on another partition.
+7. The calculation shows an outcome, not its cause, because it contains the Pauli principle and the force together. A repulsive s wave is attributed to the Pauli principle only after the orthogonality-only test of `cluster-potential` (`ocm_phase`): for 3He+alpha it gives a hard sphere of 2.65–2.90 fm and a0 = 21–26 fm, whereas this calculation gives 35–45 fm, and a referee will ask which mechanism supplies the difference. The published RGM numbers to compare with (Walliser, Kanada and Tang 1984; Kajino 1986; Mertelmeier and Hofmann 1986) are collected in validation.md.
 
 ## Scripts
 

@@ -59,9 +59,10 @@ Which level scheme describes the data, and what is the rate at stellar energies?
 
 | Skill | Use it for |
 |---|---|
-| `azure2` | AZURE2/pyazr R-matrix calculations, fits, decompositions, extrapolations, rates |
+| `r-matrix` | R-matrix evaluations with AZURE2/pyazr (charged particles, capture, rates) or SAMMY (neutron resonances, broadening, Bayes, ENDF): choice of code, fits, decompositions, extrapolations, conversions through ENDF, and whether a fit is physical (Park norm and saturated levels, transformability, covariance against profile scans) |
+| `rmatrix-posterior` | Posterior sampling of AZURE2 fits: width, transformability and Park-norm priors that make the fit physical, exact-Hessian whitening at the MAP, Laplace and importance-sampling checks, checkpointed NUTS against an emcee baseline, derived S(0) |
 | `resonance-search` | Automated, gated search for missing or misassigned resonances in a multichannel R-matrix evaluation: data audit, pattern map, window searches, structure-aware gates, merges, unattended driver |
-| `effective-range` | Coulomb-modified effective-range analysis of phase shifts (data, R-matrix eigenphases, models), fit-window systematics, the θ² one R-matrix level needs for a given scattering length |
+| `effective-range` | Coulomb-modified effective-range analysis of phase shifts (data, R-matrix eigenphases, models), fit-window systematics, the charged-hard-sphere reference for a large a0 and the equivalent core radius, the θ² one R-matrix level needs for a given scattering length |
 
 ### 4. The nucleus behind the rate
 
@@ -69,8 +70,8 @@ What structure explains a level, a width or an ANC, and is it physical?
 
 | Skill | Use it for |
 |---|---|
-| `shell-model` | KSHELL for light nuclei: p and p-sd interactions, ħω truncations, Lawson term and spurious states, occupancies, intruder-band calibration on neighbours referred to thresholds, identification of R-matrix levels (no widths) |
-| `cluster-potential` | Two-body cluster models with Pauli-forbidden states: depths on known levels, bound states, ANCs, phase shifts, resonances, penetrabilities and θ² of a width, norm-kernel μ_N, parity-dependent potentials |
+| `shell-model` | KSHELL for light nuclei: p and p-sd interactions, ħω truncations, Lawson term and spurious states, occupancies, intruder-band calibration on neighbours referred to thresholds, identification of R-matrix levels; spectroscopic amplitudes from a CI calculation with cluster channels turned into R-matrix widths (as-built SF, μ_Q renormalization, sum rule) |
+| `cluster-potential` | Two-body cluster models with Pauli-forbidden states: depths on known levels, bound states, ANCs, phase shifts, resonances, penetrabilities and θ² of a width, norm-kernel μ_N (a normalization, not a force), parity-dependent potentials, the orthogonality-condition (Pauli-only) test |
 | `microscopic-cluster` | Antisymmetrized GCM/RGM of 0s clusters with the Minnesota force and the microscopic R-matrix: one exchange parameter on the other parity, oscillator-width scan, parameter-free phase shifts and scattering lengths |
 | `mirror-nucleus` | Charge-symmetry tests: mirror spectra with one potential, ANC ratios over geometries, widths at a common radius, Thomas–Ehrman shifts, free-versus-constrained mirror refits |
 

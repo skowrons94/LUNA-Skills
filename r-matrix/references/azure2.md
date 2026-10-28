@@ -1,17 +1,6 @@
----
-name: azure2
-description: Run AZURE2 R-matrix evaluations of reaction and scattering data from the CLI or from Python via pyazr: calculate cross sections and chi-squared, fit levels and widths, add or remove levels, decompose a cross section into level, interference and external contributions, extrapolate S-factors, compute reaction rates. Use whenever a task involves an .azr project file, AZURE2 levels, channels or segments, R-matrix fitting, resonance significance tests or the o17_guardo (THM) example; automated, gated searches for missing or misassigned levels are `resonance-search`.
----
-
-# Running AZURE2 evaluations
+# AZURE2: charged-particle reactions, capture, the Brune parameterization
 
 An R-matrix evaluation turns measured cross sections, scattering data and S factors into a level scheme of the compound nucleus, and through it into an S factor at stellar energies and a reaction rate. AZURE2 is a multi-channel, multi-level R-matrix code that does this; this skill explains how to run it headless, how to fit, edit and decompose a model, and what goes wrong. You need AZURE2 with its pyazr package and an evaluation driven by a single `.azr` project file, which describes the compound nucleus, the particle pairs, the levels and channels, and the data segments. You get χ² per segment, fitted parameters, extrapolated cross sections or S factors, decompositions and reaction rates, all in the centre-of-mass frame.
-
-## Where this fits
-
-- Comes from: `yield-analysis` and cross-section tables through the `to-azure` adapter of `analysis-chain` (contract `azure-dat`); effective energies and target thickness from `target-analysis`; lifetimes and widths from `delta-beta-dsam`; the structure behind a level or width from `shell-model`, `cluster-potential`, `microscopic-cluster` and `mirror-nucleus`, and scattering lengths from `effective-range`; repaired level schemes from `resonance-search`; evaluated data to compare with from `evaluated-nuclear-data`; the reactions that matter most, from the sensitivity runs of `reaction-network`.
-- Goes to: `reaction-network` (contract `rate-table`, converted with `rates.py from-azure`) and `stellar-evolution`; cross sections for `target-analysis`; phase-shift grids for `effective-range`; fits to compare with in `cluster-potential`, `microscopic-cluster` and `mirror-nucleus`; repairs of the level scheme against many data sets in `resonance-search`.
-- Checked by: the run checks in "Verifying a run", and `uncertainty-audit` or `physics-referee` before a fit, S factor or rate is quoted.
 
 ## Two ways to run it
 
@@ -23,7 +12,7 @@ The full reference documentation is in `docs/_build/html/_sources/`: `reference/
 
 ## Rules and their reasons
 
-1. The input is in the LAB frame with forward kinematics, the light particle being the projectile, while all output files and API results are in the CENTER-OF-MASS frame. The two are never mixed. A c.m. energy given where a lab energy is expected is wrong by the mass factor, and the extrapolation grids of the older 7Be scripts predate this finding ([scripts-and-examples.md](references/scripts-and-examples.md)). The rule includes `add_extrapolation(e_min, e_max, e_step)`, whose arguments are lab energies (multiply c.m. by `(m_beam + m_target)/m_target`), while the energies that come back from `calculate_energies` are c.m.
+1. The input is in the LAB frame with forward kinematics, the light particle being the projectile, while all output files and API results are in the CENTER-OF-MASS frame. The two are never mixed. A c.m. energy given where a lab energy is expected is wrong by the mass factor, and the extrapolation grids of the older 7Be scripts predate this finding ([scripts-and-examples.md](scripts-and-examples.md)). The rule includes `add_extrapolation(e_min, e_max, e_step)`, whose arguments are lab energies (multiply c.m. by `(m_beam + m_target)/m_target`), while the energies that come back from `calculate_energies` are c.m.
 2. Always run from the directory that contains the `.azr` file, because the `.azr` stores `output/`, `checks/` and data paths relative to itself. pyazr does this for you via `cwd=`, which defaults to the directory of the `.azr`.
 3. The `output/` directory must exist, since AZURE2 writes its results there.
 4. Delete `output/intEC.extrap` whenever the `<segmentsTest>` grid changes. AZURE2 caches the external-capture integrals in that file and silently reuses them on a different grid. Because the integrals for data and test segments are built together at INITIALIZE, a stale cache corrupts both the capture cross sections and the data-mode χ². `intEC.dat` is the equivalent for the data segments and is safe while `<segmentsData>` is untouched. Both files are safe to delete; they only cost time to rebuild.
@@ -44,25 +33,25 @@ The CLI prompts in a fixed order: the menu choice, then the external parameter f
 | 6 | MCMC Bayesian Sampling (`samples.mcmc`) |
 | 7 | Exit |
 
-At the external parameter file prompt, a saved `output/param.sav` starts the run from those best-fit formal parameters, and a blank answer builds the parameters fresh from the `.azr` levels.
+At the external parameter file prompt, a blank answer builds the parameters from the `.azr` levels. A saved `output/param.sav` given there was not used in the 7Be evaluation (2026 builds): the CLI silently ran on the parameters of the `.azr`, and a CLI run also overwrote `parameters.out` and `param.par` in the output directory of the copied file. Saved parameters are therefore evaluated in pyazr, with `pyazr.bands.best_fit_params(m, path=param.sav)`, or written into an `.azr` that carries them (`save_fit`), and line 3 of any copied `.azr` (its output directory) is pointed somewhere harmless first.
 
 ```bash
-# Calculate with saved best-fit params; writes chiSquared.out + AZUREOut_*.out
-printf '1\noutput/param.sav\n' | AZURE2 --no-gui 7Be.azr
+# Calculate an .azr that carries its parameters; writes chiSquared.out + AZUREOut_*.out
+printf '1\n\n\n' | AZURE2 --no-gui --use-brune 7Be.azr
 
 # Fit fresh from the .azr levels. Mode 2 then asks about the cross-section
 # uncertainty band (y/n) and, if yes, reduced-chi2 scaling (y/n):
 printf '2\n\nn\n' | AZURE2 --no-gui 7Be.azr
 
-# Extrapolate (no data) using saved params:
-printf '3\noutput/param.sav\nn\n' | AZURE2 --no-gui 7Be.azr
+# Extrapolate (no data) with the parameters of the .azr:
+printf '3\n\nn\n' | AZURE2 --no-gui --use-brune 7Be.azr
 ```
 
 The flag `--covariance-band`, with `--scale-covariance`, controls the band without the y/n prompts. Other flags are `--use-brune`, `--gsl-coul`, `--ignore-externals`, `--use-rmc` and `--no-transform`; `--help` lists all.
 
 ## Workflow B: pyazr
 
-pyazr spawns headless `AZURE2 --no-gui --use-api` processes and talks to them over a socket. A session is a context manager and is always closed. The package is not on PyPI and is installed from the repository root.
+pyazr 2.8 and later run AZURE2 in-process; earlier versions spawned headless `AZURE2 --no-gui --use-api` processes and talked to them over a socket. A session is a context manager and is always closed, one per process. The package is not on PyPI and is installed from the repository root.
 
 ```bash
 pip install -e .                # core: numpy, mpmath, scipy
@@ -77,24 +66,26 @@ import os
 os.environ.setdefault("OMP_NUM_THREADS", "4")   # set BEFORE importing numpy
 import numpy as np
 from pyazr import azure2, AzrModel
+from pyazr.bands import best_fit_params
 
-with azure2("7Be.azr", nprocs=1, cwd=HERE) as m:
-    best = np.asarray(m.params_rwa, float)      # free parameter vector
+with azure2("7Be.azr", cwd=HERE) as m:            # pyazr >= 2.8: in-process, no nprocs
+    best = np.asarray(best_fit_params(m, path="output/param.sav"), float)
     chi2 = np.sum(m.calculate_chi2_rwa(best))
 ```
 
-`nprocs=N` spawns N independent instances, and `proc=i` selects one; this gives one χ² per walker in emcee/zeus. Ports are OS-assigned, so parallel sessions never collide. The rest of the pyazr API, namely the two parameter conventions, data and extrapolation mode, inspecting a model, χ² per data set, observables and analysing power, and fitting from Python, is described in [references/pyazr.md](references/pyazr.md).
+The signature in pyazr 2.9 is `azure2(file, cwd=None, data_mode=True, use_brune=True, ignore_externals=True, transform=True, use_long_wavelength=True, use_gsl_coul=False, use_rmc=False, use_park=False, use_coulomb_table=True, ...)`; `use_park=True` runs the Park parameterization (physicality.md). Versions up to 2.7 took `nprocs=` and `proc=`, so `inspect.signature(azure2)` is checked before an example is copied. Parallel χ² evaluations run in separate processes, each with its own output directory and temporary file names. The rest of the pyazr API, namely the two parameter conventions, data and extrapolation mode, inspecting a model, χ² per data set, observables and analysing power, and fitting from Python, is described in [references/pyazr.md](pyazr.md).
 
 ## Where to read next
 
 | Task | Read |
 |---|---|
-| Parameter conventions, χ² per dataset, observables, analysing power, least-squares fits | [references/pyazr.md](references/pyazr.md) |
-| Adding/removing/moving levels, `AzrModel`, extrapolation grids | [references/model-editing.md](references/model-editing.md) |
-| Level/interference/external decomposition, S factor, significance tests, radius changes, evaluation recipes | [references/decomposition-and-recipes.md](references/decomposition-and-recipes.md) |
-| Trojan Horse (THM/HOES) segments | [references/thm.md](references/thm.md) |
-| `.azr` anatomy, `.dat` data format, output files | [references/files.md](references/files.md) |
-| Ready-made 7Be scripts, pyazr examples | [references/scripts-and-examples.md](references/scripts-and-examples.md) |
+| Parameter conventions, χ² per dataset, observables, analysing power, least-squares fits | [references/pyazr.md](pyazr.md) |
+| Adding/removing/moving levels, `AzrModel`, extrapolation grids | [references/model-editing.md](model-editing.md) |
+| Level/interference/external decomposition, S factor, significance tests, radius changes, evaluation recipes | [references/decomposition-and-recipes.md](decomposition-and-recipes.md) |
+| Trojan Horse (THM/HOES) segments | [references/thm.md](thm.md) |
+| `.azr` anatomy, `.dat` data format, output files | [references/files.md](files.md) |
+| Ready-made 7Be scripts, pyazr examples | [references/scripts-and-examples.md](scripts-and-examples.md) |
+| Saturated levels (Park norm), transformability, covariance checks, structure-predicted channels, pitfalls | [references/physicality.md](physicality.md) |
 
 The relevant file is read before editing a model, writing a fitter or interpreting a decomposition. The rules above apply throughout.
 

@@ -9,7 +9,7 @@ An evaluated cross section is often the reference against which a measurement, a
 ## Where this fits
 
 - Comes from: OpenMC HDF5 builds and raw ENDF-6 files from the distributors listed in [sources.md](references/sources.md); EXFOR data for comparison.
-- Goes to: `reaction-network` for evaluated neutron cross sections and MACS; `azure2` for R-matrix parameters converted with Ferdinand and for comparisons with an R-matrix fit; `efficiency-analysis` and the Geant4 skills (`geant4-simulation`, `underground-gamma-simulation`) for cross sections used as inputs.
+- Goes to: `reaction-network` for evaluated neutron cross sections and MACS; `r-matrix` for R-matrix parameters converted with Ferdinand and for comparisons with an R-matrix fit; `efficiency-analysis` and the Geant4 skills (`geant4-simulation`, `underground-gamma-simulation`) for cross sections used as inputs.
 - Checked by: `scripts/selftest.py` (must print `PASS`), an independent SAMMY reconstruction where resonances matter, and `physics-referee` before a number is quoted.
 
 ## Choose the route

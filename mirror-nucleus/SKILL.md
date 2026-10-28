@@ -8,8 +8,8 @@ Charge symmetry equates the nuclear part of mirror states, and it is therefore a
 
 ## Where this fits
 
-- Comes from: the cluster potential both nuclei share, from `cluster-potential`, whose library this skill imports; the mirror R-matrix fits from `azure2`, with the refit design in [method.md](references/method.md); mirror states from `shell-model`; s-wave scattering lengths from `effective-range`.
-- Goes to: the refits in `azure2`; the scattering lengths of the two s waves in `effective-range`. Shell-model mirror states, identical without Coulomb, come from `shell-model`.
+- Comes from: the cluster potential both nuclei share, from `cluster-potential`, whose library this skill imports; the mirror R-matrix fits from `r-matrix`, with the refit design in [method.md](references/method.md); mirror states from `shell-model`; s-wave scattering lengths from `effective-range`.
+- Goes to: the refits in `r-matrix`; the scattering lengths of the two s waves in `effective-range`. Shell-model mirror states, identical without Coulomb, come from `shell-model`.
 - Checked by: `scripts/selftest.py` (must print PASS) and the validation ladder in [validation.md](references/validation.md), which also records the lessons that changed results.
 
 ## Method

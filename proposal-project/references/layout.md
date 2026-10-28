@@ -54,5 +54,5 @@ When the proposal runs its own R-matrix fits, Geant4 or transport simulations or
 
 - `nuclear-research-project` for the reproducible analysis or feasibility study behind the proposal (data, R-matrix, simulation, report).
 - `proposal-analysis` for feasibility, design, decision rules, back-tests and the simulated-review cycle; `target-analysis` and `efficiency-analysis` for stopping powers, target profiles and detection efficiencies behind the rate estimates.
-- `geant4-simulation` for Geant4 applications (building, geometry, physics lists, sources, scoring, validation); `azure2` for R-matrix runs.
+- `geant4-simulation` for Geant4 applications (building, geometry, physics lists, sources, scoring, validation); `r-matrix` for R-matrix runs.
 - `proposal-style` for the prose; `prc-figures` for figures; `research-slides` for the interview talk.

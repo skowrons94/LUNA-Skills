@@ -9,8 +9,8 @@ A measured excitation curve contains the target: how the active nuclei are distr
 
 ## Where this fits
 
-- Comes from: `yield-analysis` through the `yields-to-excitation` adapter of `analysis-chain` (contract `excitation-curve`); peak shapes from `peak-shape-analysis`; cross sections from `azure2`; stopping from SRIM tables (`scripts/srim_table.py`).
-- Goes to: effective energies and target thickness for the cross section or S factor, and on to `azure2`.
+- Comes from: `yield-analysis` through the `yields-to-excitation` adapter of `analysis-chain` (contract `excitation-curve`); peak shapes from `peak-shape-analysis`; cross sections from `r-matrix`; stopping from SRIM tables (`scripts/srim_table.py`).
+- Goes to: effective energies and target thickness for the cross section or S factor, and on to `r-matrix`.
 - Checked by: the forward-model tests of step 5, `scripts/demo.py`, and `uncertainty-audit` or `physics-referee` before thickness or stoichiometry is quoted.
 
 ## Establish the measurement
@@ -25,7 +25,7 @@ Calculations, logs and tests are written to the user's project or a scratch dire
 
 1. Inspect the data coverage and group physically distinct scans. Flag duplicate measurements, non-finite values, non-positive errors and inconsistent target labels. Low-energy points are not dropped silently, and different resonances or efficiencies are not combined.
 2. Construct the stopping per active isotope from the chosen elemental or compound data and composition convention. Fit an identifiable inactive/active ratio rather than two abundances that enter only through their ratio. Check electronic against total stopping and any compound correction.
-3. Obtain a sufficiently resolved cross section for the intended channel and angular acceptance, over the full integration and broadening domain. A validated table can be reused. New AZURE2 results are generated with the `azure2` skill, if installed, and their output definition verified; the old server wrapper of the example is not run automatically.
+3. Obtain a sufficiently resolved cross section for the intended channel and angular acceptance, over the full integration and broadening domain. A validated table can be reused. New AZURE2 results are generated with the `r-matrix` skill, if installed, and their output definition verified; the old server wrapper of the example is not run automatically.
 4. Choose a uniform layer, a truncated Gaussian or another justified profile, state its normalisation and support, and fold cross section and stopping with the beam spread and the depth-dependent straggling, following [model-and-fitting.md](references/model-and-fitting.md). Start with a transparent model and add complexity only when the measurements can constrain it.
 5. Test the forward model before optimising it: the analytic limit of a constant cross section, the behaviour without broadening, unit and frame consistency, input coverage, numerical convergence and the recovery of synthetic parameters.
 6. Fit only parameters the model uses, with physical constraints and an appropriate likelihood or covariance. Test multiple starts and inspect residuals, parameter correlations, bounds and rank. Statistical uncertainty is kept separate from the efficiency, stopping, calibration and nuclear-model systematics. A forward plot with hand-picked parameters is not a fit.

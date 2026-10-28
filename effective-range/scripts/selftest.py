@@ -51,5 +51,13 @@ for a0, want in ((22.0, 2.234), (40.0, 1.548), (60.0, 0.934)):
     t = ere.theta2_for_a0(pair, E_lam, a0, 4.7)
     check(f"one-level theta^2 for a0 = {a0:.0f} fm", abs(t - want) < 0.01, f"{t:.3f} (study {want})")
 
+# charged hard sphere (3He+alpha): a large a0 needs no attraction (7Be study, analysis/microscopic/hardsphere.txt)
+for R, want_a0, want_r0 in ((2.8, 23.5, 0.982), (3.3, 36.1, 1.053), (4.7, 103.9, 1.171)):
+    h = ere.ere_hard_sphere(pair, R)
+    check(f"hard sphere R = {R} fm: a0, r0", abs(h["a0"] - want_a0) < 0.3 and abs(h["r0"] - want_r0) < 0.005,
+          f"{h['a0']:.1f} fm, {h['r0']:.3f} fm (study {want_a0}, {want_r0})")
+R1 = ere.core_radius(pair, 1.0, -9.0)
+check("core radius of delta0(1 MeV) = -9.0 deg", abs(R1 - 3.18) < 0.1, f"{R1:.2f} fm")
+
 print("PASS" if ok else "FAIL")
 sys.exit(0 if ok else 1)

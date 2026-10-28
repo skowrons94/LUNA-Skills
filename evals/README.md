@@ -15,7 +15,7 @@ python3 evals/run_evals.py report
 
 | File | Purpose |
 |---|---|
-| `routing.jsonl` | Requests labelled with the skill that should load first (`none` for requests no skill covers). Near-misses matter most: yield vs peak shape, azure2 vs resonance-search, the three Geant4 skills, the writing skills. |
+| `routing.jsonl` | Requests labelled with the skill that should load first (`none` for requests no skill covers). Near-misses matter most: yield vs peak shape, r-matrix vs resonance-search, the three Geant4 skills, the writing skills. |
 | `tasks.py` | Graded tasks with deterministic synthetic fixtures and a known answer. Most carry a trap a careless analysis falls into. |
 | `run_evals.py` | Runner, offline selftest and report. |
 | `ledger.jsonl` | One line per run: model, git commit, dirty flag, SKILL.md hashes, skills invoked, checks, cost, time. Commit it. |

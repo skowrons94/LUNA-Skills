@@ -273,3 +273,35 @@ def alpha_x_weights(x):
     nucleon of x has exactly one same-spin-isospin partner in alpha, w_k = C(A_x, k)."""
     ax = NUCLEONS[x]
     return {k: comb(ax, k) for k in range(ax + 1)}
+
+
+# ------------------------------------------- orthogonality condition model (Saito 1969)
+def ho_radial(n, l, brel, r):
+    """Normalized oscillator radial function u(r) = r R_nl(r), relative-motion length brel (fm)."""
+    from scipy.special import eval_genlaguerre, gammaln
+    x = np.asarray(r, float) / brel
+    lognorm = 0.5 * (np.log(2.0) + gammaln(n + 1) - gammaln(n + l + 1.5)) - 1.5 * np.log(brel)
+    return np.exp(lognorm) * np.asarray(r) * x ** l * np.exp(-x * x / 2) * eval_genlaguerre(n, l + 0.5, x * x)
+
+
+def ocm_phase(system, l, E, b_nuc, V0=0.0, a=2.0, lam=1e5, rmax=12.0, n=800):
+    """Phase (rad) of the orthogonality-condition model: Gaussian well (V0, a; V0 = 0 for the Pauli-only
+    test) + point Coulomb, with the relative wave kept orthogonal to the Pauli-forbidden oscillator states
+    (N = 2n + l < n_min) by a projector lam * sum |phi_f><phi_f| (Kukulin; lam -> infinity; check it).
+    b_nuc: nucleon oscillator length of the clusters; relative length b_nuc / sqrt(A1 A2 / A).
+    Pauli-only test: does orthogonality alone make the hard core?  (7Be: alpha+3He s wave, b 1.30-1.42 fm,
+    a0 21-26 fm, equivalent hard sphere 2.65-2.90 fm at 1 MeV.)"""
+    from scipy.linalg import solve
+    A1, A2 = NUCLEONS[system.c1], NUCLEONS[system.c2]
+    brel = b_nuc / np.sqrt(A1 * A2 / (A1 + A2))
+    r = np.linspace(rmax / n, rmax, n); h = r[1] - r[0]
+    forb = [ho_radial(k, l, brel, r) for k in range((system.n_min - l + 1) // 2) if 2 * k + l < system.n_min]
+    P = sum(np.outer(f, f) * h for f in forb) if forb else np.zeros((n, n))
+    h2m = system.h2m
+    V = -V0 * np.exp(-(r / a) ** 2) + system.zz * E2 / r + h2m * l * (l + 1) / r ** 2
+    M = np.diag(2 * h2m / h ** 2 + V - E) + lam * P
+    M += np.diag(np.full(n - 1, -h2m / h ** 2), 1) + np.diag(np.full(n - 1, -h2m / h ** 2), -1)
+    u = np.append(solve(M[:-1, :-1], -M[:-1, -1]), 1.0)
+    L = (3 * u[-1] - 4 * u[-2] + u[-3]) / (2 * h) / u[-1]
+    k, eta, F, G, dF, dG = coul_at(system, l, E, rmax)
+    return np.arctan2(-(L * F - dF), (L * G - dG))

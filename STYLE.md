@@ -82,7 +82,7 @@ Other habits. Cross-references are short and specific: "see Table I and Fig. 1 f
 name: skill-name
 description: <Verb> <object> with <method or tool>, <two or three main sub-tasks>. Use when <trigger
   phrased as the user would say it>, <second trigger>, or <third>; <one boundary sentence, e.g.
-  "use `azure2` for single fits" or "these numbers must be computed, not recalled">.
+  "use `r-matrix` for single fits" or "these numbers must be computed, not recalled">.
 ---
 # Title (the task, in plain words)
 

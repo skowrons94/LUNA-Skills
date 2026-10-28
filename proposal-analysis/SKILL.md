@@ -8,7 +8,7 @@ A panel funds a proposal it believes, while a specialist believes only numbers t
 
 ## Where this fits
 
-- Comes from: R-matrix calculations from `azure2`; detector response from `underground-gamma-simulation` or `agata-simulation` and other Geant4 work from `geant4-simulation`; yields from `yield-analysis`; stopping powers and target profiles from `target-analysis`; detection efficiency and summing from `efficiency-analysis`; rate impacts from the Monte Carlo of `reaction-network`. Back-tests and sampler diagnostics are routed here from `uncertainty-audit`.
+- Comes from: R-matrix calculations from `r-matrix`; detector response from `underground-gamma-simulation` or `agata-simulation` and other Geant4 work from `geant4-simulation`; yields from `yield-analysis`; stopping powers and target profiles from `target-analysis`; detection efficiency and summing from `efficiency-analysis`; rate impacts from the Monte Carlo of `reaction-network`. Back-tests and sampler diagnostics are routed here from `uncertainty-audit`.
 - Goes to: `analysis/results/` of a `proposal-project`, and from there through its numbers file to the text written with `proposal-style`.
 - Checked by: `scripts/selftest.py`, which must print PASS; the simulated review cycle, in which the `physics-referee` and `citation-checker` subagents act as specialist reviewers.
 
