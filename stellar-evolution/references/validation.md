@@ -9,6 +9,8 @@
 | 4 | Physics degeneracy: vary the dominant non-nuclear uncertainty of the phase (overshoot f_ov, mixing length, thermohaline efficiency, mass loss) by its plausible range; compare its effect with the rate effect | whether the rate is the limiting uncertainty | — |
 | 5 | Post-processing consistency (when a network ran on a model trajectory): the network's energy generation and central abundances track the model's | the handoff is consistent | mixing effects on the network side |
 
+For thermohaline mixing, rung 2 must scale `num_cells_for_smooth_gradL_composition_term` with the mesh, or a finer mesh switches the mixing off numerically: see [mixing.md](mixing.md#thermohaline-runs-and-the-mesh-refine-the-smoothing-with-the-mesh).
+
 Rungs 0–2 are always required. Rung 3 is required before a new sensitivity is reported. Rung 4 is required before claiming that a measurement would improve a stellar prediction. It is the rung most often skipped, and a referee will ask for it.
 
 Give `physics-referee` the specs, `manifest.json`, the history/profile files and the claim; it recomputes the comparison numbers.

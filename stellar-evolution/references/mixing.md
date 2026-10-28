@@ -25,6 +25,28 @@ while Charbonnel & Lagarde (2010, Eq. 3) write D = C_t · K_th · (φ/δ)(−∇
 
 Thermohaline mixing needs `use_Ledoux_criterion = .true.` and a net with ³He (pp chains explicit).
 
+## Thermohaline runs and the mesh: refine the smoothing with the mesh
+
+A cell mixes by thermohaline only where `gradL_composition_term < 0` (`star/private/turb_support.f90`). That term is the composition part of `brunt_B`: the EOS is evaluated at fixed ρ and T with the neighbouring cell's composition, and the result is smoothed over `num_cells_for_smooth_gradL_composition_term` cells on each side (default 3; `hydro_vars.f90`, `threshold_smoothing` in `star_utils.f90`). Above the bump the μ inversion is tiny away from the ³He-burning layer. When the mesh is refined, the μ difference per cell falls with the cell size, and the smoothing width (a fixed number of cells) falls too. The sign of the term then follows numerical noise, and cells with zero mixing appear between the shell and the envelope. A single non-mixing cell blocks the transport.
+
+What this looks like (1.25 Msun, Z = 0.02, C_t = 1000, NACRE, r26.04.1; LUNA project, 2026-10-28):
+
+| Run | Surface drop starts at log L | Tip ¹²C/¹³C |
+|---|---|---|
+| Standard (`mesh_delta_coeff` 1.5 from `1M_thermohaline`) | 1.56 (the bump) | 8.20 |
+| `time_delta_coeff` 0.25 only | bump | 8.04 |
+| `mesh_delta_coeff` 0.5 only | 3.14 | 13.72 |
+| `mesh_delta_coeff` 0.25 + `time_delta_coeff` 0.25 | none before the tip | 26.88 (dredge-up value) |
+| `mesh_delta_coeff` 0.5 + smoothing over 9 cells | 1.53 | the ratio runs 5–10 % below the standard run at equal log L |
+
+In the profiles, the standard run has one thermohaline region from just above the shell to the envelope base. The mesh-0.5 run has the same region only up to r ≈ 0.12 R☉, then a non-mixing gap of about 260 cells (μ still rises outward there, by about 2×10⁻⁷ per cell against 6×10⁻⁶ per cell in the standard run), then a few short thermohaline patches.
+
+How to test thermohaline results for resolution:
+- Scale `num_cells_for_smooth_gradL_composition_term` with the number of cells, so that the smoothing keeps its width in mass. Count the cells between the H shell and the envelope base in the profiles of both runs: 3 cells at the standard mesh became 9 at `mesh_delta_coeff` 0.5.
+- Do not read a later onset on a finer mesh as convergence. First check the profiles: plot `mix_type` between the shell and the envelope, and look for gaps. Add `gradL_composition_term`, `brunt_B` and `log_D_thrm` to the profile columns of resolution runs.
+- Vary the time step separately (`time_delta_coeff`). MESA refuses `varcontrol_target` below `min_allowed_varcontrol_target` (1d-4). Lattanzio et al. (2015, MNRAS 446, 2673) found the time step the critical parameter in the four codes they compared (Li, 1.25 Msun). Their tests did not include MESA's resolution, and in MESA the smoothing effect above dominates.
+- Quote a rate shift only from pairs with identical numerics. The setup moves the absolute tip ratio by about as much as a 5–10 % rate shift.
+
 ## Doing it
 
 - One mixing change per comparison, crossed with the rate change: a 2 × N grid (rates × mixing prescriptions) is the minimum for a rate claim about surface abundances.

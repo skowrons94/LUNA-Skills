@@ -17,7 +17,7 @@ Rate impact at fixed conditions, rankings over many rates and Monte Carlo belong
 - installation and the environment file: [install.md](references/install.md);
 - templates (including carbon ignition), inlists, threads, output, run checks: [running.md](references/running.md);
 - networks, reaction names, rate factors, rate tables, caches, screening, ²⁶Al isomers: [nuclear.md](references/nuclear.md);
-- mixing prescriptions (thermohaline with the C_t ↔ `thermohaline_coeff` mapping, rotation, overshoot, third dredge-up, hot-bottom burning, ¹³C pocket) and how to cross them with rate changes: [mixing.md](references/mixing.md);
+- mixing prescriptions (thermohaline with the C_t ↔ `thermohaline_coeff` mapping and its resolution trap: scale the composition-term smoothing with the mesh, rotation, overshoot, third dredge-up, hot-bottom burning, ¹³C pocket) and how to cross them with rate changes: [mixing.md](references/mixing.md);
 - solar models, neutrino fluxes, the B23/SF-III reference models and `ssm.py`: [solar.md](references/solar.md);
 - trajectories and compositions for `reaction-network`: [trajectories.md](references/trajectories.md);
 - validation ladder: [validation.md](references/validation.md).
