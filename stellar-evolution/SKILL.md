@@ -38,7 +38,7 @@ Rate impact at fixed conditions, rankings over many rates and Monte Carlo belong
 1. State the observable (core mass, lifetime, surface ratio, yield, neutrino flux), the star or phase, and what precision would matter.
 2. Pick the template ([running.md](references/running.md)) and write a spec for `run.py` with the template, inlist edits, extra columns and files. Nominal and varied runs differ only in the rate entry.
 3. Pilot, then run, then check with `mesa.py check-run`. Compare runs at the same evolutionary phase with `mesa.py compare` or `final`.
-4. Climb the validation ladder as far as the claim needs. Hand trajectories to `reaction-network` for cheap extensions.
+4. Climb the validation ladder as far as the claim needs. For thermohaline mixing, the resolution rung refines the composition-term smoothing together with the mesh, and the profiles are checked for non-mixing gaps ([mixing.md](references/mixing.md#thermohaline-runs-and-the-mesh-refine-the-smoothing-with-the-mesh)). Hand trajectories to `reaction-network` for cheap extensions.
 5. Put the headline numbers in the study's `results.json` with the run directories and manifests, and register them as claims.
 
 ## Scripts
