@@ -102,6 +102,8 @@ def setup(spec):
     for src, dst in spec.get("files", {}).items():
         s = (spec["_base"] / src).resolve()
         shutil.copy(s, run / dst)
+        if dst in ("rn", "re", "mk", "clean"):   # a replacement driver script must stay executable
+            (run / dst).chmod(0o755)
         copied[dst] = {"from": str(s), "sha256": sha(s)}
     man = {
         "template": str(tpl),
