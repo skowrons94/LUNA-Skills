@@ -33,7 +33,7 @@ State whether `yield_per_ion` is a detected-photon yield, a photon yield (effici
 
 ## azure-dat → AZURE2
 
-Four columns: E_lab (MeV), angle (deg), cross section (b, or b/sr for differential), uncertainty in the same unit. Lab frame, forward kinematics. Angle-integrated data use a dummy angle. Analysing-power data use a centre-of-mass angle (see `azure2`). Conversions with `to-azure`:
+Four columns: E_lab (MeV), angle (deg), cross section (b, or b/sr for differential), uncertainty in the same unit. Lab frame, forward kinematics. Angle-integrated data use a dummy angle. Analysing-power data use a centre-of-mass angle (see `r-matrix`). Conversions with `to-azure`:
 
 - `--frame cm`: E_lab = E_cm (m₁+m₂)/m₂, non-relativistic. Differential data in the centre of mass are refused; convert angles and cross sections first.
 - `--value-kind sfactor`: σ = S/E_cm · exp(−2πη), with 2πη = 2π Z₁Z₂ α √(μc²/2E_cm). Any electron-screening correction must be removed or applied explicitly before conversion, and recorded.

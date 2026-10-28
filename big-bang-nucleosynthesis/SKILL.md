@@ -8,11 +8,11 @@ A rate measured in the laboratory changes a primordial abundance only through a 
 
 ## Where this fits
 
-- Comes from: a rate table (T9, N_A⟨σv⟩, factor uncertainty) made by `azure2` or by `reaction-network` (`rates.py from-sfactor`); the observational inputs from the papers listed in [alterbbn.md](references/alterbbn.md).
+- Comes from: a rate table (T9, N_A⟨σv⟩, factor uncertainty) made by `r-matrix` or by `reaction-network` (`rates.py from-sfactor`); the observational inputs from the papers listed in [alterbbn.md](references/alterbbn.md).
 - Goes to: `stellar-evolution`, for zero-metallicity (Population III) stars that start from the BBN composition.
 - Checked by: the patch identity, the round trip and the solver-convergence check of rules 1–3; `physics-referee` before a number is quoted.
 
-The rate itself, from an S factor, an R-matrix fit or a rate integration, belongs to `azure2` and `reaction-network`. Burning in stars, including zero-metallicity stars, belongs to `stellar-evolution`. Building, running and checking AlterBBN is documented in [alterbbn.md](references/alterbbn.md): reaction numbers, units, the patch, run modes, conversions and the observational inputs to source.
+The rate itself, from an S factor, an R-matrix fit or a rate integration, belongs to `r-matrix` and `reaction-network`. Burning in stars, including zero-metallicity stars, belongs to `stellar-evolution`. Building, running and checking AlterBBN is documented in [alterbbn.md](references/alterbbn.md): reaction numbers, units, the patch, run modes, conversions and the observational inputs to source.
 
 ## Rules and their reasons
 

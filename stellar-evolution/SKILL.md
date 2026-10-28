@@ -8,11 +8,11 @@ A reaction rate reaches an astronomical observable only through a star, that is,
 
 ## Where this fits
 
-- Comes from: rate tables from `azure2` or `reaction-network`, in the `rate-table` contract, converted with `mesa.py rate-table`; the candidate rates that passed the one-zone screen of `reaction-network`; the Population III starting composition from `big-bang-nucleosynthesis`; the model pairs (phase, mass, Z, mixing) that `stellar-observables` specifies for a rate-to-observable question.
+- Comes from: rate tables from `r-matrix` or `reaction-network`, in the `rate-table` contract, converted with `mesa.py rate-table`; the candidate rates that passed the one-zone screen of `reaction-network`; the Population III starting composition from `big-bang-nucleosynthesis`; the model pairs (phase, mass, Z, mixing) that `stellar-observables` specifies for a rate-to-observable question.
 - Goes to: trajectories and compositions for `reaction-network` (`mesa.py trajectory`, `mesa.py composition`, contract `thermo-trajectory`); surface, wind and grain values for interpretation in `stellar-observables`.
 - Checked by: `scripts/selftest.py`, `mesa.py check-run` and the validation ladder of [validation.md](references/validation.md); `physics-referee` recomputes the comparison numbers.
 
-Rate impact at fixed conditions, rankings over many rates and Monte Carlo belong to `reaction-network`, which is cheap; this skill gives the conditions and handles the few rates that pass that screen. The rate itself, from an R-matrix fit, an extrapolation or a rate integration, belongs to `azure2`, which hands it over in the `rate-table` contract. What physics sets a surface, wind or grain observable, which phase and levers matter, and how to compare a model with observed stars or grains belong to `stellar-observables`. The references of this skill hold:
+Rate impact at fixed conditions, rankings over many rates and Monte Carlo belong to `reaction-network`, which is cheap; this skill gives the conditions and handles the few rates that pass that screen. The rate itself, from an R-matrix fit, an extrapolation or a rate integration, belongs to `r-matrix`, which hands it over in the `rate-table` contract. What physics sets a surface, wind or grain observable, which phase and levers matter, and how to compare a model with observed stars or grains belong to `stellar-observables`. The references of this skill hold:
 
 - installation and the environment file: [install.md](references/install.md);
 - templates (including carbon ignition), inlists, threads, output, run checks: [running.md](references/running.md);

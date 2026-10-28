@@ -1,0 +1,3 @@
+interface:
+  display_name: "R-matrix Posterior"
+  short_description: "Priors, MAP-Hessian whitening and checkpointed NUTS for AZURE2 posteriors"

@@ -35,4 +35,4 @@ A reaction is a candidate when its present uncertainty times its sensitivity is 
 - whether the uncertainty comes from an unmeasured resonance (an upper limit in the Gamow window: a lifetime, spectroscopic factor or ANC measurement may fix it);
 - whether the effect survives a scan over the site's conditions and a stellar model.
 
-Then hand the candidate to `azure2` (rate from R-matrix), `delta-beta-dsam` (widths from lifetimes) or `proposal-analysis` (feasibility).
+Then hand the candidate to `r-matrix` (rate from R-matrix), `delta-beta-dsam` (widths from lifetimes) or `proposal-analysis` (feasibility).

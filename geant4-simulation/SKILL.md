@@ -8,7 +8,7 @@ A simulation result is an input to a decision, such as whether a counter is effi
 
 ## Where this fits
 
-- Comes from: the geometry and source of the planned measurement; cross sections for generated reaction products from evaluated or measured data (`evaluated-nuclear-data`), CM angular distributions from `azure2`, stopping tables from `target-analysis`.
+- Comes from: the geometry and source of the planned measurement; cross sections for generated reaction products from evaluated or measured data (`evaluated-nuclear-data`), CM angular distributions from `r-matrix`, stopping tables from `target-analysis`.
 - Goes to: `efficiency-analysis`, for the simulated response that enters its `efficiency-curve`; `proposal-analysis`, for rates, beam time, uncertainty budgets and decisions, through the proposal's numbers file; `delta-beta-dsam`, for simulated events.
 - Checked by: `scripts/selftest.py` (must print PASS), `scripts/test_template.py`, the validation ladder in [validation.md](references/validation.md), and `physics-referee` before a number is quoted.
 

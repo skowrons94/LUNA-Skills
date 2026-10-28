@@ -1,6 +1,6 @@
 ---
 name: resonance-search
-description: Run an automated, gated search for missing, surplus or misassigned resonances in a multichannel R-matrix evaluation (AZURE2/pyazr) fitted to many excitation functions: data audit, pattern map, window searches that add, delete, re-assign or move levels, acceptance gates, merges and an unattended driver loop. Use when a level scheme must be extended or repaired against dense angular or excitation-function data (elastic scattering, (p,α), (α,α), THM), when χ² stalls far above 1, or when the user asks for "automatic resonance fits"; single AZURE2 runs, fits or extrapolations use `azure2`.
+description: Run an automated, gated search for missing, surplus or misassigned resonances in a multichannel R-matrix evaluation (AZURE2/pyazr) fitted to many excitation functions: data audit, pattern map, window searches that add, delete, re-assign or move levels, acceptance gates, merges and an unattended driver loop. Use when a level scheme must be extended or repaired against dense angular or excitation-function data (elastic scattering, (p,α), (α,α), THM), when χ² stalls far above 1, or when the user asks for "automatic resonance fits"; single AZURE2 runs, fits or extrapolations use `r-matrix`.
 ---
 
 # Automated resonance search in R-matrix evaluations
@@ -9,8 +9,8 @@ A multichannel R-matrix evaluation fitted to many excitation functions often sta
 
 ## Where this fits
 
-- Comes from: an evaluation built and run with `azure2`, on data in the `azure-dat` contract; the `data-auditor` subagent for the first data audit.
-- Goes to: `azure2` for single calculations, fits, decompositions, extrapolations and rates of the consolidated model; project layout, logs and reports follow `nuclear-research-project`.
+- Comes from: an evaluation built and run with `r-matrix`, on data in the `azure-dat` contract; the `data-auditor` subagent for the first data audit.
+- Goes to: `r-matrix` for single calculations, fits, decompositions, extrapolations and rates of the consolidated model; project layout, logs and reports follow `nuclear-research-project`.
 - Checked by: the acceptance gate and the hypothesis ledger of step 3, the reload test of the written file, and `physics-referee` or `uncertainty-audit` before a level scheme is quoted.
 
 ## Rules and their reasons
@@ -77,6 +77,8 @@ Gaussian convolution (beam spread, data at an effective energy) and target integ
 - the census of states per J^π constrained by each data set.
 
 ## Pitfalls
+
+A structure model (shell model or cluster model) can predict a channel that the fit lacks, and such a channel is a legitimate candidate. In 7Be the shell model gave a 7/2⁻ level a p+⁶Li(3⁺) width, which improved χ² by 319. It is gated like any other candidate, and two further checks follow, because a new channel can saturate its level while the Brune widths still look ordinary (Park norm 0.91 → 0.05 in 7Be): where the gain sits (data at the top edge only, or across the range), and the Park norm of the level, which is bounded before the candidate is accepted (`r-matrix`, physicality.md).
 
 Level energies are fitted only with bounds that keep ≥ 1 keV from every same-J^π level, live or dormant. AZURE2 merges coincident same-J^π levels on reload, and the saved file then no longer reproduces the fit. Always reload the written file and compare χ².
 

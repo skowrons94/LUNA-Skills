@@ -11,7 +11,7 @@ The method follows Fougères et al., Nature Commun. 14, 4536 (2023) and the 15O 
 ## Where this fits
 
 - Comes from: measured ejectile and gamma data, or simulated events from `agata-simulation` and `geant4-simulation`; stopping powers from SRIM or Geant4; the levels whose lifetimes matter, from the sensitivity runs of `reaction-network`.
-- Goes to: lifetimes and widths of the levels, for example for an R-matrix evaluation in `azure2`; plots through `prc-figures`.
+- Goes to: lifetimes and widths of the levels, for example for an R-matrix evaluation in `r-matrix`; plots through `prc-figures`.
 - Checked by: `python3 scripts/selftest.py`, the no-stopping reference described below, and `uncertainty-audit`.
 
 ## Library

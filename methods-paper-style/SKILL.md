@@ -9,7 +9,7 @@ A methods paper is read by a working physicist who wants to reuse the result, so
 
 ## Where this fits
 
-- Comes from: a method or evaluation to describe, for example an R-matrix analysis made with `azure2` or `resonance-search`, at the Write-up stage (7) of `analysis-chain`.
+- Comes from: a method or evaluation to describe, for example an R-matrix analysis made with `r-matrix` or `resonance-search`, at the Write-up stage (7) of `analysis-chain`.
 - Used by: the formalism, method and validation sections of a paper whose measurement parts follow `clear-experimental-writing`; the repository's STYLE.md takes its rules for skill prose partly from §§1, 4 and 6 of this skill. No other skill calls it directly.
 - Checked by: the revision checklist in §7; `physics-referee` for the numbers and `citation-checker` for borrowed results.
 

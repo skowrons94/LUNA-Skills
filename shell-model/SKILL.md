@@ -1,6 +1,6 @@
 ---
 name: shell-model
-description: Run and interpret KSHELL shell-model calculations of light nuclei with p and p-sd (cross-shell) interactions such as YSOX, Cohen-Kurath or PSDMK, hbar-omega truncations and the Lawson term against spurious states, giving energies, J^pi, isospin, sd occupancies and calibrated intruder (1/2+, 5/2+) or mirror states, but no widths. Use when a task asks where a state of a light nucleus should lie, what it is made of, whether an R-matrix level has a shell-model counterpart, or how to run or parse KSHELL; these must be computed, not estimated from memory.
+description: Run and interpret KSHELL shell-model calculations of light nuclei, and turn spectroscopic amplitudes from a CI calculation with cluster channels (e.g. FSU / Kravvaris–Volya) into R-matrix reduced widths, with p and p-sd (cross-shell) interactions such as YSOX, Cohen-Kurath or PSDMK, hbar-omega truncations and the Lawson term against spurious states, giving energies, J^pi, isospin, sd occupancies and calibrated intruder (1/2+, 5/2+) or mirror states; widths only through a single-particle continuum width. Use when a task asks where a state of a light nucleus should lie, what it is made of, whether an R-matrix level has a shell-model counterpart, or how to run or parse KSHELL; these must be computed, not estimated from memory.
 ---
 # Shell model (KSHELL)
 
@@ -8,8 +8,8 @@ The shell model answers two questions about a level of a light nucleus: where it
 
 ## Where this fits
 
-- Comes from: known levels of the nucleus and its neighbours from the compilations (ENSDF, TUNL) for the calibration; the R-matrix level to identify from `azure2`; the structure questions raised by `cluster-potential`, `microscopic-cluster` and `mirror-nucleus` (intruder energies and configurations, mirror states).
-- Goes to: the identification of that level in `azure2`; the charge-symmetric part of mirror states for `mirror-nucleus`. Widths, phase shifts, ANCs and the continuum are left to `cluster-potential` (two-body) or `microscopic-cluster` (antisymmetrized).
+- Comes from: known levels of the nucleus and its neighbours from the compilations (ENSDF, TUNL) for the calibration; the R-matrix level to identify from `r-matrix`; the structure questions raised by `cluster-potential`, `microscopic-cluster` and `mirror-nucleus` (intruder energies and configurations, mirror states).
+- Goes to: the identification of that level in `r-matrix`, and the reduced widths implied by spectroscopic amplitudes, computed as described in [amplitudes-to-widths.md](references/amplitudes-to-widths.md) with `scripts/amplitudes.py` and the single-particle width of `cluster-potential`; the charge-symmetric part of mirror states for `mirror-nucleus`. Widths, phase shifts, ANCs and the continuum are left to `cluster-potential` (two-body) or `microscopic-cluster` (antisymmetrized).
 - Checked by: `scripts/selftest.py` (must print PASS) and the validation ladder in [validation.md](references/validation.md); setup and runs are described in [running.md](references/running.md).
 
 ## Method
@@ -24,7 +24,7 @@ The interaction is used in the space it was fitted for, spurious centre-of-mass 
 
 ## Rules and their reasons
 
-1. The shell model gives no widths. It gives energies, J^π, isospin, occupancies, ħω content and, with care, spectroscopic factors. A width needs a continuum calculation, because a square-integrable basis has no decay channel.
+1. The shell model alone gives no widths. It gives energies, J^π, isospin, occupancies, ħω content and spectroscopic factors, and a width needs a continuum calculation, because a square-integrable basis has no decay channel. A spectroscopic factor becomes a reduced width only when it multiplies a single-particle R-matrix width computed at the fitted energy and channel radius. Cluster spectroscopic factors are used as built; a channel normalized to unity divides them by the projected eigenvalue mu_Q of the norm kernel, and the renormalized strength summed over states is checked against the number of J values of the channel, which is how an unphysical normalization was caught in 7Be.
 2. Spurious states are removed, and shown to be removed. In any space with more than one ħω the run uses the Lawson term (β_cm = 10), and ⟨H_cm⟩ is checked per state. Physical states carry ~0.0–0.1 MeV, while a state with several MeV is a centre-of-mass excitation. The β_cm = 0 run that shows the difference is kept. In the 7Be study the three lowest positive-parity states of the full 1ħω space were spurious (validation.md).
 3. The interaction is used in the space it was fitted for. YSOX is a p-sd interaction for 0–2ħω in normal and 1–3ħω in non-normal parity. A smaller truncation is a sensitivity check (7Be: 0.3–0.6 MeV), not the result.
 4. An intruder band is calibrated before it predicts. The same kind of state (1/2⁺, 5/2⁺) is taken in neighbouring nuclei where it is known, and every energy is referred to the same reference, preferably the core+nucleon threshold. The offset corrects the prediction and the scatter is its uncertainty. The reference sets the error: in the 7Be study the scatter was 1.04 MeV referred to the ground state and 0.38 MeV referred to the threshold.

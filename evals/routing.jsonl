@@ -4,9 +4,9 @@
 {"id": "r04", "prompt": "Use the 152Eu and 60Co source runs to build the photopeak efficiency curve of our detector at 5 cm.", "expect": ["efficiency-analysis"]}
 {"id": "r05", "prompt": "How big is the summing-in correction for the 1369 keV line of 24Na in close geometry?", "expect": ["efficiency-analysis"]}
 {"id": "r06", "prompt": "Our implanted 22Ne target is degrading. From the excitation curves of the 271 keV resonance taken over two months, infer the target profile evolution.", "expect": ["target-analysis"]}
-{"id": "r07", "prompt": "Fit the 17O(p,alpha) data with the existing .azr file and give me the S-factor at 65 keV.", "expect": ["azure2"]}
+{"id": "r07", "prompt": "Fit the 17O(p,alpha) data with the existing .azr file and give me the S-factor at 65 keV.", "expect": ["r-matrix"]}
 {"id": "r08", "prompt": "The R-matrix chi2 is stuck at 6 per point for the 20Ne+alpha elastic data, there must be levels missing. Search systematically for missing or misassigned resonances.", "expect": ["resonance-search"]}
-{"id": "r09", "prompt": "Decompose the fitted 12C(p,gamma) cross section into the resonance, direct capture and interference contributions with pyazr.", "expect": ["azure2"]}
+{"id": "r09", "prompt": "Decompose the fitted 12C(p,gamma) cross section into the resonance, direct capture and interference contributions with pyazr.", "expect": ["r-matrix"]}
 {"id": "r10", "prompt": "Give me the JEFF-4.0 and ENDF/B-VIII.1 capture cross sections of 56Fe at 300 K and the MACS at 30 keV, with the library spread.", "expect": ["evaluated-nuclear-data"]}
 {"id": "r11", "prompt": "Design a Geant4 simulation of a 3He neutron counter embedded in polyethylene and compute its efficiency vs neutron energy.", "expect": ["geant4-simulation"]}
 {"id": "r12", "prompt": "Add the new BGO summing detector geometry to our underground accelerator gamma simulation and check the 14N(p,gamma) sum-peak efficiency.", "expect": ["underground-gamma-simulation"]}
@@ -21,14 +21,14 @@
 {"id": "r21", "prompt": "Make a PRC-style figure of the S-factor with our points and the literature data, inward ticks, legend outside.", "expect": ["prc-figures"]}
 {"id": "r22", "prompt": "Build a 15-minute conference talk on our 27Si lifetime measurement with a Manim animation of the Doppler shift.", "expect": ["research-slides"]}
 {"id": "r23", "prompt": "Unslop this paragraph, it reads like AI wrote it: \"In today's rapidly evolving landscape of nuclear astrophysics, it is worth noting that our groundbreaking measurement not only sheds light on stellar nucleosynthesis but also paves the way for a deeper understanding of the cosmos.\"", "expect": ["unslop"]}
-{"id": "r24", "prompt": "Compute the reaction rate from the AZURE2 extrapolation between 0.01 and 2 GK.", "expect": ["azure2"]}
+{"id": "r24", "prompt": "Compute the reaction rate from the AZURE2 extrapolation between 0.01 and 2 GK.", "expect": ["r-matrix"]}
 {"id": "r25", "prompt": "What is the stopping power of protons in Ta2O5 at 300 keV and how does the effective stopping change with composition?", "expect": ["target-analysis"]}
 {"id": "r26", "prompt": "Fetch the 152Eu decay gamma lines and intensities from IAEA NDS for my efficiency calibration.", "expect": ["efficiency-analysis"]}
 {"id": "r27", "prompt": "Draft our reply to referee 2, who writes: \"The authors quote a 3% uncertainty on the photopeak efficiency at 6.8 MeV, but their calibration extends only to 1.8 MeV and the extrapolation relies on a single 14N(p,gamma) resonance. I consider this uncertainty underestimated.\" We used the 278 keV resonance with known branchings and a Geant4 simulation validated at 5 energies.", "expect": ["clear-experimental-writing"]}
 {"id": "r28", "prompt": "Write a Python function that removes duplicate entries from a list while keeping the order.", "expect": ["none"]}
 {"id": "r29", "prompt": "Explain the difference between git rebase and git merge.", "expect": ["none"]}
 {"id": "r30", "prompt": "Fix the CSS so the sidebar does not overlap the footer on mobile.", "expect": ["none"]}
-{"id": "r31", "prompt": "Turn the excitation-curve points and their covariance into an S-factor and fit it with a resonance plus non-resonant term in AZURE2.", "expect": ["azure2"]}
+{"id": "r31", "prompt": "Turn the excitation-curve points and their covariance into an S-factor and fit it with a resonance plus non-resonant term in AZURE2.", "expect": ["r-matrix"]}
 {"id": "r32", "prompt": "Summarise the attached meeting minutes in five bullet points for my group.", "expect": ["none"]}
 {"id": "r33", "prompt": "The yields from yesterday's runs and the new efficiency curve are ready. Push everything through to the AZURE2 fit and the S-factor, and keep track of what depends on what.", "expect": ["analysis-chain"]}
 {"id": "r34", "prompt": "Our R-matrix fit gives chi2/N = 0.6 and a 3 % uncertainty on S(0). Can we trust that uncertainty?", "expect": ["uncertainty-audit"]}
@@ -36,7 +36,7 @@
 {"id": "r36", "prompt": "Which reactions control the 12C/13C ratio after CN burning at 25 MK? Do a Monte Carlo over the STARLIB uncertainties.", "expect": ["reaction-network"]}
 {"id": "r37", "prompt": "Put the rate in output/reactionrates.out from my AZURE2 run into a pynucastro network instead of the REACLIB one and compare the oxygen isotopic ratios.", "expect": ["reaction-network"]}
 {"id": "r38", "prompt": "Our proposal measures 22Ne(p,g) to 10 %. How much does that shrink the model uncertainty of the Na yield in the burning zone?", "expect": ["reaction-network", "proposal-analysis"]}
-{"id": "r39", "prompt": "Compute the 12C(p,g)13N reaction rate from the R-matrix fit in this .azr project between T9 = 0.01 and 1.", "expect": ["azure2"]}
+{"id": "r39", "prompt": "Compute the 12C(p,g)13N reaction rate from the R-matrix fit in this .azr project between T9 = 0.01 and 1.", "expect": ["r-matrix"]}
 {"id": "r40", "prompt": "Run a 1 Msun solar model with the 14N(p,g)15O rate 10 % higher and tell me how the CNO neutrino fluxes change.", "expect": ["stellar-evolution"]}
 {"id": "r41", "prompt": "MESA stops at the start with 'unknown type name FILE' while compiling utils on my Mac. How do I fix the install?", "expect": ["stellar-evolution"]}
 {"id": "r42", "prompt": "Give me the central temperature and density history of a 15 Msun star during carbon burning so I can post-process it with a network.", "expect": ["stellar-evolution"]}

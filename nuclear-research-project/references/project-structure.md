@@ -123,3 +123,23 @@ Keep geometry, macro/configuration, physics-list settings, source distributions,
 ## What this adds beyond a basic analysis tree
 
 The important missing pieces in many feasibility projects are `configs/`, environment capture, `tests/`, run manifests, explicit provenance, decision and assumption logs, validation areas for both R-matrix and simulation, and a scratch boundary. These make the study reviewable and prevent a polished report from becoming the only record of how a conclusion was obtained.
+
+
+## Correspondence, collaborators' files and literature checks (7Be evaluation, 2026)
+
+- `docs/correspondence/<person>/` with one folder per collaborator (plus `internal-review/` for our own referee
+  reports) and a README index with open threads. Name files `YYYY-MM-DD_<from|to>_<person>[_topic]`; keep
+  attachments next to the email that brought them; mark drafts in their first line. Data a collaborator sends
+  go where the analysis reads them (e.g. `data/external/<person>/` or a top-level folder), are never edited,
+  and the email points there.
+- When a collaborator's model replaces one in a paper, keep the paper's previous version untouched next to the
+  working copy (e.g. `article/prl/` and `article/prl-fsu/`) until the authors sign off; produce a latexdiff.
+- **Literature check of claims.** Before a paper cites prior work for a physics statement, write the claims as a
+  numbered table, give each paper (or pair of papers) to a reader with that table, and keep the answers with
+  page-quoted evidence in `analysis/<study>/literature/<paper>.md`: supports / contradicts / partially /
+  silent. Then test what the literature cannot settle. In the 7Be study this turned "the Pauli principle
+  weakens the even-wave attraction" into a tested hard-core statement and caught a hard-sphere radius
+  (2.8 fm in the cited paper, not the 3.3 fm the text implied).
+- Zotero: the library database is in use while Zotero runs; read a copy of `zotero.sqlite` together with its
+  `zotero.sqlite-wal` (recent additions live only in the write-ahead log), and locate PDFs under `storage/<key>/`.
+  Match items by title or date added when the DOI field is empty or formatted differently.

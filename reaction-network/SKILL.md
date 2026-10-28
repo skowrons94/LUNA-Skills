@@ -8,13 +8,13 @@ A rate measured in the laboratory becomes an astrophysical statement only throug
 
 ## Where this fits
 
-- Comes from: rate tables from `azure2` (`rates.py from-azure`) or from REACLIB and STARLIB, in the `rate-table` contract; trajectories and compositions from `stellar-evolution` (`mesa.py trajectory`, `mesa.py composition`), in the `thermo-trajectory` contract; MACS from `evaluated-nuclear-data`.
-- Goes to: `stellar-evolution` for the few rates that pass the one-zone screen; `stellar-observables` for the local equilibrium and transient values; `proposal-analysis` for what a measurement buys; `big-bang-nucleosynthesis` for tables made with `rates.py from-sfactor`; candidate reactions to `azure2` or `delta-beta-dsam`.
+- Comes from: rate tables from `r-matrix` (`rates.py from-azure`) or from REACLIB and STARLIB, in the `rate-table` contract; trajectories and compositions from `stellar-evolution` (`mesa.py trajectory`, `mesa.py composition`), in the `thermo-trajectory` contract; MACS from `evaluated-nuclear-data`.
+- Goes to: `stellar-evolution` for the few rates that pass the one-zone screen; `stellar-observables` for the local equilibrium and transient values; `proposal-analysis` for what a measurement buys; `big-bang-nucleosynthesis` for tables made with `rates.py from-sfactor`; candidate reactions to `r-matrix` or `delta-beta-dsam`.
 - Checked by: `scripts/selftest.py` and the validation ladder of [validation.md](references/validation.md); `physics-referee` recomputes the headline numbers; claims are registered with `nuclear-research-project`.
 
 ## Neighbouring tasks and references
 
-The rate itself, from an R-matrix fit, an S factor, an extrapolation or an AZURE2 rate integration, belongs to `azure2`; this skill starts from the rate table. Stellar structure, mixing and trajectories come from stellar models (MESA). This skill post-processes their (t, T, ρ) output, whereas a rate's impact on a star's evolution, rather than on burning at given conditions, needs the stellar model itself. Proposal numbers, such as the projected precision, the beam time or "what this measurement buys" as a decision, belong to `proposal-analysis`, which is fed by the Monte Carlo here. Evaluated neutron cross sections and MACS belong to `evaluated-nuclear-data`. Everything else is a network calculation, documented in:
+The rate itself, from an R-matrix fit, an S factor, an extrapolation or an AZURE2 rate integration, belongs to `r-matrix`; this skill starts from the rate table. Stellar structure, mixing and trajectories come from stellar models (MESA). This skill post-processes their (t, T, ρ) output, whereas a rate's impact on a star's evolution, rather than on burning at given conditions, needs the stellar model itself. Proposal numbers, such as the projected precision, the beam time or "what this measurement buys" as a decision, belong to `proposal-analysis`, which is fed by the Monte Carlo here. Evaluated neutron cross sections and MACS belong to `evaluated-nuclear-data`. Everything else is a network calculation, documented in:
 
 - configuration format: [config.md](references/config.md);
 - rate conventions, screening, detailed balance, weak rates, isomers, one-zone limits: [physics.md](references/physics.md);
