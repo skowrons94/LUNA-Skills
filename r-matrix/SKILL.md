@@ -45,7 +45,7 @@ The local SAMMY build of the 7Be project does not run (Debug libraries with Addr
 | Trojan Horse (THM/HOES) segments | [thm.md](references/thm.md) |
 | `.azr` anatomy, `.dat` format, output files | [files.md](references/files.md) |
 | Ready-made 7Be scripts, pyazr examples | [scripts-and-examples.md](references/scripts-and-examples.md) |
-| Park norm, stiff bounds, transformability, covariance against profile, structure-predicted channels, pitfalls | [physicality.md](references/physicality.md) |
+| Park norm, stiff bounds, transformability, covariance against profile, structure-predicted channels, model choices (add vs replace, fixed variant beating the free fit), pitfalls | [physicality.md](references/physicality.md) |
 | SAMMY: input, parameters, broadening, Bayes fitting, ENDF, local installation | [sammy.md](references/sammy.md) |
 
 ## Scripts

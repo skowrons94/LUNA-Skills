@@ -28,7 +28,7 @@ Formulas, conventions and the one-level relation are in [method.md](references/m
 1. Get the phase on a fine grid from threshold to the window edge; in AZURE2 this is a phase-shift test segment per J, L, as described in `r-matrix`. Unwrap and reference it (`unwrap_from_threshold`).
 2. Fit `fit_ere(pair, E, δ, emin, emax, order=2)`. Repeat with a second window and order and report the spread, which measures how much the number depends on the recipe.
 3. Compare with published (a0, r0) using the same window, or convert theirs to a phase band with `delta_from_ere` and compare phases.
-4. To connect to an R-matrix level, run `theta2_for_a0(pair, E_lam, a0, a)` over the measured a0 range at the channel radius of the fit, and place the fitted level on that curve.
+4. To connect to an R-matrix level, run `theta2_for_a0(pair, E_lam, a0, a)` over the measured a0 range at the channel radius of the fit, and place the fitted level on that curve. The radius must be passed through to the Wigner unit as well as to the penetrability and shift: a script that converted θ² with γ_W² fixed at 4.70 fm returned widths 7 % low for a fit at 4.87 fm, and nothing in its output showed it.
 5. Record window, order, number of points and rms of the K fit with every number.
 
 ## Scripts

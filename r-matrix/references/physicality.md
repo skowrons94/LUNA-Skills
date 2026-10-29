@@ -73,6 +73,38 @@ J = 1 / (1 + Σ_c γ_c² dS_c/dE)  (T.-S. Park, PRC 104, 064612 (2021)).
 - A free refit can stop in a local minimum (⁷Li mirror test: 10053 vs 8167 for the identical model from
   another start). Compare against the lowest minimum of the identical model and say so.
 - Load on a shared machine: `pgrep`/load averages first; many-process runs slow by an order of magnitude.
+- A shell loop that waits with `until ! pgrep -f "<pattern>"` never ends when the pattern also appears in the
+  loop's own command line, because `pgrep -f` then finds the loop itself. Wait on the run's final log line
+  ("wrote ...") or on a recorded process id instead.
+- When the channel radius changes, every hard-coded radius in the helper scripts must change with it, because
+  a θ² ↔ Γ conversion uses the Wigner width γ_W² = ħ²/μa² at one radius. A one-level script that kept
+  γ_W² at 4.70 fm while the fit moved to 4.87 fm returned θ² 7 % low; search the scripts for the old radius
+  (`grep -n "4\.70"`) before quoting widths at a new one.
+- A comparison script that finds "the same level" in a new fit by an energy window drops a level silently once a
+  refit moves it out of the window. In the ⁷Be comparison with the shell model the windows were ±1.5 MeV around
+  the old nominal's energies; at a = 5.07 fm the 3/2⁺ had moved 1.53 MeV and vanished from the table without a
+  warning. After every change of radius or model, count the rows of such a comparison against the previous one,
+  and make the script report the levels it could not match.
+- Plotting and table scripts that read a fit's `output/` folder (chiSquared.out, the .out segment files) fail on
+  a new fit until that folder exists. A model rebuilt from a parameter vector has no outputs until they are
+  written (`write_outputs.py <azr> <sav>` in the ⁷Be project); put that step at the top of the product chain,
+  not after the plots, and check that its χ² equals the fit's before anything else runs.
+
+## Model choices: test "add" as well as "replace", and distrust a fixed variant that wins
+
+A variant with a parameter held fixed can never fit better than the same model with that parameter free, if the free fit has converged. When the fixed variant wins, the free fit has stopped in a different minimum, and it should be restarted from the fixed solution (pyazr refit scripts can take a start vector from a previous run). In the ⁷Be evaluation (a = 4.87 fm) the second 1/2⁺ term, started at 12.5 MeV with its energy free, ran to about 480 MeV and gained Δχ² = −14, while the same term held at 12.5 MeV gained −42. Freed from the fixed solution, it stayed at 12.45 MeV with −42, so both minima were real and the free fit had simply missed the better one.
+
+A "replace" test answers a narrower question than it seems to. The 12.5 MeV variant had removed the 30 MeV α background pole, and the new term carried almost no α width: it was a proton level, not a relocated background. Keeping the pole and adding the proton level gave Δχ² = −134 for four parameters and moved S(0) by −2.5 %, which made it the nominal model. Before a better-fitting alternative is booked as a systematic error, we therefore check whether it describes different physics and test it added to the nominal model as well as in its place. A variant that fits better than the nominal by more than the information-criterion charge is a new nominal, not an uncertainty.
+
+A removal test is only valid if no other free term can take the removed level's place. In the ⁷Be evaluation at a = 5.07 fm the model had a second, free 1/2⁺ level at 12.5 MeV. Removing the main 1/2⁺ level (all widths zeroed) cost Δχ² = +947, and removing only its proton widths +638. Both numbers went into the Letter. A per-dataset breakdown made later showed that only 0.2 % of the first cost fell on the ⁶Li(p,α) data, and that is what gave the test away. The 12.5 MeV level had moved down to 7.0–7.3 MeV and taken over the α width (and, in the second test, the proton widths) of the removed level. The tests had measured the loss of one term, not of the level. Removing every 1/2⁺ level below the background pole gave +3590, and removing the proton widths of both gave +2086, with 70 % of the cost on the (p,α) and (α,p) data, the physical picture the earlier numbers only appeared to show. After every removal or constrained test, we list where each remaining level of the same Jπ ended up before quoting the cost. Two levels that trade places are one term from the data's point of view.
+
+The same check applies to removal tests, which are nested: removing all widths of a level is a special case of removing only its proton widths, so the second refit can never end worse than the first. In the ⁷Be evaluation it did (+2170 against +1036), because the proton-only removal had stopped in a poorer minimum. We restart the less constrained test from the solution of the more constrained one, which guarantees the ordering, and quote a removal cost only after this check.
+
+A test that holds one width at a structure-model value is a constrained refit, and it lands in whichever minimum is nearest its start. In the ⁷Be evaluation we held the 1/2⁺ α width at three shell-model values (θ² = 0.074, 0.176 and 0.296 Teichmann–Wigner units), each started from the nominal fit. The costs came out as Δχ² = +896, +2570 (stopped at χ² 7546 and killed) and +911. A larger allowed width cannot cost more than a smaller one when both are near the same solution, so this non-monotonic sequence already showed that the starts were the problem, not the physics. Restarting each test from the best neighbouring solution gave +870, +796 and +768, a smooth sequence, and a third start of the middle value returned the same minimum to 0.2. In all of them the held level moved up to 10 MeV as a proton level, and the free 12.5 MeV level moved down to 7 MeV and took the large α width. We now scan a fixed parameter over at least three values, restart each from its neighbours until the costs vary smoothly, and quote the lowest minimum together with where the freed strength went.
+
+## The exterior potential and the channel radius trade against each other
+
+Carrying a nuclear potential outside the channel radius (AZURE2 hybrid exterior) and moving the radius outward are two ways of describing the same nuclear tail, so their effects must be judged together. In the ⁷Be fit the cluster-model tail at 4.87 fm is still −2.8 MeV against +1.2 MeV Coulomb. There the potential improved the fit by Δχ² ≈ −200 and brought the 1/2⁺ α width from 1.29 to 0.83 of the Teichmann–Wigner limit. At 5.07 fm, near the χ² minimum of a radius scan, the same potential was worth only −14, and a pure-Coulomb fit gave 0.97 of the limit, while its 30 MeV background pole took up a large α width instead. What an analysis calls "level" and what it calls "continuum" thus depends on where the boundary is drawn. A statement such as "the width is below the single-state limit once the exterior potential is included" holds at one radius and should be quoted with that radius, together with the radius scan of both versions of the model. The energy of a broad level moves with the radius too (7.6 to 6.7 MeV for the ⁷Be 1/2⁺ between 4.83 and 5.25 fm), so its fit uncertainty at fixed radius understates what is known about it.
 
 ## Interpreting an "internal" amplitude
 

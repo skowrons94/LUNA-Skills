@@ -145,6 +145,12 @@ Jacobian for the whole fit back to numerical. Never wrong, just slower.
 Worked comparison against measured data: `tests/13N`, segments 11–16 (Baumann
 1992). Formalism and implementation: `docs/source/theory/polarization_*.rst`.
 
+### Writing a fitted model to disk
+
+An .azr written after a fit (`apply_fit`) carries the level parameters but not the fitted normalizations, so a session that runs on the file's own parameters gives a χ² far from the fit (⁷Be: 65942 instead of 4686). The fitted state is the free-parameter vector. We keep it, write a `param.sav` from it by parameter name (`#parametrization` tag line, then one `name value 0` row per free parameter), and confirm the copy by reloading it with `best_fit_params` and recomputing χ² before anything is built on it.
+
+Two details of the file format matter. Line 3 of an .azr must keep its marker `#Full Path to Output Directory` after the path, because the pyazr configuration reader looks for that marker and fails without it. And `update_sav_from_rwa_params` reads and writes `output/param.sav` relative to the session's working directory, not the model's own output directory: with `cwd` set to the project root it edits the top-level fit's file (it writes `param.sav.new` beside it), so it is not the tool for saving a variant.
+
 ## Fitting from Python
 
 Minuit (CLI mode 2) fits everything free in the `.azr`. For evaluation work you
