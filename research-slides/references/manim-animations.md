@@ -27,6 +27,7 @@ Do not animate a static plot, a list, or a table. One to three clips in a 25-min
 - Also render the parts back-to-back as one scene (`Full`/`OpeningScene`) for a single-click version.
 - Narrated pace: 1–2 s per simple step, 3–5 s holds after each key reveal, 20–45 s per clip. Speed up after rehearsal, not before.
 - Use `ValueTracker` + updaters for live read-outs (velocity, energy) and `always_redraw` for arrows that follow moving objects, as in `DSAMScene`.
+- Data-driven frames whose number of parts changes from frame to frame (rings of an onion, the strongest flow arrows of a network, labels that appear) break `always_redraw`. Its `become()` pairs old and new submobjects by position, so fill colours land on the wrong rings. Swap the submobjects in an updater instead (`g.add_updater(lambda m: setattr(m, "submobjects", list(fn())))`). Then override `Scene.get_moving_and_static_mobjects` to return `(list_update(self.mobjects, self.foreground_mobjects), [])`: Manim freezes the leaf list and a static background at the start of each `play`, and the old leaves stay on screen as ghosts. Both failures appear only in the rendered movie, never in a `-s` still, so check frames extracted from the clip. Render data-driven scenes with `--disable_caching`, because the cache does not see changes inside updater functions.
 
 ## Render
 
