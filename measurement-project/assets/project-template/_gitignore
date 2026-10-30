@@ -1,0 +1,20 @@
+# Large or regenerable data: integrity through data/MANIFEST.sha256 (committed)
+data/raw/
+data/root/
+simulation/runs/
+_claude/
+report/build/
+slides/*/build/
+__pycache__/
+*.py[cod]
+.DS_Store
+*.aux
+*.bbl
+*.bcf
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.run.xml
+*.synctex.gz

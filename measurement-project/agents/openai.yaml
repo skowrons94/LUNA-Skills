@@ -1,0 +1,4 @@
+interface:
+  display_name: "Measurement Project"
+  short_description: "Lay out and audit a reproducible measurement analysis"
+  default_prompt: "Use $measurement-project to set up the folder of a measurement campaign: raw data and per-run ROOT files, a generated logbook.csv, analysis stages from audit to S factor and R-matrix, registers, report and slides."

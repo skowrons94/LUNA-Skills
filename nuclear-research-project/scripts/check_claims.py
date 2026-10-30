@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Check a project's claims register (docs/CLAIMS.toml) against its files and documents.
+"""Check a project's claims register (docs/CLAIMS.toml, or CLAIMS.toml at the root of a measurement-project)
+against its files and documents.
 
   python3 check_claims.py PROJECT                     check evidence, dependencies, staleness
   python3 check_claims.py PROJECT --text report/main.tex presentations/notes.md
@@ -37,11 +38,15 @@ def norm(s):
 
 
 def load(root):
+    # docs/CLAIMS.toml (nuclear-research-project) or CLAIMS.toml at the root (measurement-project, whose docs/ holds
+    # documents); the lock file sits next to the register
     f = root / "docs" / "CLAIMS.toml"
+    if not f.exists() and (root / "CLAIMS.toml").exists():
+        f = root / "CLAIMS.toml"
     if not f.exists():
-        sys.exit(f"no claims register at {f}")
+        sys.exit(f"no claims register at {root / 'docs' / 'CLAIMS.toml'} or {root / 'CLAIMS.toml'}")
     claims = tomllib.loads(f.read_text()).get("claim", [])
-    lockf = root / "docs" / "claims.lock.json"
+    lockf = f.parent / "claims.lock.json"
     lock = json.loads(lockf.read_text()) if lockf.exists() else {}
     return claims, lock, lockf
 

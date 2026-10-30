@@ -55,3 +55,6 @@
 {"id": "r55", "prompt": "Our MESA 1.25 Msun model ends with surface 12C/13C of 7.5, the M67 clump giants are around 16. How should I compare them properly, and is the mass or the mixing the bigger lever?", "expect": ["stellar-observables"]}
 {"id": "r56", "prompt": "How do the primordial deuterium and lithium abundances change if I replace the d(p,gamma)3He rate with our new measured table? And what baryon density does that imply?", "expect": ["big-bang-nucleosynthesis"]}
 {"id": "r57", "prompt": "I need the starting composition for a zero-metallicity Population III star from standard BBN, with the uncertainty from the nuclear rates.", "expect": ["big-bang-nucleosynthesis"]}
+{"id": "r58", "prompt": "We just got the data of the 2025 SOCIAL campaign from lunaserver. Set up the analysis folder so that every run, calibration and S-factor point is reproducible, with a logbook of all runs.", "expect": ["measurement-project"]}
+{"id": "r59", "prompt": "Check whether my old 15N(p,g) analysis folder is reproducible: are the raw files checksummed, is there a run logbook, does each stage have its README?", "expect": ["measurement-project"]}
+{"id": "r60", "prompt": "Plan a feasibility study for a new 22Ne(a,n) measurement with Geant4 simulations, an R-matrix estimate and a LaTeX report; no data yet.", "expect": ["nuclear-research-project"]}

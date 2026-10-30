@@ -15,6 +15,7 @@ A feasibility study or an analysis is only as credible as the path from its inpu
 
 ## Routing
 
+- Analysis of measured data (runs, logbooks, calibrations, targets, yields, S factors): `measurement-project`, which specialises this layout for a measurement campaign; its CLAIMS.toml at the project root is read by `scripts/check_claims.py`.
 - New project: read [references/project-structure.md](references/project-structure.md), then run `scripts/create_research_project.py` unless the user requests a different layout.
 - Existing project: inspect it first. Preserve user files and propose a mapping to the canonical structure; files are moved, renamed or deleted only when the user asks for the reorganization.
 - LaTeX feasibility report: also read [references/report-style.md](references/report-style.md).

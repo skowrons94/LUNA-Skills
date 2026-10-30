@@ -26,6 +26,7 @@ How is the work kept reproducible, staged and checked? Read this first; every ot
 
 | Skill | Use it for |
 |---|---|
+| `measurement-project` | Layout and audit of a measurement analysis: raw data and per-run ROOT files, generated `logbook.csv`, stage folders from audit, beam, calibration, background, efficiency and target to yield, S factor, R-matrix and rate (mapped onto the `analysis-chain` stages and contracts), registers (HANDOFF, PROBLEMS, LITERATURE, DECISIONS), report and slides |
 | `nuclear-research-project` | Scaffolding and auditing reproducible feasibility-study projects and reports; claims register with staleness checks |
 | `analysis-chain` | Analyses that span several skills: fixed stages with gates, handoff contracts, unit/frame/correlation-preserving adapters (efficiency → yields, yields → target, tables → AZURE2), provenance sidecars, decision briefs, bounded retries, parallel independent attempts |
 | `uncertainty-audit` | Whether uncertainties support the conclusion: source and correlation assessment against the code; pulls, χ², localised residual structure, held-out coverage, parameter identifiability |
@@ -147,6 +148,7 @@ python3 mirror-nucleus/scripts/selftest.py       # needs cluster-potential next 
 python3 analysis-chain/scripts/selftest.py
 python3 uncertainty-audit/scripts/selftest.py
 python3 nuclear-research-project/scripts/test_check_claims.py
+python3 measurement-project/scripts/selftest.py
 python3 settings/test_guard.py
 python3 evals/run_evals.py selftest
 python3 proposal-project/scripts/test_create_proposal_project.py
