@@ -66,6 +66,17 @@ For an implementation test, create synthetic observations with known parameters 
 
 Propagate fitted covariance or joint posterior/bootstrap samples while respecting constraints. Shared calibration/efficiency/stopping uncertainties need correlated treatment. Independently perturbing each parameter by an arbitrary 20–50% and plotting a standard deviation is a sensitivity envelope, not a measured confidence band. Use positive/log transforms or bounded priors for widths, composition and straggling; negative Gaussian samples become misleading when squared in the model. Record random seeds.
 
+A measured case shows how both traps look in practice. The SOCIAL 14N(p,γ) target Dep181_2056_LNL_5 (Feb 2025) was
+scanned over the 278 keV resonance every day. A first model with a sharp 14N front, an error-function back edge and a
+plateau slope converged to χ²/ndf = 14–57 with a slope of −9 %/keV, which is unphysical; the scans in fact reached the
+back edge of a 14 keV layer, and the model had to be a 14N depth profile folded with the Breit–Wigner. That model, started
+from one point, stopped in a minimum with the plateau 5 % below the data (χ² = 524/25); from four starting points the best
+minimum had χ² = 341/25 and a different thickness (14.6 instead of 15.3 keV). Keep the best of several starts and record
+the spread. In the same fit the plateau height was about 2e7 counts/C while the other parameters were of order 1–15:
+JᵀJ was singular, and with a pseudo-inverse the height came out with an error of exactly zero. Fitting the height in
+units of 1e6 gave 3 %. An error of exactly zero, or a parameter error far smaller than its scatter between days, is a
+conditioning problem, not a precise measurement; rescale parameters to similar magnitudes before inverting.
+
 ## Acceptance and reporting
 
 Demonstrate stability against integration extent, grid density and kernel cutoff at a level small compared with the requested physical precision. Preserve cross-section grid resolution near resonances. Include raw and transformed energy/yield conventions, fit range, exclusions, free/fixed parameters, optimizer outcome, fit statistic and degrees of freedom where meaningful, covariance/rank diagnostics and systematic assumptions.

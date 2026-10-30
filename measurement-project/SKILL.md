@@ -72,6 +72,12 @@ are fixed and recorded.
   stage must model the profile from all checks before they are used as normalisation (stages.md, 05_target).
 - Effective energies of thick targets depend on the definition (median, mean, self-consistent); quote the one used,
   and compare with published points in units of a common model shape (stages.md, 07_sfactor).
+- When exploratory results are promoted, compare their inputs as well as their outputs. In the SOCIAL data the
+  exploratory long-run file was written before the logbook was rebuilt with integrated (TetrAMM) charges, so the
+  promoted yields differed from it by up to 13 % although the counts were identical; the same comparison also caught a
+  promoted script that divided an already truncated charge by the kept-time fraction a second time (0.909 instead of
+  3.950 C). Rerun the promoted chain twice and require identical files: fits on empty spectra and parameters written in
+  set order made reruns differ in the MV and 2001–2002 projects.
 - Large raw data (hundreds of GB) are not copied whole; choose targets and runs with the researcher, and record the
   selection and what was left on the server in the README.
 

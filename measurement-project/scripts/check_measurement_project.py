@@ -2,8 +2,9 @@
 """Check a measurement project against the layout of the measurement-project skill.
 
 Errors: missing registers or main folders, a logbook.csv without the required columns or with an unknown purpose,
-file_map.csv without its header, checksum mismatches (with --verify). Warnings: stray file names (*.bak, *copy*,
-tmp*, _out_*), stages without README, logbook rows whose ROOT file is missing, CHAIN.md or CLAIMS.toml missing.
+file_map.csv without its header, checksum mismatches (with --verify); members of packed archives (`x.tar:member`) only
+need the archive. Warnings: stray file names (*.bak, *copy*, tmp*, _out_*, .DS_Store), uppercase names of authored files
+or folders, stages without README, logbook rows whose ROOT file is missing, CHAIN.md or CLAIMS.toml missing.
 Exit code 1 on errors (also on warnings with --strict).
 
 Usage: python3 check_measurement_project.py PATH [--verify] [--strict]
@@ -24,7 +25,8 @@ FOLDERS = ["data/raw", "data/root", "docs", "analysis", "tools", "report", "slid
 LOGBOOK_COLS = ["run", "file", "start", "stop", "real_s", "live_s", "charge_C", "charge_source", "current_uA",
                 "Ep_keV", "Ep_source", "target", "purpose", "geometry", "source_id", "flags", "notes"]
 PURPOSES = {"scan", "long_run", "background", "source", "calibration", "test", "excluded"}
-STRAY = ["*.bak", "*.orig", "*copy*", "tmp*", "_out_*", "*~"]
+STRAY = ["*.bak", "*.orig", "*copy*", "tmp*", "_out_*", "*~", ".ds_store"]
+AUTHORED = {".py", ".md", ".tex", ".sh", ".toml", ".yaml", ".yml"}   # files people write: lowercase names
 UPPER_OK = set(REGISTERS) | {"CHAIN.md", "CLAIMS.toml", "MANIFEST.sha256", "Makefile"}
 SKIP_DIRS = {".git", "_claude", "build", "__pycache__"}
 
@@ -81,7 +83,14 @@ def main() -> int:
         if hdr[:3] != ["source_path", "local_path", "sha256"]:
             err.append("data/file_map.csv: header must start with source_path,local_path,sha256")
         for r in rows:
-            p = root / r.get("local_path", "")
+            lp = r.get("local_path", "")
+            if not lp:
+                continue                                   # recorded but not copied (unreadable at the source)
+            if re.search(r"\.(tar|tgz|tar\.gz|zip):", lp):  # member of a packed archive: the archive must exist
+                if not (root / re.split(r"(?<=\.tar|\.tgz|\.zip):|(?<=\.tar\.gz):", lp)[0]).is_file():
+                    err.append(f"file_map: archive of {lp} missing")
+                continue
+            p = root / lp
             if not p.is_file():
                 err.append(f"file_map: {r.get('local_path')} listed but missing")
             elif a.verify and sha256(p) != r.get("sha256"):
@@ -121,7 +130,9 @@ def main() -> int:
             n = p.name
             if any(fnmatch.fnmatch(n.lower(), s) for s in STRAY):
                 warn.append(f"stray file name: {p.relative_to(root)}")
-            elif p.is_file() and n != n.lower() and n not in UPPER_OK and sub != "data/root":
+            elif n != n.lower() and n not in UPPER_OK and sub != "data/root" and (
+                    p.is_dir() or p.suffix.lower() in AUTHORED):
+                # generated files may carry original run or target names (e.g. MrX), which keep their capitals
                 warn.append(f"uppercase name: {p.relative_to(root)}")
             elif " " in n:
                 warn.append(f"space in name: {p.relative_to(root)}")

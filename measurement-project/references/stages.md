@@ -10,7 +10,7 @@ results in the format of the contract the next stage reads, so that the chain's 
 |---|---|---|---|---|
 | `00_audit` | 0 Data audit | `data-auditor` subagent, `yield-analysis` (run checks) | `results/run_table.csv` (logbook.csv plus flags) | — |
 | `01_beam` | 0–1 (normalisation inputs) | `yield-analysis` (charge, live time), `target-analysis` (resonance energies) | `results/beam_energy.json`, `results/charge_checks.csv` | — |
-| `02_calibration` | 1 (energy scale) | `peak-shape-analysis`, `yield-analysis` | `results/calibration_<period>.json` per channel | `spectrum-csv` for exported spectra |
+| `02_calibration` | 1 (energy scale) | `peak-shape-analysis`, `yield-analysis` | `results/calibration_<period>.json` per channel, `run_areas.csv` (line areas of every run) | `spectrum-csv` for exported spectra |
 | `03_background` | 1 (backgrounds) | `yield-analysis`, `peak-shape-analysis`, `underground-gamma-simulation` | `results/room_rates.csv`, `results/contaminant_lines.csv` | — |
 | `04_efficiency` | 2 Efficiency | `efficiency-analysis`, `underground-gamma-simulation`, `agata-simulation` | `results/result.json` | `efficiency-curve` |
 | `05_target` | 3 Target, effective energy | `target-analysis`, `peak-shape-analysis` | `results/target_profiles.json`, `results/run_normalisation.csv` | `excitation-curve` in |
@@ -47,6 +47,12 @@ Energy calibration per channel and period from lines in the data (room backgroun
 gammas), validated on lines not used in the fit, and the resolution as a function of energy. A drifting calibration
 is calibrated per run or per group with the anchors that are present in every run; a single global calibration
 smears summed peaks.
+
+This stage also writes the net areas of the main lines of every run (`run_areas.csv`), because the efficiency stage
+(resonance and source runs) and the target stage (resonance scans) need them before the yield stage exists. The yield
+stage then aggregates the long runs, fits the difficult regions and normalises; it does not re-extract the areas the
+earlier stages used. In the 2001–2002 14N(p,γ) project the area extraction had grown inside the yield folder and the
+target stage read it from there, a dependency on a later stage that this split removes.
 
 ## 03_background
 
@@ -87,6 +93,16 @@ shape error and independent of the layer's back part; the self-consistent energy
 233) suits thin targets. The uncertainty budget keeps statistical, independent normalisation and shared systematic
 parts separate, and comparisons with published data are made in units of a common model shape, matching points from
 the same runs by beam energy. Output in `azure-dat` format for 08.
+
+When the data contain the resonance scans of the same target, normalise to the resonance plateau (ratio method) and
+use the absolute route only as a check: divide the plateau height by the reactions per coulomb of the nominal
+stoichiometry to get a measured resonance efficiency, and compare it with the simulated one. In the SOCIAL 14N(p,γ)
+data of February 2025 the two differ by 8 % (0.53–0.55 from the plateau with TiN 1:1, 0.499 simulated), and the S factor
+normalised to the plateau is 0.93 of the collaboration's on the same counts. The ratio method needs only
+ε_long/ε_res (1.140, stable to 0.7 % against threshold and resolution), and the composition drops out because the layer
+is measured at the resonance; the absolute route depends on Ti/N (0.87–0.91 would remove the 8 %), the absolute
+efficiency and the charge scale. Report which normalisation a result uses and the size of this check, so that a
+difference with another analysis can be traced to the normalisation rather than to the counts.
 
 ## 08_rmatrix and 09_rate
 

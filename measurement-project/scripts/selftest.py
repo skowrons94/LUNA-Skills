@@ -59,9 +59,13 @@ def main():
             w = csv.DictWriter(f, fieldnames=COLS)
             w.writeheader()
             w.writerow(row)
+        with open(p / "data" / "file_map.csv", "a", newline="") as f:      # a member of a packed archive
+            csv.writer(f).writerow(["/server/b.tar", "data/raw/2025-02/backups.tar:old/run_1.txt~", "0" * 64, "packed"])
+        (p / "data" / "raw" / "2025-02" / "backups.tar").write_bytes(b"tar")
+        (p / "analysis" / "06_yield" / "results" / "fit_ep140_MrX.csv").write_text("x\n")   # original target name
         rc, out = run(CHECK, p, "--verify")
-        if rc:
-            fails.append("valid data do not pass --verify: " + out)
+        if rc or "uppercase" in out:
+            fails.append("valid data (archive member, original target name) do not pass --verify cleanly: " + out)
         raw.write_text("counts edited\n")
         rc, out = run(CHECK, p, "--verify")
         if not rc or "checksum mismatch" not in out:
